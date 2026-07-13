@@ -23,7 +23,7 @@
       <a href="#prueba">Prueba</a>
       <a href="#precios">Precios</a>
     </nav>
-    <a class="btn" href="#contacto">Únete a la waitlist</a>
+    <a class="btn" href="#contacto">Diagnóstico gratis</a>
   </div>
 </div>
 
@@ -37,7 +37,7 @@
       <h1>Tu marca<br>es tu <span class="bl">ventaja.</span></h1>
       <p class="sub">O es la razón por la que sigues perdiendo frente a quien se ve mejor que tú. Construimos el sistema operativo de marca que deja tu negocio listo para vender.</p>
       <div class="cta">
-        <a class="btn solid lg" href="#contacto">Solicita tu lugar <span class="ar">→</span></a>
+        <a class="btn solid lg" href="diagnostico.html">Hacer diagnóstico gratis <span class="ar">→</span></a>
         <a class="btn lg" href="#prueba">Ver la prueba</a>
       </div>
     </div>
@@ -230,34 +230,19 @@
 <section class="cta-final" id="contacto">
   <svg class="eldon" viewBox="0 0 120 120" aria-hidden="true"><rect x="44" y="44" width="32" height="4.4" rx="2.2" fill="#F2F5F9"></rect><circle cx="53" cy="63" r="3.6" fill="#F2F5F9"></circle><circle cx="70" cy="63" r="9" fill="none" stroke="#3B74F2" stroke-width="3.4"></circle><path d="M79 67 Q83 77 78 84" fill="none" stroke="#3B74F2" stroke-width="2" stroke-linecap="round"></path></svg>
   <div class="in wrap">
-    <div class="eyebrow reveal" style="justify-content:center">Cupo limitado · lista de espera</div>
+    <div class="eyebrow reveal" style="justify-content:center">Cupo limitado · diagnóstico gratis</div>
     <h2 class="reveal d1" style="margin-top:20px">Hagamos que tu<br>marca <span class="bl">venda.</span></h2>
-    <p class="reveal d2">Trabajamos con pocos negocios a la vez para cuidar la calidad. Déjanos tus datos y entras a la lista: cuando sea tu turno arrancamos con un <b style="color:var(--fg)">diagnóstico de marca gratis</b>, sin compromiso.</p>
+    <p class="reveal d2">Trabajamos con pocos negocios a la vez para cuidar la calidad. Empieza por tu <b style="color:var(--fg)">diagnóstico de marca gratis</b> (5 min): te decimos tu punto de partida con un paquete a la medida y, si hay cupo, agendamos tu llamada.</p>
     <div class="diag reveal d2" id="diag">
       <div class="diag-h">Mini-diagnóstico · 30 segundos</div>
       <div class="diag-q" data-q="etapa"><span class="diag-l">¿En qué etapa está tu marca?</span><div class="chips"><button type="button" class="chip" data-v="nueva">Apenas arranco</button><button type="button" class="chip" data-v="sinid">Ya opero, sin identidad clara</button><button type="button" class="chip" data-v="rebrand">Necesito rebranding</button></div></div>
       <div class="diag-q" data-q="necesidad"><span class="diag-l">¿Qué necesitas más urgente?</span><div class="chips"><button type="button" class="chip" data-v="logo">Logo e identidad</button><button type="button" class="chip" data-v="web">Una web que venda</button><button type="button" class="chip" data-v="sistema">El sistema completo</button><button type="button" class="chip" data-v="contenido">Contenido y redes</button></div></div>
       <div class="diag-q" data-q="ventas"><span class="diag-l">¿Cómo van tus ventas hoy?</span><div class="chips"><button type="button" class="chip" data-v="no">Aún no vendo</button><button type="button" class="chip" data-v="crecer">Vendo y quiero crecer</button><button type="button" class="chip" data-v="desfase">Vendo, pero mi marca no acompaña</button></div></div>
-      <div class="diag-res" id="diagRes"><div class="diag-res-l">Tu punto de partida sugerido</div><div class="diag-res-t" id="diagResT"></div><div class="diag-res-d" id="diagResD"></div><div class="diag-res-note">Es una sugerencia; la afinamos en tu diagnóstico gratis. Guarda tu lugar 👇</div></div>
+      <div class="diag-res" id="diagRes"><div class="diag-res-l">Tu punto de partida sugerido</div><div class="diag-res-t" id="diagResT"></div><div class="diag-res-d" id="diagResD"></div><div class="diag-res-note">Es un adelanto. El diagnóstico completo lo afina y te da tu paquete a la medida 👇</div></div>
     </div>
-    <form class="wl reveal d3" id="wlForm" novalidate>
-      <input type="hidden" id="wl-paquete" name="paquete">
-      <div class="row">
-        <div class="fld"><label for="wl-nombre">Nombre</label><input id="wl-nombre" name="nombre" type="text" placeholder="Tu nombre" required></div>
-        <div class="fld"><label for="wl-correo">Correo</label><input id="wl-correo" name="correo" type="email" placeholder="tu@correo.com" required></div>
-      </div>
-      <div class="fld"><label for="wl-negocio">Tu negocio y giro</label><input id="wl-negocio" name="negocio" type="text" placeholder="Ej. Joyería artesanal · Mérida" required></div>
-      <div class="fld"><label for="wl-whatsapp">WhatsApp <span style="text-transform:none;color:var(--fg-faint)">(opcional)</span></label><input id="wl-whatsapp" name="whatsapp" type="tel" placeholder="+52 …"></div>
-      <div class="fld"><label for="wl-reto">¿Cuál es tu mayor reto de marca hoy? <span style="text-transform:none;color:var(--fg-faint)">(opcional)</span></label><textarea id="wl-reto" name="reto" placeholder="En una línea…"></textarea></div>
-      <label class="consent"><input type="checkbox" name="consent" required> Acepto que Don Ventas me contacte y me envíe información. Puedo darme de baja cuando quiera. Consulta el <a href="15_LEGAL/Aviso de Privacidad.html" target="_blank" rel="noopener">Aviso de Privacidad</a>.</label>
-      <button class="btn solid lg" type="submit">Solicitar mi lugar <span class="ar">→</span></button>
-      <div class="hint">¿Prefieres escribirnos? <a href="mailto:arturo.villagomez@donventas.mx">arturo.villagomez@donventas.mx</a></div>
-    </form>
-    <div class="wl-ok" id="wlOk">
-      <div class="ic">✓</div>
-      <h3>¡Estás en la lista!</h3>
-      <p>Te confirmamos por correo. Cuando sea tu turno te escribimos para agendar tu <b style="color:var(--fg)">diagnóstico gratis</b>.</p>
-      <div class="pos"></div>
+    <div class="wl reveal d3" style="text-align:center">
+      <a class="btn solid lg" href="diagnostico.html" style="justify-content:center;width:100%;max-width:440px;margin:0 auto">Hacer mi diagnóstico gratis <span class="ar">→</span></a>
+      <div class="hint">5 minutos · sin costo · agendamos según cupo. ¿Prefieres escribirnos? <a href="mailto:arturo.villagomez@donventas.mx">arturo.villagomez@donventas.mx</a></div>
     </div>
   </div>
 </section>
