@@ -14,32 +14,34 @@ Este archivo lo lee Claude Code al inicio de cada sesión: síguelo siempre.
 4. Si un cambio toca datos o llaves (Supabase, etc.), avisa antes.
 5. Resume en 2 líneas qué cambiaste y en qué archivo, cada iteración.
 
-## ⚠ Estructura del `index.html` — LÉELO ANTES DE EDITAR
-`index.html` es un **archivo empaquetado (bundle) de una sola pieza**, no fuente normal.
-El markup real vive como **string JSON-escapado** dentro de
-`<script type="__bundler/template">…</script>` (verás `\n`, `\"`, y las barras como
-`<\u002F...>` en vez de `</...>`). Las fuentes e imágenes están incrustadas como data.
+## ✅ Estructura — FUENTE EDITABLE (ya no es un bundle)
+El sitio es fuente normal, editable con diffs baratos. Tres archivos + assets:
+- **`index.html`** — markup limpio. Enlaza `styles.css` y (con `defer`) `app.js`. Edita el
+  texto/estructura aquí directamente; no hay strings escapados.
+- **`styles.css`** — todo el CSS (tokens en `:root`, secciones, form, banner de cookies).
+  Las fuentes se cargan por `@import` de Google Fonts al inicio del archivo.
+- **`app.js`** — todo el JS, en 5 secciones comentadas: (1) reveal on-scroll, (2) lightbox,
+  (3) waitlist→Supabase, (4) mini-diagnóstico, (5) banner de cookies + Clarity. Las llaves
+  públicas (Supabase URL/anon, Clarity id) están como `var` al inicio de cada sección.
 
-Para editar **texto o pequeños fragmentos** sin romper el bundle:
-- Localiza el texto por su contenido (ej. el eslogan del footer), y reemplaza respetando
-  la codificación escapada del bloque (barras como `\u002F`, comillas como `\"`).
-- Haz reemplazos **puntuales y mínimos**; no reescribas el string completo.
-- Verifica el diff antes de commit.
+Para un cambio de texto: edítalo en `index.html`. Para estilo: `styles.css`. Para lógica /
+llaves: `app.js`. Cambios chicos = diffs chicos.
 
-> Nota: la **fuente canónica** de esta landing NO vive en este repo, sino en el proyecto de
-> diseño (Claude Design), archivo `Bloque 10 - Landing - Ruta A (Terminal).html`, de donde
-> se re-empaqueta el `index.html`. Cambios grandes de diseño conviene hacerlos allá y
-> re-empaquetar; en este repo, prioriza ajustes de texto/contenido puntuales.
+> Nota: la fuente canónica de diseño sigue viviendo en el proyecto de diseño (Claude Design),
+> `Bloque 10 - Landing - Ruta A (Terminal).html`. Cambios grandes de diseño conviene hacerlos
+> allá y re-exportar los tres archivos; los ajustes de texto/contenido/copys van directo aquí.
 
-## Dónde está cada cosa (dentro de index.html)
-- **Footer:** eslogan "Don Ventas · branding que vende", coordenadas CDMX/Mérida, email de
-  contacto y línea de copyright.
-- **Formulario de waitlist:** hace POST a Supabase (`/rest/v1/lead`). Config en el script:
-  `SUPABASE_URL`, `SUPABASE_ANON` (clave pública, OK que esté en el front), tabla `lead`.
-- **Banner de cookies:** guarda consentimiento en `localStorage` y registra un INSERT anónimo
-  en Supabase tabla `consent_log`; carga **Microsoft Clarity** (id `xlcmparelv`) solo si el
-  usuario acepta. Vercel Web Analytics (`/_vercel/insights/script.js`) es sin cookies y siempre carga.
-- **Enlaces legales:** apuntan a `/15_LEGAL/…` (Aviso de Privacidad, Política de Cookies,
+## Dónde está cada cosa
+- **Footer** (`index.html`, `<footer class="foot">`): eslogan "Don Ventas · branding que vende",
+  coordenadas CDMX/Mérida, email de contacto.
+- **Formulario de waitlist** (`app.js`, §3): POST a Supabase (`/rest/v1/lead`). Config:
+  `SUPABASE_URL`, `SUPABASE_ANON` (clave pública, OK en el front), `TABLE`.
+- **Banner de cookies** (markup en `index.html` `#dv-cookie`; lógica en `app.js`, §5): guarda
+  consentimiento en `localStorage`, registra INSERT anónimo en Supabase `consent_log`, y carga
+  **Microsoft Clarity** (`CLARITY_ID='xlcmparelv'`) solo si el usuario acepta. Vercel Web
+  Analytics (`/_vercel/insights/script.js`, en `index.html`) es sin cookies y siempre carga.
+- **Estilos del banner:** en `styles.css`, sección `/* ══ banner de cookies ══ */`.
+- **Enlaces legales:** apuntan a `15_LEGAL/…` (Aviso de Privacidad, Política de Cookies,
   Términos, Centro Legal). Esas páginas viven en la carpeta `15_LEGAL/` del repo.
 
 ## Datos / seguridad
@@ -56,4 +58,8 @@ de que la carpeta se llame **exactamente** `15_LEGAL` y de los nombres de archiv
 ## Buenas prácticas para ahorrar tokens
 - El humano debe indicar **archivo y sección exactos**; si no, pregunta breve antes de explorar.
 - No explores todo el repo: este archivo ya te dice dónde está lo importante.
-- Cambios mínimos y verificados; nada de reescribir el bundle completo.
+- Cambios mínimos y verificados; edita solo el archivo que corresponde (html / css / js).
+
+> Migración jul-2026: el sitio dejó de ser un bundle escapado de una pieza y pasó a fuente
+> editable (`index.html` + `styles.css` + `app.js` + assets). Si ves un `index.html` viejo
+> con `<script type="__bundler/template">`, es de antes de la migración.
