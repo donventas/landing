@@ -177,3 +177,28 @@ window.va = window.va || function () { (window.vaq = window.vaq || []).push(argu
   else if(saved==='no'){ el.style.display='none'; }
   else { requestAnimationFrame(function(){ setTimeout(function(){el.classList.add('show');},600); }); }
 })();
+
+/* ── 6 · feed de testimonios publicados (testimonios.json → sección "Voces") ──
+   El portal genera este JSON al publicar una reseña con consentimiento y pasada
+   la ventana de 48 h (Reseñas → "Copiar feed JSON"). Si el archivo está vacío,
+   la sección permanece oculta: nunca mostramos testimonios de relleno. */
+(function(){
+  var wrap=document.getElementById('voces'), grid=document.getElementById('vocesGrid');
+  if(!wrap||!grid) return;
+  function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+  function stars(n){n=Math.max(0,Math.min(5,n|0));var o='';for(var i=1;i<=5;i++){o+='<span'+(i<=n?' class="on"':'')+'>★</span>';}return o;}
+  fetch('testimonios.json',{cache:'no-store'}).then(function(r){return r.ok?r.json():[];}).then(function(list){
+    if(!Array.isArray(list)) list=[];
+    list=list.filter(function(t){return t && String(t.quote||'').trim();});
+    if(!list.length) return; // sin testimonios reales → sección oculta
+    grid.innerHTML=list.map(function(t){
+      var who=esc(t.business||t.author||'Cliente Don Ventas');
+      var k=esc(t.sector||(t.business?t.author:'')||'');
+      return '<figure class="tcard"><div class="stars">'+stars(t.rating)+'</div>'+
+        '<blockquote>'+esc(t.quote)+'</blockquote>'+
+        '<figcaption><span class="n">'+who+'</span>'+(k?'<span class="k">'+k+'</span>':'')+'</figcaption></figure>';
+    }).join('');
+    wrap.hidden=false;
+    requestAnimationFrame(function(){wrap.classList.add('in');});
+  }).catch(function(){});
+})();
