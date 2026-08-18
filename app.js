@@ -40,14 +40,14 @@ window.va = window.va || function () { (window.vaq = window.vaq || []).push(argu
     [].slice.call(gallery.querySelectorAll('.case-thumb')).forEach(function(thumb){
       thumb.addEventListener('click',function(){
         var src=thumb.getAttribute('data-src'), alt=thumb.getAttribute('data-alt')||'';
+        var previousSrc=stageImg.getAttribute('src'), previousAlt=stageImg.alt||'';
         if(src)stageImg.src=src;
         stageImg.alt=alt;
         stage.setAttribute('aria-label','Ampliar '+(alt||'referencia visual'));
-        [].slice.call(gallery.querySelectorAll('.case-thumb')).forEach(function(t){
-          var selected=t===thumb;
-          t.classList.toggle('is-active',selected);
-          t.setAttribute('aria-pressed',selected?'true':'false');
-        });
+        thumb.setAttribute('data-src',previousSrc);
+        thumb.setAttribute('data-alt',previousAlt);
+        thumb.setAttribute('aria-label','Ver '+(previousAlt||'referencia visual anterior'));
+        var thumbImg=thumb.querySelector('img'); if(thumbImg)thumbImg.src=previousSrc;
       });
     });
     stage.addEventListener('click',function(){
