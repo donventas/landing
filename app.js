@@ -34,15 +34,27 @@ window.va = window.va || function () { (window.vaq = window.vaq || []).push(argu
   var lbxImg=lbx.querySelector('img'), lbxCap=lbx.querySelector('figcaption');
   function openLbx(src,cap){ lbxImg.src=src; lbxCap.innerHTML=cap||''; lbx.classList.add('open'); lbx.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden'; }
   function closeLbx(){ lbx.classList.remove('open'); lbx.setAttribute('aria-hidden','true'); document.body.style.overflow=''; setTimeout(function(){lbxImg.src='';},320); }
-  [].slice.call(document.querySelectorAll('.gal .shot')).forEach(function(sh){
-    function openShot(){
-      var img=sh.querySelector('img'); if(!img)return;
+  [].slice.call(document.querySelectorAll('.gal [data-gallery]')).forEach(function(gallery){
+    var sh=gallery.closest('.shot'), stage=gallery.querySelector('.case-stage'), stageImg=stage&&stage.querySelector('img');
+    if(!sh||!stage||!stageImg)return;
+    [].slice.call(gallery.querySelectorAll('.case-thumb')).forEach(function(thumb){
+      thumb.addEventListener('click',function(){
+        var src=thumb.getAttribute('data-src'), alt=thumb.getAttribute('data-alt')||'';
+        var previousSrc=stageImg.getAttribute('src'), previousAlt=stageImg.alt||'';
+        if(src)stageImg.src=src;
+        stageImg.alt=alt;
+        stage.setAttribute('aria-label','Ampliar '+(alt||'referencia visual'));
+        thumb.setAttribute('data-src',previousSrc);
+        thumb.setAttribute('data-alt',previousAlt);
+        thumb.setAttribute('aria-label','Ver '+(previousAlt||'referencia visual anterior'));
+        var thumbImg=thumb.querySelector('img'); if(thumbImg)thumbImg.src=previousSrc;
+      });
+    });
+    stage.addEventListener('click',function(){
       var n=sh.querySelector('.meta .n'), k=sh.querySelector('.meta .k'), dd=sh.querySelector('.meta .d');
       var cap='<b>'+(n?n.textContent:'')+'</b>'+(k?' · '+k.textContent:'')+(dd?' — '+dd.textContent:'');
-      openLbx(img.currentSrc||img.src,cap);
-    }
-    sh.addEventListener('click',openShot);
-    sh.addEventListener('keydown',function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); openShot(); } });
+      openLbx(stageImg.currentSrc||stageImg.src,cap);
+    });
   });
   lbx.addEventListener('click',function(e){ if(e.target===lbx||e.target.classList.contains('x'))closeLbx(); });
   document.addEventListener('keydown',function(e){ if(e.key==='Escape'&&lbx.classList.contains('open'))closeLbx(); });
