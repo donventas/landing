@@ -35,12 +35,14 @@ window.va = window.va || function () { (window.vaq = window.vaq || []).push(argu
   function openLbx(src,cap){ lbxImg.src=src; lbxCap.innerHTML=cap||''; lbx.classList.add('open'); lbx.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden'; }
   function closeLbx(){ lbx.classList.remove('open'); lbx.setAttribute('aria-hidden','true'); document.body.style.overflow=''; setTimeout(function(){lbxImg.src='';},320); }
   [].slice.call(document.querySelectorAll('.gal .shot')).forEach(function(sh){
-    sh.addEventListener('click',function(){
+    function openShot(){
       var img=sh.querySelector('img'); if(!img)return;
       var n=sh.querySelector('.meta .n'), k=sh.querySelector('.meta .k'), dd=sh.querySelector('.meta .d');
       var cap='<b>'+(n?n.textContent:'')+'</b>'+(k?' · '+k.textContent:'')+(dd?' — '+dd.textContent:'');
       openLbx(img.currentSrc||img.src,cap);
-    });
+    }
+    sh.addEventListener('click',openShot);
+    sh.addEventListener('keydown',function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); openShot(); } });
   });
   lbx.addEventListener('click',function(e){ if(e.target===lbx||e.target.classList.contains('x'))closeLbx(); });
   document.addEventListener('keydown',function(e){ if(e.key==='Escape'&&lbx.classList.contains('open'))closeLbx(); });
