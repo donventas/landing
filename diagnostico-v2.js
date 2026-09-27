@@ -344,28 +344,53 @@
     var self=this;
     [].slice.call(this.el.querySelectorAll('[data-field]')).forEach(function(field){self.state[field.getAttribute('data-field')]=field.type==='checkbox'?field.checked:field.value;});
   };
+  Diagnostic.prototype.resultMarkup=function(result,delivery){
+    var reasons=result.reasons.length?'<ul>'+result.reasons.map(function(r){return '<li>'+escapeHtml(r)+'</li>';}).join('')+'</ul>':'';
+    var deliveryMarkup=delivery==='error'
+      ? '<div class="dv-result-next dv-result-error"><b>No pudimos registrar tus datos</b><p>Tu recomendación está lista, pero el envío falló. Intenta de nuevo o escríbenos a <a href="mailto:arturo.villagomez@donventas.mx">arturo.villagomez@donventas.mx</a>.</p><button type="button" class="btn dv-retry">Intentar de nuevo</button></div>'
+      : '<div class="dv-result-next"><b>Solicitud recibida</b><p>Revisaremos hechos e inferencias y, si existe encaje, te enviaremos por correo un diagnóstico en PDF con prioridades, alcance y siguiente paso. Plazo estimado: 3–5 días hábiles.</p></div>';
+    return '<div class="dv-result"><span class="dv-result-kicker">Recomendación preliminar</span><h3>'+escapeHtml(result.name)+'</h3><p class="dv-result-band">'+escapeHtml(result.band)+'</p><p>'+escapeHtml(result.desc)+'</p>'+reasons+(result.start?'<div class="dv-result-plan"><b>Cómo empezar</b><p>'+escapeHtml(result.start)+'</p></div>':'')+deliveryMarkup+'<button type="button" class="btn dv-restart">Hacer otro diagnóstico</button></div>';
+  };
+  Diagnostic.prototype.bindResultActions=function(summary,result){
+    var self=this,restart=this.el.querySelector('.dv-restart'),retry=this.el.querySelector('.dv-retry');
+    if(restart)restart.onclick=function(){self.state={entry:''};self.index=0;self.render();};
+    if(retry)retry.onclick=function(){self.submitLead(summary,result);};
+  };
   Diagnostic.prototype.finish=function(){
     this.captureFields();
     var result=recommendation(this.route,this.state),summary=summarize(this.route,this.state,result);
     this.result=result;
-    this.sendLead(summary,result);
-    this.track('diagnostic_completed',{route:this.route,recommendation:result.key,budget_gap:result.gap});
-    try{localStorage.removeItem(this.storageKey);}catch(_e){}
-    var reasons=result.reasons.length?'<ul>'+result.reasons.map(function(r){return '<li>'+escapeHtml(r)+'</li>';}).join('')+'</ul>':'';
-    this.el.innerHTML='<div class="dv-result"><span class="dv-result-kicker">Recomendación preliminar</span><h3>'+escapeHtml(result.name)+'</h3><p class="dv-result-band">'+escapeHtml(result.band)+'</p><p>'+escapeHtml(result.desc)+'</p>'+reasons+(result.start?'<div class="dv-result-plan"><b>Cómo empezar</b><p>'+escapeHtml(result.start)+'</p></div>':'')+'<div class="dv-result-next"><b>¿Qué sigue?</b><p>Revisaremos hechos e inferencias y, si existe encaje, te enviaremos un diagnóstico en PDF con prioridades, alcance y siguiente paso. Plazo estimado: 3–5 días hábiles.</p></div><button type="button" class="btn dv-restart">Hacer otro diagnóstico</button></div>';
-    var self=this;this.el.querySelector('.dv-restart').onclick=function(){self.state={entry:''};self.index=0;self.render();};
+    this.el.innerHTML='<div class="dv-result dv-result-loading" role="status" aria-live="polite"><span class="dv-result-kicker">Guardando diagnóstico</span><h3>Un momento…</h3><p>Estamos registrando tus respuestas de forma segura.</p></div>';
     this.el.scrollIntoView({behavior:'smooth',block:'center'});
+    this.submitLead(summary,result);
+  };
+  Diagnostic.prototype.submitLead=function(summary,result){
+    var self=this;
+    this.el.querySelectorAll('button').forEach(function(btn){btn.disabled=true;});
+    this.sendLead(summary,result).then(function(){
+      self.track('diagnostic_completed',{route:self.route,recommendation:result.key,budget_gap:result.gap});
+      try{localStorage.removeItem(self.storageKey);sessionStorage.removeItem('dv-lead-pending');}catch(_e){}
+      self.el.innerHTML=self.resultMarkup(result,'success');self.bindResultActions(summary,result);
+    }).catch(function(){
+      self.track('diagnostic_submit_failed',{route:self.route});
+      self.el.innerHTML=self.resultMarkup(result,'error');self.bindResultActions(summary,result);
+    });
   };
   Diagnostic.prototype.sendLead=function(summary,result){
-    var self=this,body={
+    if(!this.state.submissionKey)this.state.submissionKey=(root.crypto&&root.crypto.randomUUID)?root.crypto.randomUUID():('dv-'+Date.now()+'-'+Math.random().toString(16).slice(2));
+    var body={
       nombre:this.state.name||'',correo:this.state.email||'',negocio:this.state.business||'',whatsapp:this.state.whatsapp||'',
       reto:summary+(this.state.url?' | URL: '+this.state.url:''),paquete:result.name+' · '+result.band,consent:!!this.state.consent,
-      origen:'landing-'+this.route+'-'+((new URLSearchParams(location.search)).get('utm_source')||'directo')
+      origen:'landing-'+this.route+'-'+((new URLSearchParams(location.search)).get('utm_source')||'directo'),
+      submission_key:this.state.submissionKey
     };
-    try{
-      var local=JSON.parse(localStorage.getItem('dv-waitlist')||'[]');local.push(body);localStorage.setItem('dv-waitlist',JSON.stringify(local));
-      fetch(CONFIG.SUPABASE_URL+'/rest/v1/'+CONFIG.LEAD_TABLE,{method:'POST',headers:{'Content-Type':'application/json','apikey':CONFIG.SUPABASE_ANON,'Authorization':'Bearer '+CONFIG.SUPABASE_ANON,'Prefer':'return=minimal'},body:JSON.stringify(body)}).catch(function(){self.track('diagnostic_submit_failed',{route:self.route});});
-    }catch(_e){}
+    try{sessionStorage.setItem('dv-lead-pending',JSON.stringify(body));}catch(_e){}
+    var controller=typeof AbortController!=='undefined'?new AbortController():null;
+    var timeout=setTimeout(function(){if(controller)controller.abort();},12000);
+    return fetch(CONFIG.SUPABASE_URL+'/rest/v1/'+CONFIG.LEAD_TABLE,{method:'POST',headers:{'Content-Type':'application/json','apikey':CONFIG.SUPABASE_ANON,'Authorization':'Bearer '+CONFIG.SUPABASE_ANON,'Prefer':'resolution=ignore-duplicates,return=minimal'},body:JSON.stringify(body),signal:controller?controller.signal:undefined}).then(function(response){
+      if(!response.ok){var error=new Error('LEAD_SUBMIT_FAILED');error.status=response.status;throw error;}
+      return true;
+    }).finally(function(){clearTimeout(timeout);});
   };
   Diagnostic.prototype.track=function(name,data){try{if(root.va)root.va('event',{name:name,data:data||{}});}catch(_e){}}
 

@@ -568,6 +568,10 @@ section.band{padding:var(--gap) 0;position:relative}
 .dv-result-plan,.dv-result-next{margin-top:24px;padding:18px 20px;border:1px solid var(--line);border-radius:12px;background:rgba(14,19,27,.72)}
 .dv-result-plan b,.dv-result-next b{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent-2)}
 .dv-result-plan p,.dv-result-next p{margin-top:8px!important;font-size:14px!important;color:var(--fg-soft)!important}
+.dv-result-loading{min-height:260px;display:grid;align-content:center}
+.dv-result-error{border-color:rgba(255,124,124,.35);background:rgba(104,30,30,.16)}
+.dv-result-error a{color:var(--accent-2);text-decoration:underline;text-underline-offset:3px}
+.dv-result-error .dv-retry{margin-top:16px}
 .dv-result .dv-restart{margin-top:24px}
 
 /* ══ segunda ruta comercial: sistema de marca ═════════════════════ */
