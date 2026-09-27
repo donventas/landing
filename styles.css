@@ -89,6 +89,7 @@ section.band{padding:var(--gap) 0;position:relative}
 .shead{max-width:26ch}
 .slede{color:var(--fg-soft);font-size:clamp(17px,1.9vw,20px);line-height:1.6;max-width:60ch;margin-top:22px}
 .slede b{color:var(--fg)}
+.key-phrase{color:var(--accent-2);font-weight:650}
 
 /* problema — editorial, rules not cards */
 .prob{display:grid;grid-template-columns:1fr 1fr;gap:0;margin-top:44px;border-top:1px solid var(--line)}

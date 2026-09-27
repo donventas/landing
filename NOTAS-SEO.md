@@ -89,3 +89,15 @@ Aplicación por superficie:
 La repetición de siglas no mejora por sí sola el posicionamiento. Mantener una entidad consistente,
 servicios explícitos, respuestas útiles, estructura semántica y datos verificables es más importante
 que forzar palabras clave en cada sección.
+
+## Regla de énfasis editorial en azul
+
+El azul ayuda a escanear el contenido; no sustituye una jerarquía clara ni se usa como decoración.
+En textos densos se destaca la frase que responde una de estas preguntas: **qué resultado obtengo**,
+**qué problema se resuelve** o **qué sucede después**.
+
+- usar una frase destacada por párrafo; dos solo si el párrafo es excepcionalmente largo;
+- destacar palabras cotidianas y resultados, no siglas o términos técnicos por defecto;
+- conservar el texto completo dentro del HTML: el color no debe cargar significado indispensable;
+- usar `strong.key-phrase` cuando la frase tenga énfasis semántico real;
+- revisar el ritmo de toda la sección: no todos los párrafos necesitan azul.
