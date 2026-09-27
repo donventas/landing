@@ -42,6 +42,10 @@ depende de profundidad, aplicaciones, materiales, ritmo y capacidad de operació
   clara, consistente y operable con autonomía.
 - [Diagnóstico](https://www.donventas.mx/diagnostico.html): formulario compartido para recomendar
   contenido, mejoras al sitio y buscadores, o un sistema de marca.
+- [Ideas](https://www.donventas.mx/blog/): biblioteca editorial sobre contenido, marca,
+  buscadores y decisiones de compra.
+- [Cómo crear contenido que atraiga clientes](https://www.donventas.mx/blog/contenido-que-atrae-clientes.html):
+  guía para responder dudas reales, demostrar por qué confiar y facilitar una siguiente acción.
 - [Centro Legal](https://www.donventas.mx/15_LEGAL/Centro%20Legal.html): privacidad,
   términos y política de cookies.
 
