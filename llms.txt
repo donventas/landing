@@ -1,21 +1,22 @@
 # Don Ventas
 
 > Estudio de contenido y marca para PyMEs de México. Creamos contenido para redes y
-> sitios que atrae tráfico calificado, genera confianza y acerca conversaciones y
-> pedidos. Base en Ciudad de México y Mérida.
+> sitios que ayudan a que más personas entiendan el negocio, lo encuentren y se
+> animen a contactarlo o comprar. Base en Ciudad de México y Mérida.
 
 ## Qué hace Don Ventas
 
-- **Contenido para redes:** estrategia, diseño y copy para atraer atención calificada y acercar
-  conversaciones comerciales.
-- **Sitio + SEO:** páginas, artículos y respuestas útiles para aparecer en búsquedas, ganar confianza
-  y construir posicionamiento orgánico.
-- **Contenido + SEO + AEO:** redes, sitio y motores de respuesta operados como un sistema que
-  crea demanda, captura preguntas y aprende de señales reales.
-- **Sistema de marca:** estrategia, identidad, reglas, activos y aplicaciones para que equipos
-  y proveedores puedan publicar, presentar y vender sin improvisar cada decisión.
-- **GEO:** fortalecimiento de información pública, consistente y verificable para que los
-  motores de IA puedan comprender la marca, citar sus páginas y describir correctamente su oferta.
+- **Contenido para redes:** temas, textos y diseño para atraer personas con una necesidad real y
+  acercarlas a una conversación o pedido.
+- **Sitio para aparecer en Google:** páginas, artículos y respuestas útiles para aparecer en
+  buscadores y generar confianza. Este trabajo incluye posicionamiento en buscadores (SEO).
+- **Redes, sitio, buscadores e inteligencia artificial:** una solución conectada de contenido,
+  SEO, AEO y GEO para atraer personas, responder preguntas y mejorar con resultados reales.
+- **Sistema de marca:** mensaje, identidad, reglas, archivos y plantillas para que equipos y
+  proveedores puedan publicar, presentar y vender sin improvisar cada decisión.
+- **Presencia en herramientas de IA:** información pública, consistente y verificable para que
+  los motores de inteligencia artificial comprendan la marca, citen sus páginas y describan
+  correctamente su oferta. Las prácticas técnicas se conocen como AEO y GEO.
 - **Método:** cada cliente conserva contexto versionado de negocio, audiencia, voz y marca para
   producir con consistencia sin empezar de cero cada semana.
 
@@ -25,21 +26,22 @@ la capacidad de ejecución del negocio.
 
 ## Primer paso
 
-El CTA principal es **Recibe tu diagnóstico**. El visitante completa un formulario
-dinámico que pregunta presupuesto al inicio y adapta el resto del recorrido. La lógica
-de recomendación es determinista; el PDF y la propuesta conservan revisión humana.
+La llamada a la acción principal es **Recibe tu diagnóstico**. El visitante completa un
+formulario que pregunta el presupuesto al inicio y adapta las preguntas siguientes. Las
+mismas respuestas producen la misma recomendación preliminar; una persona revisa el PDF
+y la propuesta antes de enviarlos.
 
-Rangos orientativos: contenido desde $12,000 MXN al mes; sitio y SEO desde $25,000 MXN
+Rangos orientativos: contenido desde $12,000 MXN al mes; sitio preparado para buscadores (SEO) desde $25,000 MXN
 de implementación; sistemas de marca desde $18,000 MXN por proyecto. El alcance final
 depende de profundidad, aplicaciones, materiales, ritmo y capacidad de operación.
 
 ## Enlaces canónicos
 
-- [Sitio principal](https://www.donventas.mx/): propósito, oferta, casos, método y brief.
+- [Sitio principal](https://www.donventas.mx/): propósito, oferta, casos, método y formulario.
 - [Sistema de marca](https://www.donventas.mx/branding.html): ruta para construir una marca
   clara, consistente y operable con autonomía.
-- [Diagnóstico](https://www.donventas.mx/diagnostico.html): motor compartido de orientación
-  para contenido, autoridad digital o sistema de marca.
+- [Diagnóstico](https://www.donventas.mx/diagnostico.html): formulario compartido para recomendar
+  contenido, mejoras al sitio y buscadores, o un sistema de marca.
 - [Centro Legal](https://www.donventas.mx/15_LEGAL/Centro%20Legal.html): privacidad,
   términos y política de cookies.
 

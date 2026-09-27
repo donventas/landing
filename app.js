@@ -150,7 +150,7 @@ window.va = window.va || function () { (window.vaq = window.vaq || []).push(argu
 (function(){
   var select = document.getElementById('wl-oferta');
   if(!select) return;
-  var labels = {contenido:'Contenido para redes', autoridad:'Sitio + SEO', motor:'Contenido + SEO + AEO'};
+  var labels = {contenido:'Contenido para redes', autoridad:'Sitio para aparecer en Google', motor:'Redes + sitio + buscadores e IA'};
   [].slice.call(document.querySelectorAll('[data-offer]')).forEach(function(link){
     link.addEventListener('click', function(){
       var value = labels[link.getAttribute('data-offer')];

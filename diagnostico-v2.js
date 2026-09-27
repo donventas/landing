@@ -13,10 +13,10 @@
 
   var CONTENT_QUESTIONS=[
     {id:'outcome',type:'single',title:'¿Qué quieres lograr primero?',hint:'Elige el resultado que más importa en los próximos 90 días.',required:true,auto:true,options:[
-      {id:'traffic',label:'Atraer tráfico más calificado',desc:'Que lleguen personas con una necesidad real.'},
+      {id:'traffic',label:'Atraer personas que sí podrían comprar',desc:'Que lleguen personas con una necesidad real.'},
       {id:'orders',label:'Generar más conversaciones o pedidos',desc:'Acercar el contenido a una acción comercial.'},
       {id:'trust',label:'Construir confianza antes de la decisión',desc:'Explicar mejor por qué elegirte.'},
-      {id:'search',label:'Aparecer mejor en Google y motores de IA',desc:'Ser encontrado y entendido cuando investigan.'},
+      {id:'search',label:'Aparecer mejor en Google y herramientas de inteligencia artificial',desc:'Ser encontrado y entendido cuando investigan.'},
       {id:'consistency',label:'Publicar con mayor consistencia',desc:'Dejar de empezar desde cero cada semana.'},
       {id:'other',label:'Otro resultado',other:true}
     ]},
@@ -34,12 +34,12 @@
       {id:'quarter',label:'En dos o tres meses'},
       {id:'exploring',label:'Solo estoy explorando por ahora'}
     ]},
-    {id:'obstacle',type:'single',title:'¿Qué frena más tu contenido hoy?',hint:'Selecciona el cuello de botella principal.',required:true,auto:true,options:[
-      {id:'ideas',label:'No sabemos qué publicar',desc:'Faltan temas y una dirección editorial.'},
-      {id:'quality',label:'El contenido no refleja la calidad del negocio',desc:'Diseño, copy o mensaje se sienten genéricos.'},
+    {id:'obstacle',type:'single',title:'¿Qué frena más tu contenido hoy?',hint:'Selecciona el problema principal.',required:true,auto:true,options:[
+      {id:'ideas',label:'No sabemos qué publicar',desc:'Faltan temas y una dirección clara.'},
+      {id:'quality',label:'El contenido no refleja la calidad del negocio',desc:'El diseño, los textos o el mensaje se sienten genéricos.'},
       {id:'cadence',label:'Publicamos sin consistencia',desc:'La operación depende del tiempo disponible.'},
-      {id:'conversion',label:'Hay atención, pero pocas conversaciones o pedidos',desc:'Falta intención comercial o siguiente paso.'},
-      {id:'site',label:'El sitio no explica ni aparece en búsquedas',desc:'La fricción ocurre durante la decisión.'},
+      {id:'conversion',label:'Hay atención, pero pocas conversaciones o pedidos',desc:'Falta una razón o un siguiente paso claro.'},
+      {id:'site',label:'El sitio no explica ni aparece en búsquedas',desc:'Las personas encuentran dudas cuando están por decidir.'},
       {id:'other',label:'Otro problema',other:true}
     ]},
     {id:'channels',type:'multi',title:'¿Dónde tiene presencia activa tu negocio?',hint:'Puedes elegir varias opciones.',required:true,options:[
@@ -54,14 +54,14 @@
       {id:'weekly',label:'Una o dos veces por semana'},
       {id:'frequent',label:'Tres o más veces por semana'}
     ]},
-    {id:'siteState',type:'single',title:'¿Qué papel cumple hoy tu sitio web?',hint:'Esto determina si conviene sumar una ruta de autoridad.',required:true,auto:true,options:[
+    {id:'siteState',type:'single',title:'¿Qué papel cumple hoy tu sitio web?',hint:'Esto nos ayuda a saber si también necesitas mejorar el sitio y los buscadores.',required:true,auto:true,options:[
       {id:'none',label:'No tenemos sitio'},
       {id:'social',label:'Solo usamos redes o Google Maps'},
       {id:'basic',label:'Tenemos una página básica que casi no genera contactos'},
       {id:'works',label:'El sitio explica bien y sí genera contactos'},
       {id:'unknown',label:'No sabemos si está funcionando'}
     ]},
-    {id:'setupBudget',type:'single',title:'Si la oportunidad requiere sitio, SEO o AEO, ¿qué inversión inicial considerarías?',hint:'Solo aparece cuando tus respuestas indican una necesidad de encontrabilidad.',required:true,auto:true,showIf:function(a){return needsSearch(a);},options:[
+    {id:'setupBudget',type:'single',title:'Si necesitas mejorar el sitio para aparecer en Google o en herramientas de IA, ¿qué inversión inicial considerarías?',hint:'Solo aparece cuando tus respuestas indican que hoy es difícil encontrar o entender tu negocio.',required:true,auto:true,showIf:function(a){return needsSearch(a);},options:[
       {id:'lt25',label:'Menos de $25,000 MXN'},
       {id:'25_45',label:'$25,000–$45,000 MXN'},
       {id:'46_80',label:'$46,000–$80,000 MXN'},
@@ -84,7 +84,7 @@
 
   var BRAND_QUESTIONS=[
     {id:'desired',type:'single',title:'¿Qué quieres resolver primero con tu marca?',hint:'Elige el resultado que más cambiaría cómo publicas, presentas o vendes.',required:true,auto:true,options:[
-      {id:'clarity',label:'Que la marca se entienda mejor',desc:'Aclarar mensaje, oferta y posicionamiento.'},
+      {id:'clarity',label:'Que la marca se entienda mejor',desc:'Aclarar qué vendes, para quién y por qué elegirte.'},
       {id:'consistency',label:'Que todo se vea y suene consistente',desc:'Dejar de improvisar entre canales y proveedores.'},
       {id:'autonomy',label:'Que el equipo pueda crear sin depender de una agencia',desc:'Tener reglas, plantillas y archivos utilizables.'},
       {id:'launch',label:'Lanzar una marca nueva con una base sólida'},
@@ -166,20 +166,20 @@
     var content=a.entry!=='autoridad' && (a.entry==='motor'||['traffic','orders','consistency'].indexOf(a.outcome)>=0||['ideas','quality','cadence','conversion'].indexOf(a.obstacle)>=0);
     var key=search&&content?'motor':(search?'autoridad':'contenido');
     var catalog={
-      contenido:{name:'Contenido que genera demanda',band:'$12,000–$32,000 MXN al mes',desc:'Estrategia editorial, piezas maestras y derivados por canal con revisión mensual.'},
-      autoridad:{name:'Autoridad encontrable',band:'$25,000–$80,000 MXN de implementación',desc:'Sitio editorial, SEO técnico y de contenido, y una base preparada para AEO.'},
-      motor:{name:'Motor de demanda y autoridad',band:'$35,000–$95,000 MXN de implementación + $28,000–$50,000 MXN al mes',desc:'Contenido, sitio, búsqueda y aprendizaje conectados como un solo sistema.'}
+      contenido:{name:'Contenido para atraer posibles clientes',band:'$12,000–$32,000 MXN al mes',desc:'Temas, textos y diseños principales, con versiones para cada canal y revisión mensual.'},
+      autoridad:{name:'Sitio para que te encuentren y confíen',band:'$25,000–$80,000 MXN de implementación',desc:'Un sitio claro, mejoras para buscadores (SEO) y respuestas fáciles de entender para herramientas de IA.'},
+      motor:{name:'Redes, sitio, buscadores e inteligencia artificial',band:'$35,000–$95,000 MXN de implementación + $28,000–$50,000 MXN al mes',desc:'Contenido, sitio, búsquedas y mejora continua conectados en un solo plan.'}
     };
     var m=monthlyRank(a.monthlyBudget),s=setupRank(a.setupBudget),gap=false,start='';
     if(key==='contenido' && m===0){gap=true;start='Conviene iniciar con un alcance acotado o madurar recursos antes de una operación mensual completa.';}
     if(key==='autoridad' && (s===0||s===-1)){gap=true;start=s===0?'Conviene empezar por una intervención priorizada antes de construir el sistema completo.':'La inversión inicial debe confirmarse antes de definir el alcance.';}
     if(key==='motor' && (m<3||s<1)){
       gap=true;
-      start=search?'La necesidad es combinada, pero recomendamos ejecutarla por fases: primero el cuello de botella con mejor encaje presupuestal y después conectar el segundo frente.':'Recomendamos una primera fase acotada y un roadmap para conectar el sistema.';
+      start=search?'Necesitas trabajar más de un frente, pero recomendamos hacerlo por etapas: primero el problema más importante que cabe en tu presupuesto y después el segundo.':'Recomendamos una primera etapa acotada y un plan para conectar el resto.';
     }
     var reasons=[];
-    if(content)reasons.push('Tus respuestas muestran una necesidad activa de contenido, cadencia o conversión.');
-    if(search)reasons.push('También existe una fricción de sitio, confianza o encontrabilidad durante la decisión.');
+    if(content)reasons.push('Tus respuestas muestran que necesitas mejores temas, mayor constancia o un siguiente paso más claro para vender.');
+    if(search)reasons.push('También hay un problema en el sitio o es difícil encontrar y entender tu negocio antes de decidir.');
     if(a.resources&&a.resources.indexOf('none')>=0)reasons.push('La producción deberá incluir una fase inicial para construir evidencia y materiales.');
     if(a.timing==='exploring')reasons.push('El momento todavía es exploratorio; el PDF debe ayudarte a decidir sin forzar una compra.');
     return {route:'contenido',key:key,name:catalog[key].name,band:catalog[key].band,desc:catalog[key].desc,gap:gap,start:start,reasons:reasons};
@@ -196,17 +196,17 @@
     var need=score<=3?'essential':(score<=6?'complete':'extended');
     var catalog={
       essential:{name:'Sistema esencial',band:'$18,000–$30,000 MXN',desc:'Claridad, núcleo visual y las reglas mínimas para dejar de improvisar.'},
-      complete:{name:'Sistema de marca completo',band:'$31,000–$60,000 MXN',desc:'Estrategia, identidad y aplicaciones prioritarias para operar con consistencia.'},
-      extended:{name:'Sistema extendido',band:'$61,000–$120,000 MXN',desc:'Un sistema amplio para equipos, proveedores y múltiples aplicaciones.'}
+      complete:{name:'Sistema de marca completo',band:'$31,000–$60,000 MXN',desc:'Mensaje, identidad y usos prioritarios para que la marca sea consistente.'},
+      extended:{name:'Sistema extendido',band:'$61,000–$120,000 MXN',desc:'Una guía amplia para equipos, proveedores y todos los lugares donde aparece la marca.'}
     };
     var needRank={essential:1,complete:2,extended:3}[need],capacity=brandBudgetRank(a.projectBudget),gap=capacity>=0&&capacity<needRank;
     var start='';
     if(a.projectBudget==='lt18')start='El presupuesto está por debajo del mínimo de un sistema completo; conviene priorizar una intervención puntual o una ruta de maduración.';
-    else if(gap)start='La necesidad es mayor que el rango disponible. Recomendamos construir el sistema por etapas y dejar el roadmap explícito.';
+    else if(gap)start='La necesidad es mayor que el rango disponible. Recomendamos construir el sistema por etapas y dejar un plan claro para completarlo.';
     else if(a.projectBudget==='unknown')start='Primero debemos validar profundidad, aplicaciones y capacidad antes de cerrar el alcance.';
     var reasons=[];
     if(['none','logo'].indexOf(a.assets)>=0)reasons.push('El punto de partida todavía no funciona como un sistema reutilizable.');
-    if(a.consistency!=='yes')reasons.push('La consistencia entre puntos de contacto necesita reglas y activos comunes.');
+    if(a.consistency!=='yes')reasons.push('Los lugares donde aparece la marca necesitan reglas y recursos comunes.');
     if(['providers','scale'].indexOf(a.users)>=0)reasons.push('Varias personas o proveedores necesitan una fuente clara para aplicar la marca.');
     if(a.autonomy==='independent')reasons.push('La autonomía exige archivos editables, plantillas, documentación y transferencia de uso.');
     return {route:'branding',key:need,name:catalog[need].name,band:catalog[need].band,desc:catalog[need].desc,gap:gap||a.projectBudget==='lt18'||a.projectBudget==='unknown',start:start,reasons:reasons,score:score};
@@ -280,7 +280,7 @@
     var current=this.current(),q=current.q,list=current.list;
     if(!q)return;
     var progress=Math.round(((this.index+1)/list.length)*100);
-    var routeLabel=this.route==='branding'?'Sistema de marca':'Contenido y autoridad';
+    var routeLabel=this.route==='branding'?'Sistema de marca':'Contenido, sitio y buscadores';
     var h='<div class="dv-form-shell" data-route-name="'+this.route+'">';
     h+='<div class="dv-form-top"><div><span class="dv-form-kicker">Diagnóstico · '+routeLabel+'</span><strong>'+(this.index+1)+' / '+list.length+'</strong></div><div class="dv-progress" aria-label="Progreso"><i style="width:'+progress+'%"></i></div></div>';
     h+='<div class="dv-step" aria-live="polite"><h3>'+escapeHtml(q.title)+'</h3>';

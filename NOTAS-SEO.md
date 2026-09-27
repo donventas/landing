@@ -61,3 +61,31 @@ La home mantiene una arquitectura comercial breve y una zona de preguntas más e
 No reducir texto por una cuota arbitraria. Ejecutar `python scripts/audit_content.py` y revisar
 si cada párrafo ayuda a entender, comparar, confiar o actuar. Las secciones visualmente tituladas
 deben conservar encabezados HTML reales.
+
+## Regla de lenguaje claro sin perder SEO ni GEO
+
+La página debe poder entenderse sin conocer términos de marketing. El término cotidiano va
+primero; la palabra técnica aparece después, entre paréntesis o en una explicación breve cuando
+ayuda a identificar el servicio.
+
+| Evitar como primera explicación | Usar primero | Término técnico que puede conservarse después |
+| --- | --- | --- |
+| tráfico calificado | personas que sí podrían comprar | tráfico calificado |
+| copy | textos o mensajes | copywriting |
+| generar demanda | atraer interés y posibles clientes | generación de demanda |
+| SEO | aparecer en Google o en buscadores | SEO |
+| AEO / GEO | ser entendido y citado por herramientas de IA | AEO / GEO |
+| brief | formulario o cuestionario | brief |
+| lead / prospecto | posible cliente o persona interesada | lead |
+| atomización | versiones para cada canal | atomización de contenido |
+
+Aplicación por superficie:
+
+- **Títulos, botones y primeros párrafos:** solo lenguaje cotidiano.
+- **Descripciones de servicio y FAQ:** lenguaje cotidiano seguido del término técnico.
+- **JSON-LD, `llms.txt` y metadatos:** combinar intención de búsqueda y explicación clara.
+- **Código interno y nombres de datos:** pueden conservar términos técnicos cuando no son visibles.
+
+La repetición de siglas no mejora por sí sola el posicionamiento. Mantener una entidad consistente,
+servicios explícitos, respuestas útiles, estructura semántica y datos verificables es más importante
+que forzar palabras clave en cada sección.
