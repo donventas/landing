@@ -11,6 +11,9 @@ Referencia rápida para indexación del sitio. No afecta al sitio (archivo de do
 - `scripts/audit_content.py` — control local de peso textual y jerarquía H1/H2/H3 por sección.
 - Host canónico vigente: `https://www.donventas.mx/`, alineado con la redirección efectiva.
 - La home declara explícitamente `index,follow`; los previews pueden seguir protegidos por Vercel.
+- Un preview protegido por Vercel puede responder `X-Robots-Tag: noindex`; es correcto y no
+  debe usarse para diagnosticar la indexación del dominio productivo. Validar siempre
+  `https://www.donventas.mx/` después del merge y despliegue.
 
 ## Google Search Console
 
