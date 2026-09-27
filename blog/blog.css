@@ -42,7 +42,7 @@
 .topic-row h3{font-size:22px;line-height:1.15;letter-spacing:-.02em}
 .topic-row p{color:var(--fg-soft);font-size:14px;line-height:1.55}
 .topic-row .state{color:var(--accent-2);text-align:right}
-.blog-invite{display:grid;grid-template-columns:1fr auto;gap:30px;align-items:center;padding:clamp(36px,6vw,70px) 0}
+.blog-invite{display:grid;grid-template-columns:1fr auto;gap:30px;align-items:center;padding-block:clamp(36px,6vw,70px)}
 .blog-invite h2{font-size:clamp(32px,5vw,58px);line-height:1;letter-spacing:-.04em;max-width:16ch}
 .blog-invite p{color:var(--fg-soft);margin-top:16px;max-width:56ch}
 
@@ -129,4 +129,3 @@
   .summary-box{padding:26px 22px}
   .article-copy>p,.article-section>p{font-size:17px}
 }
-
