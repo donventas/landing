@@ -5,9 +5,9 @@ Referencia rápida para indexación del sitio. No afecta al sitio (archivo de do
 ## Archivos publicados (en producción)
 - `robots.txt` — permite crawlers web y de IA (GPTBot, OAI-SearchBot, ChatGPT-User,
   Google-Extended, PerplexityBot, ClaudeBot, Claude-Web, Applebot-Extended) y declara el sitemap.
-- `sitemap.xml` — home, `diagnostico.html` y las 4 páginas legales de `15_LEGAL/`.
+- `sitemap.xml` — home, `branding.html`, `diagnostico.html` y las 4 páginas legales de `15_LEGAL/`.
 - `llms.txt` — resumen del negocio para motores de IA.
-- `index.html` / `diagnostico.html` — datos estructurados JSON-LD + canonical + OG/Twitter.
+- `index.html` / `branding.html` / `diagnostico.html` — datos estructurados JSON-LD + canonical + OG/Twitter.
 - `scripts/audit_content.py` — control local de peso textual y jerarquía H1/H2/H3 por sección.
 - Host canónico vigente: `https://www.donventas.mx/`, alineado con la redirección efectiva.
 - La home declara explícitamente `index,follow`; los previews pueden seguir protegidos por Vercel.
@@ -26,11 +26,12 @@ Referencia rápida para indexación del sitio. No afecta al sitio (archivo de do
      archivo HTML subido a la raíz del repo (se puede automatizar por commit).
 
 ### 2. Enviar sitemap
-- GSC → **Sitemaps** → escribir `sitemap.xml` → Enviar. Debe quedar "Correcto" con 6 URLs.
+- GSC → **Sitemaps** → escribir `sitemap.xml` → Enviar. Debe quedar "Correcto" con 7 URLs.
 
 ### 3. Forzar primer rastreo (opcional)
 - GSC → **Inspección de URLs** → `https://www.donventas.mx/` → **Solicitar indexación**.
-  Repetir con `https://www.donventas.mx/diagnostico.html`.
+  Repetir con `https://www.donventas.mx/diagnostico.html` y
+  `https://www.donventas.mx/branding.html`.
 
 ### 4. Comprobación previa (responden 200)
 - `https://www.donventas.mx/sitemap.xml`

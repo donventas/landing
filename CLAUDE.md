@@ -15,17 +15,20 @@ Este archivo lo lee Claude Code al inicio de cada sesión: síguelo siempre.
 5. Resume en 2 líneas qué cambiaste y en qué archivo, cada iteración.
 
 ## ✅ Estructura — FUENTE EDITABLE (ya no es un bundle)
-El sitio es fuente normal, editable con diffs baratos. Tres archivos + assets:
+El sitio es fuente normal, editable con diffs baratos. Páginas, estilos, lógica y assets:
 - **`index.html`** — markup limpio. Enlaza `styles.css` y (con `defer`) `app.js`. Edita el
-  texto/estructura aquí directamente; no hay strings escapados.
+  texto/estructura de la ruta de contenido y autoridad aquí directamente; no hay strings escapados.
+- **`branding.html`** — segunda ruta comercial: sistema de marca, rangos y diagnóstico de branding.
+- **`diagnostico.html`** — acceso independiente al diagnóstico. `?ruta=branding` activa la ruta de marca.
 - **`styles.css`** — todo el CSS (tokens en `:root`, secciones, form, banner de cookies).
   Las fuentes se cargan por `@import` de Google Fonts al inicio del archivo.
-- **`app.js`** — todo el JS, en 5 secciones comentadas: (1) reveal on-scroll, (2) lightbox,
-  (3) waitlist→Supabase, (4) mini-diagnóstico, (5) banner de cookies + Clarity. Las llaves
-  públicas (Supabase URL/anon, Clarity id) están como `var` al inicio de cada sección.
+- **`app.js`** — interacciones editoriales, galerías, animaciones, cookies y Clarity.
+- **`diagnostico-v2.js`** — formulario compartido, preguntas condicionales, recomendación
+  determinista y captura del lead en Supabase. Las llaves públicas (Supabase URL/anon,
+  Clarity id) permanecen visibles solo como configuración de cliente.
 
-Para un cambio de texto: edítalo en `index.html`. Para estilo: `styles.css`. Para lógica /
-llaves: `app.js`. Cambios chicos = diffs chicos.
+Para un cambio de texto: edita la página correspondiente. Para estilo: `styles.css`. Para
+lógica editorial/cookies: `app.js`. Para el diagnóstico: `diagnostico-v2.js`.
 
 > Nota: la fuente canónica de diseño sigue viviendo en el proyecto de diseño (Claude Design),
 > `Bloque 10 - Landing - Ruta A (Terminal).html`. Cambios grandes de diseño conviene hacerlos
@@ -34,7 +37,7 @@ llaves: `app.js`. Cambios chicos = diffs chicos.
 ## Dónde está cada cosa
 - **Footer** (`index.html`, `<footer class="foot">`): eslogan "Don Ventas · branding que vende",
   coordenadas CDMX/Mérida, email de contacto.
-- **Formulario de waitlist** (`app.js`, §3): POST a Supabase (`/rest/v1/lead`). Config:
+- **Formulario de diagnóstico** (`diagnostico-v2.js`): POST a Supabase (`/rest/v1/lead`). Config:
   `SUPABASE_URL`, `SUPABASE_ANON` (clave pública, OK en el front), `TABLE`.
 - **Banner de cookies** (markup en `index.html` `#dv-cookie`; lógica en `app.js`, §5): guarda
   consentimiento en `localStorage`, registra INSERT anónimo en Supabase `consent_log`, y carga

@@ -12,6 +12,8 @@
   y construir posicionamiento orgánico.
 - **Contenido + SEO + AEO:** redes, sitio y motores de respuesta operados como un sistema que
   crea demanda, captura preguntas y aprende de señales reales.
+- **Sistema de marca:** estrategia, identidad, reglas, activos y aplicaciones para que equipos
+  y proveedores puedan publicar, presentar y vender sin improvisar cada decisión.
 - **GEO:** fortalecimiento de información pública, consistente y verificable para que los
   motores de IA puedan comprender la marca, citar sus páginas y describir correctamente su oferta.
 - **Método:** cada cliente conserva contexto versionado de negocio, audiencia, voz y marca para
@@ -23,16 +25,21 @@ la capacidad de ejecución del negocio.
 
 ## Primer paso
 
-El CTA principal es **Recibe tu diagnóstico**. El visitante completa un brief sobre
-objetivo, audiencia, canales y conversión. Después de revisarlo, Don Ventas envía un PDF
-breve con problemas detectados, oportunidades prioritarias, la ruta recomendada y una
-propuesta de alcance y frecuencia.
+El CTA principal es **Recibe tu diagnóstico**. El visitante completa un formulario
+dinámico que pregunta presupuesto al inicio y adapta el resto del recorrido. La lógica
+de recomendación es determinista; el PDF y la propuesta conservan revisión humana.
+
+Rangos orientativos: contenido desde $12,000 MXN al mes; sitio y SEO desde $25,000 MXN
+de implementación; sistemas de marca desde $18,000 MXN por proyecto. El alcance final
+depende de profundidad, aplicaciones, materiales, ritmo y capacidad de operación.
 
 ## Enlaces canónicos
 
 - [Sitio principal](https://www.donventas.mx/): propósito, oferta, casos, método y brief.
-- [Diagnóstico de marca](https://www.donventas.mx/diagnostico.html): herramienta previa
-  de orientación sobre el sistema de marca.
+- [Sistema de marca](https://www.donventas.mx/branding.html): ruta para construir una marca
+  clara, consistente y operable con autonomía.
+- [Diagnóstico](https://www.donventas.mx/diagnostico.html): motor compartido de orientación
+  para contenido, autoridad digital o sistema de marca.
 - [Centro Legal](https://www.donventas.mx/15_LEGAL/Centro%20Legal.html): privacidad,
   términos y política de cookies.
 
