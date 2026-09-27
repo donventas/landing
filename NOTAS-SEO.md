@@ -61,3 +61,54 @@ La home mantiene una arquitectura comercial breve y una zona de preguntas más e
 No reducir texto por una cuota arbitraria. Ejecutar `python scripts/audit_content.py` y revisar
 si cada párrafo ayuda a entender, comparar, confiar o actuar. Las secciones visualmente tituladas
 deben conservar encabezados HTML reales.
+
+## Regla de lenguaje claro sin perder SEO ni GEO
+
+La página debe poder entenderse sin conocer términos de marketing. El término cotidiano va
+primero; la palabra técnica aparece después, entre paréntesis o en una explicación breve cuando
+ayuda a identificar el servicio.
+
+| Evitar como primera explicación | Usar primero | Término técnico que puede conservarse después |
+| --- | --- | --- |
+| tráfico calificado | personas que sí podrían comprar | tráfico calificado |
+| copy | textos o mensajes | copywriting |
+| generar demanda | atraer interés y posibles clientes | generación de demanda |
+| SEO | aparecer en Google o en buscadores | SEO |
+| AEO / GEO | ser entendido y citado por herramientas de IA | AEO / GEO |
+| brief | formulario o cuestionario | brief |
+| lead / prospecto | posible cliente o persona interesada | lead |
+| atomización | versiones para cada canal | atomización de contenido |
+
+Aplicación por superficie:
+
+- **Títulos, botones y primeros párrafos:** solo lenguaje cotidiano.
+- **Descripciones de servicio y FAQ:** lenguaje cotidiano seguido del término técnico.
+- **JSON-LD, `llms.txt` y metadatos:** combinar intención de búsqueda y explicación clara.
+- **Código interno y nombres de datos:** pueden conservar términos técnicos cuando no son visibles.
+
+La repetición de siglas no mejora por sí sola el posicionamiento. Mantener una entidad consistente,
+servicios explícitos, respuestas útiles, estructura semántica y datos verificables es más importante
+que forzar palabras clave en cada sección.
+
+## Regla de énfasis editorial en azul
+
+El azul ayuda a escanear el contenido; no sustituye una jerarquía clara ni se usa como decoración.
+En textos densos se destaca la frase que responde una de estas preguntas: **qué resultado obtengo**,
+**qué problema se resuelve** o **qué sucede después**.
+
+- usar una frase destacada por párrafo; dos solo si el párrafo es excepcionalmente largo;
+- destacar palabras cotidianas y resultados, no siglas o términos técnicos por defecto;
+- conservar el texto completo dentro del HTML: el color no debe cargar significado indispensable;
+- usar `strong.key-phrase` cuando la frase tenga énfasis semántico real;
+- revisar el ritmo de toda la sección: no todos los párrafos necesitan azul.
+
+## Regla de prueba comercial verificable
+
+Los casos del portafolio explican **necesidad, entrega visible y estado**. Un resultado comercial
+solo se publica cuando existe evidencia autorizada que lo respalda. Las muestras conceptuales deben
+seguir identificadas como tales; una pieza visual no equivale por sí sola a una venta, mejora de
+posicionamiento o resultado del negocio.
+
+Las tarjetas de servicio incluyen un criterio “Te conviene si” para ayudar a elegir sin conocer
+terminología de marketing. El diagnóstico informa desde el inicio el tiempo para completarlo y el
+plazo estimado de revisión humana.
