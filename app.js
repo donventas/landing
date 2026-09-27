@@ -1,8 +1,8 @@
 /* ════════════════════════════════════════════════════════════════════
    Don Ventas — landing (donventas.mx)
    Fuente editable. Cargado con `defer` desde index.html.
-   Secciones:  1) reveal on-scroll   2) lightbox   3) waitlist (Supabase)
-               4) mini-diagnóstico   5) banner de cookies + Clarity
+   Secciones:  1) reveal on-scroll   2) lightbox   3) solicitud de diagnóstico (Supabase)
+               4) preselección de oferta   5) banner de cookies + Clarity
    Config (llaves públicas) al pie de cada sección — edítalas ahí.
    ════════════════════════════════════════════════════════════════════ */
 
@@ -60,7 +60,7 @@ window.va = window.va || function () { (window.vaq = window.vaq || []).push(argu
   document.addEventListener('keydown',function(e){ if(e.key==='Escape'&&lbx.classList.contains('open'))closeLbx(); });
 })();
 
-/* ── 3 · waitlist form → Supabase (tabla `lead`) ──────────────────── */
+/* ── 3 · solicitud de diagnóstico → Supabase (tabla `lead`) ─────── */
 (function(){
   // Config Supabase — clave pública (RLS permite solo INSERT). OK en front.
   var SUPABASE_URL = 'https://hlabhmegjnrjygsywnqa.supabase.co';
@@ -69,26 +69,44 @@ window.va = window.va || function () { (window.vaq = window.vaq || []).push(argu
   var form = document.getElementById('wlForm');
   if(!form) return;
   var ok = document.getElementById('wlOk');
+  var started = false;
+  form.addEventListener('focusin', function(){
+    if(started) return; started = true;
+    window.va('event', {name:'diagnostic_form_started'});
+  });
   form.addEventListener('submit', function(e){
     e.preventDefault();
     var btn = form.querySelector('button[type=submit]');
+    var canales = [].slice.call(form.querySelectorAll('input[name="canal"]:checked')).map(function(x){return x.value;});
+    var oferta = form.oferta.value || 'Por recomendar';
+    var reto = [
+      'Objetivo: ' + form.objetivo.value.trim(),
+      'Audiencia: ' + form.audiencia.value.trim(),
+      'Canales: ' + (canales.join(', ') || 'No indicado'),
+      'Conversión: ' + form.conversion.value.trim(),
+      'Capacidad: ' + form.inversion.value.trim()
+    ].join(' | ');
     var d = {
       nombre: form.nombre.value.trim(),
       correo: form.correo.value.trim(),
       negocio: form.negocio.value.trim(),
       whatsapp: form.whatsapp.value.trim(),
-      reto: form.reto.value.trim(),
-      paquete: (form.paquete && form.paquete.value) || '',
+      reto: reto,
+      paquete: oferta,
       consent: form.consent.checked,
       origen: (new URLSearchParams(location.search)).get('utm_source') || 'landing',
       fecha: new Date().toISOString()
     };
-    if(!d.nombre || !d.correo || !d.negocio || !d.consent){ if(form.reportValidity)form.reportValidity(); return; }
+    form.reto.value = reto;
+    form.paquete.value = oferta;
+    if(!d.nombre || !d.correo || !d.negocio || !form.objetivo.value || !form.audiencia.value || !form.conversion.value || !form.inversion.value || !d.consent){ if(form.reportValidity)form.reportValidity(); return; }
     btn.disabled = true; btn.textContent = 'Enviando…';
+    window.va('event', {name:'diagnostic_form_submitted', data:{offer:oferta}});
     function done(){
       try{ var q = JSON.parse(localStorage.getItem('dv-waitlist')||'[]'); q.push(d); localStorage.setItem('dv-waitlist', JSON.stringify(q)); }catch(_){}
-      form.style.display = 'none'; ok.style.display = 'block';
-      try{ var n = JSON.parse(localStorage.getItem('dv-waitlist')||'[]').length; ok.querySelector('.pos').textContent = 'Eres el registro #' + n + ' de la lista.'; }catch(_){}
+      form.hidden = true; ok.hidden = false;
+      if(ok.querySelector('.pos')) ok.querySelector('.pos').textContent = 'Conserva este correo como referencia de tu solicitud.';
+      window.va('event', {name:'diagnostic_form_completed', data:{offer:oferta}});
     }
     if(SUPABASE_URL && SUPABASE_ANON){
       fetch(SUPABASE_URL + '/rest/v1/' + TABLE, {
@@ -102,36 +120,17 @@ window.va = window.va || function () { (window.vaq = window.vaq || []).push(argu
   });
 })();
 
-/* ── 4 · mini-diagnóstico (chips → sugerencia + prefill del form) ──── */
+/* ── 4 · oferta elegida → preselección del brief ─────────────────── */
 (function(){
-  var pick = {};
-  var diag = document.getElementById('diag'); if(!diag) return;
-  [].slice.call(diag.querySelectorAll('.chip')).forEach(function(c){
-    c.addEventListener('click', function(){
-      var q = c.closest('.diag-q').getAttribute('data-q');
-      pick[q] = c.getAttribute('data-v');
-      [].slice.call(c.closest('.chips').querySelectorAll('.chip')).forEach(function(x){ x.classList.remove('on'); });
-      c.classList.add('on');
-      if(pick.etapa && pick.necesidad && pick.ventas) showRes();
+  var select = document.getElementById('wl-oferta');
+  if(!select) return;
+  var labels = {contenido:'Contenido para redes', autoridad:'Sitio + SEO', motor:'Contenido + SEO + AEO'};
+  [].slice.call(document.querySelectorAll('[data-offer]')).forEach(function(link){
+    link.addEventListener('click', function(){
+      var value = labels[link.getAttribute('data-offer')];
+      if(value) select.value = value;
     });
   });
-  function showRes(){
-    var map = {
-      logo:{t:'Sistema de marca · Starter', d:'Empieza por el núcleo: logo, color y tipografía con criterio.'},
-      web:{t:'Activación · Landing que vende', d:'Una web enfocada en convertir, montada sobre tu identidad.'},
-      sistema:{t:'Sistema de marca · Growth / Pro', d:'El sistema utilizable de punta a punta, como los pilotos.'},
-      contenido:{t:'Activación · Contenido + retainer', d:'Presencia y contenido que sostienen tu marca en el tiempo.'}
-    };
-    var r = map[pick.necesidad] || map.sistema;
-    var pre = (pick.etapa === 'nueva') ? 'Fundación (estrategia + arquetipo) + ' : '';
-    var label = pre + r.t;
-    document.getElementById('diagResT').textContent = label;
-    document.getElementById('diagResD').textContent = r.d;
-    document.getElementById('diagRes').classList.add('on');
-    var h = document.getElementById('wl-paquete'); if(h) h.value = label;
-    var reto = document.getElementById('wl-reto');
-    if(reto && !reto.value){ reto.value = 'Diagnóstico — etapa: '+pick.etapa+' · necesita: '+pick.necesidad+' · ventas: '+pick.ventas+'.'; }
-  }
 })();
 
 /* ── 5 · banner de cookies + carga condicional de Clarity ─────────── */

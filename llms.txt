@@ -1,26 +1,41 @@
 # Don Ventas
 
-> Agencia de branding estratégico para PyMEs y emprendedores de México. Construimos el
-> "sistema operativo de marca" que deja al negocio listo para vender — branding que vende,
-> no que solo decora. Base en CDMX y Mérida.
+> Estudio de contenido y marca para PyMEs de México. Creamos contenido para redes y
+> sitios que atrae tráfico calificado, genera confianza y acerca conversaciones y
+> pedidos. Base en Ciudad de México y Mérida.
 
 ## Qué hace Don Ventas
-- **Propuesta:** "Tu marca no es estética. Es la razón por la que alguien elige pagarte a ti."
-- **Modelo en 3 capas:** (1) Fundación — investigación de mercado y bases de marca;
-  (2) Sistema de identidad de marca completo (18 bloques: logo, color, tipografía, patrones,
-  aplicaciones, presentaciones, social, papelería, merch, mascota y más); (3) Retainer de
-  evolución — contenido y mejoras continuas de marca y web.
-- **Metodología "Ruta Don Ventas" (F0–F4):** del diagnóstico gratuito a la operación continua.
-- **Para quién:** PyMEs y emprendedores mexicanos que quieren verse premium y, sobre todo, vender.
 
-## Enlaces clave
-- [Sitio principal](https://donventas.mx/): propuesta, casos y equipo.
-- [Diagnóstico de marca gratis](https://donventas.mx/diagnostico.html): 18 preguntas, 5 min,
-  entrega paquete sugerido, alcance e inversión estimada, sin costo.
-- [Centro Legal](https://donventas.mx/15_LEGAL/Centro%20Legal.html): aviso de privacidad,
+- **Contenido para redes:** estrategia, diseño y copy para atraer atención calificada y acercar
+  conversaciones comerciales.
+- **Sitio + SEO:** páginas, artículos y respuestas útiles para aparecer en búsquedas, ganar confianza
+  y construir posicionamiento orgánico.
+- **Contenido + SEO + AEO:** redes, sitio y motores de respuesta operados como un sistema que
+  crea demanda, captura preguntas y aprende de señales reales.
+- **Método:** cada cliente conserva contexto versionado de negocio, audiencia, voz,
+  Customer Taste, Brand Profile y sistema de marca para producir con consistencia.
+
+Don Ventas no garantiza ventas, alcance, viralidad, rankings ni menciones en motores de
+IA. La recomendación depende de la oferta, la evidencia, el mercado, la distribución y
+la capacidad de ejecución del negocio.
+
+## Primer paso
+
+El CTA principal es **Recibe tu diagnóstico**. El visitante completa un brief sobre
+objetivo, audiencia, canales y conversión. Después de revisarlo, Don Ventas envía un PDF
+breve con problemas detectados, oportunidades prioritarias, la ruta recomendada y una
+propuesta de alcance y frecuencia.
+
+## Enlaces canónicos
+
+- [Sitio principal](https://www.donventas.mx/): propósito, oferta, casos, método y brief.
+- [Diagnóstico de marca](https://www.donventas.mx/diagnostico.html): herramienta previa
+  de orientación sobre el sistema de marca.
+- [Centro Legal](https://www.donventas.mx/15_LEGAL/Centro%20Legal.html): privacidad,
   términos y política de cookies.
 
 ## Contacto
+
 - Correo: arturo.villagomez@donventas.mx
-- Fundador: Arturo Villagómez
-- Cobertura: Ciudad de México y Mérida, México.
+- Fundador: Arturo Villagomez
+- Cobertura: Ciudad de México, Mérida y proyectos remotos en México.

@@ -8,6 +8,8 @@ Referencia rápida para indexación del sitio. No afecta al sitio (archivo de do
 - `sitemap.xml` — home, `diagnostico.html` y las 4 páginas legales de `15_LEGAL/`.
 - `llms.txt` — resumen del negocio para motores de IA.
 - `index.html` / `diagnostico.html` — datos estructurados JSON-LD + canonical + OG/Twitter.
+- Host canónico vigente: `https://www.donventas.mx/`, alineado con la redirección efectiva.
+- La home declara explícitamente `index,follow`; los previews pueden seguir protegidos por Vercel.
 
 ## Google Search Console
 
@@ -16,19 +18,19 @@ Referencia rápida para indexación del sitio. No afecta al sitio (archivo de do
 2. Agregar propiedad → tipo **Dominio** → escribir `donventas.mx` (sin https, sin www).
 3. Google da un registro **TXT** → agregarlo en el DNS de `donventas.mx`
    (Vercel → Domains, o el registrador si el DNS vive allá) → **Verificar**.
-   - Alternativa: propiedad **Prefijo de URL** (`https://donventas.mx/`) con verificación por
+   - Alternativa: propiedad **Prefijo de URL** (`https://www.donventas.mx/`) con verificación por
      archivo HTML subido a la raíz del repo (se puede automatizar por commit).
 
 ### 2. Enviar sitemap
 - GSC → **Sitemaps** → escribir `sitemap.xml` → Enviar. Debe quedar "Correcto" con 6 URLs.
 
 ### 3. Forzar primer rastreo (opcional)
-- GSC → **Inspección de URLs** → `https://donventas.mx/` → **Solicitar indexación**.
-  Repetir con `https://donventas.mx/diagnostico.html`.
+- GSC → **Inspección de URLs** → `https://www.donventas.mx/` → **Solicitar indexación**.
+  Repetir con `https://www.donventas.mx/diagnostico.html`.
 
 ### 4. Comprobación previa (responden 200)
-- `https://donventas.mx/sitemap.xml`
-- `https://donventas.mx/robots.txt` (incluye `Sitemap:`)
+- `https://www.donventas.mx/sitemap.xml`
+- `https://www.donventas.mx/robots.txt` (incluye `Sitemap:`)
 
 ## Bing (opcional)
 - https://www.bing.com/webmasters → importar propiedad desde GSC → reenviar `sitemap.xml`.
