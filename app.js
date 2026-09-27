@@ -1,9 +1,9 @@
 /* ════════════════════════════════════════════════════════════════════
    Don Ventas — landing (donventas.mx)
    Fuente editable. Cargado con `defer` desde index.html.
-   Secciones:  1) reveal on-scroll   2) palabras del hero   3) pasos del método
-               4) lightbox   5) solicitud de diagnóstico (Supabase)
-               6) preselección de oferta   7) banner de cookies + Clarity
+   Secciones:  1) reveal on-scroll   2) pasos del método   3) lightbox
+               4) solicitud de diagnóstico (Supabase)   5) preselección de oferta
+               6) banner de cookies + Clarity
    Config (llaves públicas) al pie de cada sección — edítalas ahí.
    ════════════════════════════════════════════════════════════════════ */
 
@@ -29,30 +29,7 @@ window.va = window.va || function () { (window.vaq = window.vaq || []).push(argu
   } else { els.forEach(function(el){ el.classList.add('in'); }); }
 })();
 
-/* ── 2 · palabras del hero: atención → resultados ───────────────── */
-(function(){
-  var attention=document.querySelector('[data-rotate-attention]');
-  var outcome=document.querySelector('[data-rotate-outcome]');
-  if(!attention||!outcome) return;
-  var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if(reduce) return;
-  var attentionWords=['atención','comentarios','likes','visitas','alcance'];
-  var outcomeWords=['clientes','conversaciones','demos','llamadas','pedidos'];
-  var index=0;
-  window.setInterval(function(){
-    attention.classList.add('is-changing');
-    outcome.classList.add('is-changing');
-    window.setTimeout(function(){
-      index=(index+1)%attentionWords.length;
-      attention.textContent=attentionWords[index];
-      outcome.textContent=outcomeWords[index];
-      attention.classList.remove('is-changing');
-      outcome.classList.remove('is-changing');
-    },220);
-  },2800);
-})();
-
-/* ── 3 · recorrido visual por los cuatro pasos ───────────────────── */
+/* ── 2 · recorrido visual por los cuatro pasos ───────────────────── */
 (function(){
   var stepper=document.querySelector('[data-stepper]');
   if(!stepper) return;
@@ -71,7 +48,7 @@ window.va = window.va || function () { (window.vaq = window.vaq || []).push(argu
   },2200);
 })();
 
-/* ── 4 · lightbox de galería ──────────────────────────────────────── */
+/* ── 3 · lightbox de galería ──────────────────────────────────────── */
 (function(){
   var lbx=document.getElementById('lbx'); if(!lbx) return;
   var lbxImg=lbx.querySelector('img'), lbxCap=lbx.querySelector('figcaption');
@@ -109,7 +86,7 @@ window.va = window.va || function () { (window.vaq = window.vaq || []).push(argu
   document.addEventListener('keydown',function(e){ if(e.key==='Escape'&&lbx.classList.contains('open'))closeLbx(); });
 })();
 
-/* ── 5 · solicitud de diagnóstico → Supabase (tabla `lead`) ─────── */
+/* ── 4 · solicitud de diagnóstico → Supabase (tabla `lead`) ─────── */
 (function(){
   // Config Supabase — clave pública (RLS permite solo INSERT). OK en front.
   var SUPABASE_URL = 'https://hlabhmegjnrjygsywnqa.supabase.co';
@@ -169,7 +146,7 @@ window.va = window.va || function () { (window.vaq = window.vaq || []).push(argu
   });
 })();
 
-/* ── 6 · oferta elegida → preselección del brief ─────────────────── */
+/* ── 5 · oferta elegida → preselección del brief ─────────────────── */
 (function(){
   var select = document.getElementById('wl-oferta');
   if(!select) return;
@@ -182,7 +159,7 @@ window.va = window.va || function () { (window.vaq = window.vaq || []).push(argu
   });
 })();
 
-/* ── 7 · banner de cookies + carga condicional de Clarity ─────────── */
+/* ── 6 · banner de cookies + carga condicional de Clarity ─────────── */
 /* window.dvCookie(accepted) lo llaman los botones (onclick) del banner. */
 (function(){
   var KEY='dv-cookie-consent';
@@ -240,7 +217,7 @@ window.va = window.va || function () { (window.vaq = window.vaq || []).push(argu
   else { requestAnimationFrame(function(){ setTimeout(function(){el.classList.add('show');},600); }); }
 })();
 
-/* ── 8 · feed de testimonios publicados (testimonios.json → sección "Voces") ──
+/* ── 7 · feed de testimonios publicados (testimonios.json → sección "Voces") ──
    El portal genera este JSON al publicar una reseña con consentimiento y pasada
    la ventana de 48 h (Reseñas → "Copiar feed JSON"). Si el archivo está vacío,
    la sección permanece oculta: nunca mostramos testimonios de relleno. */

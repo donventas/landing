@@ -12,8 +12,10 @@
   y construir posicionamiento orgánico.
 - **Contenido + SEO + AEO:** redes, sitio y motores de respuesta operados como un sistema que
   crea demanda, captura preguntas y aprende de señales reales.
-- **Método:** cada cliente conserva contexto versionado de negocio, audiencia, voz,
-  Customer Taste, Brand Profile y sistema de marca para producir con consistencia.
+- **GEO:** fortalecimiento de información pública, consistente y verificable para que los
+  motores de IA puedan comprender la marca, citar sus páginas y describir correctamente su oferta.
+- **Método:** cada cliente conserva contexto versionado de negocio, audiencia, voz y marca para
+  producir con consistencia sin empezar de cero cada semana.
 
 Don Ventas no garantiza ventas, alcance, viralidad, rankings ni menciones en motores de
 IA. La recomendación depende de la oferta, la evidencia, el mercado, la distribución y
