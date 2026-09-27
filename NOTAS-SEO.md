@@ -101,3 +101,14 @@ En textos densos se destaca la frase que responde una de estas preguntas: **qué
 - conservar el texto completo dentro del HTML: el color no debe cargar significado indispensable;
 - usar `strong.key-phrase` cuando la frase tenga énfasis semántico real;
 - revisar el ritmo de toda la sección: no todos los párrafos necesitan azul.
+
+## Regla de prueba comercial verificable
+
+Los casos del portafolio explican **necesidad, entrega visible y estado**. Un resultado comercial
+solo se publica cuando existe evidencia autorizada que lo respalda. Las muestras conceptuales deben
+seguir identificadas como tales; una pieza visual no equivale por sí sola a una venta, mejora de
+posicionamiento o resultado del negocio.
+
+Las tarjetas de servicio incluyen un criterio “Te conviene si” para ayudar a elegir sin conocer
+terminología de marketing. El diagnóstico informa desde el inicio el tiempo para completarlo y el
+plazo estimado de revisión humana.

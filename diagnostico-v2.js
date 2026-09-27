@@ -287,7 +287,7 @@
     if(q.hint)h+='<p class="dv-step-hint">'+escapeHtml(q.hint)+'</p>';
     h+=this.fieldHtml(q);
     h+='<div class="dv-form-nav">'+(this.index?'<button type="button" class="btn dv-back">← Atrás</button>':'<span></span>')+'<button type="button" class="btn solid dv-next"'+(this.hasAnswer(q)?'':' disabled')+'>'+(q.type==='contact'?'Enviar y ver recomendación':'Continuar')+' <span class="ar">→</span></button></div>';
-    if(this.index===0)h+='<p class="dv-form-note">4–6 minutos · presupuesto al inicio · recomendación determinista · revisión humana</p>';
+    if(this.index===0)h+='<p class="dv-form-note">4–6 minutos · presupuesto al inicio · revisión humana en 3–5 días hábiles</p>';
     h+='</div></div>';
     this.el.innerHTML=h;
     this.bind(q);
