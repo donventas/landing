@@ -40,12 +40,18 @@ window.va = window.va || function () { (window.vaq = window.vaq || []).push(argu
     [].slice.call(gallery.querySelectorAll('.case-thumb')).forEach(function(thumb){
       thumb.addEventListener('click',function(){
         var src=thumb.getAttribute('data-src'), alt=thumb.getAttribute('data-alt')||'';
+        var fit=thumb.getAttribute('data-fit')||'contain', label=thumb.getAttribute('data-label')||'Vista';
         var previousSrc=stageImg.getAttribute('src'), previousAlt=stageImg.alt||'';
+        var previousFit=stage.getAttribute('data-fit')||'contain', previousLabel=stage.getAttribute('data-label')||'Vista';
         if(src)stageImg.src=src;
         stageImg.alt=alt;
+        stage.setAttribute('data-fit',fit);
+        stage.setAttribute('data-label',label);
         stage.setAttribute('aria-label','Ampliar '+(alt||'referencia visual'));
         thumb.setAttribute('data-src',previousSrc);
         thumb.setAttribute('data-alt',previousAlt);
+        thumb.setAttribute('data-fit',previousFit);
+        thumb.setAttribute('data-label',previousLabel);
         thumb.setAttribute('aria-label','Ver '+(previousAlt||'referencia visual anterior'));
         var thumbImg=thumb.querySelector('img'); if(thumbImg)thumbImg.src=previousSrc;
       });
