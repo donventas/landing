@@ -558,6 +558,11 @@ section.band{padding:var(--gap) 0;position:relative}
 .dv-contact-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:28px}
 .dv-contact-grid label{display:flex;flex-direction:column;gap:8px;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--fg-faint)}
 .dv-contact-grid label span,.dv-contact-full span{font-size:8px;color:var(--fg-faint)}
+.dv-field-help{margin-top:2px;font-family:var(--display);font-size:12px!important;line-height:1.45;letter-spacing:0;text-transform:none;color:var(--fg-soft)!important}
+.dv-field-error{display:block;margin-top:2px;font-family:var(--display);font-size:12px!important;line-height:1.45;letter-spacing:0;text-transform:none;color:#ff9a9a!important}
+.dv-field-error[hidden]{display:none}
+.dv-contact-grid label.has-error input,.dv-contact-full.has-error input,[data-field][aria-invalid="true"]{border-color:#ff7c7c}
+.dv-consent-error{margin-top:8px}
 .dv-consent{display:flex;align-items:flex-start;gap:10px;margin-top:20px;font-size:12px;line-height:1.5;color:var(--fg-soft)}
 .dv-consent input{flex:none;margin-top:3px;accent-color:var(--accent)}
 .dv-form-nav{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-top:30px}
