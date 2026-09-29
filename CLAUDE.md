@@ -20,12 +20,13 @@ El sitio es fuente normal, editable con diffs baratos. Páginas, estilos, lógic
   texto/estructura de la ruta de contenido y autoridad aquí directamente; no hay strings escapados.
 - **`branding.html`** — segunda ruta comercial: sistema de marca, rangos y diagnóstico de branding.
 - **`diagnostico.html`** — acceso independiente al diagnóstico. `?ruta=branding` activa la ruta de marca.
-- **`styles.css`** — todo el CSS (tokens en `:root`, secciones, form, banner de cookies).
-  Las fuentes se cargan por `@import` de Google Fonts al inicio del archivo.
-- **`app.js`** — interacciones editoriales, galerías, animaciones, cookies y Clarity.
+- **`styles.css`** — todo el CSS (tokens en `:root`, secciones y formulario).
+  Las fuentes se sirven localmente desde `assets/fonts/`; no se llama a Google Fonts.
+- **`app.js`** — interacciones editoriales, galerías y animaciones. No instala Clarity ni
+  otro software de grabación de sesiones.
 - **`diagnostico-v2.js`** — formulario compartido, preguntas condicionales, recomendación
   determinista y captura del lead en Supabase. Las llaves públicas (Supabase URL/anon,
-  Clarity id) permanecen visibles solo como configuración de cliente.
+  por diseño) permanecen visibles solo como configuración de cliente.
 
 Para un cambio de texto: edita la página correspondiente. Para estilo: `styles.css`. Para
 lógica editorial/cookies: `app.js`. Para el diagnóstico: `diagnostico-v2.js`.
@@ -39,11 +40,8 @@ lógica editorial/cookies: `app.js`. Para el diagnóstico: `diagnostico-v2.js`.
   coordenadas CDMX/Mérida, email de contacto.
 - **Formulario de diagnóstico** (`diagnostico-v2.js`): POST a Supabase (`/rest/v1/lead`). Config:
   `SUPABASE_URL`, `SUPABASE_ANON` (clave pública, OK en el front), `TABLE`.
-- **Banner de cookies** (markup en `index.html` `#dv-cookie`; lógica en `app.js`, §5): guarda
-  consentimiento en `localStorage`, registra INSERT anónimo en Supabase `consent_log`, y carga
-  **Microsoft Clarity** (`CLARITY_ID='xlcmparelv'`) solo si el usuario acepta. Vercel Web
-  Analytics (`/_vercel/insights/script.js`, en `index.html`) es sin cookies y siempre carga.
-- **Estilos del banner:** en `styles.css`, sección `/* ══ banner de cookies ══ */`.
+- **Analítica:** Microsoft Clarity está retirado y no hay grabación de sesiones. Vercel Web
+  Analytics (`/_vercel/insights/script.js`, en `index.html`) permanece como medición sin cookies.
 - **Enlaces legales:** apuntan a `15_LEGAL/…` (Aviso de Privacidad, Política de Cookies,
   Términos, Centro Legal). Esas páginas viven en la carpeta `15_LEGAL/` del repo.
 

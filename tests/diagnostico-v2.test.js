@@ -34,3 +34,27 @@ test('uses the publishable key as apikey instead of a bearer token', () => {
   assert.match(source, /'apikey':CONFIG\.SUPABASE_ANON/);
   assert.doesNotMatch(source, /'Authorization':'Bearer '\+CONFIG\.SUPABASE_ANON/);
 });
+
+test('serves brand fonts locally without Google Fonts requests', () => {
+  const styles = fs.readFileSync(path.join(__dirname, '..', 'styles.css'), 'utf8');
+  const social = fs.readFileSync(path.join(__dirname, '..', 'social-cards', 'card.css'), 'utf8');
+  assert.match(styles, /assets\/fonts\/fonts\.css/);
+  assert.doesNotMatch(styles + social, /fonts\.(?:googleapis|gstatic)\.com/);
+  [
+    'schibsted-grotesk-latin-normal.woff2',
+    'schibsted-grotesk-latin-italic.woff2',
+    'space-mono-latin-400.woff2',
+    'space-mono-latin-700.woff2'
+  ].forEach(file => assert.equal(fs.existsSync(path.join(__dirname, '..', 'assets', 'fonts', file)), true));
+});
+
+test('does not install Clarity or expose a session-replay consent banner', () => {
+  const source = [
+    'app.js', 'index.html', 'branding.html',
+    path.join('blog', 'index.html'),
+    path.join('blog', 'contenido-que-atrae-clientes.html')
+  ].map(file => fs.readFileSync(path.join(__dirname, '..', file), 'utf8')).join('\n');
+  assert.doesNotMatch(source, /clarity\.ms|CLARITY_ID|__dvClarity|id="dv-cookie"/i);
+  const policy = fs.readFileSync(path.join(__dirname, '..', '15_LEGAL', 'Politica de Cookies.html'), 'utf8');
+  assert.match(policy, /No grabamos tus sesiones/);
+});

@@ -3,7 +3,7 @@
    Fuente editable. Cargado con `defer` desde index.html.
    Secciones:  1) reveal on-scroll   2) pasos del método   3) lightbox
                4) solicitud de diagnóstico (Supabase)   5) preselección de oferta
-               6) banner de cookies + Clarity
+               6) feed de testimonios publicados
    Config (llaves públicas) al pie de cada sección — edítalas ahí.
    ════════════════════════════════════════════════════════════════════ */
 
@@ -159,65 +159,7 @@ window.va = window.va || function () { (window.vaq = window.vaq || []).push(argu
   });
 })();
 
-/* ── 6 · banner de cookies + carga condicional de Clarity ─────────── */
-/* window.dvCookie(accepted) lo llaman los botones (onclick) del banner. */
-(function(){
-  var KEY='dv-cookie-consent';
-  var AVISO_VER='2026-07-12';
-  var SB_URL='https://hlabhmegjnrjygsywnqa.supabase.co';
-  var SB_ANON='sb_publishable_Pk-_A1MghCXv9F5r9TvcxA_vkf08JYh';
-  var CLARITY_ID='xlcmparelv';
-  var el=document.getElementById('dv-cookie');
-  if(!el) return;
-
-  function anonId(){
-    try{ var k='dv-anon', v=localStorage.getItem(k);
-      if(!v){ v=(Date.now().toString(36)+Math.random().toString(36).slice(2,10)); localStorage.setItem(k,v); }
-      return v;
-    }catch(e){ return 'na'; }
-  }
-
-  function logConsent(accepted){
-    if(!SB_URL||!SB_ANON) return;
-    try{
-      fetch(SB_URL+'/rest/v1/consent_log', {
-        method:'POST',
-        headers:{'Content-Type':'application/json','apikey':SB_ANON,'Authorization':'Bearer '+SB_ANON,'Prefer':'return=minimal'},
-        body: JSON.stringify({
-          choice: accepted?'accepted':'rejected',
-          aviso_version: AVISO_VER,
-          anon_id: anonId(),
-          page: (location.pathname||'/'),
-          user_agent: (navigator.userAgent||'').slice(0,300)
-        })
-      }).catch(function(){});
-    }catch(e){}
-  }
-
-  function loadClarity(){
-    if(window.__dvClarity)return; window.__dvClarity=1;
-    (function(c,l,a,r,i,t,y){
-      c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-      t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-      y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-    })(window,document,"clarity","script",CLARITY_ID);
-  }
-
-  window.dvCookie=function(accepted){
-    try{localStorage.setItem(KEY, accepted?'yes':'no');}catch(e){}
-    logConsent(accepted);
-    el.classList.remove('show');
-    setTimeout(function(){el.style.display='none';},400);
-    if(accepted) loadClarity();
-  };
-
-  var saved;try{saved=localStorage.getItem(KEY);}catch(e){}
-  if(saved==='yes'){ el.style.display='none'; loadClarity(); }
-  else if(saved==='no'){ el.style.display='none'; }
-  else { requestAnimationFrame(function(){ setTimeout(function(){el.classList.add('show');},600); }); }
-})();
-
-/* ── 7 · feed de testimonios publicados (testimonios.json → sección "Voces") ──
+/* ── 6 · feed de testimonios publicados (testimonios.json → sección "Voces") ──
    El portal genera este JSON al publicar una reseña con consentimiento y pasada
    la ventana de 48 h (Reseñas → "Copiar feed JSON"). Si el archivo está vacío,
    la sección permanece oculta: nunca mostramos testimonios de relleno. */
