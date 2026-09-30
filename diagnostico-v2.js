@@ -1,4 +1,4 @@
-/* Don Ventas — motor compartido de diagnóstico v2.
+/* Don Ventas — motor compartido de diagnóstico v3.
    Dinámico: muestra únicamente preguntas aplicables.
    Determinista: las mismas respuestas producen la misma ruta y recomendación.
    La recomendación en pantalla es preliminar; el PDF conserva revisión humana. */
@@ -12,78 +12,79 @@
   };
 
   var CONTENT_QUESTIONS=[
-    {id:'outcome',type:'single',title:'¿Qué quieres lograr primero?',hint:'Elige el resultado que más importa en los próximos 90 días.',required:true,auto:true,options:[
-      {id:'traffic',label:'Atraer personas que sí podrían comprar',desc:'Que lleguen personas con una necesidad real.'},
+    {id:'outcome',type:'single',title:'¿Qué quieres lograr primero?',hint:'Elige el resultado que más importa en los próximos 90 días.',required:true,options:[
+      {id:'qualified',label:'Atraer personas que sí podrían comprar',desc:'Que lleguen personas con una necesidad real.'},
       {id:'orders',label:'Generar más conversaciones o pedidos',desc:'Acercar el contenido a una acción comercial.'},
       {id:'trust',label:'Construir confianza antes de la decisión',desc:'Explicar mejor por qué elegirte.'},
-      {id:'search',label:'Aparecer mejor en Google y herramientas de inteligencia artificial',desc:'Ser encontrado y entendido cuando investigan.'},
       {id:'consistency',label:'Publicar con mayor consistencia',desc:'Dejar de empezar desde cero cada semana.'},
+      {id:'search',label:'Aparecer cuando buscan soluciones como la tuya',desc:'Ser encontrado en Google y en respuestas de herramientas de inteligencia artificial.'},
       {id:'other',label:'Otro resultado',other:true}
     ]},
-    {id:'monthlyBudget',type:'single',title:'¿Qué inversión mensual puedes sostener durante al menos 90 días?',hint:'Sirve para recomendar un ritmo realista. No es una cotización.',required:true,auto:true,options:[
-      {id:'lt12',label:'Menos de $12,000 MXN al mes'},
-      {id:'12_20',label:'$12,000–$20,000 MXN al mes'},
-      {id:'21_32',label:'$21,000–$32,000 MXN al mes'},
-      {id:'33_50',label:'$33,000–$50,000 MXN al mes'},
-      {id:'gt50',label:'Más de $50,000 MXN al mes'},
-      {id:'unknown',label:'Aún no tengo un presupuesto definido'}
+    {id:'salesProblem',type:'single',title:'¿Qué está impidiendo que más personas te contacten?',hint:'Elige el freno que más se parece a tu situación.',required:true,showIf:function(a){return ['qualified','orders','trust'].indexOf(a.outcome)>=0;},options:[
+      {id:'lowReach',label:'Pocas personas ven nuestro contenido'},
+      {id:'noInquiries',label:'Nos ven, pero casi nadie pregunta o compra'},
+      {id:'unclearOffer',label:'No explicamos bien lo que vendemos'},
+      {id:'lowTrust',label:'Nuestro contenido no genera suficiente confianza'},
+      {id:'noNextStep',label:'No queda claro qué hacer después de vernos'},
+      {id:'site',label:'El sitio no ayuda a decidir o encontrarnos'},
+      {id:'other',label:'Otro problema',other:true}
     ]},
-    {id:'timing',type:'single',title:'¿Cuándo quieres empezar?',hint:'La fecha ayuda a separar una prioridad real de una exploración.',required:true,auto:true,options:[
+    {id:'consistencyProblem',type:'single',title:'¿Qué hace difícil publicar con constancia?',hint:'Elige el problema que más interrumpe el trabajo.',required:true,showIf:function(a){return a.outcome==='consistency';},options:[
+      {id:'ideas',label:'No sabemos qué publicar'},
+      {id:'time',label:'No tenemos tiempo para producirlo'},
+      {id:'generic',label:'El contenido termina viéndose genérico'},
+      {id:'approvals',label:'Las revisiones tardan demasiado'},
+      {id:'process',label:'No existe un proceso claro para publicar'},
+      {id:'other',label:'Otro problema',other:true}
+    ]},
+    {id:'searchProblem',type:'single',title:'¿Qué sucede cuando alguien busca tu negocio o una solución como la tuya?',hint:'No necesitas conocer términos técnicos.',required:true,showIf:function(a){return a.outcome==='search';},options:[
+      {id:'noSite',label:'No tenemos sitio web'},
+      {id:'notFound',label:'Tenemos sitio, pero casi nadie lo encuentra'},
+      {id:'unclearSite',label:'El sitio no explica bien lo que ofrecemos'},
+      {id:'noLeads',label:'Recibimos visitas, pero pocos contactos'},
+      {id:'unknown',label:'No sabemos si el sitio está funcionando'},
+      {id:'other',label:'Otro problema',other:true}
+    ]},
+    {id:'otherProblem',type:'text',title:'¿Qué problema te gustaría resolver?',hint:'Cuéntalo como se lo explicarías a una persona de confianza.',required:true,showIf:function(a){return a.outcome==='other';},placeholder:'Ej. Nos cuesta explicar por qué nuestro servicio vale lo que cuesta.'},
+    {id:'nextAction',type:'single',title:'Cuando alguien se interesa, ¿qué debería hacer después?',hint:'Esta acción nos ayuda a conectar el contenido con una venta real.',required:true,options:[
+      {id:'whatsapp',label:'Escribir por WhatsApp'},
+      {id:'quote',label:'Pedir una cotización'},
+      {id:'call',label:'Agendar una llamada o demostración'},
+      {id:'buy',label:'Comprar en línea'},
+      {id:'visit',label:'Visitar el negocio'},
+      {id:'other',label:'Otra acción',other:true}
+    ]},
+    {id:'attempted',type:'multi',title:'¿Qué han intentado para atraer clientes?',hint:'Puedes elegir varias opciones. No repetiremos una fórmula que ya sabes que no te funciona.',required:true,options:[
+      {id:'internal',label:'Publicar por nuestra cuenta'},
+      {id:'provider',label:'Trabajar con un freelancer o agencia'},
+      {id:'templates',label:'Usar plantillas o Canva'},
+      {id:'ai',label:'Generar contenido con inteligencia artificial'},
+      {id:'ads',label:'Pagar anuncios'},
+      {id:'none',label:'Todavía no hemos trabajado esto con constancia',exclusive:true},
+      {id:'other',label:'Otra cosa',other:true}
+    ]},
+    {id:'proof',type:'multi',title:'¿Qué podemos demostrar hoy sobre tu negocio?',hint:'No necesitas tener todo. Elegiremos el contenido a partir de evidencia real.',required:true,options:[
+      {id:'cases',label:'Resultados o casos de clientes'},
+      {id:'reviews',label:'Testimonios o reseñas'},
+      {id:'photos',label:'Fotografías o videos reales'},
+      {id:'process',label:'Un proceso o forma de trabajar propia'},
+      {id:'spokesperson',label:'Una persona que pueda explicar o aparecer'},
+      {id:'none',label:'Todavía tenemos poco documentado',exclusive:true},
+      {id:'other',label:'Otra prueba',other:true}
+    ]},
+    {id:'businessAudience',type:'text',title:'¿Qué vendes y a quién necesitas atraer?',hint:'Una respuesta breve es suficiente. Esto evita recomendar contenido genérico.',required:true,placeholder:'Ej. Ayudamos a restaurantes con varias sucursales a reducir desperdicio y controlar costos.'},
+    {id:'timing',type:'single',title:'¿Cuándo quieres empezar?',hint:'El plazo nos ayuda a ordenar la primera etapa.',required:true,options:[
       {id:'now',label:'Lo antes posible'},
       {id:'month',label:'Durante el próximo mes'},
       {id:'quarter',label:'En dos o tres meses'},
       {id:'exploring',label:'Solo estoy explorando por ahora'}
     ]},
-    {id:'obstacle',type:'single',title:'¿Qué frena más tu contenido hoy?',hint:'Selecciona el problema principal.',required:true,auto:true,options:[
-      {id:'ideas',label:'No sabemos qué publicar',desc:'Faltan temas y una dirección clara.'},
-      {id:'quality',label:'El contenido no refleja la calidad del negocio',desc:'El diseño, los textos o el mensaje se sienten genéricos.'},
-      {id:'cadence',label:'Publicamos sin consistencia',desc:'La operación depende del tiempo disponible.'},
-      {id:'conversion',label:'Hay atención, pero pocas conversaciones o pedidos',desc:'Falta una razón o un siguiente paso claro.'},
-      {id:'site',label:'El sitio no explica ni aparece en búsquedas',desc:'Las personas encuentran dudas cuando están por decidir.'},
-      {id:'other',label:'Otro problema',other:true}
-    ]},
-    {id:'channels',type:'multi',title:'¿Dónde tiene presencia activa tu negocio?',hint:'Puedes elegir varias opciones.',required:true,options:[
-      {id:'instagram',label:'Instagram'}, {id:'facebook',label:'Facebook'},
-      {id:'linkedin',label:'LinkedIn'}, {id:'tiktok',label:'TikTok / YouTube'},
-      {id:'website',label:'Sitio web'}, {id:'google',label:'Google / Maps'},
-      {id:'whatsapp',label:'WhatsApp Business'}, {id:'other',label:'Otro canal',other:true}
-    ]},
-    {id:'cadence',type:'single',title:'¿Con qué frecuencia publican?',hint:'Cuenta redes, blog, newsletter o video.',required:true,auto:true,options:[
-      {id:'rare',label:'Casi nunca'},
-      {id:'sporadic',label:'Cuando se puede'},
-      {id:'weekly',label:'Una o dos veces por semana'},
-      {id:'frequent',label:'Tres o más veces por semana'}
-    ]},
-    {id:'siteState',type:'single',title:'¿Qué papel cumple hoy tu sitio web?',hint:'Esto nos ayuda a saber si también necesitas mejorar el sitio y los buscadores.',required:true,auto:true,options:[
-      {id:'none',label:'No tenemos sitio'},
-      {id:'social',label:'Solo usamos redes o Google Maps'},
-      {id:'basic',label:'Tenemos una página básica que casi no genera contactos'},
-      {id:'works',label:'El sitio explica bien y sí genera contactos'},
-      {id:'unknown',label:'No sabemos si está funcionando'}
-    ]},
-    {id:'setupBudget',type:'single',title:'Si necesitas mejorar el sitio para aparecer en Google o en herramientas de IA, ¿qué inversión inicial considerarías?',hint:'Solo aparece cuando tus respuestas indican que hoy es difícil encontrar o entender tu negocio.',required:true,auto:true,showIf:function(a){return needsSearch(a);},options:[
-      {id:'lt25',label:'Menos de $25,000 MXN'},
-      {id:'25_45',label:'$25,000–$45,000 MXN'},
-      {id:'46_80',label:'$46,000–$80,000 MXN'},
-      {id:'81_120',label:'$81,000–$120,000 MXN'},
-      {id:'gt120',label:'Más de $120,000 MXN'},
-      {id:'unknown',label:'Aún no tengo un presupuesto definido'}
-    ]},
-    {id:'resources',type:'multi',title:'¿Qué materiales o recursos tienes disponibles?',hint:'No necesitas tener todo; nos ayuda a dimensionar la producción.',required:true,options:[
-      {id:'spokesperson',label:'Una persona que pueda aparecer o dar entrevistas'},
-      {id:'photos',label:'Fotos o video propios'},
-      {id:'cases',label:'Casos, resultados o testimonios verificables'},
-      {id:'team',label:'Alguien del equipo puede revisar y aprobar'},
-      {id:'none',label:'Necesitamos construirlo casi desde cero'},
-      {id:'other',label:'Otro recurso',other:true}
-    ]},
-    {id:'offer',type:'text',title:'¿Qué vende tu negocio y qué debería hacer una persona interesada?',hint:'Descríbelo en palabras simples. Evita pegar una presentación completa.',required:true,placeholder:'Ej. Ayudamos a restaurantes a reducir desperdicio; el siguiente paso es pedir una demostración.'},
-    {id:'audience',type:'text',title:'¿A quién necesitas atraer?',hint:'Describe al cliente que más te interesa y lo que está intentando resolver.',required:true,placeholder:'Ej. Dueños de restaurantes con dos o más sucursales que buscan controlar costos.'},
+    {id:'budgetBand',type:'single',title:function(a){return budgetTitle('contenido',a);},hint:function(a){return budgetHint('contenido',a);},context:function(a){return budgetContext('contenido',a);},required:true,options:function(a){return budgetOptions('contenido',a);}},
     contactQuestion('contenido')
   ];
 
   var BRAND_QUESTIONS=[
-    {id:'desired',type:'single',title:'¿Qué quieres resolver primero con tu marca?',hint:'Elige el resultado que más cambiaría cómo publicas, presentas o vendes.',required:true,auto:true,options:[
+    {id:'desired',type:'single',title:'¿Qué quieres resolver primero con tu marca?',hint:'Elige el resultado que más cambiaría cómo publicas, presentas o vendes.',required:true,options:[
       {id:'clarity',label:'Que la marca se entienda mejor',desc:'Aclarar qué vendes, para quién y por qué elegirte.'},
       {id:'consistency',label:'Que todo se vea y suene consistente',desc:'Dejar de improvisar entre canales y proveedores.'},
       {id:'autonomy',label:'Que el equipo pueda crear sin depender de una agencia',desc:'Tener reglas, plantillas y archivos utilizables.'},
@@ -91,46 +92,36 @@
       {id:'reposition',label:'Reposicionar una marca que ya existe'},
       {id:'other',label:'Otro resultado',other:true}
     ]},
-    {id:'projectBudget',type:'single',title:'¿Qué inversión considerarías para resolverlo bien?',hint:'El rango sirve para recomendar profundidad y aplicaciones. No es una cotización.',required:true,auto:true,options:[
-      {id:'lt18',label:'Menos de $18,000 MXN'},
-      {id:'18_30',label:'$18,000–$30,000 MXN'},
-      {id:'31_60',label:'$31,000–$60,000 MXN'},
-      {id:'61_120',label:'$61,000–$120,000 MXN'},
-      {id:'gt120',label:'Más de $120,000 MXN'},
-      {id:'unknown',label:'Aún no tengo un presupuesto definido'}
+    {id:'clarityProblem',type:'single',title:'¿Qué cuesta más trabajo explicar sobre tu marca?',hint:'Elige el punto que genera más dudas.',required:true,showIf:function(a){return a.desired==='clarity';},options:[
+      {id:'offer',label:'Qué vendemos exactamente'},
+      {id:'audience',label:'Para quién es nuestra oferta'},
+      {id:'difference',label:'Por qué deberían elegirnos'},
+      {id:'value',label:'Por qué vale lo que cuesta'},
+      {id:'other',label:'Otra dificultad',other:true}
     ]},
-    {id:'timing',type:'single',title:'¿Cuándo necesitas empezar?',hint:'El plazo modifica el orden y la capacidad necesaria.',required:true,auto:true,options:[
-      {id:'now',label:'Lo antes posible'},
-      {id:'month',label:'Durante el próximo mes'},
-      {id:'quarter',label:'En dos o tres meses'},
-      {id:'exploring',label:'Solo estoy explorando por ahora'}
+    {id:'systemProblem',type:'single',title:'¿Dónde se rompe más la consistencia de la marca?',hint:'Piensa en el trabajo cotidiano, no solo en el logo.',required:true,showIf:function(a){return ['consistency','autonomy'].indexOf(a.desired)>=0;},options:[
+      {id:'channels',label:'Cada canal se ve y suena diferente'},
+      {id:'team',label:'Cada persona aplica la marca a su manera'},
+      {id:'providers',label:'Los proveedores no reciben instrucciones claras'},
+      {id:'templates',label:'Faltan plantillas y archivos utilizables'},
+      {id:'manual',label:'Existe un manual, pero está viejo o nadie lo usa'},
+      {id:'other',label:'Otro problema',other:true}
     ]},
-    {id:'stage',type:'single',title:'¿En qué momento está el negocio?',hint:'Selecciona la situación más cercana.',required:true,auto:true,options:[
-      {id:'idea',label:'Estamos en la idea o pre-lanzamiento'},
-      {id:'early',label:'Ya operamos, pero la marca todavía es improvisada'},
-      {id:'established',label:'El negocio está establecido y queremos profesionalizarlo'},
-      {id:'expansion',label:'Estamos expandiendo, lanzando o entrando a otro mercado'},
-      {id:'rebrand',label:'Necesitamos corregir o reemplazar una identidad existente'}
+    {id:'launchProblem',type:'single',title:'¿Qué necesitas tener listo para lanzar?',hint:'Elige la base que hoy hace falta.',required:true,showIf:function(a){return a.desired==='launch';},options:[
+      {id:'strategy',label:'Aclarar la idea, el público y la propuesta'},
+      {id:'identity',label:'Crear nombre, logo y sistema visual'},
+      {id:'applications',label:'Preparar redes, sitio o materiales de venta'},
+      {id:'complete',label:'Construir la marca completa desde el inicio'},
+      {id:'other',label:'Otra necesidad',other:true}
     ]},
-    {id:'assets',type:'single',title:'¿Qué tienes hoy en cuanto a identidad?',hint:'No evaluamos si te gusta; necesitamos conocer el punto de partida.',required:true,auto:true,options:[
-      {id:'none',label:'Solo el nombre o una idea'},
-      {id:'logo',label:'Un logo suelto'},
-      {id:'basic',label:'Logo, colores y algunas plantillas'},
-      {id:'manualOld',label:'Un manual que está viejo o nadie usa'},
-      {id:'system',label:'Un sistema vigente y utilizado'}
+    {id:'repositionProblem',type:'single',title:'¿Qué dejó de funcionar en la marca actual?',hint:'Elige la señal que hizo necesario cambiar.',required:true,showIf:function(a){return a.desired==='reposition';},options:[
+      {id:'old',label:'Se ve desactualizada frente al negocio actual'},
+      {id:'wrongAudience',label:'Atrae a un público que ya no buscamos'},
+      {id:'growth',label:'No acompaña el crecimiento o una nueva oferta'},
+      {id:'confusion',label:'La gente no entiende bien qué hacemos'},
+      {id:'other',label:'Otro problema',other:true}
     ]},
-    {id:'consistency',type:'single',title:'¿La marca se reconoce igual en todos sus puntos de contacto?',hint:'Redes, presentaciones, sitio, propuestas, empaque y proveedores.',required:true,auto:true,options:[
-      {id:'no',label:'No; cada canal se ve diferente'},
-      {id:'partial',label:'Más o menos; hay elementos comunes'},
-      {id:'yes',label:'Sí; existe una consistencia clara'},
-      {id:'unknown',label:'No lo hemos revisado'}
-    ]},
-    {id:'users',type:'single',title:'¿Quién necesita usar la marca?',hint:'Esto define cuánto sistema y documentación hacen falta.',required:true,auto:true,options:[
-      {id:'owner',label:'Solo yo'},
-      {id:'smallTeam',label:'Un equipo de 2–5 personas'},
-      {id:'providers',label:'Equipo y proveedores externos'},
-      {id:'scale',label:'Equipo, proveedores y varias unidades o sucursales'}
-    ]},
+    {id:'brandOtherProblem',type:'text',title:'¿Qué problema te gustaría resolver con tu marca?',hint:'Descríbelo en palabras simples.',required:true,showIf:function(a){return a.desired==='other';},placeholder:'Ej. La empresa creció, pero la marca todavía parece de un negocio pequeño.'},
     {id:'applications',type:'multi',title:'¿Dónde necesitas que la marca funcione?',hint:'Puedes elegir varias aplicaciones.',required:true,options:[
       {id:'social',label:'Contenido y redes'},
       {id:'sales',label:'Presentaciones, propuestas y ventas'},
@@ -140,12 +131,25 @@
       {id:'space',label:'Local, evento o señalización'},
       {id:'other',label:'Otra aplicación',other:true}
     ]},
-    {id:'autonomy',type:'single',title:'¿Qué nivel de autonomía buscas después del proyecto?',hint:'Una marca útil debe poder operarse, no quedarse como presentación.',required:true,auto:true,options:[
+    {id:'users',type:'single',title:'¿Quién necesita usar la marca?',hint:'Esto define cuántas reglas, archivos y plantillas hacen falta.',required:true,options:[
+      {id:'owner',label:'Solo yo'},
+      {id:'smallTeam',label:'Un equipo de 2–5 personas'},
+      {id:'providers',label:'Equipo y proveedores externos'},
+      {id:'scale',label:'Equipo, proveedores y varias unidades o sucursales'}
+    ]},
+    {id:'autonomy',type:'single',title:'¿Cómo quieres trabajar con la marca después del proyecto?',hint:'Esto nos permite recomendar operación continua o herramientas para trabajar por tu cuenta.',required:true,options:[
       {id:'agency',label:'Prefiero que Don Ventas siga operándola'},
       {id:'shared',label:'Queremos operar una parte y recibir acompañamiento'},
       {id:'independent',label:'Queremos reglas, archivos y plantillas para operar solos'}
     ]},
     {id:'difference',type:'text',title:'¿Qué hace valioso o diferente a tu negocio?',hint:'Si todavía no está claro, dilo: esa también es información útil.',required:true,placeholder:'Ej. Tenemos diez años resolviendo… Nuestros clientes nos eligen porque…'},
+    {id:'timing',type:'single',title:'¿Cuándo necesitas empezar?',hint:'El plazo nos ayuda a ordenar la primera etapa.',required:true,options:[
+      {id:'now',label:'Lo antes posible'},
+      {id:'month',label:'Durante el próximo mes'},
+      {id:'quarter',label:'En dos o tres meses'},
+      {id:'exploring',label:'Solo estoy explorando por ahora'}
+    ]},
+    {id:'budgetBand',type:'single',title:function(a){return budgetTitle('branding',a);},hint:function(a){return budgetHint('branding',a);},context:function(a){return budgetContext('branding',a);},required:true,options:function(a){return budgetOptions('branding',a);}},
     contactQuestion('branding')
   ];
 
@@ -153,63 +157,123 @@
     return {id:'contact',type:'contact',title:'¿A dónde enviamos tu diagnóstico?',hint:route==='branding'?'Revisaremos tu sistema actual y prepararemos una recomendación de alcance.':'Revisaremos tu contenido, presencia y oportunidades antes de preparar el PDF.',required:true};
   }
 
-  function needsSearch(a){
-    return a.entry==='autoridad'||a.entry==='motor'||a.outcome==='search'||a.outcome==='trust'||a.obstacle==='site'||['none','social','basic','unknown'].indexOf(a.siteState)>=0;
+  function questionOptions(question,state){return typeof question.options==='function'?question.options(state):question.options||[];}
+  function questionText(value,state){return typeof value==='function'?value(state):value||'';}
+  function optionLabelById(question,value,state){
+    var option=questionOptions(question,state).filter(function(o){return o.id===value;})[0];
+    return option?option.label:value;
+  }
+  function contentProblem(a){
+    if(['qualified','orders','trust'].indexOf(a.outcome)>=0)return {id:a.salesProblem,text:optionLabelById(CONTENT_QUESTIONS[1],a.salesProblem,a)};
+    if(a.outcome==='consistency')return {id:a.consistencyProblem,text:optionLabelById(CONTENT_QUESTIONS[2],a.consistencyProblem,a)};
+    if(a.outcome==='search')return {id:a.searchProblem,text:optionLabelById(CONTENT_QUESTIONS[3],a.searchProblem,a)};
+    return {id:'other',text:a.otherProblem||'un problema que requiere revisión'};
+  }
+  function brandProblem(a){
+    var map={clarity:['clarityProblem',BRAND_QUESTIONS[1]],consistency:['systemProblem',BRAND_QUESTIONS[2]],autonomy:['systemProblem',BRAND_QUESTIONS[2]],launch:['launchProblem',BRAND_QUESTIONS[3]],reposition:['repositionProblem',BRAND_QUESTIONS[4]]};
+    var pair=map[a.desired];
+    if(!pair)return {id:'other',text:a.brandOtherProblem||'una necesidad que requiere revisión'};
+    return {id:a[pair[0]],text:optionLabelById(pair[1],a[pair[0]],a)};
+  }
+  function preliminaryContentKey(a){
+    var problem=contentProblem(a).id;
+    var search=a.entry==='autoridad'||a.entry==='motor'||a.outcome==='search'||problem==='site'||['noSite','notFound','unclearSite','noLeads','unknown'].indexOf(problem)>=0;
+    var content=a.entry==='motor'||a.outcome!=='search'||['lowReach','noInquiries','unclearOffer','lowTrust','noNextStep','ideas','time','generic','approvals','process'].indexOf(problem)>=0;
+    return search&&content?'motor':(search?'autoridad':'contenido');
+  }
+  function needsSearch(a){return preliminaryContentKey(a)!=='contenido';}
+  function budgetOptions(route,state){
+    if(route==='branding')return [
+      {id:'b_lt18',label:'Hasta 18 mil MXN'}, {id:'b_18_30',label:'18–30 mil MXN'},
+      {id:'b_31_60',label:'31–60 mil MXN'}, {id:'b_61_120',label:'61–120 mil MXN'},
+      {id:'b_gt120',label:'Más de 120 mil MXN'}, {id:'unknown',label:'Necesito conocer primero el alcance recomendado'}
+    ];
+    var key=preliminaryContentKey(state);
+    if(key==='contenido')return [
+      {id:'c_lt12',label:'Hasta 12 mil MXN al mes'}, {id:'c_12_20',label:'12–20 mil MXN al mes'},
+      {id:'c_21_32',label:'21–32 mil MXN al mes'}, {id:'c_33_50',label:'33–50 mil MXN al mes'},
+      {id:'c_gt50',label:'Más de 50 mil MXN al mes'}, {id:'unknown',label:'Necesito ver primero qué conviene hacer'}
+    ];
+    if(key==='autoridad')return [
+      {id:'a_lt25',label:'Hasta 25 mil MXN'}, {id:'a_25_45',label:'25–45 mil MXN'},
+      {id:'a_46_80',label:'46–80 mil MXN'}, {id:'a_81_120',label:'81–120 mil MXN'},
+      {id:'a_gt120',label:'Más de 120 mil MXN'}, {id:'unknown',label:'Necesito ver primero qué conviene hacer'}
+    ];
+    return [
+      {id:'m_lt30',label:'Hasta 30 mil MXN'}, {id:'m_30_60',label:'30–60 mil MXN'},
+      {id:'m_61_100',label:'61–100 mil MXN'}, {id:'m_101_150',label:'101–150 mil MXN'},
+      {id:'m_gt150',label:'Más de 150 mil MXN'}, {id:'unknown',label:'Necesito ver primero qué conviene hacer'}
+    ];
+  }
+  function budgetTitle(route,state){
+    if(route==='branding')return '¿Qué inversión podrías considerar para resolver esta primera etapa?';
+    var key=preliminaryContentKey(state);
+    if(key==='contenido')return '¿Qué inversión mensual podrías sostener durante tres meses?';
+    if(key==='autoridad')return '¿Qué inversión podrías considerar para mejorar cómo encuentran y entienden tu negocio?';
+    return '¿Qué inversión podrías considerar para empezar por la prioridad más importante?';
+  }
+  function budgetHint(route,state){
+    var basis=route==='contenido'&&preliminaryContentKey(state)==='contenido'?'Elige un rango mensual.':'Elige un rango para la primera etapa.';
+    return basis+' Lo usaremos para ajustar la profundidad de la recomendación; no es una cotización.';
+  }
+  function budgetContext(route,state){
+    if(route==='branding'){
+      var desired=optionLabelById(BRAND_QUESTIONS[0],state.desired,state).toLowerCase();
+      return 'Hasta aquí entendemos que buscas '+desired+' y que el principal freno es: '+brandProblem(state).text.toLowerCase()+'. La inversión solo ajustará la profundidad de la primera etapa.';
+    }
+    var outcome=optionLabelById(CONTENT_QUESTIONS[0],state.outcome,state).toLowerCase();
+    var action=optionLabelById(CONTENT_QUESTIONS[5],state.nextAction,state).toLowerCase();
+    return 'Hasta aquí entendemos que buscas '+outcome+' y que hoy el principal freno es: '+contentProblem(state).text.toLowerCase()+'. El siguiente paso que quieres provocar es '+action+'.';
+  }
+  function budgetRank(value){
+    return {c_lt12:0,c_12_20:1,c_21_32:2,c_33_50:3,c_gt50:4,a_lt25:0,a_25_45:1,a_46_80:2,a_81_120:3,a_gt120:4,m_lt30:0,m_30_60:1,m_61_100:2,m_101_150:3,m_gt150:4,b_lt18:0,b_18_30:1,b_31_60:2,b_61_120:3,b_gt120:4,unknown:-1}[value];
   }
 
-  function monthlyRank(v){return {lt12:0,'12_20':1,'21_32':2,'33_50':3,gt50:4,unknown:-1}[v];}
-  function setupRank(v){return {lt25:0,'25_45':1,'46_80':2,'81_120':3,gt120:4,unknown:-1}[v];}
-  function brandBudgetRank(v){return {lt18:0,'18_30':1,'31_60':2,'61_120':3,gt120:4,unknown:-1}[v];}
-
   function recommendContent(a){
-    var search=needsSearch(a);
-    var content=a.entry!=='autoridad' && (a.entry==='motor'||['traffic','orders','consistency'].indexOf(a.outcome)>=0||['ideas','quality','cadence','conversion'].indexOf(a.obstacle)>=0);
-    var key=search&&content?'motor':(search?'autoridad':'contenido');
+    var key=preliminaryContentKey(a),search=key!=='contenido',content=key!=='autoridad';
     var catalog={
-      contenido:{name:'Contenido para atraer posibles clientes',band:'$12,000–$32,000 MXN al mes',desc:'Temas, textos y diseños principales, con versiones para cada canal y revisión mensual.'},
-      autoridad:{name:'Sitio para que te encuentren y confíen',band:'$25,000–$80,000 MXN de implementación',desc:'Un sitio claro, mejoras para buscadores (SEO) y respuestas fáciles de entender para herramientas de IA.'},
-      motor:{name:'Redes, sitio, buscadores e inteligencia artificial',band:'$35,000–$95,000 MXN de implementación + $28,000–$50,000 MXN al mes',desc:'Contenido, sitio, búsquedas y mejora continua conectados en un solo plan.'}
+      contenido:{name:'Contenido para atraer posibles clientes',band:'12–32 mil MXN al mes',desc:'Temas, textos y diseños principales, con versiones para cada canal y revisión mensual.'},
+      autoridad:{name:'Sitio para que te encuentren y confíen',band:'25–80 mil MXN de inversión inicial',desc:'Un sitio claro, mejoras para buscadores y respuestas fáciles de entender para herramientas de inteligencia artificial.'},
+      motor:{name:'Contenido y sitio conectados por etapas',band:'Primera etapa según prioridad',desc:'Contenido, sitio y búsquedas conectados en un plan que empieza por el problema más importante.'}
     };
-    var m=monthlyRank(a.monthlyBudget),s=setupRank(a.setupBudget),gap=false,start='';
-    if(key==='contenido' && m===0){gap=true;start='Conviene iniciar con un alcance acotado o madurar recursos antes de una operación mensual completa.';}
-    if(key==='autoridad' && (s===0||s===-1)){gap=true;start=s===0?'Conviene empezar por una intervención priorizada antes de construir el sistema completo.':'La inversión inicial debe confirmarse antes de definir el alcance.';}
-    if(key==='motor' && (m<3||s<1)){
-      gap=true;
-      start=search?'Necesitas trabajar más de un frente, pero recomendamos hacerlo por etapas: primero el problema más importante que cabe en tu presupuesto y después el segundo.':'Recomendamos una primera etapa acotada y un plan para conectar el resto.';
-    }
+    var capacity=budgetRank(a.budgetBand),gap=false,start='';
+    if(key==='contenido'&&capacity===0){gap=true;start='La mejor forma de empezar es una intervención prioritaria y un plan para crecer después.';}
+    if(key==='autoridad'&&capacity===0){gap=true;start='Conviene resolver primero la parte del sitio que más afecta la confianza o los contactos.';}
+    if(key==='motor'&&capacity>=0&&capacity<2){gap=true;start='Recomendamos hacerlo por etapas: primero el problema con mayor impacto y después conectar el segundo frente.';}
+    if(a.budgetBand==='unknown')start='El diagnóstico definirá primero qué conviene resolver; después podremos dimensionar la inversión sin forzar un alcance prematuro.';
     var reasons=[];
     if(content)reasons.push('Tus respuestas muestran que necesitas mejores temas, mayor constancia o un siguiente paso más claro para vender.');
     if(search)reasons.push('También hay un problema en el sitio o es difícil encontrar y entender tu negocio antes de decidir.');
-    if(a.resources&&a.resources.indexOf('none')>=0)reasons.push('La producción deberá incluir una fase inicial para construir evidencia y materiales.');
+    if(a.proof&&a.proof.indexOf('none')>=0)reasons.push('La producción deberá incluir una fase inicial para documentar evidencia y materiales reales.');
     if(a.timing==='exploring')reasons.push('El momento todavía es exploratorio; el PDF debe ayudarte a decidir sin forzar una compra.');
     return {route:'contenido',key:key,name:catalog[key].name,band:catalog[key].band,desc:catalog[key].desc,gap:gap,start:start,reasons:reasons};
   }
 
   function recommendBrand(a){
     var score=0;
-    if(['none','logo'].indexOf(a.assets)>=0)score+=2; else if(['basic','manualOld'].indexOf(a.assets)>=0)score+=1;
-    if(a.consistency==='no')score+=2; else if(a.consistency!=='yes')score+=1;
+    var problem=brandProblem(a).id;
+    if(['complete','identity','old','wrongAudience','channels','manual'].indexOf(problem)>=0)score+=2; else score+=1;
     if(a.users==='providers')score+=1; else if(a.users==='scale')score+=2;
     if((a.applications||[]).length>=4)score+=2; else if((a.applications||[]).length>=2)score+=1;
     if(a.autonomy==='independent')score+=1;
-    if(['expansion','rebrand'].indexOf(a.stage)>=0)score+=1;
+    if(['launch','reposition'].indexOf(a.desired)>=0)score+=1;
     var need=score<=3?'essential':(score<=6?'complete':'extended');
     var catalog={
-      essential:{name:'Sistema esencial',band:'$18,000–$30,000 MXN',desc:'Claridad, núcleo visual y las reglas mínimas para dejar de improvisar.'},
-      complete:{name:'Sistema de marca completo',band:'$31,000–$60,000 MXN',desc:'Mensaje, identidad y usos prioritarios para que la marca sea consistente.'},
-      extended:{name:'Sistema extendido',band:'$61,000–$120,000 MXN',desc:'Una guía amplia para equipos, proveedores y todos los lugares donde aparece la marca.'}
+      essential:{name:'Sistema esencial',band:'18–30 mil MXN',desc:'Claridad, núcleo visual y las reglas mínimas para dejar de improvisar.'},
+      complete:{name:'Sistema de marca completo',band:'31–60 mil MXN',desc:'Mensaje, identidad y usos prioritarios para que la marca sea consistente.'},
+      extended:{name:'Sistema extendido',band:'61–120 mil MXN',desc:'Una guía amplia para equipos, proveedores y todos los lugares donde aparece la marca.'}
     };
-    var needRank={essential:1,complete:2,extended:3}[need],capacity=brandBudgetRank(a.projectBudget),gap=capacity>=0&&capacity<needRank;
+    var needRank={essential:1,complete:2,extended:3}[need],capacity=budgetRank(a.budgetBand),gap=capacity>=0&&capacity<needRank;
     var start='';
-    if(a.projectBudget==='lt18')start='El presupuesto está por debajo del mínimo de un sistema completo; conviene priorizar una intervención puntual o una ruta de maduración.';
+    if(a.budgetBand==='b_lt18')start='La mejor forma de empezar es una intervención prioritaria y una ruta clara para completar el sistema después.';
     else if(gap)start='La necesidad es mayor que el rango disponible. Recomendamos construir el sistema por etapas y dejar un plan claro para completarlo.';
-    else if(a.projectBudget==='unknown')start='Primero debemos validar profundidad, aplicaciones y capacidad antes de cerrar el alcance.';
+    else if(a.budgetBand==='unknown')start='Primero debemos validar profundidad y aplicaciones antes de dimensionar la inversión.';
     var reasons=[];
-    if(['none','logo'].indexOf(a.assets)>=0)reasons.push('El punto de partida todavía no funciona como un sistema reutilizable.');
-    if(a.consistency!=='yes')reasons.push('Los lugares donde aparece la marca necesitan reglas y recursos comunes.');
+    if(['launch','reposition'].indexOf(a.desired)>=0)reasons.push('El momento del negocio exige una base que pueda aplicarse sin improvisar.');
+    if(['channels','team','providers','templates','manual'].indexOf(problem)>=0)reasons.push('Los lugares donde aparece la marca necesitan reglas y recursos comunes.');
     if(['providers','scale'].indexOf(a.users)>=0)reasons.push('Varias personas o proveedores necesitan una fuente clara para aplicar la marca.');
     if(a.autonomy==='independent')reasons.push('La autonomía exige archivos editables, plantillas, documentación y transferencia de uso.');
-    return {route:'branding',key:need,name:catalog[need].name,band:catalog[need].band,desc:catalog[need].desc,gap:gap||a.projectBudget==='lt18'||a.projectBudget==='unknown',start:start,reasons:reasons,score:score};
+    return {route:'branding',key:need,name:catalog[need].name,band:catalog[need].band,desc:catalog[need].desc,gap:gap||a.budgetBand==='b_lt18',start:start,reasons:reasons,score:score};
   }
 
   function recommendation(route,a){return route==='branding'?recommendBrand(a):recommendContent(a);}
@@ -217,21 +281,16 @@
   function questionsFor(route){return route==='branding'?BRAND_QUESTIONS:CONTENT_QUESTIONS;}
   function visibleQuestions(route,state){return questionsFor(route).filter(function(q){return !q.showIf||q.showIf(state);});}
 
-  function optionLabel(question,value){
-    var option=(question.options||[]).filter(function(o){return o.id===value;})[0];
-    return option?option.label:value;
-  }
-
   function summarize(route,state,result){
     var lines=['Ruta: '+route,'Recomendación: '+result.name,'Rango: '+result.band];
     visibleQuestions(route,state).forEach(function(q){
       if(q.type==='contact')return;
       var value=state[q.id];
       if(value==null||value===''||(Array.isArray(value)&&!value.length))return;
-      if(Array.isArray(value))value=value.map(function(v){return optionLabel(q,v);}).join(', ');
-      else if(q.options)value=optionLabel(q,value);
+      if(Array.isArray(value))value=value.map(function(v){return optionLabelById(q,v,state);}).join(', ');
+      else if(q.options)value=optionLabelById(q,value,state);
       if(state[q.id+'Other'])value+=': '+state[q.id+'Other'];
-      lines.push(q.title+' '+value);
+      lines.push(questionText(q.title,state)+' '+value);
     });
     return lines.join(' | ');
   }
@@ -272,7 +331,7 @@
     var params=new URLSearchParams(location.search);
     this.route=(params.get('ruta')||el.getAttribute('data-route')||'contenido').toLowerCase();
     if(['contenido','branding'].indexOf(this.route)<0)this.route='contenido';
-    this.storageKey='dv-diagnostic-v2-'+this.route;
+    this.storageKey='dv-diagnostic-v3-'+this.route;
     this.state={entry:params.get('entrada')||el.getAttribute('data-entry')||''};
     this.index=0;
     this.load();
@@ -302,21 +361,27 @@
     var value=this.state[q.id];
     if(q.type==='multi')return !q.required||(Array.isArray(value)&&value.length>0);
     if(q.required&&(value==null||String(value).trim()===''))return false;
+    if(q.type==='single'&&questionOptions(q,this.state).length&&!questionOptions(q,this.state).some(function(option){return option.id===value;}))return false;
     if(value==='other'&&!String(this.state[q.id+'Other']||'').trim())return false;
     return true;
   };
   Diagnostic.prototype.render=function(){
     var current=this.current(),q=current.q,list=current.list;
     if(!q)return;
-    var progress=Math.round(((this.index+1)/list.length)*100);
+    var pendingBranch=(this.route==='contenido'&&!this.state.outcome)||(this.route==='branding'&&!this.state.desired);
+    var total=list.length+(pendingBranch?1:0);
+    var progress=Math.round(((this.index+1)/total)*100);
     var routeLabel=this.route==='branding'?'Sistema de marca':'Contenido, sitio y buscadores';
     var h='<div class="dv-form-shell" data-route-name="'+this.route+'">';
-    h+='<div class="dv-form-top"><div><span class="dv-form-kicker">Diagnóstico · '+routeLabel+'</span><strong>'+(this.index+1)+' / '+list.length+'</strong></div><div class="dv-progress" aria-label="Progreso"><i style="width:'+progress+'%"></i></div></div>';
-    h+='<div class="dv-step" aria-live="polite"><h3>'+escapeHtml(q.title)+'</h3>';
-    if(q.hint)h+='<p class="dv-step-hint">'+escapeHtml(q.hint)+'</p>';
+    h+='<div class="dv-form-top"><div><span class="dv-form-kicker">Diagnóstico · '+routeLabel+'</span><strong>'+(this.index+1)+' / '+total+'</strong></div><div class="dv-progress" aria-label="Progreso"><i style="width:'+progress+'%"></i></div></div>';
+    var title=questionText(q.title,this.state),hint=questionText(q.hint,this.state),context=questionText(q.context,this.state);
+    h+='<div class="dv-step" aria-live="polite">';
+    if(context)h+='<div class="dv-route-recap"><span>Lo que entendimos</span><p>'+escapeHtml(context)+'</p></div>';
+    h+='<h3>'+escapeHtml(title)+'</h3>';
+    if(hint)h+='<p class="dv-step-hint">'+escapeHtml(hint)+'</p>';
     h+=this.fieldHtml(q);
     h+='<div class="dv-form-nav">'+(this.index?'<button type="button" class="btn dv-back">← Atrás</button>':'<span></span>')+'<button type="button" class="btn solid dv-next"'+(this.hasAnswer(q)?'':' disabled')+'>'+(q.type==='contact'?'Enviar y ver recomendación':'Continuar')+' <span class="ar">→</span></button></div>';
-    if(this.index===0)h+='<p class="dv-form-note">4–6 minutos · presupuesto al inicio · revisión humana en 3–5 días hábiles</p>';
+    if(this.index===0)h+='<p class="dv-form-note">4–6 minutos · preguntas según tu situación · revisión humana en 3–5 días hábiles</p>';
     h+='</div></div>';
     this.el.innerHTML=h;
     this.bind(q);
@@ -325,7 +390,7 @@
     var self=this,h='';
     if(q.type==='single'||q.type==='multi'){
       h+='<div class="dv-options '+(q.type==='multi'?'is-multi':'')+'">';
-      q.options.forEach(function(o,i){
+      questionOptions(q,this.state).forEach(function(o,i){
         var selected=q.type==='multi'?(self.state[q.id]||[]).indexOf(o.id)>=0:self.state[q.id]===o.id;
         h+='<button type="button" class="dv-option'+(selected?' is-selected':'')+'" data-value="'+o.id+'" aria-pressed="'+(selected?'true':'false')+'"><span class="dv-option-key">'+String.fromCharCode(65+i)+'</span><span><b>'+escapeHtml(o.label)+'</b>'+(o.desc?'<small>'+escapeHtml(o.desc)+'</small>':'')+'</span><i aria-hidden="true"></i></button>';
       });
@@ -355,8 +420,14 @@
       btn.onclick=function(){
         var value=btn.getAttribute('data-value');
         if(q.type==='multi'){
+          var options=questionOptions(q,self.state),selected=options.filter(function(option){return option.id===value;})[0];
           var values=self.state[q.id]||[],pos=values.indexOf(value);
-          if(pos>=0)values.splice(pos,1);else values.push(value);
+          if(pos>=0)values.splice(pos,1);
+          else if(selected&&selected.exclusive)values=[value];
+          else{
+            values=values.filter(function(current){return !options.some(function(option){return option.id===current&&option.exclusive;});});
+            values.push(value);
+          }
           self.state[q.id]=values;self.render();self.persist();
         }else{
           self.state[q.id]=value;self.persist();
@@ -450,7 +521,7 @@
   };
   Diagnostic.prototype.track=function(name,data){try{if(root.va)root.va('event',{name:name,data:data||{}});}catch(_e){}}
 
-  root.DVDiagnostic={recommendation:recommendation,needsSearch:needsSearch,visibleQuestions:visibleQuestions,contactErrors:contactErrors,validWebUrl:validWebUrl};
+  root.DVDiagnostic={recommendation:recommendation,needsSearch:needsSearch,visibleQuestions:visibleQuestions,budgetContext:budgetContext,contactErrors:contactErrors,validWebUrl:validWebUrl};
   if(typeof module!=='undefined'&&module.exports)module.exports=root.DVDiagnostic;
   if(typeof document==='undefined')return;
   document.addEventListener('DOMContentLoaded',function(){[].slice.call(document.querySelectorAll('[data-dv-diagnostic]')).forEach(function(el){new Diagnostic(el);});});

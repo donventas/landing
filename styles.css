@@ -519,6 +519,9 @@ section.band{padding:var(--gap) 0;position:relative}
 .dv-step{padding:clamp(24px,4vw,38px)}
 .dv-step h3{font-size:clamp(27px,3.4vw,42px);line-height:1.06;letter-spacing:-.028em;max-width:19ch}
 .dv-step-hint{max-width:60ch!important;margin:14px 0 0!important;font-size:14px!important;color:var(--fg-soft)!important}
+.dv-route-recap{margin:0 0 24px;padding:16px 18px;border-left:2px solid var(--accent);background:rgba(59,116,242,.08)}
+.dv-route-recap span{font-family:var(--mono);font-size:9px;letter-spacing:.13em;text-transform:uppercase;color:var(--accent-2)}
+.dv-route-recap p{max-width:66ch!important;margin:8px 0 0!important;font-size:14px!important;line-height:1.55!important;color:var(--fg-soft)!important}
 .dv-options{display:grid;gap:10px;margin-top:28px}
 .dv-options.is-multi{grid-template-columns:repeat(2,minmax(0,1fr))}
 .dv-option{appearance:none;width:100%;display:grid;grid-template-columns:32px minmax(0,1fr) 18px;align-items:center;gap:12px;padding:15px 16px;border:1px solid var(--line);border-radius:12px;background:#0E131B;color:var(--fg);font:inherit;text-align:left;cursor:pointer;transition:border-color .18s,background .18s,transform .18s}

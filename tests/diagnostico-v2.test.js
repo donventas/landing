@@ -29,6 +29,46 @@ test('identifies the specific required contact field', () => {
   assert.equal(errors.email, 'Revisa el correo. Ejemplo: nombre@empresa.com');
 });
 
+test('shows one economic question and the branch that matches the main content problem', () => {
+  const state = {
+    outcome: 'orders',
+    salesProblem: 'noInquiries',
+    nextAction: 'whatsapp',
+    attempted: ['internal'],
+    proof: ['reviews'],
+    businessAudience: 'Vendemos joyería a personas que buscan regalos especiales.',
+    timing: 'month',
+    budgetBand: 'c_12_20'
+  };
+  const questions = diagnostic.visibleQuestions('contenido', state);
+  assert.equal(questions.filter(question => question.id === 'budgetBand').length, 1);
+  assert.equal(questions.some(question => question.id === 'salesProblem'), true);
+  assert.equal(questions.some(question => question.id === 'searchProblem'), false);
+  assert.match(diagnostic.budgetContext('contenido', state), /casi nadie pregunta o compra/i);
+  assert.match(diagnostic.budgetContext('contenido', state), /whatsapp/i);
+});
+
+test('uses the main problem to choose the preliminary route before applying the budget', () => {
+  const state = {
+    outcome: 'search',
+    searchProblem: 'noSite',
+    nextAction: 'quote',
+    attempted: ['none'],
+    proof: ['photos'],
+    businessAudience: 'Servicios profesionales para negocios locales.',
+    timing: 'quarter',
+    budgetBand: 'a_25_45'
+  };
+  assert.equal(diagnostic.recommendation('contenido', state).key, 'autoridad');
+  assert.equal(diagnostic.needsSearch(state), true);
+});
+
+test('keeps only one budget field across the diagnostic source', () => {
+  const source = fs.readFileSync(path.join(__dirname, '..', 'diagnostico-v2.js'), 'utf8');
+  assert.doesNotMatch(source, /id:'(?:monthlyBudget|setupBudget|projectBudget)'/);
+  assert.equal((source.match(/id:'budgetBand'/g) || []).length, 2);
+});
+
 test('uses the publishable key as apikey instead of a bearer token', () => {
   const source = fs.readFileSync(path.join(__dirname, '..', 'diagnostico-v2.js'), 'utf8');
   assert.match(source, /'apikey':CONFIG\.SUPABASE_ANON/);
