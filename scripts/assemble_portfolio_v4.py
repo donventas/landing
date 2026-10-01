@@ -55,19 +55,6 @@ def pafi_merch():
     save(canvas, "pafi-dv-v4-01-merch.png")
 
 
-def pafi_editor():
-    canvas = Image.new("RGBA", SIZE, "#3A241F")
-    rounded_card(
-        canvas,
-        SNAPS / "pafi-dv-v4-03-editor-source.png",
-        (42, 50, 1516, 900),
-        "#F7F2EA",
-        radius=24,
-        padding=18,
-    )
-    save(canvas, "pafi-dv-v4-02-editor.png")
-
-
 def tamanova_editorial():
     canvas = Image.new("RGBA", SIZE, "#EEE8DB")
     rounded_card(
@@ -105,7 +92,6 @@ def quickfinance_brand():
 
 if __name__ == "__main__":
     pafi_merch()
-    pafi_editor()
     tamanova_editorial()
     quickfinance_brand()
     # Public portfolio selections copied byte-for-byte from the source capsules.
