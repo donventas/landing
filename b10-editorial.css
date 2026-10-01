@@ -59,11 +59,27 @@
 .b10-offer-grid p{max-width:35ch;color:#465367;font-size:14px;line-height:1.6}
 .b10-offer-grid .is-lead p{color:#B4BECE}
 .b10-offer-grid article>div{display:flex;flex-direction:column;gap:18px;margin-top:auto;padding-top:28px}
+.b10-offer-grid article>div>span{max-width:28ch;color:#556175;font-size:12px;line-height:1.55}
+.b10-offer-grid .is-lead article>div>span,.b10-offer-grid .is-lead div>span{color:#B4BECE}
 .b10-offer-grid strong{font-size:19px;letter-spacing:-.025em}
 .b10-offer-grid strong small{display:block;margin-top:4px;font:700 9px/1.5 var(--mono);letter-spacing:.03em}
 .b10-offer-grid a{align-self:start;color:#1B49A0;font:700 10px/1.4 var(--mono);border-bottom:1px solid currentColor}
 .b10-offer-grid .is-lead a{color:#91B0FF}
 .b10-offer-note{margin-top:19px;color:#556175;font-size:11px;line-height:1.58}
+
+.b10-pricing{scroll-margin-top:100px;margin-top:110px;padding-top:70px;border-top:1px solid var(--line)}
+.b10-pricing-intro{display:grid;grid-template-columns:.7fr 1.3fr;gap:24px 70px;align-items:start}
+.b10-pricing-intro .eyebrow{grid-column:1/-1}
+.b10-pricing-intro h2{max-width:15ch;font-size:clamp(36px,5vw,62px);line-height:.98;letter-spacing:-.04em}
+.b10-pricing-intro p{max-width:48ch;color:var(--fg-soft);font-size:15px;line-height:1.65}
+.b10-pricing-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;margin-top:50px;background:var(--line)}
+.b10-pricing-grid article{display:flex;flex-direction:column;min-height:330px;padding:28px;background:var(--panel)}
+.b10-pricing-grid article>span{color:var(--accent-2);font:700 10px/1.4 var(--mono);letter-spacing:.11em;text-transform:uppercase}
+.b10-pricing-grid h3{margin:50px 0 0;font-size:clamp(31px,3.2vw,44px);letter-spacing:-.04em}
+.b10-pricing-grid p{margin:3px 0 20px;color:var(--fg);font:700 10px/1.5 var(--mono);letter-spacing:.04em;text-transform:uppercase}
+.b10-pricing-grid small{color:var(--fg-soft);font-size:13px;line-height:1.6}
+.b10-pricing-grid a{align-self:start;margin-top:auto;padding-top:28px;color:var(--accent-2);font:700 10px/1.4 var(--mono);border-bottom:1px solid currentColor}
+.b10-pricing-note{max-width:72ch;margin:20px 0 0;color:var(--fg-faint);font-size:11px;line-height:1.6}
 
 .b10-method{display:grid;grid-template-columns:1fr 1fr;gap:clamp(38px,7vw,100px);margin-top:110px;padding-top:105px;border-top:1px solid #C5CED9}
 .b10-method-visual{position:relative;align-self:center;min-width:0;aspect-ratio:1672/941;overflow:hidden;background:#0E1117}
@@ -135,6 +151,10 @@
   .b10-offer-grid article{padding:23px;min-height:360px}
   .b10-offer-grid h3{margin-top:42px}
   .b10-method-visual span{position:static;display:block}
+  .b10-pricing-intro{grid-template-columns:1fr}
+  .b10-pricing-intro .eyebrow{grid-column:auto}
+  .b10-pricing-grid{grid-template-columns:1fr}
+  .b10-pricing-grid article{min-height:280px}
 }
 
 @media(prefers-reduced-motion:reduce){

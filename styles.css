@@ -51,7 +51,7 @@ img{max-width:100%;display:block}
 .btn.solid:hover{background:#2E63DC;border-color:#2E63DC;color:#fff}
 .btn.lg{padding:16px 26px;font-size:13px}
 .btn .ar{font-family:var(--mono)}
-@media(max-width:720px){.nav .links{display:none}}
+@media(max-width:850px){.nav .links{display:none}}
 
 /* ── hero ── */
 .hero{position:relative;padding:calc(var(--gap) + 40px) 0 var(--gap);overflow:hidden}

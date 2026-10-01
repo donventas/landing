@@ -116,12 +116,6 @@
       {id:'independent',label:'Queremos reglas, archivos y plantillas para operar solos'}
     ]},
     {id:'difference',type:'text',title:'¿Qué hace valioso o diferente a tu negocio?',hint:'Si todavía no está claro, dilo: esa también es información útil.',required:true,placeholder:'Ej. Tenemos diez años resolviendo… Nuestros clientes nos eligen porque…'},
-    {id:'timing',type:'single',title:'¿Cuándo necesitas empezar?',hint:'El plazo nos ayuda a ordenar la primera etapa.',required:true,options:[
-      {id:'now',label:'Lo antes posible'},
-      {id:'month',label:'Durante el próximo mes'},
-      {id:'quarter',label:'En dos o tres meses'},
-      {id:'exploring',label:'Solo estoy explorando por ahora'}
-    ]},
     {id:'budgetBand',type:'single',title:function(a){return budgetTitle('branding',a);},hint:function(a){return budgetHint('branding',a);},context:function(a){return budgetContext('branding',a);},required:true,options:function(a){return budgetOptions('branding',a);}},
     contactQuestion('branding')
   ];
@@ -155,9 +149,9 @@
   function needsSearch(a){return preliminaryContentKey(a)!=='contenido';}
   function budgetOptions(route,state){
     if(route==='branding')return [
-      {id:'b_lt18',label:'Hasta $18 mil MXN + IVA'}, {id:'b_18_30',label:'$18–30 mil MXN + IVA'},
-      {id:'b_31_60',label:'$31–60 mil MXN + IVA'}, {id:'b_61_120',label:'$61–120 mil MXN + IVA'},
-      {id:'b_gt120',label:'Más de $120 mil MXN + IVA'}, {id:'unknown',label:'Necesito conocer primero el alcance recomendado'}
+      {id:'b_lt18',label:'Hasta $18 mil MXN / primera etapa + IVA'}, {id:'b_18_30',label:'$18–30 mil MXN / primera etapa + IVA'},
+      {id:'b_31_60',label:'$31–60 mil MXN / primera etapa + IVA'}, {id:'b_61_120',label:'$61–120 mil MXN / primera etapa + IVA'},
+      {id:'b_gt120',label:'Más de $120 mil MXN / primera etapa + IVA'}, {id:'unknown',label:'Necesito conocer primero el alcance recomendado'}
     ];
     var key=preliminaryContentKey(state);
     if(key==='contenido')return [
@@ -230,9 +224,9 @@
     if(['launch','reposition'].indexOf(a.desired)>=0)score+=1;
     var need=score<=3?'essential':(score<=6?'complete':'extended');
     var catalog={
-      essential:{name:'Sistema esencial',band:'18–30 mil MXN',desc:'Claridad, núcleo visual y las reglas mínimas para dejar de improvisar.'},
-      complete:{name:'Sistema de marca completo',band:'31–60 mil MXN',desc:'Mensaje, identidad y usos prioritarios para que la marca sea consistente.'},
-      extended:{name:'Sistema extendido',band:'61–120 mil MXN',desc:'Una guía amplia para equipos, proveedores y todos los lugares donde aparece la marca.'}
+      essential:{name:'Sistema esencial',band:'$18–30 mil MXN / primera etapa + IVA',desc:'Claridad, núcleo visual y las reglas mínimas para dejar de improvisar.'},
+      complete:{name:'Sistema de marca completo',band:'$31–60 mil MXN / primera etapa + IVA',desc:'Mensaje, identidad y usos prioritarios para que la marca sea consistente.'},
+      extended:{name:'Sistema extendido',band:'$61–120 mil MXN / primera etapa + IVA',desc:'Una guía amplia para equipos, proveedores y todos los lugares donde aparece la marca.'}
     };
     var needRank={essential:1,complete:2,extended:3}[need],capacity=budgetRank(a.budgetBand),gap=capacity>=0&&capacity<needRank;
     var start='';

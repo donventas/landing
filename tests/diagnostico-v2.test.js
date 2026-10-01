@@ -125,13 +125,35 @@ test('publishes only the two verifiable B10 cases', () => {
   const html = fs.readFileSync(path.join(__dirname, '..', 'index.html'), 'utf8');
   const editorial = fs.readFileSync(path.join(__dirname, '..', 'b10-editorial.css'), 'utf8');
   assert.equal((html.match(/class="shot is-public-case"/g) || []).length, 2);
-  assert.equal((html.match(/class="shot" hidden/g) || []).length, 4);
+  assert.equal((html.match(/class="shot" hidden/g) || []).length, 0);
+  ['Sicarú', 'QuickFinance', '>Pafi<', 'sistema Don Ventas'].forEach(name => assert.doesNotMatch(html, new RegExp(name, 'i')));
   assert.match(html, /<h3 class="n">Arturo Villagomez<\/h3>/);
   assert.doesNotMatch(html, /Arturo Villagómez/);
   assert.match(html, /href="https:\/\/www\.arturovillagomez\.com\/"/);
   assert.match(html, /href="https:\/\/www\.airbnb\.com\/h\/casa-artu-merida-progreso"/);
   assert.match(editorial, /#prueba \.shot:not\(\.is-public-case\)\{display:none\}/);
   assert.match(editorial, /#prueba \.case-stage img\{[^}]*object-fit:contain/);
+});
+
+test('reveals prices only after the value sections', () => {
+  const html = fs.readFileSync(path.join(__dirname, '..', 'index.html'), 'utf8');
+  const offer = html.slice(html.indexOf('id="oferta"'), html.indexOf('id="metodo"'));
+  const pricing = html.slice(html.indexOf('id="precios"'), html.indexOf('id="preguntas"'));
+  assert.doesNotMatch(offer, /\$\d/);
+  assert.match(offer, /href="#precios"/);
+  assert.match(pricing, /\$12–32 mil/);
+  assert.match(pricing, /por mes \+ IVA/);
+  assert.match(pricing, /por implementación \+ IVA/);
+  assert.match(pricing, /de inicio \+ IVA/);
+  assert.ok(html.indexOf('id="precios"') > html.indexOf('id="recursos"'));
+});
+
+test('asks branding timing once and keeps period plus VAT in recommendations', () => {
+  const source = fs.readFileSync(path.join(__dirname, '..', 'diagnostico-v2.js'), 'utf8');
+  assert.equal((source.match(/data-field="timing"/g) || []).length, 1);
+  assert.doesNotMatch(source, /id:'month'/);
+  assert.match(source, /Sistema esencial',band:'\$18–30 mil MXN \/ primera etapa \+ IVA'/);
+  assert.match(source, /Sistema de marca completo',band:'\$31–60 mil MXN \/ primera etapa \+ IVA'/);
 });
 
 test('keeps every local landing asset and page link resolvable', () => {

@@ -26,14 +26,18 @@ la capacidad de ejecución del negocio.
 
 ## Primer paso
 
-La llamada a la acción principal es **Recibe tu diagnóstico**. El visitante completa un
-formulario que pregunta el presupuesto al inicio y adapta las preguntas siguientes. Las
-mismas respuestas producen la misma recomendación preliminar; una persona revisa el PDF
-y la propuesta antes de enviarlos.
+La llamada a la acción principal es **Recibe tu diagnóstico**. El visitante explica primero
+el problema actual y el cambio que quiere lograr. Después el formulario presenta una sola
+pregunta de inversión, con rangos abreviados, periodo y la indicación de que no incluyen IVA.
+Las mismas respuestas producen la misma recomendación preliminar y una persona revisa cada
+solicitud. Cuando existe encaje e información suficiente, Don Ventas entrega un diagnóstico
+breve en PDF en 3–5 días hábiles; no es una entrega automática para todos los envíos.
 
-Rangos orientativos: contenido desde $12,000 MXN al mes; sitio preparado para buscadores (SEO) desde $25,000 MXN
-de implementación; sistemas de marca desde $18,000 MXN por proyecto. El alcance final
-depende de profundidad, aplicaciones, materiales, ritmo y capacidad de operación.
+Los precios no aparecen en la primera explicación de la oferta. Después de mostrar casos,
+método y sistema de trabajo, el sitio ofrece una sección de inversión orientativa: contenido
+entre $12–32 mil MXN por mes + IVA; sitio preparado para buscadores entre $25–80 mil MXN por
+implementación + IVA; y sistema combinado entre $35–95 mil MXN de inicio + IVA. El alcance
+final depende de profundidad, aplicaciones, materiales, ritmo y capacidad de operación.
 
 ## Enlaces canónicos
 
