@@ -41,6 +41,18 @@ El navegador elige la imagen apropiada mediante `srcset`; la galería conserva e
 
 La lógica del diagnóstico se descarga al aproximarse al formulario o al mostrar intención de abrirlo, con una alternativa accesible por correo si falla. El símbolo conserva el SVG canónico visible desde el primer instante y solicita la malla 3D en tiempo ocioso; movimiento reducido sigue usando la versión estática.
 
+### Segunda ronda: primera vista
+
+La tipografía normal que compone la mayor parte del encabezado principal, junto con el SVG estático del símbolo, se solicita de forma prioritaria. La cursiva conserva `font-display: swap` y deja de competir con la hoja de estilos durante la primera descarga. La escena del símbolo mantiene una altura reservada antes de pintar para evitar desplazamientos sin forzar la geometría del SVG.
+
+El render 3D completo sale también de la ruta crítica: se descarga tras siete segundos posteriores a `load`, o antes si la persona interactúa con la escena; la preferencia de movimiento reducido evita esa descarga. La analítica de Vercel se carga después de seis segundos o en la primera interacción global. Así se conserva la medición y la entrada autorizada sin hacerlas competir con la primera vista; no se incorporó grabación de sesiones.
+
+Los scripts, hojas, fuentes, SVG y malla solicitados con versión reciben caché de un año con `immutable`. Los derivados WebP y la fotografía optimizada del fundador, que todavía usan nombres mutables, reciben un día de caché y una semana de revalidación en segundo plano. Los documentos HTML conservan la política normal de revalidación, de modo que una publicación pueda actualizar el contenido sin servir una página anterior.
+
+No se separó una segunda hoja de estilos crítica en esta ronda. Las dos hojas de la portada suman cerca de 69 KiB sin compresión y dividirlas ahora duplicaría reglas y aumentaría el riesgo de divergencia visual. La decisión se volverá a evaluar únicamente si las mediciones del nuevo preview muestran que el CSS sigue bloqueando el objetivo interno de LCP.
+
+En tres cargas frías locales a 390 px, con CPU limitada a 4× y red móvil simulada en 1.6 Mbps/150 ms, se obtuvieron LCP de 2.228, 1.736 y 1.720 s; CLS de 0 en las tres; y TBT aproximado de 11, 83 y 82 ms. Las medianas quedaron en **1.736 s de LCP, 0 de CLS y 82 ms de TBT**, dentro de los objetivos internos de 2.2 s, 0.05 y 150 ms. La prueba verificó además que ni el render 3D ni la analítica se descargan durante esa ventana. El render sí se activa al interactuar con la escena y permanece completamente estático con movimiento reducido.
+
 ## QA exigido antes de producción
 
 - Suite automatizada del formulario y activos.

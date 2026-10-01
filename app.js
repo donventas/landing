@@ -7,8 +7,8 @@
    Config (llaves públicas) al pie de cada sección — edítalas ahí.
    ════════════════════════════════════════════════════════════════════ */
 
-/* Vercel Web Analytics — bootstrap (sin cookies; el <script> del insights
-   se carga desde index.html justo después de este archivo). */
+/* Vercel Web Analytics — bootstrap (sin cookies; analytics-loader.js carga
+   el script remoto tras la primera interacción o durante tiempo ocioso). */
 window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
 
 /* ── 1 · reveal on-scroll (+ failsafe de impresión) ───────────────── */

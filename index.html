@@ -30,8 +30,10 @@
 <link rel="icon" href="favicon.svg">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
-<link rel="stylesheet" href="styles.css?v=20261001-3">
-<link rel="stylesheet" href="b10-editorial.css?v=20261001-3">
+<link rel="preload" href="assets/fonts/schibsted-grotesk-latin-normal.woff2?v=20261001-1" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/b10-motion/donventas-symbol-b-reverse.svg?v=20261001-1" as="image" type="image/svg+xml" fetchpriority="high">
+<link rel="stylesheet" href="styles.css?v=20261001-4">
+<link rel="stylesheet" href="b10-editorial.css?v=20261001-4">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -159,11 +161,11 @@
     <div class="b10-hero-visual">
       <div class="b10-motion-stage" role="group" aria-label="Símbolo tridimensional de Don Ventas con una entrada editorial breve">
         <div class="b10-mark-viewport" data-b10-hero-mark>
-          <img src="assets/b10-motion/donventas-symbol-b-reverse.svg" alt="Símbolo B de Don Ventas">
+          <img src="assets/b10-motion/donventas-symbol-b-reverse.svg?v=20261001-1" alt="Símbolo B de Don Ventas" fetchpriority="high" decoding="async">
           <canvas aria-hidden="true"></canvas>
         </div>
         <button class="b10-motion-replay" type="button" data-b10-replay hidden>Reproducir entrada ↻</button>
-        <small data-b10-motion-status aria-live="polite">Cargando modelo 3D</small>
+        <small data-b10-motion-status aria-live="polite">Símbolo de Don Ventas · entrada editorial</small>
       </div>
       <a class="b10-diagnostic-note" href="#contacto" data-diagnostic-entry="contenido">
         <b>Diagnóstico de contenido</b>
@@ -427,10 +429,10 @@
 </div>
 
 <!-- Scripts del sitio. No se instala software de grabación de sesiones. -->
-<script defer src="hero-mark-3d.js?v=20261001-4"></script>
-<script defer src="app.js?v=20261001-3"></script>
+<script defer src="hero-mark-loader.js?v=20261001-1"></script>
+<script defer src="app.js?v=20261001-4"></script>
 <script defer src="diagnostico-loader.js?v=20261001-1"></script>
-<script defer src="/_vercel/insights/script.js"></script>
+<script defer src="analytics-loader.js?v=20261001-1"></script>
 
 </body>
 </html>

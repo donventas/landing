@@ -8,7 +8,7 @@
   if (!roots.length) return;
 
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-  const meshUrl = new URL('assets/b10-motion/symbol-b-mesh.json', document.currentScript.src);
+  const meshUrl = new URL('assets/b10-motion/symbol-b-mesh.json?v=20261001-1', document.currentScript.src);
   const vertexSource = `#version 300 es
     in vec3 aPosition;
     in vec3 aNormal;
