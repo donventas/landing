@@ -1,0 +1,32 @@
+{
+  "source": {
+    "repository": "FinDataMan/don-ventas-runtime",
+    "pullRequest": 52,
+    "commit": "9f531f5"
+  },
+  "releasePolicy": {
+    "markStatus": "approved-symbol-source",
+    "motionStatus": "static-only",
+    "rotationApproved": false,
+    "canonicalAdmission": false,
+    "notes": "The hero renders a static front view. No logo rotation or canonical 3D admission is implied."
+  },
+  "assets": [
+    {
+      "path": "donventas-symbol-b-reverse.svg",
+      "sha256": "A5D38AC61E4E34887678988C1731E5D4756A862470662B13CE0B7FE339D59D75"
+    },
+    {
+      "path": "donventas-symbol-b-pilot.glb",
+      "sha256": "C3865A7408129313AD27F798A6FB8411AE8207FFB5599689EA6150F4F985C6AC"
+    },
+    {
+      "path": "symbol-b-mesh.json",
+      "sha256": "B730CD15D01ECC5E923C22DB172145E4010CDB337E2C01812AE5B4FD61155E1B"
+    },
+    {
+      "path": "donventas-symbol-b-pilot-preview.png",
+      "sha256": "4372CD8DFC79BF848434A0A474F3F4E80D1D9895C3EB9A84444A84F232061BE0"
+    }
+  ]
+}

@@ -1,5 +1,6 @@
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
+const crypto = require('node:crypto');
 const path = require('node:path');
 const test = require('node:test');
 const diagnostic = require('../diagnostico-v2.js');
@@ -8,6 +9,7 @@ const validContact = {
   name: 'Ramses Anduaga',
   business: 'Joyería Marje',
   email: 'ramses@example.com',
+  businessAudience: 'Vendemos joyería a personas que buscan regalos especiales.',
   consent: true
 };
 
@@ -31,42 +33,217 @@ test('identifies the specific required contact field', () => {
 
 test('shows one economic question and the branch that matches the main content problem', () => {
   const state = {
-    outcome: 'orders',
     salesProblem: 'noInquiries',
-    nextAction: 'whatsapp',
-    attempted: ['internal'],
-    proof: ['reviews'],
-    businessAudience: 'Vendemos joyería a personas que buscan regalos especiales.',
-    timing: 'month',
+    outcome: 'orders',
+    entry: 'contenido',
+    proof: 'cases',
     budgetBand: 'c_12_20'
   };
   const questions = diagnostic.visibleQuestions('contenido', state);
   assert.equal(questions.filter(question => question.id === 'budgetBand').length, 1);
-  assert.equal(questions.some(question => question.id === 'salesProblem'), true);
-  assert.equal(questions.some(question => question.id === 'searchProblem'), false);
+  assert.deepEqual(questions.slice(0, 3).map(question => question.id), ['salesProblem', 'outcome', 'budgetBand']);
+  assert.equal(questions.length, 5);
+  assert.equal(questions.some(question => question.id === 'commercialRoute'), false);
   assert.match(diagnostic.budgetContext('contenido', state), /casi nadie pregunta o compra/i);
-  assert.match(diagnostic.budgetContext('contenido', state), /whatsapp/i);
+  assert.match(diagnostic.budgetContext('contenido', state), /contenido para redes/i);
 });
 
 test('uses the main problem to choose the preliminary route before applying the budget', () => {
   const state = {
+    salesProblem: 'notFound',
     outcome: 'search',
-    searchProblem: 'noSite',
-    nextAction: 'quote',
-    attempted: ['none'],
-    proof: ['photos'],
-    businessAudience: 'Servicios profesionales para negocios locales.',
-    timing: 'quarter',
+    entry: 'autoridad',
+    proof: 'photos',
     budgetBand: 'a_25_45'
   };
   assert.equal(diagnostic.recommendation('contenido', state).key, 'autoridad');
   assert.equal(diagnostic.needsSearch(state), true);
 });
 
+test('shows abbreviated prices with period and VAT disclosure', () => {
+  const source = fs.readFileSync(path.join(__dirname, '..', 'diagnostico-v2.js'), 'utf8');
+  assert.match(source, /\$12–20 mil MXN \/ mes \+ IVA/);
+  assert.match(source, /\$25–45 mil MXN \/ implementación \+ IVA/);
+  assert.match(source, /no incluyen IVA/);
+});
+
+test('rejects the honeypot while preserving ordinary contacts', () => {
+  assert.equal(diagnostic.contactErrors({...validContact, websiteConfirm: 'https://spam.example'}).spam, 'No pudimos validar el formulario. Actualiza la página e inténtalo de nuevo.');
+  assert.deepEqual(diagnostic.contactErrors({...validContact, websiteConfirm: ''}), {});
+});
+
+test('uses the approved one-time B10 entrance and ships governed fallbacks', () => {
+  const script = fs.readFileSync(path.join(__dirname, '..', 'hero-mark-3d.js'), 'utf8');
+  assert.match(script, /requestAnimationFrame/);
+  assert.match(script, /const duration = 2300/);
+  assert.match(script, /const degrees = -72 \+ 80 \* eased - 8 \* settle/);
+  assert.match(script, /draw\(0\)/);
+  assert.doesNotMatch(script, /360 \*/);
+  assert.match(script, /prefers-reduced-motion: reduce/);
+  ['donventas-symbol-b-reverse.svg', 'donventas-symbol-b-pilot.glb', 'symbol-b-mesh.json', 'donventas-symbol-b-pilot-preview.png']
+    .forEach(file => assert.equal(fs.existsSync(path.join(__dirname, '..', 'assets', 'b10-motion', file)), true));
+});
+
+test('binds the GLB and mesh to the approved B symbol', () => {
+  const assetDir = path.join(__dirname, '..', 'assets', 'b10-motion');
+  const expected = {
+    'donventas-symbol-b-reverse.svg': 'A5D38AC61E4E34887678988C1731E5D4756A862470662B13CE0B7FE339D59D75',
+    'donventas-symbol-b-pilot.glb': 'C3865A7408129313AD27F798A6FB8411AE8207FFB5599689EA6150F4F985C6AC',
+    'symbol-b-mesh.json': 'B730CD15D01ECC5E923C22DB172145E4010CDB337E2C01812AE5B4FD61155E1B'
+  };
+  Object.entries(expected).forEach(([file, hash]) => {
+    const bytes = fs.readFileSync(path.join(assetDir, file));
+    assert.equal(crypto.createHash('sha256').update(bytes).digest('hex').toUpperCase(), hash);
+  });
+  const source = fs.readFileSync(path.join(assetDir, 'donventas-symbol-b-reverse.svg'), 'utf8');
+  assert.match(source, /viewBox="28 27 49 46"/);
+  assert.equal((source.match(/stroke-width="6\.5"/g) || []).length, 2);
+  const glb = fs.readFileSync(path.join(assetDir, 'donventas-symbol-b-pilot.glb'));
+  assert.equal(glb.readUInt32LE(0), 0x46546c67);
+  assert.equal(glb.readUInt32LE(4), 2);
+  assert.equal(glb.readUInt32LE(8), glb.length);
+  assert.equal(glb.readUInt32LE(16), 0x4e4f534a);
+  const jsonLength = glb.readUInt32LE(12);
+  const gltf = JSON.parse(glb.subarray(20, 20 + jsonLength).toString('utf8').trim());
+  assert.equal(gltf.asset.version, '2.0');
+  assert.equal(gltf.meshes.length, 2);
+  assert.deepEqual(gltf.materials.map(material => material.name), ['Papel Don Ventas', 'Azul Don Ventas']);
+});
+
+test('preserves indexation, structured metadata and keyboard landmarks', () => {
+  const html = fs.readFileSync(path.join(__dirname, '..', 'index.html'), 'utf8');
+  const robots = fs.readFileSync(path.join(__dirname, '..', 'robots.txt'), 'utf8');
+  const sitemap = fs.readFileSync(path.join(__dirname, '..', 'sitemap.xml'), 'utf8');
+  assert.match(html, /<link rel="canonical" href="https:\/\/www\.donventas\.mx\/">/);
+  assert.match(html, /<meta name="robots" content="index,follow/);
+  assert.doesNotMatch(html, /noindex/i);
+  assert.match(html, /<script type="application\/ld\+json">/);
+  assert.match(html, /<a class="skip-link" href="#main-content">/);
+  assert.match(html, /<main id="main-content" tabindex="-1">/);
+  assert.match(robots, /Sitemap: https:\/\/www\.donventas\.mx\/sitemap\.xml/);
+  assert.match(sitemap, /<loc>https:\/\/www\.donventas\.mx\/<\/loc>/);
+});
+
+test('publishes only the two verifiable B10 cases', () => {
+  const html = fs.readFileSync(path.join(__dirname, '..', 'index.html'), 'utf8');
+  const editorial = fs.readFileSync(path.join(__dirname, '..', 'b10-editorial.css'), 'utf8');
+  assert.equal((html.match(/class="shot is-public-case"/g) || []).length, 2);
+  assert.equal((html.match(/class="shot" hidden/g) || []).length, 0);
+  ['Sicarú', 'QuickFinance', '>Pafi<', 'sistema Don Ventas'].forEach(name => assert.doesNotMatch(html, new RegExp(name, 'i')));
+  assert.match(html, /<h3 class="n">Arturo Villagomez<\/h3>/);
+  assert.doesNotMatch(html, /Arturo Villagómez/);
+  assert.match(html, /href="https:\/\/www\.arturovillagomez\.com\/"/);
+  assert.match(html, /href="https:\/\/www\.airbnb\.com\/h\/casa-artu-merida-progreso"/);
+  assert.match(editorial, /#prueba \.shot:not\(\.is-public-case\)\{display:none\}/);
+  assert.match(editorial, /#prueba \.case-stage img\{[^}]*object-fit:contain/);
+});
+
+test('reveals prices only after the value sections', () => {
+  const html = fs.readFileSync(path.join(__dirname, '..', 'index.html'), 'utf8');
+  const offer = html.slice(html.indexOf('id="oferta"'), html.indexOf('id="metodo"'));
+  const pricing = html.slice(html.indexOf('id="precios"'), html.indexOf('id="preguntas"'));
+  assert.doesNotMatch(offer, /\$\d/);
+  assert.match(offer, /href="#precios"/);
+  assert.match(pricing, /\$12–32 mil/);
+  assert.equal((pricing.match(/<small>MXN<\/small>/g) || []).length, 3);
+  assert.match(pricing, /por mes \+ IVA/);
+  assert.match(pricing, /por implementación \+ IVA/);
+  assert.match(pricing, /de inicio \+ IVA/);
+  assert.ok(html.indexOf('id="precios"') > html.indexOf('id="recursos"'));
+});
+
+test('keeps the diagnostic short and limits visible choices', () => {
+  const content = diagnostic.visibleQuestions('contenido', {salesProblem: 'noInquiries', outcome: 'orders', entry: 'contenido'});
+  const branding = diagnostic.visibleQuestions('branding', {desired: 'consistency'});
+  assert.equal(content.length, 5);
+  assert.equal(branding.length, 6);
+  [...content, ...branding].forEach(question => {
+    const options = typeof question.options === 'function' ? question.options({salesProblem: 'noInquiries', outcome: 'orders', entry: 'contenido', desired: 'consistency'}) : question.options;
+    if (Array.isArray(options)) assert.ok(options.length <= 5, `${question.id} has too many options`);
+  });
+  const applications = branding.find(question => question.id === 'applications');
+  assert.equal(applications.maxSelections, 2);
+});
+
+test('keeps the simplified branding route deterministic', () => {
+  const result = diagnostic.recommendation('branding', {
+    desired: 'launch',
+    launchProblem: 'complete',
+    applications: ['web', 'physical'],
+    autonomy: 'independent',
+    budgetBand: 'b_gt60'
+  });
+  assert.equal(result.key, 'extended');
+  assert.match(result.band, /MXN \/ primera etapa \+ IVA/);
+});
+
+test('builds a compact editable review before contact', () => {
+  const contentReview = diagnostic.reviewItems('contenido', {
+    salesProblem: 'noInquiries',
+    outcome: 'orders',
+    entry: 'contenido',
+    budgetBand: 'c_12_20',
+    proof: 'cases'
+  });
+  assert.deepEqual(contentReview.map(item => item.label), ['Problema principal', 'Cambio buscado', 'Ruta preliminar', 'Inversión considerada']);
+  assert.match(contentReview[2].value, /Contenido para atraer/);
+  assert.match(contentReview[3].value, /\$12–20 mil MXN/);
+  const source = fs.readFileSync(path.join(__dirname, '..', 'diagnostico-v2.js'), 'utf8');
+  assert.match(source, /data-edit-step/);
+  assert.match(source, /Revisa lo que entendimos/);
+});
+
+test('measures viewed, completed and abandoned diagnostic steps without session replay', () => {
+  const source = fs.readFileSync(path.join(__dirname, '..', 'diagnostico-v2.js'), 'utf8');
+  assert.match(source, /diagnostic_step_viewed/);
+  assert.match(source, /diagnostic_step_completed/);
+  assert.match(source, /diagnostic_abandoned/);
+  assert.match(source, /step_index/);
+  assert.match(source, /total_steps/);
+  assert.doesNotMatch(source, /session.?replay/i);
+});
+
+test('uses human WhatsApp follow-up and reserves the PDF for useful qualified cases', () => {
+  const files = ['index.html', 'branding.html', 'diagnostico-v2.js', 'llms.txt'];
+  const source = files.map(file => fs.readFileSync(path.join(__dirname, '..', file), 'utf8')).join('\n');
+  assert.match(source, /WhatsApp/);
+  assert.match(source, /PDF de una página/);
+  assert.doesNotMatch(source, /PDF (?:breve )?(?:en|se ofrece.*en) 3[–-]5 días/i);
+});
+
+test('keeps the rotating symbol compact inside the mobile hero scene', () => {
+  const editorial = fs.readFileSync(path.join(__dirname, '..', 'b10-editorial.css'), 'utf8');
+  const mobile = editorial.slice(editorial.indexOf('@media(max-width:470px)'), editorial.indexOf('@media(prefers-reduced-motion:reduce)'));
+  assert.match(mobile, /\.b10-hero\{padding:94px 0 44px\}/);
+  assert.match(mobile, /\.b10-motion-stage\{min-height:205px\}/);
+  assert.match(mobile, /\.b10-mark-viewport img\{width:min\(58%,220px\)/);
+});
+
+test('removes the redundant timing question and keeps period plus VAT in recommendations', () => {
+  const source = fs.readFileSync(path.join(__dirname, '..', 'diagnostico-v2.js'), 'utf8');
+  assert.equal((source.match(/data-field="timing"/g) || []).length, 0);
+  assert.doesNotMatch(source, /id:'month'/);
+  assert.match(source, /Sistema esencial',band:'\$18–30 mil MXN \/ primera etapa \+ IVA'/);
+  assert.match(source, /Sistema de marca completo',band:'\$31–60 mil MXN \/ primera etapa \+ IVA'/);
+});
+
+test('keeps every local landing asset and page link resolvable', () => {
+  const root = path.join(__dirname, '..');
+  const html = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
+  const refs = [...html.matchAll(/(?:href|src|data-src)="([^"]+)"/g)].map(match => match[1]);
+  const local = refs.filter(ref => !/^(?:https?:|mailto:|#|\/|data:)/.test(ref));
+  const missing = local.filter(ref => {
+    const cleanRef = decodeURIComponent(ref.split('?')[0].split('#')[0]);
+    const target = path.join(root, cleanRef);
+    return !(fs.existsSync(target) || fs.existsSync(path.join(target, 'index.html')));
+  });
+  assert.deepEqual(missing, []);
+});
+
 test('keeps only one budget field across the diagnostic source', () => {
   const source = fs.readFileSync(path.join(__dirname, '..', 'diagnostico-v2.js'), 'utf8');
   assert.doesNotMatch(source, /id:'(?:monthlyBudget|setupBudget|projectBudget)'/);
-  assert.equal((source.match(/id:'budgetBand'/g) || []).length, 2);
+  assert.equal((source.match(/\{id:'budgetBand',type:/g) || []).length, 2);
 });
 
 test('uses the publishable key as apikey instead of a bearer token', () => {
@@ -78,7 +255,8 @@ test('uses the publishable key as apikey instead of a bearer token', () => {
 test('serves brand fonts locally without Google Fonts requests', () => {
   const styles = fs.readFileSync(path.join(__dirname, '..', 'styles.css'), 'utf8');
   const social = fs.readFileSync(path.join(__dirname, '..', 'social-cards', 'card.css'), 'utf8');
-  assert.match(styles, /assets\/fonts\/fonts\.css/);
+  assert.doesNotMatch(styles, /@import/);
+  assert.match(styles, /assets\/fonts\/schibsted-grotesk-latin-normal\.woff2/);
   assert.doesNotMatch(styles + social, /fonts\.(?:googleapis|gstatic)\.com/);
   [
     'schibsted-grotesk-latin-normal.woff2',
