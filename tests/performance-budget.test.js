@@ -64,6 +64,7 @@ test('loads secondary behavior progressively and keeps accessible fallbacks', ()
   assert.match(heroLoader, /prefers-reduced-motion: reduce/);
   assert.match(heroLoader, /Vista estática · movimiento reducido/);
   assert.match(heroLoader, /Preparando entrada 3D/);
+  assert.match(heroLoader, /script\.onerror[\s\S]*Vista estática · SVG canónico/);
 });
 
 test('avoids a serial font stylesheet request and reserves image geometry', () => {
@@ -104,15 +105,17 @@ test('loads analytics outside the critical rendering path', () => {
 test('uses immutable cache only for versioned assets and revalidates mutable images', () => {
   const config = JSON.parse(read('vercel.json'));
   assert.ok(Array.isArray(config.headers));
-  assert.ok(config.headers.length >= 8);
+  assert.ok(config.headers.length >= 13);
   config.headers.forEach(rule => {
     assert.doesNotMatch(rule.source, /html/i);
     assert.ok(rule.headers.some(header => header.key === 'Cache-Control'));
   });
   const immutable = config.headers.filter(rule => rule.headers.some(header => /immutable/.test(header.value)));
-  assert.ok(immutable.length >= 6);
-  const mutableImages = config.headers.filter(rule => /webp/.test(rule.source));
-  assert.ok(mutableImages.every(rule => rule.headers.some(header => /max-age=86400, stale-while-revalidate=604800/.test(header.value))));
+  assert.ok(immutable.length >= 8);
+  assert.ok(immutable.every(rule => !/\(\.\*\)\.js|styles\.css|app\.js|assets\/fonts/.test(rule.source)));
+  assert.ok(!config.headers.some(rule => rule.source === '/(.*).js'));
+  const mutable = config.headers.filter(rule => /webp|foundador|styles\.css|app\.js|assets\/fonts/.test(rule.source));
+  assert.ok(mutable.every(rule => rule.headers.some(header => /max-age=86400, stale-while-revalidate=604800/.test(header.value))));
   assert.match(read('styles.css'), /woff2\?v=20261001-1/);
   assert.match(read('hero-mark-3d.js'), /symbol-b-mesh\.json\?v=20261001-1/);
 });

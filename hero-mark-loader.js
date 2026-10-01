@@ -31,6 +31,9 @@
     var script = document.createElement('script');
     script.src = 'hero-mark-3d.js?v=20261001-5';
     script.async = true;
+    script.onerror = function () {
+      if (status) status.textContent = 'Vista estática · SVG canónico';
+    };
     document.head.appendChild(script);
   }
 
