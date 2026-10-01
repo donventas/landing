@@ -10,7 +10,6 @@ const validContact = {
   business: 'Joyería Marje',
   email: 'ramses@example.com',
   businessAudience: 'Vendemos joyería a personas que buscan regalos especiales.',
-  timing: 'quarter',
   consent: true
 };
 
@@ -35,16 +34,16 @@ test('identifies the specific required contact field', () => {
 test('shows one economic question and the branch that matches the main content problem', () => {
   const state = {
     salesProblem: 'noInquiries',
-    impact: 'lost',
     outcome: 'orders',
-    commercialRoute: 'contenido',
-    proof: ['reviews'],
+    entry: 'contenido',
+    proof: 'cases',
     budgetBand: 'c_12_20'
   };
   const questions = diagnostic.visibleQuestions('contenido', state);
   assert.equal(questions.filter(question => question.id === 'budgetBand').length, 1);
-  assert.deepEqual(questions.slice(0, 3).map(question => question.id), ['salesProblem', 'impact', 'outcome']);
-  assert.equal(questions.length, 7);
+  assert.deepEqual(questions.slice(0, 3).map(question => question.id), ['salesProblem', 'outcome', 'budgetBand']);
+  assert.equal(questions.length, 5);
+  assert.equal(questions.some(question => question.id === 'commercialRoute'), false);
   assert.match(diagnostic.budgetContext('contenido', state), /casi nadie pregunta o compra/i);
   assert.match(diagnostic.budgetContext('contenido', state), /contenido para redes/i);
 });
@@ -52,10 +51,9 @@ test('shows one economic question and the branch that matches the main content p
 test('uses the main problem to choose the preliminary route before applying the budget', () => {
   const state = {
     salesProblem: 'notFound',
-    impact: 'lost',
     outcome: 'search',
-    commercialRoute: 'autoridad',
-    proof: ['photos'],
+    entry: 'autoridad',
+    proof: 'photos',
     budgetBand: 'a_25_45'
   };
   assert.equal(diagnostic.recommendation('contenido', state).key, 'autoridad');
@@ -74,9 +72,14 @@ test('rejects the honeypot while preserving ordinary contacts', () => {
   assert.deepEqual(diagnostic.contactErrors({...validContact, websiteConfirm: ''}), {});
 });
 
-test('keeps the B10 logo static and ships the governed fallback assets', () => {
-  const script = fs.readFileSync(path.join(__dirname, '..', 'hero-mark-3d-static.js'), 'utf8');
-  assert.doesNotMatch(script, /requestAnimationFrame|uAngle|Math\.PI/);
+test('uses the approved one-time B10 entrance and ships governed fallbacks', () => {
+  const script = fs.readFileSync(path.join(__dirname, '..', 'hero-mark-3d.js'), 'utf8');
+  assert.match(script, /requestAnimationFrame/);
+  assert.match(script, /const duration = 2300/);
+  assert.match(script, /const degrees = -72 \+ 80 \* eased - 8 \* settle/);
+  assert.match(script, /draw\(0\)/);
+  assert.doesNotMatch(script, /360 \*/);
+  assert.match(script, /prefers-reduced-motion: reduce/);
   ['donventas-symbol-b-reverse.svg', 'donventas-symbol-b-pilot.glb', 'symbol-b-mesh.json', 'donventas-symbol-b-pilot-preview.png']
     .forEach(file => assert.equal(fs.existsSync(path.join(__dirname, '..', 'assets', 'b10-motion', file)), true));
 });
@@ -142,15 +145,41 @@ test('reveals prices only after the value sections', () => {
   assert.doesNotMatch(offer, /\$\d/);
   assert.match(offer, /href="#precios"/);
   assert.match(pricing, /\$12–32 mil/);
+  assert.equal((pricing.match(/<small>MXN<\/small>/g) || []).length, 3);
   assert.match(pricing, /por mes \+ IVA/);
   assert.match(pricing, /por implementación \+ IVA/);
   assert.match(pricing, /de inicio \+ IVA/);
   assert.ok(html.indexOf('id="precios"') > html.indexOf('id="recursos"'));
 });
 
-test('asks branding timing once and keeps period plus VAT in recommendations', () => {
+test('keeps the diagnostic short and limits visible choices', () => {
+  const content = diagnostic.visibleQuestions('contenido', {salesProblem: 'noInquiries', outcome: 'orders', entry: 'contenido'});
+  const branding = diagnostic.visibleQuestions('branding', {desired: 'consistency'});
+  assert.equal(content.length, 5);
+  assert.equal(branding.length, 6);
+  [...content, ...branding].forEach(question => {
+    const options = typeof question.options === 'function' ? question.options({salesProblem: 'noInquiries', outcome: 'orders', entry: 'contenido', desired: 'consistency'}) : question.options;
+    if (Array.isArray(options)) assert.ok(options.length <= 5, `${question.id} has too many options`);
+  });
+  const applications = branding.find(question => question.id === 'applications');
+  assert.equal(applications.maxSelections, 2);
+});
+
+test('keeps the simplified branding route deterministic', () => {
+  const result = diagnostic.recommendation('branding', {
+    desired: 'launch',
+    launchProblem: 'complete',
+    applications: ['web', 'physical'],
+    autonomy: 'independent',
+    budgetBand: 'b_gt60'
+  });
+  assert.equal(result.key, 'extended');
+  assert.match(result.band, /MXN \/ primera etapa \+ IVA/);
+});
+
+test('removes the redundant timing question and keeps period plus VAT in recommendations', () => {
   const source = fs.readFileSync(path.join(__dirname, '..', 'diagnostico-v2.js'), 'utf8');
-  assert.equal((source.match(/data-field="timing"/g) || []).length, 1);
+  assert.equal((source.match(/data-field="timing"/g) || []).length, 0);
   assert.doesNotMatch(source, /id:'month'/);
   assert.match(source, /Sistema esencial',band:'\$18–30 mil MXN \/ primera etapa \+ IVA'/);
   assert.match(source, /Sistema de marca completo',band:'\$31–60 mil MXN \/ primera etapa \+ IVA'/);

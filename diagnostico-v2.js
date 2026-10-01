@@ -16,41 +16,22 @@
       {id:'noInquiries',label:'Nos ven, pero casi nadie pregunta o compra'},
       {id:'notFound',label:'No nos encuentran las personas correctas'},
       {id:'unclearOffer',label:'Nuestra oferta no se entiende rápido'},
-      {id:'lowTrust',label:'No generamos suficiente confianza'},
       {id:'consistency',label:'Publicamos sin constancia o dirección'},
-      {id:'site',label:'El sitio no ayuda a decidir o encontrarnos'},
       {id:'other',label:'Otro problema',other:true}
     ]},
-    {id:'impact',type:'single',title:'¿Qué efecto tiene eso en tu negocio?',hint:'No necesitas calcular dinero. Elige la consecuencia que más reconoces.',required:true,options:[
-      {id:'lost',label:'Perdemos oportunidades sin saber por qué'},
-      {id:'repeat',label:'Repetimos las mismas explicaciones'},
-      {id:'price',label:'La conversación se va solo al precio'},
-      {id:'misfit',label:'Llegan consultas poco alineadas'},
-      {id:'unknown',label:'Todavía no lo hemos medido'},
-      {id:'other',label:'Otro efecto',other:true}
-    ]},
     {id:'outcome',type:'single',title:'Si esto mejora, ¿qué cambio te importaría más?',hint:'Piensa en los próximos 90 días. Es una prioridad a investigar, no una promesa de resultado.',required:true,options:[
-      {id:'qualified',label:'Atraer personas que sí podrían comprar'},
-      {id:'orders',label:'Generar más conversaciones o pedidos'},
-      {id:'trust',label:'Construir confianza antes de la decisión'},
+      {id:'orders',label:'Recibir más conversaciones o pedidos adecuados'},
+      {id:'trust',label:'Que la oferta se entienda y genere confianza'},
       {id:'consistency',label:'Publicar con mayor consistencia'},
       {id:'search',label:'Aparecer cuando buscan soluciones como la nuestra'},
       {id:'other',label:'Otro cambio',other:true}
     ]},
-    {id:'commercialRoute',type:'single',title:'¿Qué ruta te gustaría explorar?',hint:'Puedes elegir una posibilidad. La recomendación final puede ser distinta después de la revisión.',required:true,options:[
-      {id:'contenido',label:'Contenido para redes',desc:'Publicar con dirección y acercar conversaciones.'},
-      {id:'autoridad',label:'Sitio y búsqueda',desc:'Ser encontrable y generar confianza al decidir.'},
-      {id:'motor',label:'Contenido + sitio',desc:'Conectar descubrimiento, explicación y decisión.'},
-      {id:'orientacion',label:'Necesito orientación',desc:'Aún no sé qué combinación conviene.'}
-    ]},
     {id:'budgetBand',type:'single',title:function(a){return budgetTitle('contenido',a);},hint:function(a){return budgetHint('contenido',a);},context:function(a){return budgetContext('contenido',a);},required:true,options:function(a){return budgetOptions('contenido',a);}},
-    {id:'proof',type:'multi',title:'¿Qué podemos demostrar hoy sobre tu negocio?',hint:'Puedes elegir varias opciones. La confianza se construye con evidencia real.',required:true,options:[
-      {id:'cases',label:'Resultados o casos de clientes'},
-      {id:'reviews',label:'Testimonios o reseñas'},
+    {id:'proof',type:'single',title:'¿Cuál es la mejor prueba que ya tienes?',hint:'Elige la evidencia más útil. Después podremos revisar materiales adicionales.',required:true,options:[
+      {id:'cases',label:'Casos, resultados o reseñas'},
       {id:'photos',label:'Fotografías o videos reales'},
-      {id:'process',label:'Un proceso o forma de trabajar propia'},
-      {id:'spokesperson',label:'Una persona que pueda explicar o aparecer'},
-      {id:'none',label:'Todavía tenemos poco documentado',exclusive:true},
+      {id:'process',label:'Un proceso o una persona experta que pueda explicarlo'},
+      {id:'none',label:'Todavía tenemos poco documentado'},
       {id:'other',label:'Otra prueba',other:true}
     ]},
     contactQuestion('contenido')
@@ -59,8 +40,7 @@
   var BRAND_QUESTIONS=[
     {id:'desired',type:'single',title:'¿Qué quieres resolver primero con tu marca?',hint:'Elige el resultado que más cambiaría cómo publicas, presentas o vendes.',required:true,options:[
       {id:'clarity',label:'Que la marca se entienda mejor',desc:'Aclarar qué vendes, para quién y por qué elegirte.'},
-      {id:'consistency',label:'Que todo se vea y suene consistente',desc:'Dejar de improvisar entre canales y proveedores.'},
-      {id:'autonomy',label:'Que el equipo pueda crear sin depender de una agencia',desc:'Tener reglas, plantillas y archivos utilizables.'},
+      {id:'consistency',label:'Trabajar con consistencia y más autonomía',desc:'Tener reglas, plantillas y archivos utilizables.'},
       {id:'launch',label:'Lanzar una marca nueva con una base sólida'},
       {id:'reposition',label:'Reposicionar una marca que ya existe'},
       {id:'other',label:'Otro resultado',other:true}
@@ -72,10 +52,9 @@
       {id:'value',label:'Por qué vale lo que cuesta'},
       {id:'other',label:'Otra dificultad',other:true}
     ]},
-    {id:'systemProblem',type:'single',title:'¿Dónde se rompe más la consistencia de la marca?',hint:'Piensa en el trabajo cotidiano, no solo en el logo.',required:true,showIf:function(a){return ['consistency','autonomy'].indexOf(a.desired)>=0;},options:[
+    {id:'systemProblem',type:'single',title:'¿Dónde se rompe más la consistencia de la marca?',hint:'Piensa en el trabajo cotidiano, no solo en el logo.',required:true,showIf:function(a){return a.desired==='consistency';},options:[
       {id:'channels',label:'Cada canal se ve y suena diferente'},
       {id:'team',label:'Cada persona aplica la marca a su manera'},
-      {id:'providers',label:'Los proveedores no reciben instrucciones claras'},
       {id:'templates',label:'Faltan plantillas y archivos utilizables'},
       {id:'manual',label:'Existe un manual, pero está viejo o nadie lo usa'},
       {id:'other',label:'Otro problema',other:true}
@@ -95,27 +74,18 @@
       {id:'other',label:'Otro problema',other:true}
     ]},
     {id:'brandOtherProblem',type:'text',title:'¿Qué problema te gustaría resolver con tu marca?',hint:'Descríbelo en palabras simples.',required:true,showIf:function(a){return a.desired==='other';},placeholder:'Ej. La empresa creció, pero la marca todavía parece de un negocio pequeño.'},
-    {id:'applications',type:'multi',title:'¿Dónde necesitas que la marca funcione?',hint:'Puedes elegir varias aplicaciones.',required:true,options:[
+    {id:'applications',type:'multi',maxSelections:2,title:'¿Dónde necesitas que la marca funcione primero?',hint:'Elige hasta dos lugares prioritarios.',required:true,options:[
       {id:'social',label:'Contenido y redes'},
       {id:'sales',label:'Presentaciones, propuestas y ventas'},
       {id:'web',label:'Sitio o producto digital'},
-      {id:'print',label:'Papelería e impresos'},
-      {id:'packaging',label:'Empaque o producto'},
-      {id:'space',label:'Local, evento o señalización'},
-      {id:'other',label:'Otra aplicación',other:true}
-    ]},
-    {id:'users',type:'single',title:'¿Quién necesita usar la marca?',hint:'Esto define cuántas reglas, archivos y plantillas hacen falta.',required:true,options:[
-      {id:'owner',label:'Solo yo'},
-      {id:'smallTeam',label:'Un equipo de 2–5 personas'},
-      {id:'providers',label:'Equipo y proveedores externos'},
-      {id:'scale',label:'Equipo, proveedores y varias unidades o sucursales'}
+      {id:'physical',label:'Empaque, impresos, local o eventos'},
+      {id:'other',label:'Otro lugar',other:true}
     ]},
     {id:'autonomy',type:'single',title:'¿Cómo quieres trabajar con la marca después del proyecto?',hint:'Esto nos permite recomendar operación continua o herramientas para trabajar por tu cuenta.',required:true,options:[
       {id:'agency',label:'Prefiero que Don Ventas siga operándola'},
       {id:'shared',label:'Queremos operar una parte y recibir acompañamiento'},
       {id:'independent',label:'Queremos reglas, archivos y plantillas para operar solos'}
     ]},
-    {id:'difference',type:'text',title:'¿Qué hace valioso o diferente a tu negocio?',hint:'Si todavía no está claro, dilo: esa también es información útil.',required:true,placeholder:'Ej. Tenemos diez años resolviendo… Nuestros clientes nos eligen porque…'},
     {id:'budgetBand',type:'single',title:function(a){return budgetTitle('branding',a);},hint:function(a){return budgetHint('branding',a);},context:function(a){return budgetContext('branding',a);},required:true,options:function(a){return budgetOptions('branding',a);}},
     contactQuestion('branding')
   ];
@@ -134,40 +104,39 @@
     return {id:a.salesProblem||'other',text:optionLabelById(CONTENT_QUESTIONS[0],a.salesProblem,a)||'un problema que requiere revisión'};
   }
   function brandProblem(a){
-    var map={clarity:['clarityProblem',BRAND_QUESTIONS[1]],consistency:['systemProblem',BRAND_QUESTIONS[2]],autonomy:['systemProblem',BRAND_QUESTIONS[2]],launch:['launchProblem',BRAND_QUESTIONS[3]],reposition:['repositionProblem',BRAND_QUESTIONS[4]]};
+    var map={clarity:['clarityProblem',BRAND_QUESTIONS[1]],consistency:['systemProblem',BRAND_QUESTIONS[2]],launch:['launchProblem',BRAND_QUESTIONS[3]],reposition:['repositionProblem',BRAND_QUESTIONS[4]]};
     var pair=map[a.desired];
     if(!pair)return {id:'other',text:a.brandOtherProblem||'una necesidad que requiere revisión'};
     return {id:a[pair[0]],text:optionLabelById(pair[1],a[pair[0]],a)};
   }
   function preliminaryContentKey(a){
     var problem=contentProblem(a).id;
-    if(['contenido','autoridad','motor'].indexOf(a.commercialRoute)>=0)return a.commercialRoute;
-    var search=a.entry==='autoridad'||a.entry==='motor'||a.outcome==='search'||problem==='site'||problem==='notFound';
-    var content=a.entry==='motor'||a.outcome!=='search'||['noInquiries','unclearOffer','lowTrust','consistency'].indexOf(problem)>=0;
+    var search=a.entry==='autoridad'||a.entry==='motor'||a.outcome==='search'||problem==='notFound';
+    var content=a.entry==='contenido'||a.entry==='motor'||a.outcome!=='search'||['noInquiries','unclearOffer','consistency'].indexOf(problem)>=0;
     return search&&content?'motor':(search?'autoridad':'contenido');
   }
   function needsSearch(a){return preliminaryContentKey(a)!=='contenido';}
   function budgetOptions(route,state){
     if(route==='branding')return [
       {id:'b_lt18',label:'Hasta $18 mil MXN / primera etapa + IVA'}, {id:'b_18_30',label:'$18–30 mil MXN / primera etapa + IVA'},
-      {id:'b_31_60',label:'$31–60 mil MXN / primera etapa + IVA'}, {id:'b_61_120',label:'$61–120 mil MXN / primera etapa + IVA'},
-      {id:'b_gt120',label:'Más de $120 mil MXN / primera etapa + IVA'}, {id:'unknown',label:'Necesito conocer primero el alcance recomendado'}
+      {id:'b_31_60',label:'$31–60 mil MXN / primera etapa + IVA'}, {id:'b_gt60',label:'Más de $60 mil MXN / primera etapa + IVA'},
+      {id:'unknown',label:'Necesito conocer primero el alcance recomendado'}
     ];
     var key=preliminaryContentKey(state);
     if(key==='contenido')return [
       {id:'c_lt12',label:'Hasta $12 mil MXN / mes + IVA'}, {id:'c_12_20',label:'$12–20 mil MXN / mes + IVA'},
-      {id:'c_21_32',label:'$21–32 mil MXN / mes + IVA'}, {id:'c_33_50',label:'$33–50 mil MXN / mes + IVA'},
-      {id:'c_gt50',label:'Más de $50 mil MXN / mes + IVA'}, {id:'unknown',label:'Necesito ver primero qué conviene hacer'}
+      {id:'c_21_32',label:'$21–32 mil MXN / mes + IVA'}, {id:'c_gt32',label:'Más de $32 mil MXN / mes + IVA'},
+      {id:'unknown',label:'Necesito ver primero qué conviene hacer'}
     ];
     if(key==='autoridad')return [
       {id:'a_lt25',label:'Hasta $25 mil MXN / implementación + IVA'}, {id:'a_25_45',label:'$25–45 mil MXN / implementación + IVA'},
-      {id:'a_46_80',label:'$46–80 mil MXN / implementación + IVA'}, {id:'a_81_120',label:'$81–120 mil MXN / implementación + IVA'},
-      {id:'a_gt120',label:'Más de $120 mil MXN / implementación + IVA'}, {id:'unknown',label:'Necesito ver primero qué conviene hacer'}
+      {id:'a_46_80',label:'$46–80 mil MXN / implementación + IVA'}, {id:'a_gt80',label:'Más de $80 mil MXN / implementación + IVA'},
+      {id:'unknown',label:'Necesito ver primero qué conviene hacer'}
     ];
     return [
-      {id:'m_lt30',label:'Hasta $35 mil MXN / inicio + IVA'}, {id:'m_30_60',label:'$35–60 mil MXN / inicio + IVA'},
-      {id:'m_61_100',label:'$61–95 mil MXN / inicio + IVA'}, {id:'m_101_150',label:'$96–150 mil MXN / inicio + IVA'},
-      {id:'m_gt150',label:'Más de $150 mil MXN / inicio + IVA'}, {id:'unknown',label:'Necesito ver primero qué conviene hacer'}
+      {id:'m_lt35',label:'Hasta $35 mil MXN / inicio + IVA'}, {id:'m_35_60',label:'$35–60 mil MXN / inicio + IVA'},
+      {id:'m_61_95',label:'$61–95 mil MXN / inicio + IVA'}, {id:'m_gt95',label:'Más de $95 mil MXN / inicio + IVA'},
+      {id:'unknown',label:'Necesito ver primero qué conviene hacer'}
     ];
   }
   function budgetTitle(route,state){
@@ -186,12 +155,12 @@
       var desired=optionLabelById(BRAND_QUESTIONS[0],state.desired,state).toLowerCase();
       return 'Hasta aquí entendemos que buscas '+desired+' y que el principal freno es: '+brandProblem(state).text.toLowerCase()+'. La inversión solo ajustará la profundidad de la primera etapa.';
     }
-    var outcome=optionLabelById(CONTENT_QUESTIONS[2],state.outcome,state).toLowerCase();
-    var route=optionLabelById(CONTENT_QUESTIONS[3],state.commercialRoute,state).toLowerCase();
-    return 'Hasta aquí entendemos que el principal freno es '+contentProblem(state).text.toLowerCase()+', que buscas '+outcome+' y que te interesa explorar '+route+'.';
+    var outcome=optionLabelById(CONTENT_QUESTIONS[1],state.outcome,state).toLowerCase();
+    var route={contenido:'contenido para redes',autoridad:'sitio y búsqueda',motor:'contenido y sitio conectados'}[preliminaryContentKey(state)];
+    return 'Hasta aquí entendemos que el principal freno es '+contentProblem(state).text.toLowerCase()+', que buscas '+outcome+' y que la ruta preliminar es '+route+'.';
   }
   function budgetRank(value){
-    return {c_lt12:0,c_12_20:1,c_21_32:2,c_33_50:3,c_gt50:4,a_lt25:0,a_25_45:1,a_46_80:2,a_81_120:3,a_gt120:4,m_lt30:0,m_30_60:1,m_61_100:2,m_101_150:3,m_gt150:4,b_lt18:0,b_18_30:1,b_31_60:2,b_61_120:3,b_gt120:4,unknown:-1}[value];
+    return {c_lt12:0,c_12_20:1,c_21_32:2,c_gt32:3,a_lt25:0,a_25_45:1,a_46_80:2,a_gt80:3,m_lt35:0,m_35_60:1,m_61_95:2,m_gt95:3,b_lt18:0,b_18_30:1,b_31_60:2,b_gt60:3,unknown:-1}[value];
   }
 
   function recommendContent(a){
@@ -209,8 +178,7 @@
     var reasons=[];
     if(content)reasons.push('Tus respuestas muestran que necesitas mejores temas, mayor constancia o un siguiente paso más claro para vender.');
     if(search)reasons.push('También hay un problema en el sitio o es difícil encontrar y entender tu negocio antes de decidir.');
-    if(a.proof&&a.proof.indexOf('none')>=0)reasons.push('La producción deberá incluir una fase inicial para documentar evidencia y materiales reales.');
-    if(a.timing==='exploring')reasons.push('El momento todavía es exploratorio; el PDF debe ayudarte a decidir sin forzar una compra.');
+    if(a.proof==='none')reasons.push('La producción deberá incluir una fase inicial para documentar evidencia y materiales reales.');
     return {route:'contenido',key:key,name:catalog[key].name,band:catalog[key].band,desc:catalog[key].desc,gap:gap,start:start,reasons:reasons};
   }
 
@@ -218,11 +186,10 @@
     var score=0;
     var problem=brandProblem(a).id;
     if(['complete','identity','old','wrongAudience','channels','manual'].indexOf(problem)>=0)score+=2; else score+=1;
-    if(a.users==='providers')score+=1; else if(a.users==='scale')score+=2;
-    if((a.applications||[]).length>=4)score+=2; else if((a.applications||[]).length>=2)score+=1;
+    if((a.applications||[]).length>=2)score+=2; else score+=1;
     if(a.autonomy==='independent')score+=1;
     if(['launch','reposition'].indexOf(a.desired)>=0)score+=1;
-    var need=score<=3?'essential':(score<=6?'complete':'extended');
+    var need=score<=2?'essential':(score<=4?'complete':'extended');
     var catalog={
       essential:{name:'Sistema esencial',band:'$18–30 mil MXN / primera etapa + IVA',desc:'Claridad, núcleo visual y las reglas mínimas para dejar de improvisar.'},
       complete:{name:'Sistema de marca completo',band:'$31–60 mil MXN / primera etapa + IVA',desc:'Mensaje, identidad y usos prioritarios para que la marca sea consistente.'},
@@ -236,7 +203,7 @@
     var reasons=[];
     if(['launch','reposition'].indexOf(a.desired)>=0)reasons.push('El momento del negocio exige una base que pueda aplicarse sin improvisar.');
     if(['channels','team','providers','templates','manual'].indexOf(problem)>=0)reasons.push('Los lugares donde aparece la marca necesitan reglas y recursos comunes.');
-    if(['providers','scale'].indexOf(a.users)>=0)reasons.push('Varias personas o proveedores necesitan una fuente clara para aplicar la marca.');
+    if(a.autonomy==='shared'||a.autonomy==='independent')reasons.push('El equipo necesita una fuente clara para aplicar la marca sin reinterpretarla cada vez.');
     if(a.autonomy==='independent')reasons.push('La autonomía exige archivos editables, plantillas, documentación y transferencia de uso.');
     return {route:'branding',key:need,name:catalog[need].name,band:catalog[need].band,desc:catalog[need].desc,gap:gap||a.budgetBand==='b_lt18',start:start,reasons:reasons,score:score};
   }
@@ -279,7 +246,6 @@
     if(!clean(state.name))errors.name='Escribe tu nombre.';
     if(!clean(state.business))errors.business='Escribe el nombre de tu negocio o marca.';
     if(!clean(state.businessAudience))errors.businessAudience='Cuéntanos brevemente qué vendes y a quién quieres llegar.';
-    if(!clean(state.timing))errors.timing='Elige cuándo te gustaría empezar.';
     if(!clean(state.email))errors.email='Escribe un correo para enviarte el diagnóstico.';
     else if(!validEmail(state.email))errors.email='Revisa el correo. Ejemplo: nombre@empresa.com';
     if(clean(state.url)&&!validWebUrl(state.url))errors.url='Escribe una dirección completa que empiece con https:// o deja este campo vacío.';
@@ -319,7 +285,6 @@
     [].slice.call(document.querySelectorAll('[data-diagnostic-entry]')).forEach(function(link){
       link.addEventListener('click',function(){
         self.state.entry=link.getAttribute('data-diagnostic-entry')||'';
-        if(self.route==='contenido'&&['contenido','autoridad','motor'].indexOf(self.state.entry)>=0)self.state.commercialRoute=self.state.entry;
         self.persist();
       });
     });
@@ -354,7 +319,7 @@
     if(hint)h+='<p class="dv-step-hint">'+escapeHtml(hint)+'</p>';
     h+=this.fieldHtml(q);
     h+='<div class="dv-form-nav">'+(this.index?'<button type="button" class="btn dv-back">← Atrás</button>':'<span></span>')+'<button type="button" class="btn solid dv-next"'+(this.hasAnswer(q)?'':' disabled')+'>'+(q.type==='contact'?'Enviar y ver recomendación':'Continuar')+' <span class="ar">→</span></button></div>';
-    if(this.index===0)h+='<p class="dv-form-note">4–6 minutos · revisión humana · confirmación de encaje en hasta 2 días hábiles</p>';
+    if(this.index===0)h+='<p class="dv-form-note">3–4 minutos · revisión humana · confirmación de encaje en hasta 2 días hábiles</p>';
     h+='</div></div>';
     this.el.innerHTML=h;
     this.bind(q);
@@ -375,7 +340,6 @@
     }else if(q.type==='contact'){
       h+='<div class="dv-contact-grid"><label data-field-wrap="name">Tu nombre <span>obligatorio</span><input data-field="name" autocomplete="name" maxlength="160" required value="'+escapeHtml(this.state.name||'')+'"><small class="dv-field-error" data-error-for="name" aria-live="polite" hidden></small></label><label data-field-wrap="business">Negocio o marca <span>obligatorio</span><input data-field="business" autocomplete="organization" maxlength="200" required value="'+escapeHtml(this.state.business||'')+'"><small class="dv-field-error" data-error-for="business" aria-live="polite" hidden></small></label><label data-field-wrap="email">Correo de trabajo <span>obligatorio</span><input data-field="email" type="email" autocomplete="email" maxlength="320" required value="'+escapeHtml(this.state.email||'')+'"><small class="dv-field-error" data-error-for="email" aria-live="polite" hidden></small></label><label>WhatsApp <span>opcional</span><input data-field="whatsapp" autocomplete="tel" maxlength="80" value="'+escapeHtml(this.state.whatsapp||'')+'"></label></div>';
       h+='<label class="dv-contact-full" data-field-wrap="businessAudience">¿Qué vendes y a quién quieres llegar? <span>obligatorio</span><textarea data-field="businessAudience" rows="3" maxlength="600" required placeholder="Ej. Ayudamos a restaurantes con varias sucursales a controlar costos.">'+escapeHtml(this.state.businessAudience||'')+'</textarea><small class="dv-field-error" data-error-for="businessAudience" aria-live="polite" hidden></small></label>';
-      h+='<label class="dv-contact-full" data-field-wrap="timing">¿Cuándo te gustaría empezar? <span>obligatorio</span><select data-field="timing" required><option value="">Selecciona una opción</option><option value="now"'+(this.state.timing==='now'?' selected':'')+'>En las próximas semanas</option><option value="quarter"'+(this.state.timing==='quarter'?' selected':'')+'>En los próximos tres meses</option><option value="exploring"'+(this.state.timing==='exploring'?' selected':'')+'>Aún estoy explorando</option></select><small class="dv-field-error" data-error-for="timing" aria-live="polite" hidden></small></label>';
       h+='<label class="dv-contact-full" data-field-wrap="url">Sitio o red principal <span>opcional</span><input data-field="url" type="url" inputmode="url" placeholder="https://" value="'+escapeHtml(this.state.url||'')+'"><small class="dv-field-help">Déjalo vacío si todavía no tienes sitio web o una red principal.</small><small class="dv-field-error" data-error-for="url" aria-live="polite" hidden></small></label>';
       h+='<label class="dv-honeypot" aria-hidden="true">No completar<input data-field="websiteConfirm" tabindex="-1" autocomplete="off" value=""></label>';
       h+='<label class="dv-consent"><input data-field="consent" type="checkbox"'+(this.state.consent?' checked':'')+'><span>Acepto que Don Ventas use esta información para preparar el diagnóstico y contactarme. Leí el <a href="15_LEGAL/Aviso de Privacidad.html" target="_blank" rel="noopener">Aviso de Privacidad</a>.</span></label>';
@@ -403,7 +367,7 @@
           else if(selected&&selected.exclusive)values=[value];
           else{
             values=values.filter(function(current){return !options.some(function(option){return option.id===current&&option.exclusive;});});
-            values.push(value);
+            if(!q.maxSelections||values.length<q.maxSelections)values.push(value);
           }
           self.state[q.id]=values;self.render();self.persist();
         }else{
@@ -438,7 +402,7 @@
   };
   Diagnostic.prototype.showContactErrors=function(){
     var self=this,errors=contactErrors(this.state);
-    ['name','business','businessAudience','timing','email','url','consent','spam'].forEach(function(fieldName){self.setFieldError(fieldName,errors[fieldName]||'');});
+    ['name','business','businessAudience','email','url','consent','spam'].forEach(function(fieldName){self.setFieldError(fieldName,errors[fieldName]||'');});
     return errors;
   };
   Diagnostic.prototype.resultMarkup=function(result,delivery,error){
@@ -479,7 +443,7 @@
     if(!this.state.submissionKey)this.state.submissionKey=(root.crypto&&root.crypto.randomUUID)?root.crypto.randomUUID():('dv-'+Date.now()+'-'+Math.random().toString(16).slice(2));
     var body={
       nombre:this.state.name||'',correo:this.state.email||'',negocio:this.state.business||'',whatsapp:this.state.whatsapp||'',
-      reto:summary+' | Negocio y cliente: '+(this.state.businessAudience||'')+' | Inicio: '+(this.state.timing||'')+(this.state.url?' | URL: '+this.state.url:''),paquete:result.name+' · '+result.band,consent:!!this.state.consent,
+      reto:summary+' | Negocio y cliente: '+(this.state.businessAudience||'')+(this.state.url?' | URL: '+this.state.url:''),paquete:result.name+' · '+result.band,consent:!!this.state.consent,
       origen:'landing-'+this.route+'-'+((new URLSearchParams(location.search)).get('utm_source')||'directo'),
       submission_key:this.state.submissionKey
     };

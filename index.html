@@ -31,7 +31,7 @@
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="stylesheet" href="styles.css?v=20261001-2">
-<link rel="stylesheet" href="b10-editorial.css?v=20261001-2">
+<link rel="stylesheet" href="b10-editorial.css?v=20261001-3">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -157,12 +157,13 @@
       <p class="b10-hero-note">Solicitud · revisión humana · oportunidades · ruta recomendada</p>
     </div>
     <div class="b10-hero-visual">
-      <div class="b10-motion-stage" role="img" aria-label="Símbolo tridimensional estático de Don Ventas, sin rotación">
+      <div class="b10-motion-stage" role="group" aria-label="Símbolo tridimensional de Don Ventas con una entrada editorial breve">
         <div class="b10-mark-viewport" data-b10-hero-mark>
           <img src="assets/b10-motion/donventas-symbol-b-reverse.svg" alt="Símbolo B de Don Ventas">
           <canvas aria-hidden="true"></canvas>
         </div>
-        <small data-b10-motion-status aria-live="polite">Vista estática · cargando modelo 3D</small>
+        <button class="b10-motion-replay" type="button" data-b10-replay hidden>Reproducir entrada ↻</button>
+        <small data-b10-motion-status aria-live="polite">Cargando modelo 3D</small>
       </div>
       <a class="b10-diagnostic-note" href="#contacto" data-diagnostic-entry="contenido">
         <b>Diagnóstico de contenido</b>
@@ -226,8 +227,8 @@
 
     <div class="b10-method reveal" id="metodo">
       <div class="b10-method-visual">
-        <img src="assets/b10-motion/donventas-symbol-b-pilot-preview.png" alt="Vista estática del símbolo tridimensional de Don Ventas" loading="lazy" decoding="async">
-        <span>Representación 3D estática · el logo plano sigue siendo el canon</span>
+        <img src="assets/b10-editorial/diagnostico-sistema-don-ventas.webp" alt="Escena editorial de Don Ventas con el diagnóstico y el sistema de trabajo" loading="lazy" decoding="async">
+        <span>Escena conceptual · muestra el sistema, no un resultado de cliente</span>
       </div>
       <div class="b10-method-copy">
         <div class="b10-kicker">03 / Cómo trabajamos</div>
@@ -357,9 +358,9 @@
         <p>Estos rangos ayudan a saber si estamos en una etapa compatible. No son una cotización: la propuesta depende del problema, los materiales disponibles y la frecuencia.</p>
       </div>
       <div class="b10-pricing-grid">
-        <article><span>Contenido</span><h3>$12–32 mil</h3><p>MXN por mes + IVA</p><small>Estrategia, temas, textos, diseño y revisión mensual.</small><a href="#contacto" data-offer="contenido" data-diagnostic-entry="contenido">Solicitar diagnóstico ↗</a></article>
-        <article><span>Sitio y búsqueda</span><h3>$25–80 mil</h3><p>MXN por implementación + IVA</p><small>Sitio editorial, estructura para buscadores y contenido base.</small><a href="#contacto" data-offer="autoridad" data-diagnostic-entry="autoridad">Solicitar diagnóstico ↗</a></article>
-        <article><span>Sistema combinado</span><h3>$35–95 mil</h3><p>MXN de inicio + IVA</p><small>Contenido y sitio por etapas; puede sumar operación mensual según alcance.</small><a href="#contacto" data-offer="motor" data-diagnostic-entry="motor">Solicitar diagnóstico ↗</a></article>
+        <article><span>Contenido</span><h3>$12–32 mil <small>MXN</small></h3><p>por mes + IVA</p><small>Estrategia, temas, textos, diseño y revisión mensual.</small><a href="#contacto" data-offer="contenido" data-diagnostic-entry="contenido">Solicitar diagnóstico ↗</a></article>
+        <article><span>Sitio y búsqueda</span><h3>$25–80 mil <small>MXN</small></h3><p>por implementación + IVA</p><small>Sitio editorial, estructura para buscadores y contenido base.</small><a href="#contacto" data-offer="autoridad" data-diagnostic-entry="autoridad">Solicitar diagnóstico ↗</a></article>
+        <article><span>Sistema combinado</span><h3>$35–95 mil <small>MXN</small></h3><p>de inicio + IVA</p><small>Contenido y sitio por etapas; puede sumar operación mensual según alcance.</small><a href="#contacto" data-offer="motor" data-diagnostic-entry="motor">Solicitar diagnóstico ↗</a></article>
       </div>
       <p class="b10-pricing-note">No prometemos ventas, primeras posiciones en Google ni publicaciones virales. Sí definimos entregables, responsables y una forma concreta de aprender de los resultados.</p>
     </div>
@@ -392,7 +393,7 @@
         <li>si necesitas redes, un sitio para buscadores o ambos;</li>
         <li>una propuesta con alcance y frecuencia.</li>
       </ul>
-      <p class="qualification-note">Completarlo toma 4–6 minutos. Confirmamos la revisión en hasta dos días hábiles. Si existe encaje e información suficiente, recibirás el diagnóstico en PDF en 3–5 días hábiles. No es una promesa automática de entrega, ventas ni posición en Google.</p>
+      <p class="qualification-note">Completarlo toma 3–4 minutos. Confirmamos la revisión en hasta dos días hábiles. Si existe encaje e información suficiente, recibirás el diagnóstico en PDF en 3–5 días hábiles. No es una promesa automática de entrega, ventas ni posición en Google.</p>
     </div>
     <div class="diagnostic-embed reveal d2" data-dv-diagnostic data-route="contenido" data-entry="contenido"></div>
   </div>
@@ -426,9 +427,9 @@
 </div>
 
 <!-- Scripts del sitio. No se instala software de grabación de sesiones. -->
-<script defer src="hero-mark-3d-static.js?v=20261001-2"></script>
+<script defer src="hero-mark-3d.js?v=20261001-3"></script>
 <script defer src="app.js?v=20261001-2"></script>
-<script defer src="diagnostico-v2.js?v=20261001-2"></script>
+<script defer src="diagnostico-v2.js?v=20261001-3"></script>
 <script defer src="/_vercel/insights/script.js"></script>
 
 </body>
