@@ -31,8 +31,9 @@ el problema actual y el cambio que quiere lograr. El formulario infiere una ruta
 sin obligarlo a escoger un paquete y después presenta una sola pregunta de inversión, con
 un máximo de cinco opciones, rangos abreviados, periodo e indicación de que no incluyen IVA.
 Las mismas respuestas producen la misma recomendación preliminar y una persona revisa cada
-solicitud. Cuando existe encaje e información suficiente, Don Ventas entrega un diagnóstico
-breve en PDF en 3–5 días hábiles; no es una entrega automática para todos los envíos.
+solicitud. Don Ventas responde de forma humana en hasta dos días hábiles: por WhatsApp cuando
+la persona deja su número o por correo en los demás casos. El PDF de una página se prepara solo
+cuando ayuda a definir o formalizar el siguiente paso; no es una entrega automática.
 
 Los precios no aparecen en la primera explicación de la oferta. Después de mostrar casos,
 método y sistema de trabajo, el sitio ofrece una sección de inversión orientativa: contenido

@@ -21,7 +21,9 @@ El formulario de contenido queda en cinco pasos y el de sistema de marca en seis
 
 ## Promesa operativa
 
-La confirmación del formulario es inmediata. Don Ventas revisa el caso y confirma encaje en un máximo de dos días hábiles. El diagnóstico en PDF se ofrece únicamente a casos calificados y se entrega en tres a cinco días hábiles; no se promete automáticamente a todo envío.
+La confirmación del formulario es inmediata. Don Ventas revisa el caso y responde en un máximo de dos días hábiles. Si la persona deja WhatsApp, Arturo puede compartir personalmente un diagnóstico breve e iniciar la conversación por ese canal; en caso contrario, se usa correo. El PDF de una página se reserva para oportunidades en las que ayude a definir o formalizar el siguiente paso y no se promete automáticamente a todo envío.
+
+Antes de enviar, el formulario presenta un resumen compacto y editable del problema, el cambio buscado, la ruta preliminar y la inversión considerada. La analítica registra cada paso visto, cada paso completado y el punto de abandono para simplificar el flujo con evidencia sin instalar grabación de sesiones.
 
 ## Símbolo 3D
 

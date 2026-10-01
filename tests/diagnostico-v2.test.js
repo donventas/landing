@@ -177,6 +177,48 @@ test('keeps the simplified branding route deterministic', () => {
   assert.match(result.band, /MXN \/ primera etapa \+ IVA/);
 });
 
+test('builds a compact editable review before contact', () => {
+  const contentReview = diagnostic.reviewItems('contenido', {
+    salesProblem: 'noInquiries',
+    outcome: 'orders',
+    entry: 'contenido',
+    budgetBand: 'c_12_20',
+    proof: 'cases'
+  });
+  assert.deepEqual(contentReview.map(item => item.label), ['Problema principal', 'Cambio buscado', 'Ruta preliminar', 'Inversión considerada']);
+  assert.match(contentReview[2].value, /Contenido para atraer/);
+  assert.match(contentReview[3].value, /\$12–20 mil MXN/);
+  const source = fs.readFileSync(path.join(__dirname, '..', 'diagnostico-v2.js'), 'utf8');
+  assert.match(source, /data-edit-step/);
+  assert.match(source, /Revisa lo que entendimos/);
+});
+
+test('measures viewed, completed and abandoned diagnostic steps without session replay', () => {
+  const source = fs.readFileSync(path.join(__dirname, '..', 'diagnostico-v2.js'), 'utf8');
+  assert.match(source, /diagnostic_step_viewed/);
+  assert.match(source, /diagnostic_step_completed/);
+  assert.match(source, /diagnostic_abandoned/);
+  assert.match(source, /step_index/);
+  assert.match(source, /total_steps/);
+  assert.doesNotMatch(source, /session.?replay/i);
+});
+
+test('uses human WhatsApp follow-up and reserves the PDF for useful qualified cases', () => {
+  const files = ['index.html', 'branding.html', 'diagnostico-v2.js', 'llms.txt'];
+  const source = files.map(file => fs.readFileSync(path.join(__dirname, '..', file), 'utf8')).join('\n');
+  assert.match(source, /WhatsApp/);
+  assert.match(source, /PDF de una página/);
+  assert.doesNotMatch(source, /PDF (?:breve )?(?:en|se ofrece.*en) 3[–-]5 días/i);
+});
+
+test('keeps the rotating symbol compact inside the mobile hero scene', () => {
+  const editorial = fs.readFileSync(path.join(__dirname, '..', 'b10-editorial.css'), 'utf8');
+  const mobile = editorial.slice(editorial.indexOf('@media(max-width:470px)'), editorial.indexOf('@media(prefers-reduced-motion:reduce)'));
+  assert.match(mobile, /\.b10-hero\{padding:94px 0 44px\}/);
+  assert.match(mobile, /\.b10-motion-stage\{min-height:205px\}/);
+  assert.match(mobile, /\.b10-mark-viewport img\{width:min\(58%,220px\)/);
+});
+
 test('removes the redundant timing question and keeps period plus VAT in recommendations', () => {
   const source = fs.readFileSync(path.join(__dirname, '..', 'diagnostico-v2.js'), 'utf8');
   assert.equal((source.match(/data-field="timing"/g) || []).length, 0);
@@ -201,7 +243,7 @@ test('keeps every local landing asset and page link resolvable', () => {
 test('keeps only one budget field across the diagnostic source', () => {
   const source = fs.readFileSync(path.join(__dirname, '..', 'diagnostico-v2.js'), 'utf8');
   assert.doesNotMatch(source, /id:'(?:monthlyBudget|setupBudget|projectBudget)'/);
-  assert.equal((source.match(/id:'budgetBand'/g) || []).length, 2);
+  assert.equal((source.match(/\{id:'budgetBand',type:/g) || []).length, 2);
 });
 
 test('uses the publishable key as apikey instead of a bearer token', () => {
