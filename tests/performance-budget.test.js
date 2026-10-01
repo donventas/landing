@@ -58,6 +58,7 @@ test('loads secondary behavior progressively and keeps accessible fallbacks', ()
   assert.match(hero, /Vista estática · SVG canónico/);
   assert.match(hero, /prefers-reduced-motion: reduce/);
   assert.match(pages, /hero-mark-loader\.js/);
+  assert.match(read('index.html'), /hero-mark-loader\.js\?v=20261001-2/);
   assert.doesNotMatch(pages, /<script defer src="hero-mark-3d\.js/);
   assert.match(heroLoader, /setTimeout[\s\S]*7000/);
   assert.match(heroLoader, /requestIdleCallback/);
