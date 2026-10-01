@@ -12,58 +12,39 @@
   };
 
   var CONTENT_QUESTIONS=[
-    {id:'outcome',type:'single',title:'¿Qué quieres lograr primero?',hint:'Elige el resultado que más importa en los próximos 90 días.',required:true,options:[
-      {id:'qualified',label:'Atraer personas que sí podrían comprar',desc:'Que lleguen personas con una necesidad real.'},
-      {id:'orders',label:'Generar más conversaciones o pedidos',desc:'Acercar el contenido a una acción comercial.'},
-      {id:'trust',label:'Construir confianza antes de la decisión',desc:'Explicar mejor por qué elegirte.'},
-      {id:'consistency',label:'Publicar con mayor consistencia',desc:'Dejar de empezar desde cero cada semana.'},
-      {id:'search',label:'Aparecer cuando buscan soluciones como la tuya',desc:'Ser encontrado en Google y en respuestas de herramientas de inteligencia artificial.'},
-      {id:'other',label:'Otro resultado',other:true}
-    ]},
-    {id:'salesProblem',type:'single',title:'¿Qué está impidiendo que más personas te contacten?',hint:'Elige el freno que más se parece a tu situación.',required:true,showIf:function(a){return ['qualified','orders','trust'].indexOf(a.outcome)>=0;},options:[
-      {id:'lowReach',label:'Pocas personas ven nuestro contenido'},
+    {id:'salesProblem',type:'single',title:'¿Dónde se atora hoy la decisión de tu cliente?',hint:'Empecemos por el problema que reconoces, no por elegir un paquete.',required:true,options:[
       {id:'noInquiries',label:'Nos ven, pero casi nadie pregunta o compra'},
-      {id:'unclearOffer',label:'No explicamos bien lo que vendemos'},
-      {id:'lowTrust',label:'Nuestro contenido no genera suficiente confianza'},
-      {id:'noNextStep',label:'No queda claro qué hacer después de vernos'},
+      {id:'notFound',label:'No nos encuentran las personas correctas'},
+      {id:'unclearOffer',label:'Nuestra oferta no se entiende rápido'},
+      {id:'lowTrust',label:'No generamos suficiente confianza'},
+      {id:'consistency',label:'Publicamos sin constancia o dirección'},
       {id:'site',label:'El sitio no ayuda a decidir o encontrarnos'},
       {id:'other',label:'Otro problema',other:true}
     ]},
-    {id:'consistencyProblem',type:'single',title:'¿Qué hace difícil publicar con constancia?',hint:'Elige el problema que más interrumpe el trabajo.',required:true,showIf:function(a){return a.outcome==='consistency';},options:[
-      {id:'ideas',label:'No sabemos qué publicar'},
-      {id:'time',label:'No tenemos tiempo para producirlo'},
-      {id:'generic',label:'El contenido termina viéndose genérico'},
-      {id:'approvals',label:'Las revisiones tardan demasiado'},
-      {id:'process',label:'No existe un proceso claro para publicar'},
-      {id:'other',label:'Otro problema',other:true}
+    {id:'impact',type:'single',title:'¿Qué efecto tiene eso en tu negocio?',hint:'No necesitas calcular dinero. Elige la consecuencia que más reconoces.',required:true,options:[
+      {id:'lost',label:'Perdemos oportunidades sin saber por qué'},
+      {id:'repeat',label:'Repetimos las mismas explicaciones'},
+      {id:'price',label:'La conversación se va solo al precio'},
+      {id:'misfit',label:'Llegan consultas poco alineadas'},
+      {id:'unknown',label:'Todavía no lo hemos medido'},
+      {id:'other',label:'Otro efecto',other:true}
     ]},
-    {id:'searchProblem',type:'single',title:'¿Qué sucede cuando alguien busca tu negocio o una solución como la tuya?',hint:'No necesitas conocer términos técnicos.',required:true,showIf:function(a){return a.outcome==='search';},options:[
-      {id:'noSite',label:'No tenemos sitio web'},
-      {id:'notFound',label:'Tenemos sitio, pero casi nadie lo encuentra'},
-      {id:'unclearSite',label:'El sitio no explica bien lo que ofrecemos'},
-      {id:'noLeads',label:'Recibimos visitas, pero pocos contactos'},
-      {id:'unknown',label:'No sabemos si el sitio está funcionando'},
-      {id:'other',label:'Otro problema',other:true}
+    {id:'outcome',type:'single',title:'Si esto mejora, ¿qué cambio te importaría más?',hint:'Piensa en los próximos 90 días. Es una prioridad a investigar, no una promesa de resultado.',required:true,options:[
+      {id:'qualified',label:'Atraer personas que sí podrían comprar'},
+      {id:'orders',label:'Generar más conversaciones o pedidos'},
+      {id:'trust',label:'Construir confianza antes de la decisión'},
+      {id:'consistency',label:'Publicar con mayor consistencia'},
+      {id:'search',label:'Aparecer cuando buscan soluciones como la nuestra'},
+      {id:'other',label:'Otro cambio',other:true}
     ]},
-    {id:'otherProblem',type:'text',title:'¿Qué problema te gustaría resolver?',hint:'Cuéntalo como se lo explicarías a una persona de confianza.',required:true,showIf:function(a){return a.outcome==='other';},placeholder:'Ej. Nos cuesta explicar por qué nuestro servicio vale lo que cuesta.'},
-    {id:'nextAction',type:'single',title:'Cuando alguien se interesa, ¿qué debería hacer después?',hint:'Esta acción nos ayuda a conectar el contenido con una venta real.',required:true,options:[
-      {id:'whatsapp',label:'Escribir por WhatsApp'},
-      {id:'quote',label:'Pedir una cotización'},
-      {id:'call',label:'Agendar una llamada o demostración'},
-      {id:'buy',label:'Comprar en línea'},
-      {id:'visit',label:'Visitar el negocio'},
-      {id:'other',label:'Otra acción',other:true}
+    {id:'commercialRoute',type:'single',title:'¿Qué ruta te gustaría explorar?',hint:'Puedes elegir una posibilidad. La recomendación final puede ser distinta después de la revisión.',required:true,options:[
+      {id:'contenido',label:'Contenido para redes',desc:'Publicar con dirección y acercar conversaciones.'},
+      {id:'autoridad',label:'Sitio y búsqueda',desc:'Ser encontrable y generar confianza al decidir.'},
+      {id:'motor',label:'Contenido + sitio',desc:'Conectar descubrimiento, explicación y decisión.'},
+      {id:'orientacion',label:'Necesito orientación',desc:'Aún no sé qué combinación conviene.'}
     ]},
-    {id:'attempted',type:'multi',title:'¿Qué han intentado para atraer clientes?',hint:'Puedes elegir varias opciones. No repetiremos una fórmula que ya sabes que no te funciona.',required:true,options:[
-      {id:'internal',label:'Publicar por nuestra cuenta'},
-      {id:'provider',label:'Trabajar con un freelancer o agencia'},
-      {id:'templates',label:'Usar plantillas o Canva'},
-      {id:'ai',label:'Generar contenido con inteligencia artificial'},
-      {id:'ads',label:'Pagar anuncios'},
-      {id:'none',label:'Todavía no hemos trabajado esto con constancia',exclusive:true},
-      {id:'other',label:'Otra cosa',other:true}
-    ]},
-    {id:'proof',type:'multi',title:'¿Qué podemos demostrar hoy sobre tu negocio?',hint:'No necesitas tener todo. Elegiremos el contenido a partir de evidencia real.',required:true,options:[
+    {id:'budgetBand',type:'single',title:function(a){return budgetTitle('contenido',a);},hint:function(a){return budgetHint('contenido',a);},context:function(a){return budgetContext('contenido',a);},required:true,options:function(a){return budgetOptions('contenido',a);}},
+    {id:'proof',type:'multi',title:'¿Qué podemos demostrar hoy sobre tu negocio?',hint:'Puedes elegir varias opciones. La confianza se construye con evidencia real.',required:true,options:[
       {id:'cases',label:'Resultados o casos de clientes'},
       {id:'reviews',label:'Testimonios o reseñas'},
       {id:'photos',label:'Fotografías o videos reales'},
@@ -72,14 +53,6 @@
       {id:'none',label:'Todavía tenemos poco documentado',exclusive:true},
       {id:'other',label:'Otra prueba',other:true}
     ]},
-    {id:'businessAudience',type:'text',title:'¿Qué vendes y a quién necesitas atraer?',hint:'Una respuesta breve es suficiente. Esto evita recomendar contenido genérico.',required:true,placeholder:'Ej. Ayudamos a restaurantes con varias sucursales a reducir desperdicio y controlar costos.'},
-    {id:'timing',type:'single',title:'¿Cuándo quieres empezar?',hint:'El plazo nos ayuda a ordenar la primera etapa.',required:true,options:[
-      {id:'now',label:'Lo antes posible'},
-      {id:'month',label:'Durante el próximo mes'},
-      {id:'quarter',label:'En dos o tres meses'},
-      {id:'exploring',label:'Solo estoy explorando por ahora'}
-    ]},
-    {id:'budgetBand',type:'single',title:function(a){return budgetTitle('contenido',a);},hint:function(a){return budgetHint('contenido',a);},context:function(a){return budgetContext('contenido',a);},required:true,options:function(a){return budgetOptions('contenido',a);}},
     contactQuestion('contenido')
   ];
 
@@ -154,7 +127,7 @@
   ];
 
   function contactQuestion(route){
-    return {id:'contact',type:'contact',title:'¿A dónde enviamos tu diagnóstico?',hint:route==='branding'?'Revisaremos tu sistema actual y prepararemos una recomendación de alcance.':'Revisaremos tu contenido, presencia y oportunidades antes de preparar el PDF.',required:true};
+    return {id:'contact',type:'contact',title:'¿A quién le damos seguimiento?',hint:route==='branding'?'Revisaremos tu sistema actual y prepararemos una recomendación de alcance.':'Cuéntanos qué vendes, a quién quieres llegar y dónde podemos responderte. La revisión es humana.',required:true};
   }
 
   function questionOptions(question,state){return typeof question.options==='function'?question.options(state):question.options||[];}
@@ -164,10 +137,7 @@
     return option?option.label:value;
   }
   function contentProblem(a){
-    if(['qualified','orders','trust'].indexOf(a.outcome)>=0)return {id:a.salesProblem,text:optionLabelById(CONTENT_QUESTIONS[1],a.salesProblem,a)};
-    if(a.outcome==='consistency')return {id:a.consistencyProblem,text:optionLabelById(CONTENT_QUESTIONS[2],a.consistencyProblem,a)};
-    if(a.outcome==='search')return {id:a.searchProblem,text:optionLabelById(CONTENT_QUESTIONS[3],a.searchProblem,a)};
-    return {id:'other',text:a.otherProblem||'un problema que requiere revisión'};
+    return {id:a.salesProblem||'other',text:optionLabelById(CONTENT_QUESTIONS[0],a.salesProblem,a)||'un problema que requiere revisión'};
   }
   function brandProblem(a){
     var map={clarity:['clarityProblem',BRAND_QUESTIONS[1]],consistency:['systemProblem',BRAND_QUESTIONS[2]],autonomy:['systemProblem',BRAND_QUESTIONS[2]],launch:['launchProblem',BRAND_QUESTIONS[3]],reposition:['repositionProblem',BRAND_QUESTIONS[4]]};
@@ -177,32 +147,33 @@
   }
   function preliminaryContentKey(a){
     var problem=contentProblem(a).id;
-    var search=a.entry==='autoridad'||a.entry==='motor'||a.outcome==='search'||problem==='site'||['noSite','notFound','unclearSite','noLeads','unknown'].indexOf(problem)>=0;
-    var content=a.entry==='motor'||a.outcome!=='search'||['lowReach','noInquiries','unclearOffer','lowTrust','noNextStep','ideas','time','generic','approvals','process'].indexOf(problem)>=0;
+    if(['contenido','autoridad','motor'].indexOf(a.commercialRoute)>=0)return a.commercialRoute;
+    var search=a.entry==='autoridad'||a.entry==='motor'||a.outcome==='search'||problem==='site'||problem==='notFound';
+    var content=a.entry==='motor'||a.outcome!=='search'||['noInquiries','unclearOffer','lowTrust','consistency'].indexOf(problem)>=0;
     return search&&content?'motor':(search?'autoridad':'contenido');
   }
   function needsSearch(a){return preliminaryContentKey(a)!=='contenido';}
   function budgetOptions(route,state){
     if(route==='branding')return [
-      {id:'b_lt18',label:'Hasta 18 mil MXN'}, {id:'b_18_30',label:'18–30 mil MXN'},
-      {id:'b_31_60',label:'31–60 mil MXN'}, {id:'b_61_120',label:'61–120 mil MXN'},
-      {id:'b_gt120',label:'Más de 120 mil MXN'}, {id:'unknown',label:'Necesito conocer primero el alcance recomendado'}
+      {id:'b_lt18',label:'Hasta $18 mil MXN + IVA'}, {id:'b_18_30',label:'$18–30 mil MXN + IVA'},
+      {id:'b_31_60',label:'$31–60 mil MXN + IVA'}, {id:'b_61_120',label:'$61–120 mil MXN + IVA'},
+      {id:'b_gt120',label:'Más de $120 mil MXN + IVA'}, {id:'unknown',label:'Necesito conocer primero el alcance recomendado'}
     ];
     var key=preliminaryContentKey(state);
     if(key==='contenido')return [
-      {id:'c_lt12',label:'Hasta 12 mil MXN al mes'}, {id:'c_12_20',label:'12–20 mil MXN al mes'},
-      {id:'c_21_32',label:'21–32 mil MXN al mes'}, {id:'c_33_50',label:'33–50 mil MXN al mes'},
-      {id:'c_gt50',label:'Más de 50 mil MXN al mes'}, {id:'unknown',label:'Necesito ver primero qué conviene hacer'}
+      {id:'c_lt12',label:'Hasta $12 mil MXN / mes + IVA'}, {id:'c_12_20',label:'$12–20 mil MXN / mes + IVA'},
+      {id:'c_21_32',label:'$21–32 mil MXN / mes + IVA'}, {id:'c_33_50',label:'$33–50 mil MXN / mes + IVA'},
+      {id:'c_gt50',label:'Más de $50 mil MXN / mes + IVA'}, {id:'unknown',label:'Necesito ver primero qué conviene hacer'}
     ];
     if(key==='autoridad')return [
-      {id:'a_lt25',label:'Hasta 25 mil MXN'}, {id:'a_25_45',label:'25–45 mil MXN'},
-      {id:'a_46_80',label:'46–80 mil MXN'}, {id:'a_81_120',label:'81–120 mil MXN'},
-      {id:'a_gt120',label:'Más de 120 mil MXN'}, {id:'unknown',label:'Necesito ver primero qué conviene hacer'}
+      {id:'a_lt25',label:'Hasta $25 mil MXN / implementación + IVA'}, {id:'a_25_45',label:'$25–45 mil MXN / implementación + IVA'},
+      {id:'a_46_80',label:'$46–80 mil MXN / implementación + IVA'}, {id:'a_81_120',label:'$81–120 mil MXN / implementación + IVA'},
+      {id:'a_gt120',label:'Más de $120 mil MXN / implementación + IVA'}, {id:'unknown',label:'Necesito ver primero qué conviene hacer'}
     ];
     return [
-      {id:'m_lt30',label:'Hasta 30 mil MXN'}, {id:'m_30_60',label:'30–60 mil MXN'},
-      {id:'m_61_100',label:'61–100 mil MXN'}, {id:'m_101_150',label:'101–150 mil MXN'},
-      {id:'m_gt150',label:'Más de 150 mil MXN'}, {id:'unknown',label:'Necesito ver primero qué conviene hacer'}
+      {id:'m_lt30',label:'Hasta $35 mil MXN / inicio + IVA'}, {id:'m_30_60',label:'$35–60 mil MXN / inicio + IVA'},
+      {id:'m_61_100',label:'$61–95 mil MXN / inicio + IVA'}, {id:'m_101_150',label:'$96–150 mil MXN / inicio + IVA'},
+      {id:'m_gt150',label:'Más de $150 mil MXN / inicio + IVA'}, {id:'unknown',label:'Necesito ver primero qué conviene hacer'}
     ];
   }
   function budgetTitle(route,state){
@@ -214,16 +185,16 @@
   }
   function budgetHint(route,state){
     var basis=route==='contenido'&&preliminaryContentKey(state)==='contenido'?'Elige un rango mensual.':'Elige un rango para la primera etapa.';
-    return basis+' Lo usaremos para ajustar la profundidad de la recomendación; no es una cotización.';
+    return basis+' Los importes están abreviados, indican el periodo y no incluyen IVA. Sirven para ajustar la profundidad; no son una cotización.';
   }
   function budgetContext(route,state){
     if(route==='branding'){
       var desired=optionLabelById(BRAND_QUESTIONS[0],state.desired,state).toLowerCase();
       return 'Hasta aquí entendemos que buscas '+desired+' y que el principal freno es: '+brandProblem(state).text.toLowerCase()+'. La inversión solo ajustará la profundidad de la primera etapa.';
     }
-    var outcome=optionLabelById(CONTENT_QUESTIONS[0],state.outcome,state).toLowerCase();
-    var action=optionLabelById(CONTENT_QUESTIONS[5],state.nextAction,state).toLowerCase();
-    return 'Hasta aquí entendemos que buscas '+outcome+' y que hoy el principal freno es: '+contentProblem(state).text.toLowerCase()+'. El siguiente paso que quieres provocar es '+action+'.';
+    var outcome=optionLabelById(CONTENT_QUESTIONS[2],state.outcome,state).toLowerCase();
+    var route=optionLabelById(CONTENT_QUESTIONS[3],state.commercialRoute,state).toLowerCase();
+    return 'Hasta aquí entendemos que el principal freno es '+contentProblem(state).text.toLowerCase()+', que buscas '+outcome+' y que te interesa explorar '+route+'.';
   }
   function budgetRank(value){
     return {c_lt12:0,c_12_20:1,c_21_32:2,c_33_50:3,c_gt50:4,a_lt25:0,a_25_45:1,a_46_80:2,a_81_120:3,a_gt120:4,m_lt30:0,m_30_60:1,m_61_100:2,m_101_150:3,m_gt150:4,b_lt18:0,b_18_30:1,b_31_60:2,b_61_120:3,b_gt120:4,unknown:-1}[value];
@@ -232,9 +203,9 @@
   function recommendContent(a){
     var key=preliminaryContentKey(a),search=key!=='contenido',content=key!=='autoridad';
     var catalog={
-      contenido:{name:'Contenido para atraer posibles clientes',band:'12–32 mil MXN al mes',desc:'Temas, textos y diseños principales, con versiones para cada canal y revisión mensual.'},
-      autoridad:{name:'Sitio para que te encuentren y confíen',band:'25–80 mil MXN de inversión inicial',desc:'Un sitio claro, mejoras para buscadores y respuestas fáciles de entender para herramientas de inteligencia artificial.'},
-      motor:{name:'Contenido y sitio conectados por etapas',band:'Primera etapa según prioridad',desc:'Contenido, sitio y búsquedas conectados en un plan que empieza por el problema más importante.'}
+      contenido:{name:'Contenido para atraer posibles clientes',band:'$12–32 mil MXN / mes + IVA',desc:'Temas, textos y diseños principales, con versiones para cada canal y revisión mensual.'},
+      autoridad:{name:'Sitio para que te encuentren y confíen',band:'$25–80 mil MXN / implementación + IVA',desc:'Un sitio claro, mejoras para buscadores y respuestas fáciles de entender para herramientas de inteligencia artificial.'},
+      motor:{name:'Contenido y sitio conectados por etapas',band:'Desde $35 mil MXN / inicio + IVA',desc:'Contenido, sitio y búsquedas conectados en un plan que empieza por el problema más importante.'}
     };
     var capacity=budgetRank(a.budgetBand),gap=false,start='';
     if(key==='contenido'&&capacity===0){gap=true;start='La mejor forma de empezar es una intervención prioritaria y un plan para crecer después.';}
@@ -310,8 +281,11 @@
   }
   function contactErrors(state){
     var errors={};
+    if(clean(state.websiteConfirm))errors.spam='No pudimos validar el formulario. Actualiza la página e inténtalo de nuevo.';
     if(!clean(state.name))errors.name='Escribe tu nombre.';
     if(!clean(state.business))errors.business='Escribe el nombre de tu negocio o marca.';
+    if(!clean(state.businessAudience))errors.businessAudience='Cuéntanos brevemente qué vendes y a quién quieres llegar.';
+    if(!clean(state.timing))errors.timing='Elige cuándo te gustaría empezar.';
     if(!clean(state.email))errors.email='Escribe un correo para enviarte el diagnóstico.';
     else if(!validEmail(state.email))errors.email='Revisa el correo. Ejemplo: nombre@empresa.com';
     if(clean(state.url)&&!validWebUrl(state.url))errors.url='Escribe una dirección completa que empiece con https:// o deja este campo vacío.';
@@ -331,10 +305,11 @@
     var params=new URLSearchParams(location.search);
     this.route=(params.get('ruta')||el.getAttribute('data-route')||'contenido').toLowerCase();
     if(['contenido','branding'].indexOf(this.route)<0)this.route='contenido';
-    this.storageKey='dv-diagnostic-v3-'+this.route;
-    this.state={entry:params.get('entrada')||el.getAttribute('data-entry')||''};
+    this.storageKey='dv-diagnostic-v4-'+this.route;
+    this.state={entry:params.get('entrada')||el.getAttribute('data-entry')||'',startedAt:Date.now()};
     this.index=0;
     this.load();
+    if(!this.state.startedAt)this.state.startedAt=Date.now();
     this.render();
     this.bindEntryLinks();
   }
@@ -348,7 +323,11 @@
   Diagnostic.prototype.bindEntryLinks=function(){
     var self=this;
     [].slice.call(document.querySelectorAll('[data-diagnostic-entry]')).forEach(function(link){
-      link.addEventListener('click',function(){self.state.entry=link.getAttribute('data-diagnostic-entry')||'';self.persist();});
+      link.addEventListener('click',function(){
+        self.state.entry=link.getAttribute('data-diagnostic-entry')||'';
+        if(self.route==='contenido'&&['contenido','autoridad','motor'].indexOf(self.state.entry)>=0)self.state.commercialRoute=self.state.entry;
+        self.persist();
+      });
     });
   };
   Diagnostic.prototype.current=function(){
@@ -368,7 +347,7 @@
   Diagnostic.prototype.render=function(){
     var current=this.current(),q=current.q,list=current.list;
     if(!q)return;
-    var pendingBranch=(this.route==='contenido'&&!this.state.outcome)||(this.route==='branding'&&!this.state.desired);
+    var pendingBranch=this.route==='branding'&&!this.state.desired;
     var total=list.length+(pendingBranch?1:0);
     var progress=Math.round(((this.index+1)/total)*100);
     var routeLabel=this.route==='branding'?'Sistema de marca':'Contenido, sitio y buscadores';
@@ -381,7 +360,7 @@
     if(hint)h+='<p class="dv-step-hint">'+escapeHtml(hint)+'</p>';
     h+=this.fieldHtml(q);
     h+='<div class="dv-form-nav">'+(this.index?'<button type="button" class="btn dv-back">← Atrás</button>':'<span></span>')+'<button type="button" class="btn solid dv-next"'+(this.hasAnswer(q)?'':' disabled')+'>'+(q.type==='contact'?'Enviar y ver recomendación':'Continuar')+' <span class="ar">→</span></button></div>';
-    if(this.index===0)h+='<p class="dv-form-note">4–6 minutos · preguntas según tu situación · revisión humana en 3–5 días hábiles</p>';
+    if(this.index===0)h+='<p class="dv-form-note">4–6 minutos · revisión humana · confirmación de encaje en hasta 2 días hábiles</p>';
     h+='</div></div>';
     this.el.innerHTML=h;
     this.bind(q);
@@ -401,8 +380,12 @@
       h+='<label class="dv-textarea"><textarea rows="5" data-field="'+q.id+'" placeholder="'+escapeHtml(q.placeholder||'')+'">'+escapeHtml(this.state[q.id]||'')+'</textarea></label>';
     }else if(q.type==='contact'){
       h+='<div class="dv-contact-grid"><label data-field-wrap="name">Tu nombre <span>obligatorio</span><input data-field="name" autocomplete="name" maxlength="160" required value="'+escapeHtml(this.state.name||'')+'"><small class="dv-field-error" data-error-for="name" aria-live="polite" hidden></small></label><label data-field-wrap="business">Negocio o marca <span>obligatorio</span><input data-field="business" autocomplete="organization" maxlength="200" required value="'+escapeHtml(this.state.business||'')+'"><small class="dv-field-error" data-error-for="business" aria-live="polite" hidden></small></label><label data-field-wrap="email">Correo de trabajo <span>obligatorio</span><input data-field="email" type="email" autocomplete="email" maxlength="320" required value="'+escapeHtml(this.state.email||'')+'"><small class="dv-field-error" data-error-for="email" aria-live="polite" hidden></small></label><label>WhatsApp <span>opcional</span><input data-field="whatsapp" autocomplete="tel" maxlength="80" value="'+escapeHtml(this.state.whatsapp||'')+'"></label></div>';
+      h+='<label class="dv-contact-full" data-field-wrap="businessAudience">¿Qué vendes y a quién quieres llegar? <span>obligatorio</span><textarea data-field="businessAudience" rows="3" maxlength="600" required placeholder="Ej. Ayudamos a restaurantes con varias sucursales a controlar costos.">'+escapeHtml(this.state.businessAudience||'')+'</textarea><small class="dv-field-error" data-error-for="businessAudience" aria-live="polite" hidden></small></label>';
+      h+='<label class="dv-contact-full" data-field-wrap="timing">¿Cuándo te gustaría empezar? <span>obligatorio</span><select data-field="timing" required><option value="">Selecciona una opción</option><option value="now"'+(this.state.timing==='now'?' selected':'')+'>En las próximas semanas</option><option value="quarter"'+(this.state.timing==='quarter'?' selected':'')+'>En los próximos tres meses</option><option value="exploring"'+(this.state.timing==='exploring'?' selected':'')+'>Aún estoy explorando</option></select><small class="dv-field-error" data-error-for="timing" aria-live="polite" hidden></small></label>';
       h+='<label class="dv-contact-full" data-field-wrap="url">Sitio o red principal <span>opcional</span><input data-field="url" type="url" inputmode="url" placeholder="https://" value="'+escapeHtml(this.state.url||'')+'"><small class="dv-field-help">Déjalo vacío si todavía no tienes sitio web o una red principal.</small><small class="dv-field-error" data-error-for="url" aria-live="polite" hidden></small></label>';
+      h+='<label class="dv-honeypot" aria-hidden="true">No completar<input data-field="websiteConfirm" tabindex="-1" autocomplete="off" value=""></label>';
       h+='<label class="dv-consent"><input data-field="consent" type="checkbox"'+(this.state.consent?' checked':'')+'><span>Acepto que Don Ventas use esta información para preparar el diagnóstico y contactarme. Leí el <a href="15_LEGAL/Aviso de Privacidad.html" target="_blank" rel="noopener">Aviso de Privacidad</a>.</span></label>';
+      h+='<small class="dv-field-error" data-error-for="spam" aria-live="polite" hidden></small>';
       h+='<small class="dv-field-error dv-consent-error" data-error-for="consent" aria-live="polite" hidden></small>';
     }
     return h;
@@ -436,7 +419,7 @@
       };
     });
     [].slice.call(this.el.querySelectorAll('[data-field]')).forEach(function(field){
-      var event=field.type==='checkbox'?'change':'input';
+      var event=field.type==='checkbox'||field.tagName==='SELECT'?'change':'input';
       field.addEventListener(event,function(){
         self.captureFields();
         if(q.type==='contact'){
@@ -461,24 +444,25 @@
   };
   Diagnostic.prototype.showContactErrors=function(){
     var self=this,errors=contactErrors(this.state);
-    ['name','business','email','url','consent'].forEach(function(fieldName){self.setFieldError(fieldName,errors[fieldName]||'');});
+    ['name','business','businessAudience','timing','email','url','consent','spam'].forEach(function(fieldName){self.setFieldError(fieldName,errors[fieldName]||'');});
     return errors;
   };
   Diagnostic.prototype.resultMarkup=function(result,delivery,error){
     var reasons=result.reasons.length?'<ul>'+result.reasons.map(function(r){return '<li>'+escapeHtml(r)+'</li>';}).join('')+'</ul>':'';
     var deliveryMarkup=delivery==='error'
       ? '<div class="dv-result-next dv-result-error"><b>No pudimos registrar tus datos</b><p>'+escapeHtml(submitErrorMessage(error))+' Si el problema continúa, escríbenos a <a href="mailto:arturo.villagomez@donventas.mx">arturo.villagomez@donventas.mx</a>.</p><small>Referencia: DV-'+escapeHtml(error&&error.status?error.status:'CONEXION')+'</small><button type="button" class="btn dv-retry">Intentar de nuevo</button></div>'
-      : '<div class="dv-result-next"><b>Solicitud recibida</b><p>Revisaremos hechos e inferencias y, si existe encaje, te enviaremos por correo un diagnóstico en PDF con prioridades, alcance y siguiente paso. Plazo estimado: 3–5 días hábiles.</p></div>';
+      : '<div class="dv-result-next"><b>Solicitud recibida</b><p>La revisaremos de forma humana y te confirmaremos en hasta dos días hábiles si existe encaje e información suficiente. En ese caso, enviaremos por correo el diagnóstico en PDF en 3–5 días hábiles; si aún falta contexto, responderemos con el siguiente paso adecuado.</p></div>';
     return '<div class="dv-result"><span class="dv-result-kicker">Recomendación preliminar</span><h3>'+escapeHtml(result.name)+'</h3><p class="dv-result-band">'+escapeHtml(result.band)+'</p><p>'+escapeHtml(result.desc)+'</p>'+reasons+(result.start?'<div class="dv-result-plan"><b>Cómo empezar</b><p>'+escapeHtml(result.start)+'</p></div>':'')+deliveryMarkup+'<button type="button" class="btn dv-restart">Hacer otro diagnóstico</button></div>';
   };
   Diagnostic.prototype.bindResultActions=function(summary,result){
     var self=this,restart=this.el.querySelector('.dv-restart'),retry=this.el.querySelector('.dv-retry');
-    if(restart)restart.onclick=function(){self.state={entry:''};self.index=0;self.render();};
+    if(restart)restart.onclick=function(){self.state={entry:'',startedAt:Date.now()};self.index=0;self.render();};
     if(retry)retry.onclick=function(){self.submitLead(summary,result);};
   };
   Diagnostic.prototype.finish=function(){
     this.captureFields();
     if(Object.keys(this.showContactErrors()).length)return;
+    if(Date.now()-(this.state.startedAt||0)<3000){this.setFieldError('spam','Espera un momento antes de enviar. Tus respuestas siguen guardadas.');return;}
     var result=recommendation(this.route,this.state),summary=summarize(this.route,this.state,result);
     this.result=result;
     this.el.innerHTML='<div class="dv-result dv-result-loading" role="status" aria-live="polite"><span class="dv-result-kicker">Guardando diagnóstico</span><h3>Un momento…</h3><p>Estamos registrando tus respuestas de forma segura.</p></div>';
@@ -501,7 +485,7 @@
     if(!this.state.submissionKey)this.state.submissionKey=(root.crypto&&root.crypto.randomUUID)?root.crypto.randomUUID():('dv-'+Date.now()+'-'+Math.random().toString(16).slice(2));
     var body={
       nombre:this.state.name||'',correo:this.state.email||'',negocio:this.state.business||'',whatsapp:this.state.whatsapp||'',
-      reto:summary+(this.state.url?' | URL: '+this.state.url:''),paquete:result.name+' · '+result.band,consent:!!this.state.consent,
+      reto:summary+' | Negocio y cliente: '+(this.state.businessAudience||'')+' | Inicio: '+(this.state.timing||'')+(this.state.url?' | URL: '+this.state.url:''),paquete:result.name+' · '+result.band,consent:!!this.state.consent,
       origen:'landing-'+this.route+'-'+((new URLSearchParams(location.search)).get('utm_source')||'directo'),
       submission_key:this.state.submissionKey
     };

@@ -17,6 +17,8 @@ a:hover{color:var(--accent-2)}
 img{max-width:100%;display:block}
 ::selection{background:var(--accent);color:#fff}
 .wrap{max-width:var(--maxw);margin:0 auto;padding-inline:var(--gut)}
+.skip-link{position:fixed;z-index:300;left:16px;top:12px;transform:translateY(-180%);padding:10px 14px;border-radius:6px;background:var(--fg);color:var(--bg);font:700 13px/1.2 var(--mono);transition:transform .15s}
+.skip-link:focus{transform:translateY(0);color:var(--bg);outline:3px solid var(--accent);outline-offset:3px}
 
 /* ── stamped section label (Space Mono, extreme tracking) ── */
 .stamp{font-family:var(--display);text-transform:none;color:var(--fg);
@@ -535,8 +537,8 @@ section.band{padding:var(--gap) 0;position:relative}
 .dv-options.is-multi .dv-option i{border-radius:4px}
 .dv-option.is-selected i{border:4px solid var(--accent);background:#fff}
 .dv-other,.dv-textarea,.dv-contact-full{display:flex;flex-direction:column;gap:8px;margin-top:18px;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--fg-faint)}
-.dv-other textarea,.dv-textarea textarea,.dv-contact-grid input,.dv-contact-full input{width:100%;border:1px solid var(--line);border-radius:10px;background:#0E131B;color:var(--fg);padding:14px 15px;font-family:var(--display);font-size:15px;line-height:1.5;letter-spacing:0;text-transform:none}
-.dv-other textarea:focus,.dv-textarea textarea:focus,.dv-contact-grid input:focus,.dv-contact-full input:focus{outline:2px solid rgba(59,116,242,.3);border-color:var(--accent)}
+.dv-other textarea,.dv-textarea textarea,.dv-contact-grid input,.dv-contact-full input,.dv-contact-full textarea,.dv-contact-full select{width:100%;border:1px solid var(--line);border-radius:10px;background:#0E131B;color:var(--fg);padding:14px 15px;font-family:var(--display);font-size:15px;line-height:1.5;letter-spacing:0;text-transform:none}
+.dv-other textarea:focus,.dv-textarea textarea:focus,.dv-contact-grid input:focus,.dv-contact-full input:focus,.dv-contact-full textarea:focus,.dv-contact-full select:focus{outline:2px solid rgba(59,116,242,.3);border-color:var(--accent)}
 .dv-textarea{margin-top:28px}.dv-textarea textarea{min-height:150px;resize:vertical}
 .dv-contact-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:28px}
 .dv-contact-grid label{display:flex;flex-direction:column;gap:8px;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--fg-faint)}
@@ -544,7 +546,8 @@ section.band{padding:var(--gap) 0;position:relative}
 .dv-field-help{margin-top:2px;font-family:var(--display);font-size:12px!important;line-height:1.45;letter-spacing:0;text-transform:none;color:var(--fg-soft)!important}
 .dv-field-error{display:block;margin-top:2px;font-family:var(--display);font-size:12px!important;line-height:1.45;letter-spacing:0;text-transform:none;color:#ff9a9a!important}
 .dv-field-error[hidden]{display:none}
-.dv-contact-grid label.has-error input,.dv-contact-full.has-error input,[data-field][aria-invalid="true"]{border-color:#ff7c7c}
+.dv-contact-grid label.has-error input,.dv-contact-full.has-error input,.dv-contact-full.has-error textarea,.dv-contact-full.has-error select,[data-field][aria-invalid="true"]{border-color:#ff7c7c}
+.dv-honeypot{position:absolute!important;left:-10000px!important;width:1px!important;height:1px!important;overflow:hidden!important;opacity:0!important;pointer-events:none!important}
 .dv-consent-error{margin-top:8px}
 .dv-consent{display:flex;align-items:flex-start;gap:10px;margin-top:20px;font-size:12px;line-height:1.5;color:var(--fg-soft)}
 .dv-consent input{flex:none;margin-top:3px;accent-color:var(--accent)}
