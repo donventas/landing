@@ -247,15 +247,26 @@
       .catch(() => fallback(root, 'Vista estática · SVG canónico'));
   }
 
+  function queueLoad(root) {
+    if (root.dataset.renderQueued || root.dataset.renderRequested) return;
+    root.dataset.renderQueued = 'true';
+    const start = () => {
+      delete root.dataset.renderQueued;
+      load(root);
+    };
+    if ('requestIdleCallback' in window) window.requestIdleCallback(start, { timeout: 900 });
+    else window.setTimeout(start, 180);
+  }
+
   if ('IntersectionObserver' in window) {
     const loader = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           loader.unobserve(entry.target);
-          load(entry.target);
+          queueLoad(entry.target);
         }
       });
     }, { rootMargin: '180px 0px', threshold: 0.01 });
     roots.forEach((root) => loader.observe(root));
-  } else roots.forEach(load);
+  } else roots.forEach(queueLoad);
 })();

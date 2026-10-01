@@ -1,0 +1,99 @@
+{
+  "version": 1,
+  "generatedAt": "2026-10-01",
+  "generator": "sharp WebP quality 80; founder quality 82",
+  "policy": "The original editorial compositions remain in the repository. These derivatives only resize and encode them for responsive delivery.",
+  "rollbackCommit": "2a857147a1d9f55898d586d8eff7840881f00119",
+  "sets": [
+    {
+      "source": {"path": "portafolio/snaps/tamanova-dv-v4-01-editorial.png", "bytes": 991918, "sha256": "eb378dd8bba7f1b0bbeec21900874e185ea5a85972e7a4b27ee10880a2db0173"},
+      "derivatives": [
+        {"path": "portafolio/snaps/tamanova-dv-v4-01-editorial-640.webp", "width": 640, "height": 400, "bytes": 24414, "sha256": "d74e9794070fe463ea2f8fdad7b0a784d87449ab4c56aec11832bcc6f6c02154"},
+        {"path": "portafolio/snaps/tamanova-dv-v4-01-editorial-1280.webp", "width": 1280, "height": 800, "bytes": 77208, "sha256": "b9c3337a7efdaeee7f648216f1010f245e0c1e3daa75f8eec597e5a65607e796"}
+      ]
+    },
+    {
+      "source": {"path": "portafolio/snaps/tamanova-dv-v2-02-experiencia.png", "bytes": 150750, "sha256": "5397966bb0bdc938ba23dd386b4b4b01e3e0c3d98b8e70acdd7872bd5db88f5e"},
+      "derivatives": [
+        {"path": "portafolio/snaps/tamanova-dv-v2-02-experiencia-640.webp", "width": 640, "height": 400, "bytes": 4960, "sha256": "1655b01a93935ea69bcc5ed66631197d65bf1572166641b196e0da8c5a10dd50"},
+        {"path": "portafolio/snaps/tamanova-dv-v2-02-experiencia-1280.webp", "width": 1280, "height": 800, "bytes": 9680, "sha256": "8a9df28ab0416a13945170613e2407ee89f0289e41b6896f7db98e949fd74dae"}
+      ]
+    },
+    {
+      "source": {"path": "portafolio/snaps/tamanova-dv-v2-01-hospitalidad.png", "bytes": 3149482, "sha256": "5db3952e468b927667ef2fcbca97820814c406ed86c24fae16ab0486e0fd2986"},
+      "derivatives": [
+        {"path": "portafolio/snaps/tamanova-dv-v2-01-hospitalidad-640.webp", "width": 640, "height": 400, "bytes": 56522, "sha256": "0cbb2a70653f0d578dbede9ebac7ca21868d9b8e5d0dd1f9110e79fe02dddd0b"},
+        {"path": "portafolio/snaps/tamanova-dv-v2-01-hospitalidad-1280.webp", "width": 1280, "height": 800, "bytes": 149538, "sha256": "bf0aa92801ef433b5e900592d4a28d8e4c974936105c1ca77676a58c76915bc0"}
+      ]
+    },
+    {
+      "source": {"path": "portafolio/snaps/arturo-dv-v4-01-ensamble.webp", "bytes": 121770, "sha256": "da98c17992ab490d1dcdf052fb71b87a3154f9d781f0dbde19d3489a1a5aa35d"},
+      "derivatives": [
+        {"path": "portafolio/snaps/arturo-dv-v4-01-ensamble-640.webp", "width": 640, "height": 403, "bytes": 24536, "sha256": "4aeb89f0bb49d5c7051a6d0bb433c68afe61f5ee73948cb5fadc378d79eaab5b"},
+        {"path": "portafolio/snaps/arturo-dv-v4-01-ensamble-1280.webp", "width": 1280, "height": 806, "bytes": 58700, "sha256": "15ba6ed340849bb66161b7fea75ffb15c0f200ff5ee403857a81ae569d9a085a"}
+      ]
+    },
+    {
+      "source": {"path": "portafolio/snaps/02-arturo-merch.png", "bytes": 2757234, "sha256": "100ec06b01b547fc2eff5102d2cfa3054a10933c12987bf0725add425d963bf8"},
+      "derivatives": [
+        {"path": "portafolio/snaps/02-arturo-merch-640.webp", "width": 640, "height": 480, "bytes": 33802, "sha256": "6d5f88ef56c331eff0b2568b455d7d986d0ba80a4f4937220600c051d653fba1"},
+        {"path": "portafolio/snaps/02-arturo-merch-1280.webp", "width": 1280, "height": 960, "bytes": 195986, "sha256": "f7604a3c143dc34543f76c95b75252df64d47f3b7cbddb6ad6354300d9fa54a9"}
+      ]
+    },
+    {
+      "source": {"path": "portafolio/snaps/03-arturo-stand.png", "bytes": 1965167, "sha256": "3ea9973e8138cd6f014f59b90c8d1d977d05e67ed0463a88e620666280df2901"},
+      "derivatives": [
+        {"path": "portafolio/snaps/03-arturo-stand-640.webp", "width": 640, "height": 427, "bytes": 11430, "sha256": "1df2f32c27d1bfab76b9354ba6311876f334f960dd7fb83bff085b719b5c6797"},
+        {"path": "portafolio/snaps/03-arturo-stand-1280.webp", "width": 1280, "height": 853, "bytes": 32716, "sha256": "aa8ea1330421a812c101ad3802072afd99780cf7e2198e7217c27ea267d26f28"}
+      ]
+    },
+    {
+      "source": {"path": "portafolio/snaps/dv-v22-03-aplicacion.png", "bytes": 282841, "sha256": "75012fccfdf2f876837782e57d9c435fe231bc5212cd35aeb165d8f11ef51786"},
+      "derivatives": [
+        {"path": "portafolio/snaps/dv-v22-03-aplicacion-640.webp", "width": 640, "height": 400, "bytes": 10544, "sha256": "ebf4ee97566939da40f07e5f19ecaf8def6a0549bd038edea3487704d6b0b904"},
+        {"path": "portafolio/snaps/dv-v22-03-aplicacion-1280.webp", "width": 1280, "height": 800, "bytes": 22840, "sha256": "b348d9bcfcbca1e3b35f6fcac4dd3a3ea6d4d9919fababf54e1233c08ea9a09d"}
+      ]
+    },
+    {
+      "source": {"path": "portafolio/snaps/dv-v22-02-sistema.png", "bytes": 211504, "sha256": "2aec38dd3971451bb047ae7d8cf62436eb8edec913f9dee02b2fbdf5fd8a6d3c"},
+      "derivatives": [
+        {"path": "portafolio/snaps/dv-v22-02-sistema-640.webp", "width": 640, "height": 400, "bytes": 10808, "sha256": "e6163cd3ff17b82ff94f179925fd75dafdad09cef700a4a4fc5d16381e7e80d7"},
+        {"path": "portafolio/snaps/dv-v22-02-sistema-1280.webp", "width": 1280, "height": 800, "bytes": 28964, "sha256": "c6a97b4dde9c3295bf1a814a816010059304aad515e722656612055816c3cce3"}
+      ]
+    },
+    {
+      "source": {"path": "portafolio/snaps/dv-v22-01-portada.png", "bytes": 392087, "sha256": "a0dde66993a8dfa2d0be3799afcf5e82a563995bd6f5ac1c9ff4dd7ea2615b7d"},
+      "derivatives": [
+        {"path": "portafolio/snaps/dv-v22-01-portada-640.webp", "width": 640, "height": 400, "bytes": 11948, "sha256": "58dfba02e2fddb2cf7fe282de4a857e81e7af54065405588c32e9e810a6cd480"},
+        {"path": "portafolio/snaps/dv-v22-01-portada-1280.webp", "width": 1280, "height": 800, "bytes": 26050, "sha256": "72c6db2c47005783be61a71d4671bbed6e1640cd8ef51a03df2b7c871caae0be"}
+      ]
+    },
+    {
+      "source": {"path": "portafolio/snaps/sicaru-dv-v2-01-producto.png", "bytes": 3447206, "sha256": "94719e9ebb77fc64f04103ff3fc47ac91e4e453e1459e02bcf2f16512049b174"},
+      "derivatives": [
+        {"path": "portafolio/snaps/sicaru-dv-v2-01-producto-640.webp", "width": 640, "height": 400, "bytes": 47162, "sha256": "60cb79335be2f25619dbda6975d357289a09978fca6913019ac579e84c58bfc3"},
+        {"path": "portafolio/snaps/sicaru-dv-v2-01-producto-1280.webp", "width": 1280, "height": 800, "bytes": 152954, "sha256": "acce7777999bbe6d72997dd07e76722cfdee57df8720a234be1a56b16b134a31"}
+      ]
+    },
+    {
+      "source": {"path": "portafolio/snaps/sicaru-dv-v2-02-aplicacion.png", "bytes": 2709735, "sha256": "0c5f5557e0bd77b31b957061aaf832dcfa64a408eb09a9446d46fda9268a429a"},
+      "derivatives": [
+        {"path": "portafolio/snaps/sicaru-dv-v2-02-aplicacion-640.webp", "width": 640, "height": 400, "bytes": 14158, "sha256": "d7ad000506b8087f12e691041b88dd101ab3e1cf1115c1407cd218f6f510b56c"},
+        {"path": "portafolio/snaps/sicaru-dv-v2-02-aplicacion-1280.webp", "width": 1280, "height": 800, "bytes": 45052, "sha256": "de12bddad213bcb0e209bd925eaefd702067ac9aa0e140f0d91ed9c6e86e600f"}
+      ]
+    },
+    {
+      "source": {"path": "portafolio/snaps/sicaru-dv-v2-03-detalle.png", "bytes": 2332761, "sha256": "4cb028ebefc6bf8551bdd367043b437592941b9a21ea1fef0c548e8ceb271191"},
+      "derivatives": [
+        {"path": "portafolio/snaps/sicaru-dv-v2-03-detalle-640.webp", "width": 640, "height": 400, "bytes": 7834, "sha256": "ff98b3ddef67a9256668218285bba37107dd6099ad09e3e8f10d23e6141aae1a"},
+        {"path": "portafolio/snaps/sicaru-dv-v2-03-detalle-1280.webp", "width": 1280, "height": 800, "bytes": 25172, "sha256": "e012324d793f2c71fcf7ea0e20ed51e5cfd5e94ae000c6fc95c9179bb3091316"}
+      ]
+    },
+    {
+      "source": {"path": "fundador.jpg", "bytes": 149098, "sha256": "f7876b5296f51bd640c6f1a71555fbed4ce57e6eff414494b832c909d8e2516a"},
+      "derivatives": [
+        {"path": "fundador-800.webp", "width": 800, "height": 800, "bytes": 44450, "sha256": "4eb2d8f0396a46d7f59f4860b31200daa239fdc6e5672279ea986f18f1446986"}
+      ]
+    }
+  ]
+}

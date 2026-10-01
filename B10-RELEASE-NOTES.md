@@ -31,6 +31,16 @@ Arturo autorizó expresamente la excepción de movimiento para este hero. El sí
 
 El GLB, la malla, el SVG y la imagen de respaldo se verifican por hash en `assets/b10-motion/manifest.json`. Su inclusión no constituye admisión del GLB como activo canónico.
 
+## Ronda de rendimiento aprobada
+
+La composición no cambió: se conservaron los originales y se generaron derivados WebP de 640 y 1280 px con trazabilidad en `assets/b10-performance-manifest.json`. El peso potencial de las seis imágenes del portafolio pasó de 8.71 MiB a 152 KiB en la selección de 640 px o 512 KiB en la de 1280 px, una reducción de 94–98% según pantalla y densidad. La fotografía del fundador pasó de 146 KiB a 43 KiB y ahora carga de forma diferida.
+
+La misma política se aplicó a la ruta de sistema de marca: sus seis imágenes de casos pasaron de 8.94 MiB a 100 KiB en 640 px o 294 KiB en 1280 px, una reducción aproximada de 97–99%. Los originales permanecen intactos y disponibles para regenerar otros tamaños.
+
+El navegador elige la imagen apropiada mediante `srcset`; la galería conserva el intercambio de escenas y el lightbox. También se reservaron las dimensiones de las imágenes para evitar saltos de diseño. Las tipografías continúan autoalojadas, pero sus declaraciones quedaron en la hoja principal para eliminar una petición CSS en serie.
+
+La lógica del diagnóstico se descarga al aproximarse al formulario o al mostrar intención de abrirlo, con una alternativa accesible por correo si falla. El símbolo conserva el SVG canónico visible desde el primer instante y solicita la malla 3D en tiempo ocioso; movimiento reducido sigue usando la versión estática.
+
 ## QA exigido antes de producción
 
 - Suite automatizada del formulario y activos.
@@ -42,7 +52,7 @@ El GLB, la malla, el SVG y la imagen de respaldo se verifican por hash en `asset
 
 ## Estado de las compuertas del preview
 
-- `21/21` pruebas automatizadas aprobadas, incluidas la entrada 3D, el límite de opciones, la reducción de pasos y la ruta determinista de sistema de marca.
+- `30/30` pruebas automatizadas aprobadas, incluidas la entrada 3D, el límite de opciones, la reducción de pasos, la ruta determinista de sistema de marca y los presupuestos de rendimiento de ambas rutas.
 - Sin desbordamiento horizontal en 320, 390, 768 y 1280 px; el cierre y el formulario conservan sus márgenes.
 - Las dos imágenes principales del portafolio cargan completas con `object-fit: contain`.
 - Los enlaces públicos de Arturo Villagomez y Casa Artú respondieron con HTTP 200.

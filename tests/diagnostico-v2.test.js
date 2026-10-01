@@ -255,7 +255,8 @@ test('uses the publishable key as apikey instead of a bearer token', () => {
 test('serves brand fonts locally without Google Fonts requests', () => {
   const styles = fs.readFileSync(path.join(__dirname, '..', 'styles.css'), 'utf8');
   const social = fs.readFileSync(path.join(__dirname, '..', 'social-cards', 'card.css'), 'utf8');
-  assert.match(styles, /assets\/fonts\/fonts\.css/);
+  assert.doesNotMatch(styles, /@import/);
+  assert.match(styles, /assets\/fonts\/schibsted-grotesk-latin-normal\.woff2/);
   assert.doesNotMatch(styles + social, /fonts\.(?:googleapis|gstatic)\.com/);
   [
     'schibsted-grotesk-latin-normal.woff2',

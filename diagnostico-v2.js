@@ -524,5 +524,7 @@
   root.DVDiagnostic={recommendation:recommendation,needsSearch:needsSearch,visibleQuestions:visibleQuestions,budgetContext:budgetContext,reviewItems:reviewItems,contactErrors:contactErrors,validWebUrl:validWebUrl};
   if(typeof module!=='undefined'&&module.exports)module.exports=root.DVDiagnostic;
   if(typeof document==='undefined')return;
-  document.addEventListener('DOMContentLoaded',function(){[].slice.call(document.querySelectorAll('[data-dv-diagnostic]')).forEach(function(el){new Diagnostic(el);});});
+  function init(){[].slice.call(document.querySelectorAll('[data-dv-diagnostic]')).forEach(function(el){if(!el.dataset.dvDiagnosticReady){el.dataset.dvDiagnosticReady='true';new Diagnostic(el);}});}
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});
+  else init();
 })(typeof window!=='undefined'?window:this);

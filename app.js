@@ -59,21 +59,32 @@ window.va = window.va || function () { (window.vaq = window.vaq || []).push(argu
     if(!sh||!stage||!stageImg)return;
     [].slice.call(gallery.querySelectorAll('.case-thumb')).forEach(function(thumb){
       thumb.addEventListener('click',function(){
-        var src=thumb.getAttribute('data-src'), alt=thumb.getAttribute('data-alt')||'';
+        var src=thumb.getAttribute('data-src'), srcset=thumb.getAttribute('data-srcset')||'', sizes=thumb.getAttribute('data-sizes')||'';
+        var alt=thumb.getAttribute('data-alt')||'';
         var fit=thumb.getAttribute('data-fit')||'contain', label=thumb.getAttribute('data-label')||'Vista';
-        var previousSrc=stageImg.getAttribute('src'), previousAlt=stageImg.alt||'';
+        var previousSrc=stageImg.getAttribute('src'), previousSrcset=stageImg.getAttribute('srcset')||'', previousSizes=stageImg.getAttribute('sizes')||'';
+        var previousAlt=stageImg.alt||'';
         var previousFit=stage.getAttribute('data-fit')||'contain', previousLabel=stage.getAttribute('data-label')||'Vista';
         if(src)stageImg.src=src;
+        if(srcset)stageImg.setAttribute('srcset',srcset); else stageImg.removeAttribute('srcset');
+        if(sizes)stageImg.setAttribute('sizes',sizes); else stageImg.removeAttribute('sizes');
         stageImg.alt=alt;
         stage.setAttribute('data-fit',fit);
         stage.setAttribute('data-label',label);
         stage.setAttribute('aria-label','Ampliar '+(alt||'referencia visual'));
         thumb.setAttribute('data-src',previousSrc);
+        thumb.setAttribute('data-srcset',previousSrcset);
+        thumb.setAttribute('data-sizes',previousSizes);
         thumb.setAttribute('data-alt',previousAlt);
         thumb.setAttribute('data-fit',previousFit);
         thumb.setAttribute('data-label',previousLabel);
         thumb.setAttribute('aria-label','Ver '+(previousAlt||'referencia visual anterior'));
-        var thumbImg=thumb.querySelector('img'); if(thumbImg)thumbImg.src=previousSrc;
+        var thumbImg=thumb.querySelector('img');
+        if(thumbImg){
+          thumbImg.src=previousSrc;
+          if(previousSrcset)thumbImg.setAttribute('srcset',previousSrcset); else thumbImg.removeAttribute('srcset');
+          thumbImg.setAttribute('sizes','96px');
+        }
       });
     });
     stage.addEventListener('click',function(){
