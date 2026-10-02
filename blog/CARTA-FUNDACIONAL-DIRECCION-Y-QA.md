@@ -52,13 +52,15 @@ Convertir la dirección aprobada para el primer artículo fundacional de Don Ven
 
 ## Verificación realizada
 
-- Pruebas Node, referencias locales y dimensiones de portadas verificadas.
+- 35/35 pruebas Node pasan; incluyen referencias locales, datos estructurados, flujo del diagnóstico y dimensiones reales de las portadas.
 - Un solo `h1`, canonical, `index,follow`, `BlogPosting` y breadcrumbs válidos.
 - Retrato con dimensiones, carga correcta y texto alternativo.
 - Enlaces locales resueltos y consola sin errores ni advertencias.
 - Sin desborde horizontal en 320, 390, 768 y 1440 px.
 - Revisión visual directa del hero, HUB, bloque de quiebre, contraste valor/percepción, propósito y cierre.
 - Revisión visual directa de las composiciones sociales 16:9, 4:3 y 1:1; el retrato se ensambla completo con `object-fit: contain` y no se recorta.
+- El preview de Vercel sirve las tres portadas como `image/jpeg` en 1200×630, 1200×900 y 1200×1200.
+- Integración de inicio y artículo verificada en 320, 390, 768 y escritorio; sin desborde horizontal ni imágenes rotas.
 - `prefers-reduced-motion` elimina las transiciones de la pieza.
 
 ## Limitaciones y compuertas
