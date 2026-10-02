@@ -236,6 +236,8 @@ img{max-width:100%;display:block}
 .idea-summary p{color:#505761;font-size:clamp(17px,1.6vw,21px);line-height:1.6}
 .dark-link{display:inline-flex;gap:10px;margin-top:30px;padding-bottom:7px;border-bottom:1px solid rgba(27,73,160,.35);color:#1B49A0;font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase}
 .dark-link:hover{color:#0F2F73;border-color:#0F2F73}
+.idea-secondary{display:block;max-width:46ch;margin-top:18px;color:#59616D;font-size:13px;line-height:1.5;text-decoration:underline;text-decoration-color:rgba(27,73,160,.25);text-underline-offset:4px}
+.idea-secondary:hover{color:#1B49A0;text-decoration-color:#1B49A0}
 .idea-mark{position:absolute;z-index:0;right:-2vw;top:50%;transform:translateY(-57%);color:rgba(27,73,160,.08);font-size:clamp(260px,40vw,620px);font-family:var(--display);font-weight:200;line-height:.5}
 
 /* Founder, FAQ, contact */
@@ -244,6 +246,8 @@ img{max-width:100%;display:block}
 .founder-grid figure{position:relative;max-width:430px;aspect-ratio:4/5;overflow:hidden}
 .founder-grid figure::after{content:"";position:absolute;inset:0;border:1px solid rgba(238,241,246,.16)}
 .founder-grid img{width:100%;height:100%;object-fit:cover;filter:saturate(.85)}
+.founder-story{display:inline-flex;gap:10px;margin-top:24px;padding-bottom:7px;border-bottom:1px solid rgba(110,151,246,.4);color:#8CACF7;font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase}
+.founder-story:hover{color:#EEF1F6;border-color:#EEF1F6}
 .founder-note{font-family:var(--mono);font-size:9px!important;letter-spacing:.12em;text-transform:uppercase;color:#6E97F6!important}
 .faq-section{background:#0E1117;border-top:1px solid rgba(238,241,246,.1)}
 .faq-grid{display:grid;grid-template-columns:minmax(280px,.72fr) minmax(0,1.28fr);gap:clamp(50px,9vw,140px)}

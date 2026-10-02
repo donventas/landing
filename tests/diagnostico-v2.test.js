@@ -153,6 +153,7 @@ test('does not install Clarity or expose a session-replay consent banner', () =>
   const source = [
     'app.js', 'index.html', 'branding.html',
     path.join('blog', 'index.html'),
+    path.join('blog', 'por-que-nacio-don-ventas.html'),
     path.join('blog', 'contenido-que-atrae-clientes.html')
   ].map(file => fs.readFileSync(path.join(__dirname, '..', file), 'utf8')).join('\n');
   assert.doesNotMatch(source, /clarity\.ms|CLARITY_ID|__dvClarity|id="dv-cookie"/i);

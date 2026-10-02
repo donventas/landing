@@ -41,3 +41,39 @@ h1 em { color:var(--blue); font-family:Georgia,'Times New Roman',serif; font-wei
 .answer ul { margin:0; padding:0; list-style:none; display:grid; gap:11px; color:#bcc4d0; font-size:16px; }
 .answer li { display:flex; gap:10px; }
 .answer li::before { content:'→'; color:var(--blue); }
+
+/* Carta fundacional: composiciones nativas por formato, sin recortar el retrato. */
+.foundation-card { padding:48px 58px 40px; background:
+  radial-gradient(circle at 82% 30%, rgba(59,116,242,.2), transparent 31%),
+  linear-gradient(112deg,rgba(255,255,255,.028),transparent 48%), var(--ink); }
+.foundation-card .mast { height:62px; }
+.foundation-card .logo { width:218px; }
+.foundation-layout { position:relative; z-index:2; display:grid; grid-template-columns:minmax(0,1.35fr) minmax(300px,.65fr); gap:52px; align-items:center; height:430px; }
+.foundation-copy .eyebrow { margin-bottom:18px; color:#8CACF7; }
+.foundation-copy h1 { max-width:9.6ch; font-size:73px; }
+.foundation-copy .support { max-width:630px; font-size:20px; }
+.foundation-portrait { align-self:stretch; display:flex; flex-direction:column; justify-content:flex-end; margin:0; }
+.foundation-portrait .portrait-frame { position:relative; display:grid; place-items:end center; min-height:335px; overflow:hidden; border:1px solid rgba(238,241,246,.14); background:linear-gradient(150deg,rgba(238,241,246,.075),rgba(59,116,242,.05)); }
+.foundation-portrait .portrait-frame::before { content:''; position:absolute; inset:18px; border:1px solid rgba(238,241,246,.09); }
+.foundation-portrait img { position:relative; z-index:1; display:block; width:100%; height:100%; max-height:345px; object-fit:contain; object-position:center bottom; }
+.foundation-portrait figcaption { display:flex; justify-content:space-between; gap:18px; padding-top:12px; color:#9CA7B7; font-family:'Space Mono',monospace; font-size:10px; line-height:1.35; letter-spacing:.08em; text-transform:uppercase; }
+.foundation-card .foot { height:50px; }
+
+.foundation-4x3 { width:1200px; height:900px; padding:58px 64px 46px; }
+.foundation-4x3 .foundation-layout { grid-template-columns:minmax(0,1.22fr) minmax(360px,.78fr); height:674px; gap:64px; }
+.foundation-4x3 .foundation-copy h1 { font-size:94px; max-width:9.4ch; }
+.foundation-4x3 .foundation-copy .support { margin-top:30px; font-size:24px; }
+.foundation-4x3 .foundation-portrait .portrait-frame { min-height:0; aspect-ratio:1/1; }
+.foundation-4x3 .foundation-portrait img { max-height:none; }
+
+.foundation-square { width:1200px; height:1200px; padding:64px 68px 54px; }
+.foundation-square .mast { height:76px; }
+.foundation-square .foundation-layout { grid-template-columns:1fr; grid-template-rows:auto 510px; height:972px; gap:38px; align-items:start; }
+.foundation-square .foundation-copy { padding-top:40px; }
+.foundation-square .foundation-copy h1 { max-width:10.8ch; font-size:112px; }
+.foundation-square .foundation-copy .support { max-width:890px; margin-top:32px; font-size:28px; }
+.foundation-square .foundation-portrait { position:absolute; z-index:0; right:0; bottom:0; width:455px; height:455px; opacity:.96; }
+.foundation-square .foundation-portrait .portrait-frame { min-height:410px; background:linear-gradient(150deg,rgba(238,241,246,.06),rgba(59,116,242,.1)); }
+.foundation-square .foundation-portrait img { max-height:430px; }
+.foundation-square .foundation-portrait figcaption { font-size:9px; }
+.foundation-square .foot { height:58px; padding-right:505px; }

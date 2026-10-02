@@ -42,6 +42,9 @@ paso. El sitio no promete un PDF automático ni un plazo fijo de entrega.
   contenido, mejoras al sitio y buscadores, o un sistema de marca.
 - [Ideas](https://www.donventas.mx/blog/): biblioteca editorial sobre contenido, marca,
   buscadores y decisiones de compra.
+- [Por qué nació Don Ventas](https://www.donventas.mx/blog/por-que-nacio-don-ventas.html):
+  carta fundacional sobre la distancia entre el valor que existe dentro de un negocio y lo que
+  las personas alcanzan a entender, encontrar y elegir.
 - [Cómo crear contenido que atraiga clientes](https://www.donventas.mx/blog/contenido-que-atrae-clientes.html):
   guía para responder dudas reales, demostrar por qué confiar y facilitar una siguiente acción.
 - [Centro Legal](https://www.donventas.mx/15_LEGAL/Centro%20Legal.html): privacidad,
