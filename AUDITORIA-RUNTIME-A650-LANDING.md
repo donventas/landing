@@ -61,8 +61,9 @@ Se eliminó la promesa automática de PDF y el plazo fijo. La promesa candidata 
 > contacta por correo o WhatsApp con las oportunidades prioritarias y una propuesta del
 > siguiente paso.
 
-La recomendación visible sigue siendo preliminar y determinista. El envío continúa usando la
-tabla `lead` de Supabase, consentimiento, antispam existente, estados de éxito/error y analítica.
+La recomendación visible sigue siendo preliminar y determinista. El navegador ya no escribe
+directamente en Supabase: envía a `/api/lead`, donde se validan origen, tamaño, campos,
+consentimiento, tiempo de llenado, campo trampa, frecuencia e idempotencia antes de registrar.
 
 ## Compuertas antes de producción
 
@@ -85,9 +86,8 @@ tabla `lead` de Supabase, consentimiento, antispam existente, estados de éxito/
   reglas de movimiento reducido permanecen activos.
 - El flujo de contenido recorrió las ramas esperadas hasta contacto. La validación identificó
   correo y URL inválidos por campo, conservó los demás datos y habilitó continuar con URL vacía.
-- Pruebas automatizadas: 18/18 aprobadas. Incluyen sitio opcional, forma real del `POST` a
-  Supabase con respuesta 201 simulada, error 403 recuperable, SEO, JSON-LD, enlaces locales,
-  texto alternativo, privacidad, analítica y hashes de los activos 3D.
+- Pruebas automatizadas iniciales: 18/18 aprobadas. La ronda técnica posterior amplía la suite
+  y sus resultados quedan registrados en la sección siguiente.
 - Activos nuevos de mayor peso: placa limpia WebP 94.5 KB, fotografía etiquetada WebP 106.3 KB,
   fotografía numerada final WebP 108.3 KB, malla 3D 66.4 KB,
   referencia Arturo 121.8 KB, referencia Tamanova 173.5 KB y retrato 149.1 KB. Las imágenes
@@ -108,3 +108,45 @@ encuadre, mano, lápiz, objetos, iluminación y sombras; usar tinta carbón y re
 Una segunda edición añadió el orden exacto `01 PROBLEMA`, `02 CLIENTE`, `03 MENSAJE`,
 `04 EVIDENCIA`, `05 CANAL` y `06 SIGUIENTE PASO`, manteniendo sin cambios la escena, la
 perspectiva y la jerarquía cromática aprobada.
+
+## Ronda técnica de siete puntos — 2026-10-02
+
+Clasificación BSB: `PRESENTATION_REFINEMENT` de la Landing; el símbolo, wordmark, fotografía
+aprobada y dirección editorial permanecen protegidos. No se incorpora otra apariencia de marca.
+
+1. **LCP y CLS:** las fuentes Schibsted se precargan desde el mismo dominio y usan carga opcional
+   para impedir un intercambio tardío. El wordmark declara la proporción intrínseca real.
+2. **CSS de la portada:** `index.html` dejó de cargar los estilos de páginas históricas y usa
+   `home.css`, una hoja específica de 30.6 KB frente a los 74.2 KB anteriores.
+3. **Imagen responsive:** la fotografía numerada conserva el encuadre completo con `object-fit:
+   contain` y variantes WebP de 480 y 960 px; no hay recorte ni regeneración del contenido.
+4. **Carga diferida:** el formulario se carga al acercarse a contacto o al interactuar con un CTA.
+   La malla 3D se solicita después de `load`, durante tiempo ocioso, mientras permanece el SVG.
+5. **Accesibilidad:** el progreso expone `progressbar`, valores mínimo/máximo/actual, se corrigió
+   contraste de CTA y notas, y se conservaron foco, reducción de movimiento y contenido HTML.
+6. **Entrega:** `vercel.json` añade CSP para la portada, `nosniff`, política de referencia,
+   permisos restringidos, bloqueo de marcos y caché larga para fuentes y derivados versionados.
+   El sitemap declara la actualización de la home el 2026-10-02.
+7. **Antispam de servidor:** `/api/lead` valida y normaliza el payload, rechaza origen cruzado,
+   limita tamaño y frecuencia, comprueba tiempo mínimo, usa honeypot e idempotencia. La migración
+   `002_lock_lead_ingress.sql` queda como compuerta de release para revocar el `INSERT` anónimo
+   después de configurar el secreto de servidor; no se aplica durante el preview.
+
+### Resultado cuantitativo local
+
+| Perfil | Performance | Accesibilidad | Buenas prácticas | SEO | FCP | LCP | CLS | TBT |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|
+| Móvil Lighthouse 12.8.2 | 97 | 100 | 96* | 100 | 1.4 s | 2.3 s | 0 | 120 ms |
+| Escritorio Lighthouse 12.8.2 | 100 | 100 | 96* | 100 | 0.4 s | 0.5 s | 0 | 0 ms |
+
+\* El único descuento local de buenas prácticas es el 404 de
+`/_vercel/insights/script.js`; Vercel sirve esa ruta en preview y producción.
+
+La medición anterior de la misma candidata daba 83/92/96/100 en móvil y LCP de 3.5 s con CLS
+de 0.135. La ronda reduce el LCP local a 2.3 s, elimina el desplazamiento visual medido y lleva
+accesibilidad a 100. Se verificó ausencia de desbordamiento a 320, 390, 768 y 1440 px, recorrido
+1/9–9/9 del diagnóstico, URL vacía válida y error de correo específico conservando respuestas.
+
+Pruebas automatizadas actuales: **27/27 aprobadas**. Estado: candidato técnico listo para un
+nuevo preview. Producción continúa bloqueada hasta revisión humana, secreto de servidor,
+migración supervisada y autorización explícita de release.

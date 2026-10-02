@@ -32,7 +32,8 @@ test('publishes valid structured data without early public pricing', () => {
 
 test('keeps the working diagnostic, privacy and analytics surfaces', () => {
   assert.match(html, /data-dv-diagnostic/);
-  assert.match(html, /src="diagnostico-v2\.js"/);
+  assert.doesNotMatch(html, /<script[^>]+src="diagnostico-v2\.js"/);
+  assert.match(fs.readFileSync(path.join(root, 'app.js'), 'utf8'), /script\.src='diagnostico-v2\.js'/);
   assert.match(html, /src="\/_vercel\/insights\/script\.js"/);
   assert.match(html, /15_LEGAL\/Aviso de Privacidad\.html/);
   assert.match(html, /15_LEGAL\/Terminos y Condiciones\.html/);
@@ -72,4 +73,30 @@ test('uses the traced B6 mark and the reviewed 3D mesh exactly', () => {
   );
   assert.match(html, /data-hero-mark/);
   assert.match(html, /src="assets\/motion\/hero-mark-3d\.js"/);
+});
+
+test('uses the lean home stylesheet and responsive uncropped method image', () => {
+  assert.match(html, /href="home\.css"/);
+  assert.doesNotMatch(html, /href="styles\.css"/);
+  assert.match(html, /criterio-manos-metodo-01-06-480\.webp 480w/);
+  assert.match(html, /criterio-manos-metodo-01-06-960\.webp 960w/);
+  assert.match(html, /width="960" height="720"/);
+});
+
+test('exposes accessible diagnostic progress semantics and deferred motion', () => {
+  const diagnostic = fs.readFileSync(path.join(root, 'diagnostico-v2.js'), 'utf8');
+  const motion = fs.readFileSync(path.join(root, 'assets', 'motion', 'hero-mark-3d.js'), 'utf8');
+  assert.match(diagnostic, /role="progressbar"/);
+  assert.match(diagnostic, /aria-valuenow/);
+  assert.match(motion, /requestIdleCallback/);
+});
+
+test('declares security headers and cache policies for deployment', () => {
+  const config = JSON.parse(fs.readFileSync(path.join(root, 'vercel.json'), 'utf8'));
+  const serialized = JSON.stringify(config);
+  assert.match(serialized, /Content-Security-Policy/);
+  assert.match(serialized, /X-Content-Type-Options/);
+  assert.match(serialized, /Referrer-Policy/);
+  assert.match(serialized, /Permissions-Policy/);
+  assert.match(serialized, /max-age=31536000, immutable/);
 });

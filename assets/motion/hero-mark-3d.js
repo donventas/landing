@@ -151,12 +151,20 @@
     }
     return;
   }
-  fetch(meshUrl)
-    .then((response) => { if (!response.ok) throw new Error('mesh unavailable'); return response.json(); })
-    .then((mesh) => roots.forEach((root) => createViewer(root, mesh)))
-    .catch(() => roots.forEach((root) => {
-      root.dataset.motionState = 'poster';
-      const status = root.closest('.motion-stage')?.querySelector('[data-motion-status]');
-      if (status) { status.hidden = false; status.textContent = location.protocol === 'file:' ? 'Para ver el giro, abre el preview local HTTP' : 'Vista estática · modelo no disponible'; }
-    }));
+  function loadMesh() {
+    fetch(meshUrl)
+      .then((response) => { if (!response.ok) throw new Error('mesh unavailable'); return response.json(); })
+      .then((mesh) => roots.forEach((root) => createViewer(root, mesh)))
+      .catch(() => roots.forEach((root) => {
+        root.dataset.motionState = 'poster';
+        const status = root.closest('.motion-stage')?.querySelector('[data-motion-status]');
+        if (status) { status.hidden = false; status.textContent = location.protocol === 'file:' ? 'Para ver el giro, abre el preview local HTTP' : 'Vista estática · modelo no disponible'; }
+      }));
+  }
+  function scheduleMesh() {
+    if ('requestIdleCallback' in window) window.requestIdleCallback(loadMesh, { timeout: 1600 });
+    else window.setTimeout(loadMesh, 450);
+  }
+  if (document.readyState === 'complete') scheduleMesh();
+  else window.addEventListener('load', scheduleMesh, { once: true });
 })();

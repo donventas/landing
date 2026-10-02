@@ -11,6 +11,40 @@
    se carga desde index.html justo después de este archivo). */
 window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
 
+/* ── formulario dinámico · carga solo cuando puede ser útil ─────── */
+(function(){
+  var target=document.querySelector('[data-dv-diagnostic]');
+  if(!target)return;
+  var loading=false,loaded=false;
+  function loadDiagnostic(){
+    if(loading||loaded)return;
+    loading=true;
+    var script=document.createElement('script');
+    script.src='diagnostico-v2.js';
+    script.async=true;
+    script.onload=function(){loaded=true;loading=false;};
+    script.onerror=function(){
+      loading=false;
+      target.innerHTML='<p class="diagnostic-loading" role="status">No pudimos preparar el formulario. Escríbenos a <a href="mailto:arturo.villagomez@donventas.mx">arturo.villagomez@donventas.mx</a>.</p>';
+    };
+    document.head.appendChild(script);
+  }
+  [].slice.call(document.querySelectorAll('[data-diagnostic-entry]')).forEach(function(link){
+    link.addEventListener('pointerenter',loadDiagnostic,{once:true});
+    link.addEventListener('focus',loadDiagnostic,{once:true});
+    link.addEventListener('click',loadDiagnostic,{once:true});
+  });
+  if(location.hash==='#contacto'){loadDiagnostic();return;}
+  if('IntersectionObserver' in window){
+    var observer=new IntersectionObserver(function(entries){
+      if(entries[0].isIntersecting){observer.disconnect();loadDiagnostic();}
+    },{rootMargin:'900px 0px',threshold:0});
+    observer.observe(target);
+  }else{
+    window.addEventListener('load',loadDiagnostic,{once:true});
+  }
+})();
+
 /* ── 1 · reveal on-scroll (+ failsafe de impresión) ───────────────── */
 (function(){
   document.documentElement.classList.add('js');

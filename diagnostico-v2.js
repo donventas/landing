@@ -5,11 +5,7 @@
 (function(root){
   'use strict';
 
-  var CONFIG={
-    SUPABASE_URL:'https://hlabhmegjnrjygsywnqa.supabase.co',
-    SUPABASE_ANON:'sb_publishable_Pk-_A1MghCXv9F5r9TvcxA_vkf08JYh',
-    LEAD_TABLE:'lead'
-  };
+  var CONFIG={LEAD_ENDPOINT:'/api/lead'};
 
   var CONTENT_QUESTIONS=[
     {id:'outcome',type:'single',title:'¿Qué quieres lograr primero?',hint:'Elige el resultado que más importa en los próximos 90 días.',required:true,options:[
@@ -335,6 +331,7 @@
     this.state={entry:params.get('entrada')||el.getAttribute('data-entry')||''};
     this.index=0;
     this.load();
+    if(!this.state.startedAt)this.state.startedAt=Date.now();
     this.render();
     this.bindEntryLinks();
   }
@@ -373,7 +370,7 @@
     var progress=Math.round(((this.index+1)/total)*100);
     var routeLabel=this.route==='branding'?'Sistema de marca':'Contenido, sitio y buscadores';
     var h='<div class="dv-form-shell" data-route-name="'+this.route+'">';
-    h+='<div class="dv-form-top"><div><span class="dv-form-kicker">Diagnóstico · '+routeLabel+'</span><strong>'+(this.index+1)+' / '+total+'</strong></div><div class="dv-progress" aria-label="Progreso"><i style="width:'+progress+'%"></i></div></div>';
+    h+='<div class="dv-form-top"><div><span class="dv-form-kicker">Diagnóstico · '+routeLabel+'</span><strong>'+(this.index+1)+' / '+total+'</strong></div><div class="dv-progress" role="progressbar" aria-label="Progreso del diagnóstico" aria-valuemin="0" aria-valuemax="100" aria-valuenow="'+progress+'"><i style="width:'+progress+'%"></i></div></div>';
     var title=questionText(q.title,this.state),hint=questionText(q.hint,this.state),context=questionText(q.context,this.state);
     h+='<div class="dv-step" aria-live="polite">';
     if(context)h+='<div class="dv-route-recap"><span>Lo que entendimos</span><p>'+escapeHtml(context)+'</p></div>';
@@ -402,6 +399,7 @@
     }else if(q.type==='contact'){
       h+='<div class="dv-contact-grid"><label data-field-wrap="name">Tu nombre <span>obligatorio</span><input data-field="name" autocomplete="name" maxlength="160" required value="'+escapeHtml(this.state.name||'')+'"><small class="dv-field-error" data-error-for="name" aria-live="polite" hidden></small></label><label data-field-wrap="business">Negocio o marca <span>obligatorio</span><input data-field="business" autocomplete="organization" maxlength="200" required value="'+escapeHtml(this.state.business||'')+'"><small class="dv-field-error" data-error-for="business" aria-live="polite" hidden></small></label><label data-field-wrap="email">Correo de trabajo <span>obligatorio</span><input data-field="email" type="email" autocomplete="email" maxlength="320" required value="'+escapeHtml(this.state.email||'')+'"><small class="dv-field-error" data-error-for="email" aria-live="polite" hidden></small></label><label>WhatsApp <span>opcional</span><input data-field="whatsapp" autocomplete="tel" maxlength="80" value="'+escapeHtml(this.state.whatsapp||'')+'"></label></div>';
       h+='<label class="dv-contact-full" data-field-wrap="url">Sitio o red principal <span>opcional</span><input data-field="url" type="url" inputmode="url" placeholder="https://" value="'+escapeHtml(this.state.url||'')+'"><small class="dv-field-help">Déjalo vacío si todavía no tienes sitio web o una red principal.</small><small class="dv-field-error" data-error-for="url" aria-live="polite" hidden></small></label>';
+      h+='<label class="dv-hp" aria-hidden="true">No completes este campo<input data-field="website" name="website" tabindex="-1" autocomplete="off" value="'+escapeHtml(this.state.website||'')+'"></label>';
       h+='<label class="dv-consent"><input data-field="consent" type="checkbox"'+(this.state.consent?' checked':'')+'><span>Acepto que Don Ventas use esta información para preparar el diagnóstico y contactarme. Leí el <a href="15_LEGAL/Aviso de Privacidad.html" target="_blank" rel="noopener">Aviso de Privacidad</a>.</span></label>';
       h+='<small class="dv-field-error dv-consent-error" data-error-for="consent" aria-live="polite" hidden></small>';
     }
@@ -473,7 +471,7 @@
   };
   Diagnostic.prototype.bindResultActions=function(summary,result){
     var self=this,restart=this.el.querySelector('.dv-restart'),retry=this.el.querySelector('.dv-retry');
-    if(restart)restart.onclick=function(){self.state={entry:''};self.index=0;self.render();};
+    if(restart)restart.onclick=function(){self.state={entry:'',startedAt:Date.now()};self.index=0;self.render();};
     if(retry)retry.onclick=function(){self.submitLead(summary,result);};
   };
   Diagnostic.prototype.finish=function(){
@@ -503,12 +501,12 @@
       nombre:this.state.name||'',correo:this.state.email||'',negocio:this.state.business||'',whatsapp:this.state.whatsapp||'',
       reto:summary+(this.state.url?' | URL: '+this.state.url:''),paquete:result.name+' · '+result.band,consent:!!this.state.consent,
       origen:'landing-'+this.route+'-'+((new URLSearchParams(location.search)).get('utm_source')||'directo'),
-      submission_key:this.state.submissionKey
+      submission_key:this.state.submissionKey,website:this.state.website||'',started_at:this.state.startedAt||Date.now()
     };
     try{sessionStorage.setItem('dv-lead-pending',JSON.stringify(body));}catch(_e){}
     var controller=typeof AbortController!=='undefined'?new AbortController():null;
     var timeout=setTimeout(function(){if(controller)controller.abort();},12000);
-    return fetch(CONFIG.SUPABASE_URL+'/rest/v1/'+CONFIG.LEAD_TABLE,{method:'POST',headers:{'Content-Type':'application/json','apikey':CONFIG.SUPABASE_ANON,'Prefer':'resolution=ignore-duplicates,return=minimal'},body:JSON.stringify(body),signal:controller?controller.signal:undefined}).then(function(response){
+    return fetch(CONFIG.LEAD_ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body),signal:controller?controller.signal:undefined}).then(function(response){
       return response.text().then(function(raw){
         if(!response.ok){
           var error=new Error('LEAD_SUBMIT_FAILED'),details={};
@@ -524,5 +522,7 @@
   root.DVDiagnostic={recommendation:recommendation,needsSearch:needsSearch,visibleQuestions:visibleQuestions,budgetContext:budgetContext,contactErrors:contactErrors,validWebUrl:validWebUrl,Diagnostic:Diagnostic};
   if(typeof module!=='undefined'&&module.exports)module.exports=root.DVDiagnostic;
   if(typeof document==='undefined')return;
-  document.addEventListener('DOMContentLoaded',function(){[].slice.call(document.querySelectorAll('[data-dv-diagnostic]')).forEach(function(el){new Diagnostic(el);});});
+  function initialize(){[].slice.call(document.querySelectorAll('[data-dv-diagnostic]')).forEach(function(el){if(!el.__dvDiagnostic){el.__dvDiagnostic=true;new Diagnostic(el);}});}
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',initialize,{once:true});
+  else initialize();
 })(typeof window!=='undefined'?window:this);

@@ -49,6 +49,9 @@ Referencia rápida para indexación del sitio. No afecta al sitio (archivo de do
 
 ## Peso editorial de la home
 
+Última actualización técnica de la home: **2026-10-02**. Esta fecha debe coincidir con
+`sitemap.xml` cuando la revisión sea publicada; no adelantar la fecha de páginas sin cambios.
+
 La home mantiene una arquitectura comercial breve y una zona de preguntas más explícita:
 
 - hero y problema: comprensión inmediata;
