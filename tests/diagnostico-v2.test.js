@@ -69,16 +69,77 @@ test('keeps only one budget field across the diagnostic source', () => {
   assert.equal((source.match(/id:'budgetBand'/g) || []).length, 2);
 });
 
-test('uses the publishable key as apikey instead of a bearer token', () => {
+test('routes lead delivery through the same-origin server endpoint', () => {
   const source = fs.readFileSync(path.join(__dirname, '..', 'diagnostico-v2.js'), 'utf8');
-  assert.match(source, /'apikey':CONFIG\.SUPABASE_ANON/);
-  assert.doesNotMatch(source, /'Authorization':'Bearer '\+CONFIG\.SUPABASE_ANON/);
+  assert.match(source, /LEAD_ENDPOINT:'\/api\/lead'/);
+  assert.doesNotMatch(source, /supabase\.co|sb_publishable_/);
+});
+
+test('sends the real lead shape and accepts an empty website', async () => {
+  const originalFetch = global.fetch;
+  const originalLocation = global.location;
+  const originalSessionStorage = global.sessionStorage;
+  let request;
+  global.location = {search: ''};
+  global.sessionStorage = {setItem() {}};
+  global.fetch = async (url, options) => {
+    request = {url, options};
+    return new Response('', {status: 201});
+  };
+  try {
+    const instance = Object.create(diagnostic.Diagnostic.prototype);
+    instance.route = 'contenido';
+    instance.state = {
+      name: 'Prueba QA', business: 'Negocio de prueba', email: 'qa@example.com',
+      whatsapp: '', url: '', consent: true, submissionKey: 'qa-no-network'
+    };
+    await instance.sendLead('Resumen de prueba', {name: 'Contenido', band: '12–20 mil MXN al mes'});
+    const body = JSON.parse(request.options.body);
+    assert.equal(request.url, '/api/lead');
+    assert.equal(request.options.headers.apikey, undefined);
+    assert.equal(body.reto.includes('URL:'), false);
+    assert.equal(body.consent, true);
+    assert.equal(body.submission_key, 'qa-no-network');
+  } finally {
+    global.fetch = originalFetch;
+    global.location = originalLocation;
+    global.sessionStorage = originalSessionStorage;
+  }
+});
+
+test('turns a server rejection into a recoverable submission error', async () => {
+  const originalFetch = global.fetch;
+  const originalLocation = global.location;
+  const originalSessionStorage = global.sessionStorage;
+  global.location = {search: ''};
+  global.sessionStorage = {setItem() {}};
+  global.fetch = async () => new Response(JSON.stringify({code: '42501'}), {
+    status: 403,
+    headers: {'content-type': 'application/json'}
+  });
+  try {
+    const instance = Object.create(diagnostic.Diagnostic.prototype);
+    instance.route = 'contenido';
+    instance.state = {
+      name: 'Prueba QA', business: 'Negocio de prueba', email: 'qa@example.com',
+      whatsapp: '', url: '', consent: true, submissionKey: 'qa-error'
+    };
+    await assert.rejects(
+      instance.sendLead('Resumen de prueba', {name: 'Contenido', band: '12–20 mil MXN al mes'}),
+      error => error.status === 403 && error.code === '42501'
+    );
+  } finally {
+    global.fetch = originalFetch;
+    global.location = originalLocation;
+    global.sessionStorage = originalSessionStorage;
+  }
 });
 
 test('serves brand fonts locally without Google Fonts requests', () => {
   const styles = fs.readFileSync(path.join(__dirname, '..', 'styles.css'), 'utf8');
+  const homepage = fs.readFileSync(path.join(__dirname, '..', 'index.html'), 'utf8');
   const social = fs.readFileSync(path.join(__dirname, '..', 'social-cards', 'card.css'), 'utf8');
-  assert.match(styles, /assets\/fonts\/fonts\.css/);
+  assert.match(homepage, /assets\/fonts\/fonts\.css/);
   assert.doesNotMatch(styles + social, /fonts\.(?:googleapis|gstatic)\.com/);
   [
     'schibsted-grotesk-latin-normal.woff2',

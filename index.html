@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es-MX">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Contenido que atrae clientes, no solo atención — Don Ventas</title>
-<meta name="description" content="Creamos contenido para redes y sitios que ayudan a que más personas entiendan tu negocio, te encuentren y se animen a contactarte o comprar.">
+<title>Contenido, sitios y marcas que ayudan a vender — Don Ventas</title>
+<meta name="description" content="Don Ventas crea contenido, sitios web y sistemas de marca para que las personas entiendan tu negocio, lo encuentren y sepan cómo contactarte o comprar.">
 <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
 <link rel="canonical" href="https://www.donventas.mx/">
 <meta property="og:type" content="website">
@@ -12,25 +12,28 @@
 <meta property="og:site_name" content="Don Ventas">
 <meta property="og:locale" content="es_MX">
 <meta property="og:title" content="Contenido que atrae clientes, no solo atención — Don Ventas">
-<meta property="og:description" content="Temas, textos y diseño para redes y sitios que ayudan a atraer posibles clientes y acercan conversaciones y pedidos.">
-<meta property="og:image" content="https://www.donventas.mx/og-content.png?v=20260927-2">
-<meta property="og:image:url" content="https://www.donventas.mx/og-content.png?v=20260927-2">
-<meta property="og:image:secure_url" content="https://www.donventas.mx/og-content.png?v=20260927-2">
+<meta property="og:description" content="Contenido, sitios web y sistemas de marca para que tu negocio se entienda, se encuentre y convierta interés en conversaciones o pedidos.">
+<meta property="og:image" content="https://www.donventas.mx/og-content.png?v=20261001-a650">
+<meta property="og:image:url" content="https://www.donventas.mx/og-content.png?v=20261001-a650">
+<meta property="og:image:secure_url" content="https://www.donventas.mx/og-content.png?v=20261001-a650">
 <meta property="og:image:type" content="image/png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Don Ventas — contenido que atrae clientes">
+<meta property="og:image:alt" content="Don Ventas — contenido que atrae clientes, no solo atención">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Contenido que atrae clientes, no solo atención — Don Ventas">
-<meta name="twitter:description" content="Temas, textos y diseño para redes y sitios que ayudan a atraer posibles clientes y acercan conversaciones y pedidos.">
-<meta name="twitter:image" content="https://www.donventas.mx/og-content.png?v=20260927-2">
+<meta name="twitter:description" content="Contenido, sitios web y sistemas de marca para que tu negocio se entienda, se encuentre y ayude a vender.">
+<meta name="twitter:image" content="https://www.donventas.mx/og-content.png?v=20261001-a650">
 <meta name="twitter:image:alt" content="Don Ventas — contenido que atrae clientes, no solo atención">
 <meta name="theme-color" content="#0E1117">
 <script>document.documentElement.classList.add('js')</script>
 <link rel="icon" href="favicon.svg">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
-<link rel="stylesheet" href="styles.css">
+<link rel="preload" href="assets/fonts/schibsted-grotesk-latin-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/schibsted-grotesk-latin-italic.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/fonts/fonts.css">
+<link rel="stylesheet" href="home.css">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -39,20 +42,15 @@
       "@type": ["ProfessionalService", "Organization"],
       "@id": "https://www.donventas.mx/#org",
       "name": "Don Ventas",
-      "alternateName": "Don Ventas — Branding que vende",
       "url": "https://www.donventas.mx/",
       "logo": "https://www.donventas.mx/favicon-192.png",
-      "image": "https://www.donventas.mx/og-content.png?v=20260927-2",
-      "description": "Estudio de contenido y marca para PyMEs de México. Creamos contenido para redes y sitios que ayudan a que más personas entiendan el negocio, lo encuentren y se animen a contactarlo o comprar.",
+      "image": "https://www.donventas.mx/og-content.png?v=20261001-a650",
+      "description": "Estudio de contenido, sitios web y sistemas de marca para negocios de México. Ayudamos a que las personas entiendan qué ofrece un negocio, lo encuentren y sepan cómo contactarlo o comprar.",
       "slogan": "Entender. Encontrar. Elegir.",
       "email": "arturo.villagomez@donventas.mx",
       "founder": {"@type": "Person", "name": "Arturo Villagomez"},
-      "areaServed": [
-        {"@type": "City", "name": "Ciudad de México"},
-        {"@type": "City", "name": "Mérida"}
-      ],
-      "knowsAbout": ["Estrategia de contenido", "Contenido para redes sociales", "Branding", "Identidad de marca", "SEO", "AEO", "Marketing para PyMEs", "Posicionamiento de marca"],
-      "priceRange": "$$"
+      "areaServed": {"@type": "Country", "name": "México"},
+      "knowsAbout": ["Estrategia de contenido", "Contenido para redes sociales", "Diseño web", "SEO", "AEO", "GEO", "Branding", "Identidad de marca"]
     },
     {
       "@type": "WebSite",
@@ -64,19 +62,20 @@
     },
     {
       "@type": "Service",
-      "name": "Contenido para redes, sitios, SEO y AEO",
-      "serviceType": "Estrategia de contenido y marca",
+      "@id": "https://www.donventas.mx/#service",
+      "name": "Contenido, sitios web y sistemas de marca",
+      "serviceType": "Estrategia, diseño y producción de contenido y marca",
       "provider": {"@id": "https://www.donventas.mx/#org"},
-      "areaServed": ["Ciudad de México", "Mérida", "México"],
-      "audience": {"@type": "Audience", "audienceType": "PyMEs y emprendedores"},
-      "description": "Tres combinaciones según el objetivo del negocio: contenido para redes, un sitio preparado para aparecer en buscadores (SEO) o una solución completa para redes, buscadores y herramientas de inteligencia artificial (AEO y GEO).",
+      "areaServed": {"@type": "Country", "name": "México"},
+      "audience": {"@type": "Audience", "audienceType": "PyMEs, comercios, servicios y personas emprendedoras"},
+      "description": "Tres rutas para que un negocio se entienda, se encuentre y convierta interés en conversaciones o pedidos: contenido, sitio web o un sistema conectado de marca y contenido.",
       "hasOfferCatalog": {
         "@type": "OfferCatalog",
-        "name": "Contenido y autoridad digital",
+        "name": "Rutas de trabajo de Don Ventas",
         "itemListElement": [
-          {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Contenido para redes", "description": "Temas, textos y diseño para atraer personas con una necesidad real y acercarlas a una conversación o pedido."}},
-          {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Sitio para aparecer en Google", "description": "Sitio y contenido útil para aparecer en buscadores (SEO), explicar la oferta y generar confianza antes del contacto."}},
-          {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Redes, sitio, buscadores e inteligencia artificial", "description": "Una solución conectada de contenido, SEO, AEO y GEO para atraer personas, responder sus preguntas y mejorar con resultados reales."}}
+          {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Contenido que atrae", "description": "Estrategia, textos y diseño para convertir conocimiento en publicaciones útiles y consistentes."}},
+          {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Sitio que explica y aparece", "description": "Sitio claro, útil y preparado para que buscadores y herramientas de inteligencia artificial entiendan el negocio."}},
+          {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Marca y contenido conectados", "description": "Un sistema de marca, sitio y contenido que mantiene consistencia en cada punto de contacto."}}
         ]
       }
     },
@@ -86,28 +85,23 @@
       "mainEntity": [
         {
           "@type": "Question",
-          "name": "¿Qué incluye el Diagnóstico de Contenido en PDF?",
-          "acceptedAnswer": {"@type": "Answer", "text": "Un PDF breve con los problemas que hoy limitan tu contenido, las oportunidades prioritarias, la ruta recomendada y una propuesta de alcance y frecuencia."}
+          "name": "¿Qué recibo después de solicitar el diagnóstico?",
+          "acceptedAnswer": {"@type": "Answer", "text": "Arturo revisa personalmente cada solicitud. Si hay información suficiente y existe encaje, recibirás por correo o WhatsApp una lectura de las oportunidades prioritarias y una propuesta del siguiente paso."}
+        },
+        {
+          "@type": "Question",
+          "name": "¿Puedo contratar solo contenido o solo un sitio web?",
+          "acceptedAnswer": {"@type": "Answer", "text": "Sí. Puedes empezar por contenido, por un sitio web o por un sistema de marca. La recomendación depende del problema principal, el cambio que buscas y lo que ya tienes."}
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué significan SEO, AEO y GEO?",
+          "acceptedAnswer": {"@type": "Answer", "text": "SEO ayuda a que un sitio pueda aparecer en buscadores como Google. AEO y GEO organizan respuestas e información verificable para que herramientas de inteligencia artificial puedan entender y citar una marca. Ningún método garantiza una posición o mención."}
         },
         {
           "@type": "Question",
           "name": "¿Don Ventas garantiza ventas o aparecer primero en Google?",
-          "acceptedAnswer": {"@type": "Answer", "text": "No. Trabajamos para que tu negocio se entienda mejor, sea más fácil de encontrar y mantenga una comunicación consistente, pero los resultados también dependen de la oferta, el mercado, la difusión y la ejecución."}
-        },
-        {
-          "@type": "Question",
-          "name": "¿Puedo contratar solo contenido o solo el sitio?",
-          "acceptedAnswer": {"@type": "Answer", "text": "Sí. Puedes contratar contenido para redes, un sitio preparado para aparecer en Google o una combinación de ambos que también facilite que herramientas de inteligencia artificial entiendan tu negocio."}
-        },
-        {
-          "@type": "Question",
-          "name": "¿Cómo ayudan a que me encuentren en Google y en herramientas de inteligencia artificial?",
-          "acceptedAnswer": {"@type": "Answer", "text": "Preparamos el sitio para que Google pueda encontrar y entender sus páginas (SEO). También organizamos respuestas e información verificable para que herramientas de inteligencia artificial puedan comprender, citar o recomendar la marca (AEO y GEO). Ningún método garantiza una posición o mención."}
-        },
-        {
-          "@type": "Question",
-          "name": "¿Qué inversión requiere trabajar contenido con Don Ventas?",
-          "acceptedAnswer": {"@type": "Answer", "text": "El contenido para redes parte de 12,000 MXN al mes. Un sitio preparado para buscadores (SEO) requiere una inversión inicial estimada desde 25,000 MXN. El diagnóstico considera el objetivo, las entregas, los materiales y la capacidad para recomendar una ruta realista."}
+          "acceptedAnswer": {"@type": "Answer", "text": "No. Trabajamos para que el negocio se entienda mejor, sea más fácil de encontrar y mantenga una comunicación consistente. Los resultados también dependen de la oferta, el mercado, la difusión y la ejecución."}
         }
       ]
     }
@@ -115,364 +109,188 @@
 }
 </script>
 </head>
-<body data-screen-label="Landing — Ruta A (Terminal de marca)">
+<body class="home-editorial" data-screen-label="Landing editorial — Runtime a650b7e6">
 
-<!-- NAV -->
-<div class="nav">
-  <div class="in">
-    <a class="brand" href="#top">
-      <svg viewBox="0 0 100 100" fill="none"><path d="M22 16 L22 84 L58 50 Z" stroke="#F2F5F9" stroke-width="9" stroke-linejoin="round"></path><path d="M54 20 L84 50 L54 80" stroke="#3B74F2" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"></path></svg>
-      <b>DON<br><i>VENTAS</i><sup class="tm">™</sup></b>
+<a class="skip-link" href="#contenido">Saltar al contenido</a>
+
+<header class="editorial-nav" aria-label="Navegación principal">
+  <div class="editorial-shell nav-shell">
+    <a class="wordmark" href="#inicio" aria-label="Don Ventas, inicio">
+      <img src="assets/brand/donventas-wordmark-b6-reverse.svg" alt="Don Ventas" width="210" height="130">
     </a>
-    <nav class="links">
-      <a href="#oferta">Contenido</a>
-      <a href="branding.html">Sistema de marca</a>
+    <nav aria-label="Secciones">
+      <a href="#servicios">Servicios</a>
+      <a href="#metodo">Método</a>
+      <a href="#trabajo">Trabajo</a>
       <a href="blog/">Ideas</a>
-      <a href="#prueba">Casos</a>
     </nav>
-    <div class="nav-cta">
-      <a class="btn" href="https://app.donventas.mx">Entrar <span class="ar">↗</span></a>
-      <a class="btn solid" href="#contacto" data-diagnostic-entry="contenido">Recibe tu diagnóstico</a>
-    </div>
-  </div>
-</div>
-
-<a id="top"></a>
-
-<!-- HERO -->
-<header class="hero">
-  <div class="in wrap">
-    <div>
-      <div class="eyebrow">Entender · encontrar · elegir</div>
-      <h1>Contenido que atrae <span class="bl">clientes,</span><br>no solo atención.</h1>
-      <p class="sub">Creamos los temas, textos y diseños para redes y sitios que ayudan a <b>atraer personas que sí podrían comprar, generar confianza y acercar conversaciones y pedidos.</b></p>
-      <div class="cta">
-        <a class="btn solid lg" href="#contacto" data-diagnostic-entry="contenido">Recibe tu diagnóstico <span class="ar">→</span></a>
-        <a class="btn lg" href="#oferta">Explorar la oferta</a>
-      </div>
-      <p class="hero-note">Recibes: problemas detectados · oportunidades prioritarias · ruta recomendada · propuesta</p>
-    </div>
-    <div class="pass map-preview" aria-label="Vista previa del Diagnóstico de Contenido en PDF">
-      <div class="ph">
-        <span class="lbl">Diagnóstico de contenido · muestra</span>
-        <svg class="mk" viewBox="0 0 100 100" fill="none"><path d="M22 16 L22 84 L58 50 Z" stroke="#F2F5F9" stroke-width="9" stroke-linejoin="round"></path><path d="M54 20 L84 50 L54 80" stroke="#3B74F2" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"></path></svg>
-      </div>
-      <div class="route">
-        <div class="pt"><div class="k">Revisamos</div><div class="v">Contenido actual</div></div>
-        <div class="arw">→</div>
-        <div class="pt"><div class="k">Detectamos</div><div class="v">Problemas</div></div>
-        <div class="arw">→</div>
-        <div class="pt"><div class="k">Recomendamos</div><div class="v">Plan y alcance</div></div>
-      </div>
-      <div class="strip">
-        <div class="cell"><div class="k">Objetivo</div><div class="v">Más clientes</div></div>
-        <div class="cell"><div class="k">Entrada</div><div class="v">Formulario</div></div>
-        <div class="cell"><div class="k">Salida</div><div class="v">Prioridades</div></div>
-        <div class="cell"><div class="k">Revisión</div><div class="v">Humana</div></div>
-      </div>
-      <div class="foot">
-        <div class="bars"></div>
-        <a class="btn solid" href="#contacto" data-diagnostic-entry="contenido">Recibe tu diagnóstico <span class="ar">→</span></a>
-      </div>
+    <div class="nav-actions">
+      <a class="nav-login" href="https://app.donventas.mx">Entrar <span aria-hidden="true">↗</span></a>
+      <a class="editorial-button compact" href="#contacto" data-diagnostic-entry="contenido">Solicita tu diagnóstico</a>
     </div>
   </div>
 </header>
 
-<!-- 01 · PROBLEMA -->
-<section class="band" id="problema">
-  <div class="wrap">
-    <h2 class="stamp reveal"><span class="ix">01</span>Tu negocio sabe resolver. Tu contenido todavía no lo demuestra.</h2>
-    <p class="slede">Tu negocio sabe resolver algo importante. Pero si esa capacidad no se convierte en contenido claro, útil y encontrable, el mercado termina eligiendo a quien <strong class="key-phrase">explica mejor</strong>, no necesariamente a quien trabaja mejor.</p>
-    <div class="prob reveal">
-      <div class="col bad">
-        <h3 class="ch">Lo que suele pasar</h3>
-        <ul>
-          <li><span class="m">✕</span><span>Publicas por cumplir, sin una idea que conecte las piezas.</span></li>
-          <li><span class="m">✕</span><span>Tu experiencia vive en conversaciones que nadie más puede encontrar.</span></li>
-          <li><span class="m">✕</span><span>Las redes atraen atención, pero no ayudan a decidir.</span></li>
-          <li><span class="m">✕</span><span>Tu sitio no responde las preguntas que frenan una compra.</span></li>
-        </ul>
+<main id="contenido">
+  <section class="editorial-hero" id="inicio" aria-labelledby="hero-title">
+    <div class="hero-pattern" aria-hidden="true"></div>
+    <div class="editorial-shell hero-grid">
+      <div class="hero-copy">
+        <p class="folio">Contenido · sitios web · sistemas de marca</p>
+        <h1 id="hero-title">Contenido que atrae <em>clientes,</em><br>no solo atención.</h1>
+        <p class="hero-lede">Convertimos lo que sabes y haces en una presencia que las personas puedan <strong>entender, encontrar y elegir.</strong></p>
+        <p class="hero-detail">Creamos la estrategia, los textos y el diseño para que tu negocio explique mejor lo que vende y convierta interés en conversaciones o pedidos.</p>
+        <div class="hero-actions">
+          <a class="editorial-button" href="#contacto" data-diagnostic-entry="contenido">Solicita tu diagnóstico <span aria-hidden="true">→</span></a>
+          <a class="text-link" href="#metodo">Ver cómo trabajamos <span aria-hidden="true">↓</span></a>
+        </div>
+        <p class="hero-trust">Revisión humana · respuesta personal · recomendación según tu situación</p>
       </div>
-      <div class="col good">
-        <h3 class="ch">Lo que construimos</h3>
-        <ul>
-          <li><span class="m">→</span><span>Una forma clara de explicar lo que sabes y por qué importa.</span></li>
-          <li><span class="m">→</span><span>Contenido pensado para atraer personas con una necesidad real.</span></li>
-          <li><span class="m">→</span><span>Páginas y contenidos útiles que generan confianza antes de comprar.</span></li>
-          <li><span class="m">→</span><span>Un plan que mejora con las preguntas y los resultados reales.</span></li>
-        </ul>
+
+      <figure class="motion-stage" data-motion-mode="editorial">
+        <div class="motion-index" aria-hidden="true">01 / 07</div>
+        <div class="hero-mark" data-hero-mark data-motion-state="loading" role="img" aria-label="Símbolo tridimensional de Don Ventas">
+          <img src="assets/brand/donventas-symbol-b-reverse.svg" alt="" width="420" height="420">
+          <canvas aria-hidden="true"></canvas>
+        </div>
+        <figcaption>
+          <span class="motion-status" data-motion-status>Cargando vista 3D</span>
+          <button type="button" class="motion-replay" data-replay hidden>Volver a girar <span aria-hidden="true">↻</span></button>
+          <span>La forma apoya la idea; el mensaje hace el trabajo.</span>
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="paper-section tension-section" id="friccion" aria-labelledby="friction-title">
+    <div class="editorial-shell">
+      <div class="section-heading dark-heading reveal">
+        <p class="folio">01 · La fricción</p>
+        <h2 id="friction-title">Tu negocio puede ser bueno.<br><em>Eso no significa que se entienda.</em></h2>
+        <p>Cuando cada publicación, página o vendedor explica algo distinto, el cliente necesita trabajar demasiado para decidir.</p>
+      </div>
+      <div class="friction-grid reveal">
+        <article><span>01</span><h3>Publicas sin una dirección clara</h3><p>Hay actividad, pero las piezas no construyen una razón para confiar ni un siguiente paso.</p><strong>Lo convertimos en un mensaje que se repite con intención.</strong></article>
+        <article><span>02</span><h3>Tu sitio no responde lo importante</h3><p>La persona llega con dudas y se va sin entender qué ofreces, para quién es o cómo contactarte.</p><strong>Lo convertimos en respuestas que ayudan a decidir.</strong></article>
+        <article><span>03</span><h3>Tu marca cambia en cada canal</h3><p>El diseño y la voz dependen de quien produce ese día; la confianza se vuelve difícil de sostener.</p><strong>Lo convertimos en un sistema que mantiene consistencia.</strong></article>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<hr class="hr">
+  <section class="editorial-section method-section" id="metodo" aria-labelledby="method-title">
+    <div class="editorial-shell method-grid">
+      <div class="method-copy reveal">
+        <p class="folio">02 · El método</p>
+        <h2 id="method-title">Primero entendemos.<br><em>Luego producimos.</em></h2>
+        <p>Antes de diseñar una publicación o una página, ordenamos lo que tu negocio necesita decir, a quién quiere atraer y qué debe pasar después.</p>
+        <a class="text-link" href="#contacto" data-diagnostic-entry="contenido">Cuéntanos qué quieres cambiar <span aria-hidden="true">→</span></a>
+      </div>
+      <figure class="method-photo reveal d2">
+        <img src="assets/editorial/criterio-manos-metodo-01-06-960.webp" srcset="assets/editorial/criterio-manos-metodo-01-06-480.webp 480w, assets/editorial/criterio-manos-metodo-01-06-960.webp 960w, assets/editorial/criterio-manos-metodo-01-06.webp 1448w" sizes="(max-width: 620px) calc(100vw - 32px), (max-width: 820px) calc(100vw - 40px), 56vw" alt="Manos organizando seis etapas numeradas: Problema, Cliente, Mensaje, Evidencia, Canal y Siguiente paso" width="960" height="720" loading="lazy" decoding="async">
+        <figcaption>El criterio se vuelve visible cuando cada pieza sabe qué función cumple.</figcaption>
+      </figure>
+      <ol class="method-steps reveal d3">
+        <li><span>01</span><div><h3>Entender el negocio</h3><p>Qué vendes, a quién ayudas, qué dudas frenan la decisión y qué evidencia ya existe.</p></div></li>
+        <li><span>02</span><div><h3>Definir el mensaje</h3><p>Una idea central, una voz reconocible y reglas visuales que el equipo pueda mantener.</p></div></li>
+        <li><span>03</span><div><h3>Producir con intención</h3><p>Contenido y páginas adaptados a cada canal, sin perder la misma dirección.</p></div></li>
+        <li><span>04</span><div><h3>Aprender y mejorar</h3><p>Usamos preguntas, respuestas y resultados reales para decidir qué ajustar después.</p></div></li>
+      </ol>
+    </div>
+  </section>
 
-<!-- 02 · OFERTA -->
-<section class="band" id="oferta">
-  <div class="wrap">
-    <h2 class="stamp reveal"><span class="ix">02</span>Tres maneras de empezar</h2>
-    <p class="slede">Empieza por <strong class="key-phrase">el resultado que necesitas</strong>: atraer posibles clientes desde redes, aparecer cuando alguien busca lo que vendes o conectar ambas cosas en un plan que puedas sostener.</p>
-    <div class="route-wrap reveal">
-      <div class="capas offers">
-        <article class="capa offer-card">
-          <span class="node"></span>
-          <div class="cn">01 · Atraer posibles clientes</div>
-          <h3>Contenido para redes</h3>
-          <p>Definimos los temas, escribimos los textos y diseñamos publicaciones para <strong class="key-phrase">atraer personas con una necesidad real</strong> y acercarlas a una conversación o pedido.</p>
-          <p class="fit-note"><b>Te conviene si</b> necesitas publicar cada semana y convertir la atención en conversaciones.</p>
-          <ul><li>Ideas principales para cada tema</li><li>Versiones para cada red o canal</li><li>Publicaciones semanales acordadas</li></ul>
-          <div class="pr">$12,000–$32,000 MXN / mes</div>
-          <a class="offer-link" href="#contacto" data-offer="contenido" data-diagnostic-entry="contenido">Quiero mejorar mi contenido →</a>
+  <section class="paper-section services-section" id="servicios" aria-labelledby="services-title">
+    <div class="editorial-shell">
+      <div class="section-heading dark-heading reveal">
+        <p class="folio">03 · Tres rutas</p>
+        <h2 id="services-title">Empieza por el cambio<br><em>que más necesitas.</em></h2>
+        <p>No tienes que comprar todo. El diagnóstico nos ayuda a recomendar la ruta útil y un alcance que puedas sostener.</p>
+      </div>
+      <div class="service-ledger reveal">
+        <article>
+          <div class="service-number">A</div><div class="service-name"><p>Para dejar de publicar por cumplir</p><h3>Contenido que atrae</h3></div>
+          <p class="service-desc">Temas, textos y diseño para explicar lo que sabes, responder dudas y acercar conversaciones o pedidos.</p>
+          <a href="#contacto" data-diagnostic-entry="contenido">Quiero mejorar mi contenido <span aria-hidden="true">→</span></a>
         </article>
-        <article class="capa offer-card">
-          <span class="node"></span>
-          <div class="cn">02 · Aparecer cuando te buscan</div>
-          <h3>Sitio para aparecer en Google</h3>
-          <p>Un sitio con páginas y artículos útiles para que <strong class="key-phrase">te encuentren en buscadores</strong>, entiendan mejor tu oferta y confíen antes de contactarte.</p>
-          <p class="fit-note"><b>Te conviene si</b> hoy dependes de recomendaciones o redes para que encuentren tu negocio.</p>
-          <ul><li>Estructura clara del sitio</li><li>Mejoras para buscadores (SEO)</li><li>Respuestas fáciles de entender para Google y herramientas de IA</li></ul>
-          <div class="pr">$25,000–$80,000 MXN de implementación</div>
-          <a class="offer-link" href="#contacto" data-offer="autoridad" data-diagnostic-entry="autoridad">Quiero que encuentren mi negocio →</a>
+        <article>
+          <div class="service-number">B</div><div class="service-name"><p>Para que te encuentren y confíen</p><h3>Sitio que explica y aparece</h3></div>
+          <p class="service-desc">Un sitio claro y útil, preparado para que Google y las herramientas de inteligencia artificial entiendan tu negocio.</p>
+          <a href="#contacto" data-diagnostic-entry="autoridad">Quiero mejorar mi sitio <span aria-hidden="true">→</span></a>
         </article>
-        <article class="capa offer-card">
-          <span class="node"></span>
-          <div class="cn">03 · Conectar redes y sitio</div>
-          <h3>Contenido y sitio trabajando juntos</h3>
-          <p>Conectamos el contenido de tus redes con un sitio que <strong class="key-phrase">responde preguntas y puede aparecer en Google</strong> y en herramientas de inteligencia artificial.</p>
-          <p class="fit-note"><b>Te conviene si</b> necesitas que redes y sitio conduzcan hacia la misma ruta de venta.</p>
-          <ul><li>Contenido para redes y sitio</li><li>Versiones para cada canal</li><li>Medición y mejora continua</li></ul>
-          <div class="pr">Inicio $35,000–$95,000 + $28,000–$50,000 MXN / mes</div>
-          <a class="offer-link" href="#contacto" data-offer="motor" data-diagnostic-entry="motor">Quiero conectar todo →</a>
+        <article>
+          <div class="service-number">C</div><div class="service-name"><p>Para dejar de improvisar la marca</p><h3>Marca y contenido conectados</h3></div>
+          <p class="service-desc">Un sistema de mensaje, identidad y aplicaciones para que tu equipo o proveedores mantengan la misma dirección.</p>
+          <div class="service-links"><a href="#contacto" data-diagnostic-entry="motor">Quiero conectar todo <span aria-hidden="true">→</span></a><a href="branding.html">Conocer sistemas de marca</a></div>
         </article>
       </div>
-      <div class="capnote">La recomendación depende de tu objetivo, los materiales disponibles, los canales y el presupuesto. No prometemos ventas, primeras posiciones en Google ni publicaciones virales.</div>
+      <p class="service-note">La inversión se conversa después de entender el problema, el cambio deseado y el alcance. En el diagnóstico podrás indicar un rango en MXN.</p>
     </div>
+  </section>
 
-    <div class="reveal" id="metodo" style="margin-top:76px">
-      <h3 class="eyebrow" style="margin-bottom:16px">Cómo empieza · de la pregunta a una propuesta</h3>
-      <p class="slede" style="margin-top:0">Primero entendemos tu negocio y <strong class="key-phrase">el resultado que buscas</strong>. Después recomendamos el alcance y conservamos el contexto necesario para producir con consistencia.</p>
-      <div class="proc" data-stepper>
-        <div class="st"><div class="no">01</div><h4>Cuéntanos</h4><p>Completa un cuestionario corto sobre tu negocio, tus clientes, tus canales y lo que quieres lograr.</p><div class="wh">4–6 min</div></div>
-        <div class="st"><div class="no">02</div><h4>Recibe tu diagnóstico</h4><p>Te enviamos un PDF con problemas, oportunidades, prioridades y la ruta que recomendamos.</p><div class="wh">3–5 días hábiles</div></div>
-        <div class="st"><div class="no">03</div><h4>Elige la ruta</h4><p>Te proponemos contenido para redes, un sitio preparado para buscadores o una combinación de ambos, con entregas y frecuencia claras.</p><div class="wh">Propuesta</div></div>
-        <div class="st"><div class="no">04</div><h4>Creamos y mejoramos</h4><p>Producimos, aprobamos, publicamos y ajustamos con resultados reales, sin improvisar cada semana.</p><div class="wh">Trabajo continuo</div></div>
+  <section class="editorial-section proof-section" id="trabajo" aria-labelledby="proof-title">
+    <div class="editorial-shell">
+      <div class="section-heading reveal">
+        <p class="folio">04 · Trabajo verificable</p>
+        <h2 id="proof-title">La prueba no es decorar.<br><em>Es hacer visible una decisión.</em></h2>
+        <p>Mostramos aplicaciones reales y sitios públicos. No presentamos conceptos como resultados comerciales ni inventamos métricas.</p>
       </div>
-      <div class="procnote">Tú ves una ruta clara. Nosotros conservamos el contexto de tu negocio, tu marca y tus clientes para que cada pieza mantenga criterio y continuidad.</div>
-    </div>
-  </div>
-</section>
-
-<hr class="hr">
-
-<!-- 03 · PRUEBA REAL -->
-<section class="band" id="prueba">
-  <div class="wrap">
-    <h2 class="stamp reveal"><span class="ix">03</span>Prueba real</h2>
-    <p class="slede">Seis sistemas, diecisiete referencias seleccionadas y un mismo método: convertir decisiones de marca en <strong class="key-phrase">aplicaciones visibles, coherentes y utilizables</strong>. Cada caso muestra solo las facetas que podemos enseñar, sin presentar resultados comerciales que no estén documentados.</p>
-    <div class="evidence-key reveal" aria-label="Criterio de la galería">
-      <span><i aria-hidden="true"></i>Evidencia de aplicación</span>
-      <span>Sin métricas inventadas</span>
-    </div>
-    <div class="gal reveal">
-      <article class="shot">
-        <div class="case-top"><span class="case-index">01</span><span class="case-state">Sistema propio</span></div>
-        <div class="case-media" data-gallery>
-          <button class="case-stage" type="button" data-fit="contain" data-label="Aplicación" aria-label="Ampliar aplicación del sistema Don Ventas"><img src="portafolio/snaps/dv-v22-03-aplicacion.png" alt="Sistema Don Ventas aplicado a una presentación para clientes" loading="lazy" decoding="async"></button>
-          <div class="case-thumbs" aria-label="Referencias visuales Don Ventas">
-            <button class="case-thumb" type="button" data-src="portafolio/snaps/dv-v22-02-sistema.png" data-alt="Sistema cromático y tipográfico vigente de Don Ventas" data-fit="contain" data-label="Sistema" aria-label="Ver sistema visual Don Ventas"><img src="portafolio/snaps/dv-v22-02-sistema.png" alt="" loading="lazy" decoding="async"></button>
-            <button class="case-thumb" type="button" data-src="portafolio/snaps/dv-v22-01-portada.png" data-alt="Portada auditada del sitio y sistema Don Ventas" data-fit="contain" data-label="Portada" aria-label="Ver portada auditada Don Ventas"><img src="portafolio/snaps/dv-v22-01-portada.png" alt="" loading="lazy" decoding="async"></button>
-          </div>
-        </div>
-        <div class="meta"><div class="k">Estrategia · sistema operativo de marca</div><h3 class="n">Don Ventas</h3><div class="d">Identidad propia convertida en sistema, aplicaciones comerciales y producto digital.</div><dl class="case-proof"><div><dt>Necesidad</dt><dd>Unificar marca, comunicación comercial y producto digital.</dd></div><div><dt>Entrega visible</dt><dd>Sistema visual, sitio, presentación y portal.</dd></div><div><dt>Estado</dt><dd>Sistema propio aplicado; sin métricas comerciales atribuidas.</dd></div></dl></div>
-      </article>
-      <article class="shot">
-        <div class="case-top"><span class="case-index">02</span><span class="case-state">Prototipo conceptual</span></div>
-        <div class="case-media" data-gallery>
-          <button class="case-stage" type="button" data-fit="cover" data-label="Producto" aria-label="Ampliar prototipo conceptual Sicarú"><img src="portafolio/snaps/sicaru-dv-v2-01-producto.png" alt="Prototipo conceptual de pulsera y medallón Sicarú sobre tarjeta de marca" loading="lazy" decoding="async"></button>
-          <div class="case-thumbs" aria-label="Referencias visuales Sicarú">
-            <button class="case-thumb" type="button" data-src="portafolio/snaps/sicaru-dv-v2-02-aplicacion.png" data-alt="Visualización conceptual del empaque Sicarú" data-fit="cover" data-label="Empaque" aria-label="Ver muestra de empaque Sicarú"><img src="portafolio/snaps/sicaru-dv-v2-02-aplicacion.png" alt="" loading="lazy" decoding="async"></button>
-            <button class="case-thumb" type="button" data-src="portafolio/snaps/sicaru-dv-v2-03-detalle.png" data-alt="Detalle conceptual del medallón sello de Sicarú" data-fit="cover" data-label="Detalle" aria-label="Ver detalle conceptual Sicarú"><img src="portafolio/snaps/sicaru-dv-v2-03-detalle.png" alt="" loading="lazy" decoding="async"></button>
-          </div>
-        </div>
-        <div class="meta"><div class="k">Joyería · identidad y muestra conceptual</div><h3 class="n">Sicarú</h3><div class="d">Identidad, empaque y producto explorados como un mismo lenguaje de marca.</div><dl class="case-proof"><div><dt>Necesidad</dt><dd>Llevar la identidad a una experiencia de joyería completa.</dd></div><div><dt>Entrega visible</dt><dd>Producto, empaque y detalle del sello.</dd></div><div><dt>Estado</dt><dd>Exploración conceptual; no representa un producto fabricado.</dd></div></dl></div>
-      </article>
-      <article class="shot">
-        <div class="case-top"><span class="case-index">03</span><span class="case-state">Aplicación conceptual</span></div>
-        <div class="case-media" data-gallery>
-          <button class="case-stage" type="button" data-fit="cover" data-label="Sistema de hospitalidad" aria-label="Ampliar sistema editorial de hospitalidad Tamanova"><img src="portafolio/snaps/tamanova-dv-v4-01-editorial.png" alt="Fotografía real de Casa Artú junto a la portada y una página de su guía digital, mostradas completas" loading="lazy" decoding="async"></button>
-          <div class="case-thumbs" aria-label="Referencias visuales Tamanova">
-            <button class="case-thumb" type="button" data-src="portafolio/snaps/tamanova-dv-v2-02-experiencia.png" data-alt="Portada de la guía de Casa Artú operada por Tamanova" data-fit="contain" data-label="Bienvenida" aria-label="Ver guía de hospitalidad Tamanova"><img src="portafolio/snaps/tamanova-dv-v2-02-experiencia.png" alt="" loading="lazy" decoding="async"></button>
-            <button class="case-thumb" type="button" data-src="portafolio/snaps/tamanova-dv-v2-01-hospitalidad.png" data-alt="Fotografía real de la propiedad operada por Tamanova" data-fit="contain" data-label="Propiedad real" aria-label="Ver propiedad operada por Tamanova"><img src="portafolio/snaps/tamanova-dv-v2-01-hospitalidad.png" alt="" loading="lazy" decoding="async"></button>
-          </div>
-        </div>
-        <div class="meta"><div class="k">Hospitalidad · experiencia de llegada</div><h3 class="n">Tamanova</h3><div class="d">Una vista editorial que une la propiedad real con la portada y el contenido de su guía digital.</div><dl class="case-proof"><div><dt>Necesidad</dt><dd>Conectar la llegada a la propiedad con información útil para el huésped.</dd></div><div><dt>Entrega visible</dt><dd>Fotografía real, portada y contenido de una guía digital.</dd></div><div><dt>Estado</dt><dd>Propiedad real con ensamble editorial conceptual.</dd></div></dl></div>
-      </article>
-      <article class="shot">
-        <div class="case-top"><span class="case-index">04</span><span class="case-state">Sistema de marca</span></div>
-        <div class="case-media" data-gallery>
-          <button class="case-stage" type="button" data-fit="cover" data-label="Dirección visual" aria-label="Ampliar dirección visual de QuickFinance"><img src="portafolio/snaps/qf-dv-v4-01-brand.png" alt="Fotografía del nuevo sistema visual de QuickFinance aplicada a un negocio" loading="lazy" decoding="async"></button>
-          <div class="case-thumbs" aria-label="Referencias visuales QuickFinance">
-            <button class="case-thumb" type="button" data-src="portafolio/snaps/qf-dv-v4-02-tablet.png" data-alt="Fotografía del nuevo sistema visual de QuickFinance en un taller con una tableta" data-fit="contain" data-label="Aplicación" aria-label="Ver fotografía de aplicación QuickFinance"><img src="portafolio/snaps/qf-dv-v4-02-tablet.png" alt="" loading="lazy" decoding="async"></button>
-            <button class="case-thumb" type="button" data-src="portafolio/snaps/qf-dv-v4-03-analiza.svg" data-alt="Mascota Analiza del nuevo sistema de marca QuickFinance" data-fit="contain" data-label="Elemento de marca" aria-label="Ver mascota Analiza de QuickFinance"><img src="portafolio/snaps/qf-dv-v4-03-analiza.svg" alt="" loading="lazy" decoding="async"></button>
-          </div>
-        </div>
-        <div class="meta"><div class="k">Finanzas · claridad para negocios</div><h3 class="n">QuickFinance</h3><div class="d">Un sistema de marca renovado que acerca las finanzas a negocios reales.</div><dl class="case-proof"><div><dt>Necesidad</dt><dd>Explicar finanzas para negocios con una identidad más cercana.</dd></div><div><dt>Entrega visible</dt><dd>Fotografía, personaje de marca y aplicaciones del sistema.</dd></div><div><dt>Estado</dt><dd>Sistema de marca aplicado; sin métricas comerciales atribuidas.</dd></div></dl></div>
-      </article>
-      <article class="shot">
-        <div class="case-top"><span class="case-index">05</span><span class="case-state">Sistema + mockups</span></div>
-        <div class="case-media" data-gallery>
-          <button class="case-stage" type="button" data-fit="cover" data-label="Productos promocionales" aria-label="Ampliar productos promocionales del sistema de marca Pafi"><img src="portafolio/snaps/pafi-dv-v4-01-merch.png" alt="Visualizaciones de bolsa, termo y calcomanías de Pafi ensambladas sin recortar" loading="lazy" decoding="async"></button>
-          <div class="case-thumbs" aria-label="Referencias visuales Pafi">
-            <button class="case-thumb" type="button" data-src="portafolio/snaps/pafi-dv-v4-03-tote.png" data-alt="Visualización de bolsa Pafi mostrada completa" data-fit="contain" data-label="Bolsa" aria-label="Ver bolsa Pafi"><img src="portafolio/snaps/pafi-dv-v4-03-tote.png" alt="" loading="lazy" decoding="async"></button>
-          </div>
-        </div>
-        <div class="meta"><div class="k">Viajes · identidad y aplicaciones</div><h3 class="n">Pafi</h3><div class="d">Una identidad que conserva su carácter al pasar del emblema a una familia de objetos.</div><dl class="case-proof"><div><dt>Necesidad</dt><dd>Llevar la voz de marca a aplicaciones reconocibles.</dd></div><div><dt>Entrega visible</dt><dd>Mockups de bolsa, termo y calcomanías.</dd></div><div><dt>Estado</dt><dd>Aplicaciones conceptuales; no representan productos fabricados.</dd></div></dl></div>
-      </article>
-      <article class="shot">
-        <div class="case-top"><span class="case-index">06</span><span class="case-state">Sistema personal</span></div>
-        <div class="case-media" data-gallery>
-          <button class="case-stage" type="button" data-fit="cover" data-label="Sistema aplicado" aria-label="Ampliar sistema personal aplicado de Arturo Villagomez"><img src="portafolio/snaps/arturo-dv-v4-01-ensamble.webp" alt="Escena conceptual de estudio con el sitio de Arturo Villagomez llenando por completo la pantalla del monitor" loading="lazy" decoding="async"></button>
-          <div class="case-thumbs" aria-label="Referencias visuales Arturo Villagomez">
-            <button class="case-thumb" type="button" data-src="portafolio/snaps/02-arturo-merch.png" data-alt="Monograma personal aplicado a una libreta ejecutiva" data-fit="contain" data-label="Objeto" aria-label="Ver aplicación editorial personal"><img src="portafolio/snaps/02-arturo-merch.png" alt="" loading="lazy" decoding="async"></button>
-            <button class="case-thumb" type="button" data-src="portafolio/snaps/03-arturo-stand.png" data-alt="Sistema personal aplicado a una presentación y espacio de exhibición" data-fit="contain" data-label="Presentación" aria-label="Ver aplicación espacial personal"><img src="portafolio/snaps/03-arturo-stand.png" alt="" loading="lazy" decoding="async"></button>
-          </div>
-        </div>
-        <div class="meta"><div class="k">Marca personal · carrera y contenido</div><h3 class="n">Arturo Villagomez</h3><div class="d">Sistema unificado para la presencia pública, el portafolio y el contenido profesional.</div><dl class="case-proof"><div><dt>Necesidad</dt><dd>Unificar marca personal, portafolio y contenido profesional.</dd></div><div><dt>Entrega visible</dt><dd>Sitio, objeto editorial y presentación.</dd></div><div><dt>Estado</dt><dd>Sistema personal aplicado; escena principal conceptual.</dd></div></dl></div>
-      </article>
-    </div>
-    <p class="galnote"><b>6 sistemas · 17 referencias visuales seleccionadas.</b> Elige las miniaturas para recorrer cada caso. Las piezas con texto se muestran completas y solo publicamos material autorizado.</p>
-    <!-- Voces verificadas · feed publicado desde el portal (testimonios.json). Oculto hasta que haya reseñas reales. -->
-    <div class="voces-wrap reveal" id="voces" hidden>
-      <div class="voces-h"><span class="eyebrow">Voces verificadas</span><span class="voces-note">Publicadas con el consentimiento del cliente desde su portal Don Ventas.</span></div>
-      <div class="voces" id="vocesGrid"></div>
-    </div>
-  </div>
-</section>
-
-<hr class="hr">
-
-<!-- 04 · QUIÉN ESTÁ DETRÁS -->
-<section class="band" id="quien">
-  <div class="wrap">
-    <h2 class="stamp reveal"><span class="ix">04</span>Quién está detrás</h2>
-    <div class="who reveal">
-      <div class="por">
-        <img class="por-img" src="fundador.jpg" alt="Arturo Villagomez, fundador de Don Ventas">
-        <span class="cap">Arturo Villagomez · fundador</span>
+      <div class="proof-pair reveal">
+        <a class="proof-card proof-large" href="https://www.arturovillagomez.com/" target="_blank" rel="noopener"><div class="proof-media"><img src="portafolio/snaps/arturo-dv-v4-01-ensamble.webp" alt="Sistema editorial y sitio público de Arturo Villagomez" width="1600" height="1000" loading="lazy" decoding="async"></div><div class="proof-meta"><span>01 · Sitio público</span><h3>Arturo Villagomez</h3><p>Una presencia editorial para explicar experiencia, criterio y sistemas de trabajo.</p><strong>Visitar sitio <span aria-hidden="true">↗</span></strong></div></a>
+        <a class="proof-card" href="https://www.airbnb.com/h/casa-artu-merida-progreso" target="_blank" rel="noopener"><div class="proof-media"><img src="portafolio/snaps/tamanova-slot05-03-aplicacion.png" alt="Aplicación editorial del sistema Tamanova para Casa Artú" width="1600" height="1000" loading="lazy" decoding="async"></div><div class="proof-meta"><span>02 · Propiedad verificable</span><h3>Tamanova / Casa Artú</h3><p>Identidad y aplicaciones para una experiencia de hospitalidad con una oferta real.</p><strong>Ver propiedad <span aria-hidden="true">↗</span></strong></div></a>
       </div>
-      <div class="txt">
-        <svg class="eldon" viewBox="0 0 120 120" aria-hidden="true"><rect x="44" y="44" width="32" height="4.4" rx="2.2" fill="#F2F5F9"></rect><circle cx="53" cy="63" r="3.6" fill="#F2F5F9"></circle><circle cx="70" cy="63" r="9" fill="none" stroke="#3B74F2" stroke-width="3.4"></circle><path d="M79 67 Q83 77 78 84" fill="none" stroke="#3B74F2" stroke-width="2" stroke-linecap="round"></path></svg>
-        <p class="q">"Tu marca no es estética. Es la razón por la que alguien elige pagarte <b>a ti</b>."</p>
-        <div class="by">
-          <svg class="mk" viewBox="0 0 100 100" fill="none"><path d="M22 16 L22 84 L58 50 Z" stroke="#F2F5F9" stroke-width="9" stroke-linejoin="round"></path><path d="M54 20 L84 50 L54 80" stroke="#3B74F2" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"></path></svg>
-          <div>
-            <div class="nm">Don Ventas</div>
-            <div class="rl">Contenido, marca y sitios · CDMX &amp; Mérida</div>
-          </div>
-        </div>
+      <p class="proof-disclaimer">Estas referencias demuestran aplicaciones y superficies públicas. No implican resultados comerciales atribuibles sin evidencia documentada.</p>
+    </div>
+  </section>
+
+  <section class="paper-section ideas-section" aria-labelledby="ideas-title">
+    <div class="editorial-shell idea-feature reveal"><div><p class="folio">05 · Una idea útil</p><h2 id="ideas-title">Publicar más no arregla una oferta que nadie entiende.</h2></div><div class="idea-summary"><p>El contenido que ayuda a vender no empieza con “¿qué publicamos?”. Empieza con la duda que el cliente necesita resolver para poder avanzar.</p><a class="dark-link" href="blog/contenido-que-atrae-clientes.html">Leer la guía <span aria-hidden="true">→</span></a></div><div class="idea-mark" aria-hidden="true">›</div></div>
+  </section>
+
+  <section class="editorial-section founder-section" aria-labelledby="founder-title">
+    <div class="editorial-shell founder-grid reveal">
+      <figure><img src="fundador.jpg" alt="Arturo Villagomez, fundador de Don Ventas" width="900" height="1080" loading="lazy" decoding="async"></figure>
+      <div><p class="folio">06 · Dirección humana</p><h2 id="founder-title">Un sistema detrás.<br><em>Una persona al frente.</em></h2><p>Don Ventas es dirigido por Arturo Villagomez. Cada solicitud se revisa antes de recomendar una ruta, porque un formulario puede ordenar la información, pero no debe fingir que ya entendió todo tu negocio.</p><p class="founder-note">Estrategia · diseño · contenido · operación</p></div>
+    </div>
+  </section>
+
+  <section class="faq-section" id="preguntas" aria-labelledby="faq-title">
+    <div class="editorial-shell faq-grid">
+      <div class="section-heading reveal"><p class="folio">Preguntas frecuentes</p><h2 id="faq-title">Sin palabras difíciles.</h2><p>Si un término necesita explicación, la damos. Si una promesa no se puede sostener, no la hacemos.</p></div>
+      <div class="faq-list reveal d2">
+        <details><summary>¿Qué recibo después de solicitar el diagnóstico?</summary><p>Arturo revisa personalmente tu solicitud. Si hay información suficiente y existe encaje, recibirás por correo o WhatsApp una lectura de las oportunidades prioritarias y una propuesta del siguiente paso.</p></details>
+        <details><summary>¿Puedo contratar solo contenido o solo un sitio web?</summary><p>Sí. Puedes empezar por contenido, por un sitio o por un sistema de marca. La recomendación depende del problema principal, el cambio que buscas y lo que ya tienes.</p></details>
+        <details><summary>¿Qué significan SEO, AEO y GEO?</summary><p>SEO ayuda a que tu sitio pueda aparecer en buscadores como Google. AEO y GEO organizan respuestas e información verificable para que herramientas de inteligencia artificial puedan entender y citar tu marca. Ningún método garantiza una posición o mención.</p></details>
+        <details><summary>¿Garantizan ventas o aparecer primero en Google?</summary><p>No. Mejoramos claridad, facilidad para encontrar el negocio y consistencia. Los resultados también dependen de la oferta, el mercado, la difusión y la ejecución.</p></details>
       </div>
     </div>
-    <p class="galnote" style="margin-top:22px">Personas reales atendiendo tu negocio, no una plantilla. Riguroso en el método, cercano en el trato — así trabaja <b>El Don</b>, nuestro anfitrión de marca.</p>
-  </div>
-</section>
+  </section>
 
-<hr class="hr">
-
-<!-- 05 · SISTEMA DETRÁS -->
-<section class="band editorial-system" id="sistema">
-  <div class="wrap">
-    <h2 class="stamp reveal"><span class="ix">05</span>No improvisamos cada publicación</h2>
-    <p class="slede">Antes de producir, documentamos tu negocio, tu marca y lo que atrae a tu cliente. Así el diseño, los textos y el plan siguen <strong class="key-phrase">la misma dirección semana tras semana</strong>.</p>
-    <div class="context-grid reveal">
-      <article><span class="context-no">01</span><h3>Conocemos tu negocio</h3><p>Documentamos tu oferta, audiencia, objetivos y las preguntas que vale la pena investigar.</p></article>
-      <article><span class="context-no">02</span><h3>Definimos cómo habla tu marca</h3><p>Protegemos propósito, promesa, personalidad, voz, mensajes y límites.</p></article>
-      <article><span class="context-no">03</span><h3>Entendemos qué atrae a tu cliente</h3><p>Registramos lenguaje, estética, formatos, objeciones y señales de preferencia.</p></article>
-      <article><span class="context-no">04</span><h3>Lo convertimos en un plan de trabajo</h3><p>Unimos diseño, textos y estrategia para mantener la calidad y aprender de los resultados.</p></article>
-    </div>
-    <aside class="editorial-pull reveal">
-      <span class="pull-label">Nuestro punto de vista</span>
-      <blockquote>El contenido no debería llenar un calendario. Debería ayudar a que una persona avance de “no te conozco” a “entiendo por qué tendría sentido hablar contigo”.</blockquote>
-    </aside>
-  </div>
-</section>
-
-<hr class="hr">
-
-<!-- 06 · RECURSOS Y PREGUNTAS -->
-<section class="band" id="recursos">
-  <div class="wrap">
-    <h2 class="stamp reveal"><span class="ix">06</span>Una página que también trabaja cuando no estás</h2>
-    <p class="slede">La confianza se construye respondiendo con claridad las preguntas que aparecen antes de una compra. Esas respuestas también ayudan a que <strong class="key-phrase">Google y las herramientas de inteligencia artificial entiendan tu negocio</strong>.</p>
-    <div class="resource-grid reveal">
-      <article><span class="resource-kicker">Guía · 8 min</span><h3>Cómo crear contenido que atraiga clientes y no solo reacciones</h3><p>Cinco preguntas para convertir una idea en una pieza que responde dudas, genera confianza y facilita el siguiente paso.</p><a href="blog/contenido-que-atrae-clientes.html">Leer la guía →</a></article>
-      <article><span class="resource-kicker">Criterio</span><h3>Qué hace útil una publicación para tu negocio</h3><p>Una entrada clara, una razón, una prueba y una siguiente acción deben sostener el mismo mensaje.</p><a href="#preguntas">Ver preguntas frecuentes →</a></article>
-      <article><span class="resource-kicker">Buscadores e IA</span><h3>Que te encuentren, te entiendan y puedan citarte</h3><p>Preparamos información clara para Google (SEO) y para herramientas de inteligencia artificial (AEO y GEO).</p><a href="#contacto">Recibe tu diagnóstico →</a></article>
-    </div>
-
-    <div class="faq reveal" id="preguntas">
-      <div class="faq-intro"><span class="eyebrow">Preguntas frecuentes</span><h2>Antes de llenar el formulario</h2></div>
-      <div class="faq-list">
-        <details><summary>¿Qué incluye el Diagnóstico de Contenido en PDF?</summary><p>Un PDF breve con los problemas que hoy limitan tu contenido, las oportunidades que conviene priorizar, la ruta recomendada y una propuesta de alcance y frecuencia.</p></details>
-        <details><summary>¿Garantizan ventas, alcance o aparecer primero en Google?</summary><p>No. Trabajamos para que tu negocio se entienda mejor, sea más fácil de encontrar y mantenga una comunicación consistente. Los resultados también dependen de tu oferta, mercado, difusión, capacidad comercial y tiempo de ejecución.</p></details>
-        <details><summary>¿Puedo contratar solo contenido o solo el sitio?</summary><p>Sí. Puedes empezar con contenido para redes, con un sitio preparado para aparecer en Google o conectar ambas rutas. Recomendamos resolver primero el problema que más limita tus ventas.</p></details>
-        <details><summary>¿Cómo ayudan a que me encuentren en Google y en herramientas de inteligencia artificial?</summary><p>Preparamos el sitio para que Google pueda encontrar y entender sus páginas; a eso se le conoce como SEO. También organizamos respuestas e información verificable para que herramientas de inteligencia artificial puedan comprender, citar o recomendar tu marca; a eso se le conoce como AEO y GEO. Ningún método garantiza una posición o mención.</p></details>
-        <details><summary>¿Qué inversión requiere trabajar contenido con Don Ventas?</summary><p>El contenido para redes parte de $12,000 MXN al mes. Un sitio preparado para buscadores (SEO) requiere una inversión inicial estimada desde $25,000 MXN. Preguntamos presupuesto al inicio para recomendar una ruta que puedas sostener, no para inflar una cotización.</p></details>
-        <details><summary>¿Por qué necesitan conocer tanto de mi negocio?</summary><p>Porque un texto genérico puede sonar igual al de cualquier competidor. Conocer tu negocio evita frases vacías, protege tu forma de hablar y permite mejorar sin empezar de cero cada semana.</p></details>
+  <section class="contact-section" id="contacto" aria-labelledby="contact-title">
+    <div class="editorial-shell contact-grid">
+      <div class="contact-copy reveal">
+        <p class="folio">07 · Siguiente paso</p>
+        <h2 id="contact-title">Cuéntanos qué quieres cambiar.</h2>
+        <p>Primero preguntamos por el problema y el resultado que buscas. Después ajustamos las preguntas a tu situación y te mostramos una recomendación preliminar.</p>
+        <ul><li>Completarlo toma entre 4 y 6 minutos.</li><li>Tu sitio web es opcional.</li><li>Los rangos se muestran en MXN y no incluyen IVA.</li><li>La revisión final y el contacto son personales.</li></ul>
+        <p class="contact-caution">No prometemos ventas, posiciones en Google ni menciones de herramientas de inteligencia artificial.</p>
+      </div>
+      <div class="diagnostic-embed reveal d2" data-dv-diagnostic data-route="contenido" data-entry="contenido" aria-live="polite">
+        <p class="diagnostic-loading" role="status">Preparando las preguntas para tu diagnóstico…</p>
       </div>
     </div>
-  </div>
-</section>
+  </section>
+</main>
 
-<!-- CTA FINAL -->
-<section class="cta-final" id="contacto">
-  <svg class="eldon" viewBox="0 0 120 120" aria-hidden="true"><rect x="44" y="44" width="32" height="4.4" rx="2.2" fill="#F2F5F9"></rect><circle cx="53" cy="63" r="3.6" fill="#F2F5F9"></circle><circle cx="70" cy="63" r="9" fill="none" stroke="#3B74F2" stroke-width="3.4"></circle><path d="M79 67 Q83 77 78 84" fill="none" stroke="#3B74F2" stroke-width="2" stroke-linecap="round"></path></svg>
-  <div class="in wrap">
-    <div class="cta-copy reveal">
-      <div class="eyebrow">Lo que recibes</div>
-      <h2>Diagnóstico de contenido<br><span class="bl">en PDF.</span></h2>
-      <p>Cuéntanos dónde está hoy tu negocio. Revisaremos tu información y te enviaremos un <strong class="key-phrase">PDF breve y accionable</strong> antes de proponerte un paquete.</p>
-      <ul class="map-includes">
-        <li>qué está frenando tu contenido hoy;</li>
-        <li>qué oportunidades conviene priorizar;</li>
-        <li>si necesitas redes, un sitio para buscadores o ambos;</li>
-        <li>una propuesta con alcance y frecuencia.</li>
-      </ul>
-      <p class="qualification-note">Completarlo toma 4–6 minutos. Revisamos tus respuestas y enviamos el diagnóstico en 3–5 días hábiles. No es una promesa de ventas ni de aparecer primero en Google.</p>
-    </div>
-    <div class="diagnostic-embed reveal d2" data-dv-diagnostic data-route="contenido" data-entry="contenido"></div>
-  </div>
-</section>
-
-<!-- COORDINATE FOOTER -->
-<footer class="foot">
-  <div class="in wrap">
-    <div class="l">
-      <svg class="eldon" viewBox="0 0 120 120" aria-hidden="true"><rect x="44" y="44" width="32" height="4.4" rx="2.2" fill="#F2F5F9"></rect><circle cx="53" cy="63" r="3.6" fill="#F2F5F9"></circle><circle cx="70" cy="63" r="9" fill="none" stroke="#3B74F2" stroke-width="3.4"></circle><path d="M79 67 Q83 77 78 84" fill="none" stroke="#3B74F2" stroke-width="2" stroke-linecap="round"></path></svg>
-      <span>Don Ventas · entender, encontrar, elegir</span>
-    </div>
-    <div class="coord">
-      <span><b>CDMX</b> 19.43°N</span>
-      <span><b>Mérida</b> 20.97°N</span>
-      <a href="branding.html">Sistema de marca</a>
-      <a href="blog/">Ideas</a>
-      <a href="https://app.donventas.mx">Portal de clientes ↗</a>
-      <span>arturo.villagomez@donventas.mx</span>
-      <span class="heart">♥</span>
-    </div>
+<footer class="editorial-footer">
+  <div class="editorial-shell">
+    <div class="footer-brand"><img src="assets/brand/donventas-wordmark-b6-reverse.svg" alt="Don Ventas" width="210" height="130"><p>Entender. Encontrar. Elegir.</p></div>
+    <div class="footer-links"><a href="branding.html">Sistemas de marca</a><a href="blog/">Ideas</a><a href="https://app.donventas.mx">Portal de clientes ↗</a><a href="15_LEGAL/Aviso de Privacidad.html">Privacidad</a><a href="15_LEGAL/Terminos y Condiciones.html">Términos</a><a href="15_LEGAL/Politica de Cookies.html">Cookies</a></div>
+    <div class="footer-meta"><span>Ciudad de México · Mérida · México</span><a href="mailto:arturo.villagomez@donventas.mx">arturo.villagomez@donventas.mx</a></div>
   </div>
 </footer>
 
-<!-- LIGHTBOX -->
-<div class="lbx" id="lbx" aria-hidden="true">
-  <button class="x" type="button">Cerrar ✕</button>
-  <figure><img alt=""><figcaption></figcaption></figure>
-</div>
-
-<!-- Scripts del sitio. No se instala software de grabación de sesiones. -->
+<!-- Sin grabación de sesiones. La medición existente usa Vercel Web Analytics. -->
 <script defer src="app.js"></script>
-<script defer src="diagnostico-v2.js"></script>
+<script defer src="assets/motion/hero-mark-3d.js"></script>
 <script defer src="/_vercel/insights/script.js"></script>
-
 </body>
 </html>
