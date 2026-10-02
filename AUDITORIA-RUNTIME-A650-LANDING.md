@@ -48,6 +48,7 @@
 | `assets/patterns/relieve-rastro-oscuro.svg` | `patterns/relieve-rastro-oscuro.svg` | Un patrón en el campo visual del hero |
 | `assets/editorial/criterio-manos.webp` | `fotos/editorial-conceptual/candidates/criterio-manos-placa.png` | Placa limpia original, optimizada a WebP |
 | `assets/editorial/criterio-manos-etiquetas.webp` | Derivado de la placa limpia anterior | Fotografía funcional con seis etapas del método impresas en perspectiva |
+| `assets/editorial/criterio-manos-metodo-01-06.webp` | Derivado de la fotografía etiquetada anterior | Versión final con orden explícito `01–06` |
 
 El símbolo 3D gira una sola vez al entrar, se asienta en la vista frontal, permite repetición
 manual y respeta `prefers-reduced-motion`. El logo maestro no fue editado ni rotado.
@@ -87,7 +88,8 @@ tabla `lead` de Supabase, consentimiento, antispam existente, estados de éxito/
 - Pruebas automatizadas: 18/18 aprobadas. Incluyen sitio opcional, forma real del `POST` a
   Supabase con respuesta 201 simulada, error 403 recuperable, SEO, JSON-LD, enlaces locales,
   texto alternativo, privacidad, analítica y hashes de los activos 3D.
-- Activos nuevos de mayor peso: placa limpia WebP 94.5 KB, fotografía etiquetada WebP 106.3 KB, malla 3D 66.4 KB,
+- Activos nuevos de mayor peso: placa limpia WebP 94.5 KB, fotografía etiquetada WebP 106.3 KB,
+  fotografía numerada final WebP 108.3 KB, malla 3D 66.4 KB,
   referencia Arturo 121.8 KB, referencia Tamanova 173.5 KB y retrato 149.1 KB. Las imágenes
   bajo el primer viewport usan carga diferida; el patrón del hero pesa 1.3 KB.
 - La única respuesta 404 en el servidor local corresponde a `/_vercel/insights/script.js`,
@@ -102,3 +104,7 @@ fuente del Runtime. La instrucción final fue imprimir exactamente `PROBLEMA`, `
 `MENSAJE`, `EVIDENCIA`, `CANAL` y `SIGUIENTE PASO` sobre los papeles existentes; conservar
 encuadre, mano, lápiz, objetos, iluminación y sombras; usar tinta carbón y reservar el azul
 `#3B74F2` para `SIGUIENTE PASO`; no añadir logotipos, objetos, marcas de agua ni más texto.
+
+Una segunda edición añadió el orden exacto `01 PROBLEMA`, `02 CLIENTE`, `03 MENSAJE`,
+`04 EVIDENCIA`, `05 CANAL` y `06 SIGUIENTE PASO`, manteniendo sin cambios la escena, la
+perspectiva y la jerarquía cromática aprobada.
