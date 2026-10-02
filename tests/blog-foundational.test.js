@@ -76,6 +76,7 @@ test('keeps a reciprocal editorial path between the foundation and the guide', (
   assert.match(article, /href="contenido-que-atrae-clientes\.html">Leer la guía de contenido/);
   assert.match(guide, /href="por-que-nacio-don-ventas\.html">Leer por qué nació Don Ventas/);
   assert.doesNotMatch(guide, /diagnóstico en PDF/);
+  assert.doesNotMatch(hub, /diagnóstico en PDF/);
 });
 
 test('links the hub, sitemap and llms index to the new article', () => {
