@@ -75,6 +75,66 @@ test('uses the publishable key as apikey instead of a bearer token', () => {
   assert.doesNotMatch(source, /'Authorization':'Bearer '\+CONFIG\.SUPABASE_ANON/);
 });
 
+test('sends the real lead shape and accepts an empty website', async () => {
+  const originalFetch = global.fetch;
+  const originalLocation = global.location;
+  const originalSessionStorage = global.sessionStorage;
+  let request;
+  global.location = {search: ''};
+  global.sessionStorage = {setItem() {}};
+  global.fetch = async (url, options) => {
+    request = {url, options};
+    return new Response('', {status: 201});
+  };
+  try {
+    const instance = Object.create(diagnostic.Diagnostic.prototype);
+    instance.route = 'contenido';
+    instance.state = {
+      name: 'Prueba QA', business: 'Negocio de prueba', email: 'qa@example.com',
+      whatsapp: '', url: '', consent: true, submissionKey: 'qa-no-network'
+    };
+    await instance.sendLead('Resumen de prueba', {name: 'Contenido', band: '12–20 mil MXN al mes'});
+    const body = JSON.parse(request.options.body);
+    assert.match(request.url, /\/rest\/v1\/lead$/);
+    assert.equal(request.options.headers.apikey.startsWith('sb_publishable_'), true);
+    assert.equal(body.reto.includes('URL:'), false);
+    assert.equal(body.consent, true);
+    assert.equal(body.submission_key, 'qa-no-network');
+  } finally {
+    global.fetch = originalFetch;
+    global.location = originalLocation;
+    global.sessionStorage = originalSessionStorage;
+  }
+});
+
+test('turns a server rejection into a recoverable submission error', async () => {
+  const originalFetch = global.fetch;
+  const originalLocation = global.location;
+  const originalSessionStorage = global.sessionStorage;
+  global.location = {search: ''};
+  global.sessionStorage = {setItem() {}};
+  global.fetch = async () => new Response(JSON.stringify({code: '42501'}), {
+    status: 403,
+    headers: {'content-type': 'application/json'}
+  });
+  try {
+    const instance = Object.create(diagnostic.Diagnostic.prototype);
+    instance.route = 'contenido';
+    instance.state = {
+      name: 'Prueba QA', business: 'Negocio de prueba', email: 'qa@example.com',
+      whatsapp: '', url: '', consent: true, submissionKey: 'qa-error'
+    };
+    await assert.rejects(
+      instance.sendLead('Resumen de prueba', {name: 'Contenido', band: '12–20 mil MXN al mes'}),
+      error => error.status === 403 && error.code === '42501'
+    );
+  } finally {
+    global.fetch = originalFetch;
+    global.location = originalLocation;
+    global.sessionStorage = originalSessionStorage;
+  }
+});
+
 test('serves brand fonts locally without Google Fonts requests', () => {
   const styles = fs.readFileSync(path.join(__dirname, '..', 'styles.css'), 'utf8');
   const social = fs.readFileSync(path.join(__dirname, '..', 'social-cards', 'card.css'), 'utf8');

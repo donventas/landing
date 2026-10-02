@@ -1,7 +1,7 @@
 /* Don Ventas — motor compartido de diagnóstico v3.
    Dinámico: muestra únicamente preguntas aplicables.
    Determinista: las mismas respuestas producen la misma ruta y recomendación.
-   La recomendación en pantalla es preliminar; el PDF conserva revisión humana. */
+   La recomendación en pantalla es preliminar; el seguimiento conserva revisión humana. */
 (function(root){
   'use strict';
 
@@ -154,7 +154,7 @@
   ];
 
   function contactQuestion(route){
-    return {id:'contact',type:'contact',title:'¿A dónde enviamos tu diagnóstico?',hint:route==='branding'?'Revisaremos tu sistema actual y prepararemos una recomendación de alcance.':'Revisaremos tu contenido, presencia y oportunidades antes de preparar el PDF.',required:true};
+    return {id:'contact',type:'contact',title:'¿Cómo podemos darte seguimiento?',hint:route==='branding'?'Arturo revisará tu sistema actual antes de recomendar un alcance.':'Arturo revisará tu contenido, presencia y oportunidades antes de proponerte el siguiente paso.',required:true};
   }
 
   function questionOptions(question,state){return typeof question.options==='function'?question.options(state):question.options||[];}
@@ -214,7 +214,7 @@
   }
   function budgetHint(route,state){
     var basis=route==='contenido'&&preliminaryContentKey(state)==='contenido'?'Elige un rango mensual.':'Elige un rango para la primera etapa.';
-    return basis+' Lo usaremos para ajustar la profundidad de la recomendación; no es una cotización.';
+    return basis+' Los rangos están en MXN, no incluyen IVA y no son una cotización.';
   }
   function budgetContext(route,state){
     if(route==='branding'){
@@ -245,7 +245,7 @@
     if(content)reasons.push('Tus respuestas muestran que necesitas mejores temas, mayor constancia o un siguiente paso más claro para vender.');
     if(search)reasons.push('También hay un problema en el sitio o es difícil encontrar y entender tu negocio antes de decidir.');
     if(a.proof&&a.proof.indexOf('none')>=0)reasons.push('La producción deberá incluir una fase inicial para documentar evidencia y materiales reales.');
-    if(a.timing==='exploring')reasons.push('El momento todavía es exploratorio; el PDF debe ayudarte a decidir sin forzar una compra.');
+    if(a.timing==='exploring')reasons.push('El momento todavía es exploratorio; la revisión debe ayudarte a decidir sin forzar una compra.');
     return {route:'contenido',key:key,name:catalog[key].name,band:catalog[key].band,desc:catalog[key].desc,gap:gap,start:start,reasons:reasons};
   }
 
@@ -381,7 +381,7 @@
     if(hint)h+='<p class="dv-step-hint">'+escapeHtml(hint)+'</p>';
     h+=this.fieldHtml(q);
     h+='<div class="dv-form-nav">'+(this.index?'<button type="button" class="btn dv-back">← Atrás</button>':'<span></span>')+'<button type="button" class="btn solid dv-next"'+(this.hasAnswer(q)?'':' disabled')+'>'+(q.type==='contact'?'Enviar y ver recomendación':'Continuar')+' <span class="ar">→</span></button></div>';
-    if(this.index===0)h+='<p class="dv-form-note">4–6 minutos · preguntas según tu situación · revisión humana en 3–5 días hábiles</p>';
+    if(this.index===0)h+='<p class="dv-form-note">4–6 minutos · preguntas según tu situación · revisión y respuesta personal</p>';
     h+='</div></div>';
     this.el.innerHTML=h;
     this.bind(q);
@@ -468,7 +468,7 @@
     var reasons=result.reasons.length?'<ul>'+result.reasons.map(function(r){return '<li>'+escapeHtml(r)+'</li>';}).join('')+'</ul>':'';
     var deliveryMarkup=delivery==='error'
       ? '<div class="dv-result-next dv-result-error"><b>No pudimos registrar tus datos</b><p>'+escapeHtml(submitErrorMessage(error))+' Si el problema continúa, escríbenos a <a href="mailto:arturo.villagomez@donventas.mx">arturo.villagomez@donventas.mx</a>.</p><small>Referencia: DV-'+escapeHtml(error&&error.status?error.status:'CONEXION')+'</small><button type="button" class="btn dv-retry">Intentar de nuevo</button></div>'
-      : '<div class="dv-result-next"><b>Solicitud recibida</b><p>Revisaremos hechos e inferencias y, si existe encaje, te enviaremos por correo un diagnóstico en PDF con prioridades, alcance y siguiente paso. Plazo estimado: 3–5 días hábiles.</p></div>';
+      : '<div class="dv-result-next"><b>Solicitud recibida</b><p>Arturo revisará personalmente tus respuestas. Si hay información suficiente y existe encaje, te contactará por correo o WhatsApp con las oportunidades prioritarias y una propuesta del siguiente paso.</p></div>';
     return '<div class="dv-result"><span class="dv-result-kicker">Recomendación preliminar</span><h3>'+escapeHtml(result.name)+'</h3><p class="dv-result-band">'+escapeHtml(result.band)+'</p><p>'+escapeHtml(result.desc)+'</p>'+reasons+(result.start?'<div class="dv-result-plan"><b>Cómo empezar</b><p>'+escapeHtml(result.start)+'</p></div>':'')+deliveryMarkup+'<button type="button" class="btn dv-restart">Hacer otro diagnóstico</button></div>';
   };
   Diagnostic.prototype.bindResultActions=function(summary,result){
@@ -521,7 +521,7 @@
   };
   Diagnostic.prototype.track=function(name,data){try{if(root.va)root.va('event',{name:name,data:data||{}});}catch(_e){}}
 
-  root.DVDiagnostic={recommendation:recommendation,needsSearch:needsSearch,visibleQuestions:visibleQuestions,budgetContext:budgetContext,contactErrors:contactErrors,validWebUrl:validWebUrl};
+  root.DVDiagnostic={recommendation:recommendation,needsSearch:needsSearch,visibleQuestions:visibleQuestions,budgetContext:budgetContext,contactErrors:contactErrors,validWebUrl:validWebUrl,Diagnostic:Diagnostic};
   if(typeof module!=='undefined'&&module.exports)module.exports=root.DVDiagnostic;
   if(typeof document==='undefined')return;
   document.addEventListener('DOMContentLoaded',function(){[].slice.call(document.querySelectorAll('[data-dv-diagnostic]')).forEach(function(el){new Diagnostic(el);});});

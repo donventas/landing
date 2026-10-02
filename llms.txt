@@ -1,15 +1,15 @@
 # Don Ventas
 
-> Estudio de contenido y marca para PyMEs de México. Creamos contenido para redes y
-> sitios que ayudan a que más personas entiendan el negocio, lo encuentren y se
-> animen a contactarlo o comprar. Base en Ciudad de México y Mérida.
+> Estudio de contenido, sitios web y sistemas de marca para negocios de México.
+> Convertimos lo que un negocio sabe y hace en una presencia que las personas puedan
+> entender, encontrar y elegir. Base en Ciudad de México y Mérida.
 
 ## Qué hace Don Ventas
 
 - **Contenido para redes:** temas, textos y diseño para atraer personas con una necesidad real y
   acercarlas a una conversación o pedido.
-- **Sitio para aparecer en Google:** páginas, artículos y respuestas útiles para aparecer en
-  buscadores y generar confianza. Este trabajo incluye posicionamiento en buscadores (SEO).
+- **Sitio que explica y aparece:** páginas, artículos y respuestas útiles para que las personas
+  entiendan la oferta y el sitio pueda aparecer en buscadores. Incluye trabajo de SEO.
 - **Redes, sitio, buscadores e inteligencia artificial:** una solución conectada de contenido,
   SEO, AEO y GEO para atraer personas, responder preguntas y mejorar con resultados reales.
 - **Sistema de marca:** mensaje, identidad, reglas, archivos y plantillas para que equipos y
@@ -26,14 +26,12 @@ la capacidad de ejecución del negocio.
 
 ## Primer paso
 
-La llamada a la acción principal es **Recibe tu diagnóstico**. El visitante completa un
-formulario que pregunta el presupuesto al inicio y adapta las preguntas siguientes. Las
-mismas respuestas producen la misma recomendación preliminar; una persona revisa el PDF
-y la propuesta antes de enviarlos.
-
-Rangos orientativos: contenido desde $12,000 MXN al mes; sitio preparado para buscadores (SEO) desde $25,000 MXN
-de implementación; sistemas de marca desde $18,000 MXN por proyecto. El alcance final
-depende de profundidad, aplicaciones, materiales, ritmo y capacidad de operación.
+La llamada a la acción principal es **Solicita tu diagnóstico**. El formulario pregunta
+primero por el problema y el cambio que la persona busca. Después adapta las preguntas a
+esa situación y muestra una recomendación preliminar determinista. El presupuesto se pregunta
+al final mediante rangos abreviados en MXN que no incluyen IVA. Arturo Villagomez revisa
+personalmente cada solicitud antes de contactar por correo o WhatsApp y proponer el siguiente
+paso. El sitio no promete un PDF automático ni un plazo fijo de entrega.
 
 ## Enlaces canónicos
 
