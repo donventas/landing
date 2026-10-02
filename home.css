@@ -311,11 +311,14 @@ img{max-width:100%;display:block}
   .home-editorial .editorial-shell{width:calc(100% - 32px)}
   .nav-shell{min-height:62px;gap:12px}.wordmark img{width:124px}.nav-login{display:none}.editorial-button.compact{font-size:8px;padding:9px 10px;min-height:35px}
   .editorial-hero{padding-top:100px;padding-bottom:44px}
-  .hero-grid{gap:14px}
-  .situation-stage{order:-1}
+  .hero-grid{gap:0;align-items:stretch;border:1px solid rgba(238,241,246,.16);background:#11161e;overflow:hidden}
+  .situation-stage{order:-1;width:100%;justify-self:stretch;border:0;background:transparent}
+  .situation-stage::after{display:none}
+  .hero-copy{padding:26px 20px 30px;background:#11161e}
+  .hero-copy::before{content:"";position:absolute;z-index:-1;top:-54px;right:0;left:0;height:54px;background:linear-gradient(180deg,rgba(17,22,30,0),#11161e);pointer-events:none}
   .hero-copy h1{max-width:none;margin-top:17px;font-size:48px;line-height:.92}
   .hero-lede{margin-top:18px;font-size:16px;line-height:1.45}.hero-detail{display:none}.hero-actions{align-items:flex-start;flex-direction:column;gap:12px;margin-top:20px}.hero-actions .editorial-button{width:100%}.hero-actions .text-link{display:none}.hero-trust{margin-top:14px;font-size:8px}
-  .situation-stage{min-height:210px}.hero-scene,.hero-scene img{min-height:210px;height:210px;object-position:center 39%}.situation-stage figcaption{display:none}
+  .situation-stage{min-height:clamp(210px,64vw,250px)}.hero-scene,.hero-scene img{min-height:clamp(210px,64vw,250px);height:clamp(210px,64vw,250px);object-position:center 39%}.hero-scene::after{background:linear-gradient(180deg,rgba(14,17,23,.03) 48%,rgba(17,22,30,.9) 100%)}.situation-stage figcaption{display:none}
   .editorial-section,.paper-section,.faq-section,.contact-section{padding:84px 0}
   .section-heading h2,.method-copy h2,.founder-grid h2,.contact-copy h2{font-size:clamp(40px,12vw,58px)}
   .friction-grid{margin-top:48px}
@@ -332,7 +335,7 @@ img{max-width:100%;display:block}
 @media(max-width:360px){
   .home-editorial .editorial-shell{width:calc(100% - 24px)}
   .wordmark img{width:112px}.editorial-button.compact{padding-inline:8px;letter-spacing:.03em}
-  .hero-copy h1{font-size:43px}.situation-stage{min-height:200px}.hero-scene,.hero-scene img{min-height:200px;height:200px}
+  .hero-copy{padding:23px 16px 27px}.hero-copy h1{font-size:43px}.situation-stage{min-height:200px}.hero-scene,.hero-scene img{min-height:200px;height:200px}
 }
 @media(prefers-reduced-motion:reduce){
   .home-editorial *{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}

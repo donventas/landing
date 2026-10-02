@@ -78,7 +78,9 @@ test('leads with a capable customer situation before the mobile copy', () => {
   assert.match(html, /hero-situacion-capacidad-v1-960\.webp 960w/);
   assert.match(html, /Ya conoce su negocio\. Necesita que otros entiendan su valor\./);
   assert.doesNotMatch(html, /class="hero-signature"/);
-  assert.match(homeCss, /@media\(max-width:620px\)[\s\S]*?\.situation-stage\{order:-1\}/);
+  assert.match(homeCss, /@media\(max-width:620px\)[\s\S]*?\.situation-stage\{order:-1(?:;|\})/);
+  assert.match(homeCss, /@media\(max-width:620px\)[\s\S]*?\.hero-grid\{gap:0;align-items:stretch;border:/);
+  assert.match(homeCss, /@media\(max-width:620px\)[\s\S]*?\.hero-copy::before\{[^}]*linear-gradient/);
 });
 
 test('uses the lean home stylesheet and responsive uncropped method image', () => {

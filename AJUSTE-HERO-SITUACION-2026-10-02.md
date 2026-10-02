@@ -36,6 +36,10 @@ publicación.
   pero esta página ya no descarga su JavaScript ni su malla.
 - **Copy:** el titular aprobado se conserva; la entrada nombra la situación y la bajada
   identifica contenido para redes, sitios web y sistemas de marca.
+- **Composición móvil:** el encabezado de navegación permanece independiente. Dentro del
+  hero, fotografía, texto y CTA comparten un solo panel editorial: la escena abre arriba,
+  un degradado continuo evita el corte de «tarjeta» y el mensaje aparece inmediatamente
+  debajo sin perder el contexto visual.
 
 ## Fuente y derivados
 
@@ -70,7 +74,8 @@ luego toda la mesa, desde la perspectiva del personaje.
 - `index.html`: `picture` responsivo, texto alternativo y prioridad alta de carga; sin
   emblema ni ejecución 3D en el hero.
 - `home.css`: composición paralela en escritorio; en teléfono la escena aparece antes del
-  copy y del CTA para establecer el contexto antes de pedir una acción.
+  copy y del CTA dentro de un solo contenedor, para establecer el contexto antes de pedir
+  una acción y mantener ambos elementos en el mismo plano.
 - `blog/index.html`: se retiró la promesa inconsistente de un PDF automático; la revisión
   humana y el encaje vuelven a coincidir con el flujo público vigente.
 - Pruebas automáticas: referencias locales, SEO, accesibilidad básica, diagnóstico,
