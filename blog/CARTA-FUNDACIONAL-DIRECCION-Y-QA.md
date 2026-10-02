@@ -1,6 +1,6 @@
 # Carta fundacional de Don Ventas — dirección y QA
 
-**Estado:** preview candidato; revisión humana pendiente  
+**Estado:** preview actualizado; artículo aprobado y cierre técnico en QA
 **Rama:** `codex/foundational-blog`  
 **Base:** `donventas/landing` `main` en `ddfb761`  
 **Fecha:** 2026-10-02
@@ -41,26 +41,31 @@ Convertir la dirección aprobada para el primer artículo fundacional de Don Ven
 |---|---|---|
 | `blog/por-que-nacio-don-ventas.html` | pieza maestra nueva | Artículo, SEO, datos estructurados, retrato, CTA y progreso de lectura |
 | `blog/index.html` | adaptación para HUB | Carta fijada como artículo 00 y guía práctica conservada como segunda pieza |
+| `index.html` | integración en inicio | Carta como lectura editorial principal, guía práctica secundaria y ancla de autor |
 | `blog/blog.css` | familia compartida | Componentes específicos de la carta y tarjeta secundaria del HUB |
+| `home.css` | adaptación en inicio | Jerarquía de lectura y acceso a la historia del fundador |
 | `sitemap.xml` | índice técnico | Nueva URL y actualización del HUB |
 | `llms.txt` | índice semántico | Descripción y enlace de la carta fundacional |
-| `og-content.png` | derivado reutilizado | Sin cambio; una portada social propia queda diferida para no bloquear el preview editorial |
+| `og-fundacional-1200x630.jpg` | portada social | Composición horizontal para Open Graph y X |
+| `og-fundacional-1200x900.jpg` | portada social | Composición 4:3 para datos estructurados y superficies compatibles |
+| `og-fundacional-1200x1200.jpg` | portada social | Composición cuadrada para datos estructurados y reutilización editorial |
 
 ## Verificación realizada
 
-- 32/32 pruebas Node pasan.
+- Pruebas Node, referencias locales y dimensiones de portadas verificadas.
 - Un solo `h1`, canonical, `index,follow`, `BlogPosting` y breadcrumbs válidos.
 - Retrato con dimensiones, carga correcta y texto alternativo.
 - Enlaces locales resueltos y consola sin errores ni advertencias.
 - Sin desborde horizontal en 320, 390, 768 y 1440 px.
 - Revisión visual directa del hero, HUB, bloque de quiebre, contraste valor/percepción, propósito y cierre.
+- Revisión visual directa de las composiciones sociales 16:9, 4:3 y 1:1; el retrato se ensambla completo con `object-fit: contain` y no se recorta.
 - `prefers-reduced-motion` elimina las transiciones de la pieza.
 
 ## Limitaciones y compuertas
 
 - Las vistas responsive son simuladas; no sustituyen una prueba en dispositivo físico.
-- La página sigue pendiente de aceptación editorial del propietario.
-- La imagen social específica para este artículo no forma parte de este incremento.
+- La carta fue aprobada editorialmente por el propietario; la integración y los derivados permanecen en preview para revisión final.
+- Search Console y la solicitud de indexación solo aplican después de que la URL canónica exista en producción.
 - Merge y publicación permanecen bloqueados hasta autorización explícita posterior al preview.
 
 ## Rollback
