@@ -24,3 +24,14 @@
   Object.keys(byId).forEach(function(id){var section=document.getElementById(id);if(section)observer.observe(section);});
 })();
 
+(function(){
+  var entries=[].slice.call(document.querySelectorAll('[data-blog-entry]'));
+  if(!entries.length)return;
+  entries.forEach(function(link){
+    link.addEventListener('click',function(){
+      if(typeof window.va!=='function')return;
+      window.va('event',{name:'blog_path_selected',data:{path:link.getAttribute('data-blog-entry')}});
+    });
+  });
+})();
+
