@@ -62,17 +62,25 @@ test('images have alternative text and external new tabs are isolated', () => {
   assert.deepEqual(newTabs.filter(tag => !/\brel="[^"]*noopener[^"]*"/i.test(tag)), []);
 });
 
-test('uses the traced B6 mark and the reviewed 3D mesh exactly', () => {
+test('keeps the canonical wordmark without loading the 3D emblem in the hero', () => {
   assert.equal(
-    sha256('assets/brand/donventas-symbol-b-reverse.svg'),
-    'a5d38ac61e4e34887678988c1731e5d4756a862470662b13ce0b7fe339d59d75'
+    sha256('assets/brand/donventas-wordmark-b6-reverse.svg'),
+    'c3a0810940289164ff5a40b3ac2524de10d43d12c98743ad41c4089aedb8a90a'
   );
-  assert.equal(
-    sha256('assets/motion/exports/symbol-b-mesh.json'),
-    'b730cd15d01ecc5e923c22db172145e4010cdb337e2c01812ae5b4fd61155e1b'
-  );
-  assert.match(html, /data-hero-mark/);
-  assert.match(html, /src="assets\/motion\/hero-mark-3d\.js"/);
+  assert.match(html, /donventas-wordmark-b6-reverse\.svg/);
+  assert.doesNotMatch(html, /data-hero-mark|hero-mark-3d\.js/);
+});
+
+test('leads with a capable customer situation before the mobile copy', () => {
+  const homeCss = fs.readFileSync(path.join(root, 'home.css'), 'utf8');
+  assert.match(html, /Para cuando tienes algo valioso que todavía pocos entienden/);
+  assert.match(html, /hero-situacion-capacidad-v1-640\.webp/);
+  assert.match(html, /hero-situacion-capacidad-v1-960\.webp 960w/);
+  assert.match(html, /Ya conoce su negocio\. Necesita que otros entiendan su valor\./);
+  assert.doesNotMatch(html, /class="hero-signature"/);
+  assert.match(homeCss, /@media\(max-width:620px\)[\s\S]*?\.situation-stage\{order:-1(?:;|\})/);
+  assert.match(homeCss, /@media\(max-width:620px\)[\s\S]*?\.hero-grid\{gap:0;align-items:stretch;border:/);
+  assert.match(homeCss, /@media\(max-width:620px\)[\s\S]*?\.hero-copy::before\{[^}]*linear-gradient/);
 });
 
 test('uses the lean home stylesheet and responsive uncropped method image', () => {
@@ -83,12 +91,10 @@ test('uses the lean home stylesheet and responsive uncropped method image', () =
   assert.match(html, /width="960" height="720"/);
 });
 
-test('exposes accessible diagnostic progress semantics and deferred motion', () => {
+test('exposes accessible diagnostic progress semantics', () => {
   const diagnostic = fs.readFileSync(path.join(root, 'diagnostico-v2.js'), 'utf8');
-  const motion = fs.readFileSync(path.join(root, 'assets', 'motion', 'hero-mark-3d.js'), 'utf8');
   assert.match(diagnostic, /role="progressbar"/);
   assert.match(diagnostic, /aria-valuenow/);
-  assert.match(motion, /requestIdleCallback/);
 });
 
 test('declares security headers and cache policies for deployment', () => {
