@@ -1,5 +1,8 @@
-.blog-page{--paper:#F3EFE9;--ink:#24211D;overflow-x:hidden}
+.blog-page{--paper:#F3EFE9;--ink:#24211D;--fg-faint:#7C8798;overflow-x:hidden}
 .blog-main{padding-top:69px}
+.blog-page .brand i{color:#6E97F6}
+.blog-page .btn.solid{background:#2F65D8;border-color:#2F65D8}
+.blog-page .btn.solid:hover{background:#3A70E8;border-color:#3A70E8;color:#fff}
 .blog-page .skip-link{position:fixed;z-index:1000;left:16px;top:12px;transform:translateY(-180%);padding:10px 14px;background:#fff;color:#0E1117;border-radius:4px;font-family:var(--mono);font-size:12px}
 .blog-page .skip-link:focus{transform:none}
 .blog-page :focus-visible{outline:2px solid #6E97F6;outline-offset:4px}
