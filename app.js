@@ -34,7 +34,7 @@ window.va = window.va || function () { (window.vaq = window.vaq || []).push(argu
     link.addEventListener('focus',loadDiagnostic,{once:true});
     link.addEventListener('click',loadDiagnostic,{once:true});
   });
-  if(location.hash==='#contacto'){loadDiagnostic();return;}
+  if(location.hash==='#contacto'||location.hash==='#diagnostico'){loadDiagnostic();return;}
   if('IntersectionObserver' in window){
     var observer=new IntersectionObserver(function(entries){
       if(entries[0].isIntersecting){observer.disconnect();loadDiagnostic();}
