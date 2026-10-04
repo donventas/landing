@@ -405,13 +405,24 @@
 }
 
 /* A situational joke needs all its protagonists, not a portrait crop. */
-.article-cover-illustrated .article-cover-figure{display:flex;flex-direction:column;justify-content:center;min-height:0;background:#11161E;aspect-ratio:auto}
+.article-cover-illustrated .article-cover-grid{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+.article-cover-illustrated .article-cover-figure{display:flex;flex-direction:column;justify-content:center;min-height:0;border:0;background:transparent;aspect-ratio:auto;overflow:visible}
 .article-cover-illustrated .article-cover-figure picture{position:relative;inset:auto;display:block;width:100%}
 .article-cover-illustrated .article-cover-figure img{display:block;width:100%;height:auto;object-fit:contain;filter:none}
+.article-cover-illustrated .article-cover-figure picture::after{content:"";position:absolute;inset:-1px;pointer-events:none;background:linear-gradient(90deg,#11161E,transparent 8%),linear-gradient(180deg,#11161E,transparent 6%,transparent 90%,#11161E)}
 .article-cover-illustrated .article-cover-figure::after{display:none}
-.article-cover-illustrated .article-cover-figure figcaption{position:static;display:block;margin:20px 22px;padding-top:14px;color:var(--fg-soft);border-color:var(--line);font-size:10px;line-height:1.6;letter-spacing:.035em;text-transform:none}
+.article-cover-illustrated .article-cover-figure figcaption{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;padding:0;margin:-1px;border:0}
+.article-cover-illustrated .article-cover-copy{position:relative;z-index:3;padding:clamp(32px,4vw,54px)}
+.article-cover-illustrated .cover-source{font-size:11px;line-height:1.5;color:var(--fg-soft);margin-top:18px}
 .article-cover-illustrated h1{font-size:clamp(43px,5vw,72px)}
 @media(max-width:1120px){
-  .article-cover-illustrated .article-cover-figure{border-bottom:0}
-  .article-cover-illustrated .article-cover-copy{padding-top:22px}
+  .article-cover-illustrated .article-cover-grid{grid-template-columns:1fr}
+  .article-cover-illustrated .article-cover-figure{border:0}
+  .article-cover-illustrated .article-cover-figure picture::after{inset:0 0 -1px;background:linear-gradient(180deg,transparent 86%,#11161E 100%)}
+  .article-cover-illustrated .article-cover-copy{margin-top:-1px;padding-top:12px}
+  .article-cover-illustrated .article-folio-spaced{margin-top:20px}
+}
+@media(max-width:520px){
+  .article-cover-illustrated .article-cover-copy{padding:12px 22px 34px}
+  .article-cover-illustrated .article-breadcrumbs{font-size:9px}
 }

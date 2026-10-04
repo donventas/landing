@@ -155,3 +155,13 @@ test('gives the second article an authentic business point of view without inven
   assert.match(guide, /No puedo prometer que una explicación clara, por sí sola, conseguirá una venta/);
   assert.doesNotMatch(guide, /ventas garantizadas|resultados garantizados|millones de seguidores/i);
 });
+
+test('integrates the conceptual cover without cropping or an intervening caption band', () => {
+  const css = fs.readFileSync(path.join(root, 'blog', 'blog.css'), 'utf8');
+  assert.match(guide, /article-cover-illustrated/);
+  assert.match(guide, /class="cover-source">Portada conceptual generada con IA/);
+  assert.match(css, /\.article-cover-illustrated \.article-cover-figure img\{[^}]*height:auto;object-fit:contain/);
+  assert.match(css, /\.article-cover-illustrated \.article-cover-figure picture::after\{[^}]*pointer-events:none;[^}]*linear-gradient/);
+  assert.match(css, /\.article-cover-illustrated \.article-cover-figure figcaption\{[^}]*clip-path:inset\(50%\)/);
+  assert.match(css, /@media\(max-width:1120px\)\{\s*\.article-cover-illustrated \.article-cover-grid\{grid-template-columns:1fr\}/);
+});
