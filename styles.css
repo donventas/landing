@@ -34,6 +34,9 @@ img{max-width:100%;display:block}
 .nav .in{max-width:var(--maxw);margin:0 auto;padding:14px var(--gut);display:flex;align-items:center;gap:24px}
 .brand{display:flex;align-items:center;gap:11px;color:var(--fg)}
 .brand svg{width:26px;height:26px;flex:none}
+.brand .brand-wordmark{display:block;width:100px;height:auto;flex:none}
+.foot .brand-symbol{width:26px;height:26px;flex:none}
+@media(max-width:720px){.brand .brand-wordmark{width:88px}}
 .brand b{font-weight:800;letter-spacing:-.02em;font-size:15px;line-height:.9}
 .brand i{color:var(--accent);font-style:normal}
 .brand .tm{font-size:.6em;vertical-align:super;color:var(--fg-soft);font-weight:400;margin-left:1px;line-height:1}

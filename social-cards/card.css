@@ -10,7 +10,7 @@ body { background:var(--ink); color:var(--paper); font-family:'Schibsted Grotesk
   linear-gradient(90deg, rgba(238,241,246,.045) 1px, transparent 1px), var(--ink); background-size:auto,72px 72px,72px 72px,auto; }
 .card::after { content:""; position:absolute; inset:12px; border:1px solid rgba(238,241,246,.12); pointer-events:none; }
 .mast { position:relative; z-index:2; display:flex; align-items:center; justify-content:space-between; height:72px; }
-.logo { display:block; width:240px; height:auto; }
+.logo { display:block; width:auto; height:62px; }
 .number { font-family:'Space Mono',monospace; color:#7f8999; font-size:15px; letter-spacing:.11em; }
 .layout { position:relative; z-index:2; display:grid; grid-template-columns:minmax(0,730px) 1fr; gap:70px; align-items:end; height:414px; }
 .eyebrow { margin:0 0 22px; color:#9ca7b7; font-family:'Space Mono',monospace; font-size:15px; font-weight:700; line-height:1.4; letter-spacing:.12em; text-transform:uppercase; }
@@ -47,7 +47,7 @@ h1 em { color:var(--blue); font-family:Georgia,'Times New Roman',serif; font-wei
   radial-gradient(circle at 82% 30%, rgba(59,116,242,.2), transparent 31%),
   linear-gradient(112deg,rgba(255,255,255,.028),transparent 48%), var(--ink); }
 .foundation-card .mast { height:62px; }
-.foundation-card .logo { width:218px; }
+.foundation-card .logo { width:auto; height:62px; }
 .foundation-layout { position:relative; z-index:2; display:grid; grid-template-columns:minmax(0,1.35fr) minmax(300px,.65fr); gap:52px; align-items:center; height:430px; }
 .foundation-copy .eyebrow { margin-bottom:18px; color:#8CACF7; }
 .foundation-copy h1 { max-width:9.6ch; font-size:73px; }
