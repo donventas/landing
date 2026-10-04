@@ -1,6 +1,7 @@
 # Workflow editorial de Don Ventas
 
-Versión 1 · Dirección aprobada por Arturo el 3 de octubre de 2026.
+Versión 1.1 · Dirección del 3 de octubre de 2026; ajuste de jerarquía de notas
+solicitado por Arturo el 4 de octubre de 2026 (implementación en revisión).
 Ámbito: este sitio; no modifica el método universal de BSB/AVOS.
 
 ## Activación y resultado
@@ -83,6 +84,38 @@ registra como desconocida; no bloquea un ensayo útil aprobado como exploración
 
 **Compuerta:** revisión editorial de Arturo. La aprobación anterior de otra pieza
 no autoriza un relato nuevo; un cambio técnico no debe reabrir copy protegido.
+
+### Regla de notas: transparencia sin interrumpir el relato
+
+La narración lleva el hilo; las notas ayudan a comprobarlo. No convertir cada
+ejemplo, imagen o dato en un bloque defensivo del mismo peso que el artículo.
+Antes de añadir una nota, decidir qué interpretación incorrecta evita.
+
+1. **Esencial y visible:** mantener junto al elemento una frase breve si cambia
+   su interpretación. Ejemplos: «Ilustración con IA · escena ficticia» o
+   «Ejemplo ilustrativo · no es una campaña probada». Nunca ocultar que una
+   imagen es ficticia ni presentar una propuesta como resultado obtenido.
+2. **Fuente vinculada al dato:** citar con enlace descriptivo cerca del claim.
+   El alcance que evita una generalización engañosa pertenece a la frase
+   principal; muestra, fecha de trabajo de campo y límites adicionales pueden
+   ir en un desplegable «Sobre la encuesta y sus límites».
+3. **Detalle disponible, no obligatorio:** usar HTML nativo `details/summary`,
+   sin nuevos scripts, tooltips exclusivos de hover ni texto cargado después
+   de pulsar. Un lector debe poder consultarlo con teclado o teléfono.
+4. **Sin redundancia:** si el relato ya matiza una conclusión, no repetir el
+   mismo descargo en un recuadro largo. No eliminar límites sustantivos,
+   atribución, privacidad o contexto necesario por hacer la pieza más atractiva.
+5. **Jerarquía legible:** notas de al menos 14 px como base de esta familia,
+   contraste AA y área de acción de al menos 44 px. Menor protagonismo mediante
+   extensión, ritmo y peso; no mediante texto diminuto o de bajo contraste.
+   Comprobar estilos calculados: las reglas generales del artículo no deben
+   sobrescribir las notas. Revisar 320/390/768/escritorio, zoom y foco.
+
+En cada revisión recorrer el artículo con los detalles cerrados y después
+abiertos. Cerrados: historia comprensible y no engañosa. Abiertos: evidencia
+consultable y enlaces operativos. No añadir notas a la carta fundacional
+por simetría cuando su relato no las necesita. Aceptación estética, rigor
+de la evidencia y eficacia comercial siguen siendo verificaciones distintas.
 
 ## 5. Portada y publicación técnica
 
