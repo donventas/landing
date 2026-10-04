@@ -138,7 +138,7 @@
 .article-hero h1 em{font-style:italic;color:var(--accent);font-weight:500}
 .article-dek{font-size:clamp(18px,2.2vw,24px);line-height:1.55;color:var(--fg-soft);max-width:44ch;margin-top:32px}
 .article-meta{display:flex;flex-wrap:wrap;gap:12px 28px;margin-top:38px;padding-top:20px;border-top:1px solid var(--line);font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--fg-faint)}
-.article-layout{display:grid;grid-template-columns:240px minmax(0,740px);gap:clamp(42px,8vw,110px);align-items:start;padding:clamp(64px,9vw,110px) 0}
+.article-layout{display:grid;grid-template-columns:240px minmax(0,740px);gap:clamp(42px,8vw,110px);align-items:start;padding-block:clamp(64px,9vw,110px)}
 .article-toc{position:sticky;top:112px}
 .article-toc .label{font-family:var(--mono);font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--fg-faint)}
 .article-toc ol{list-style:none;margin-top:18px;border-top:1px solid var(--line)}

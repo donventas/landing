@@ -165,3 +165,23 @@ test('integrates the conceptual cover without cropping or an intervening caption
   assert.match(css, /\.article-cover-illustrated \.article-cover-figure figcaption\{[^}]*clip-path:inset\(50%\)/);
   assert.match(css, /@media\(max-width:1120px\)\{\s*\.article-cover-illustrated \.article-cover-grid\{grid-template-columns:1fr\}/);
 });
+
+test('uses approved editorial numbering and distinguishes publication from revision', () => {
+  assert.match(article, /Artículo 01 · Origen/);
+  assert.match(guide, /Artículo 02 · Experiencia y criterio/);
+  assert.match(hub, /Artículo 01 · Carta fundacional/);
+  assert.match(hub, /Artículo 02 · Experiencia y criterio/);
+  for (const html of [article, guide]) {
+    const published = html.match(/"datePublished":"([^"]+)"/)[1].slice(0,10);
+    const modified = html.match(/"dateModified":"([^"]+)"/)[1].slice(0,10);
+    assert.ok(html.includes(`Publicado el <time datetime="${published}">`));
+    assert.ok(html.includes(`Actualizado el <time datetime="${modified}">`));
+  }
+});
+
+test('preserves shared horizontal reading gutters on article layout', () => {
+  const css = fs.readFileSync(path.join(root, 'blog', 'blog.css'), 'utf8');
+  const rules = [...css.matchAll(/\.article-layout\{([^}]+)\}/g)].map(m => m[1]);
+  assert.ok(rules.some(rule => /padding-block:/.test(rule)));
+  assert.ok(rules.every(rule => !/(?:^|;)padding:|padding-inline:0/.test(rule)));
+});
