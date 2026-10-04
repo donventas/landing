@@ -45,8 +45,9 @@ paso. El sitio no promete un PDF automático ni un plazo fijo de entrega.
 - [Por qué nació Don Ventas](https://www.donventas.mx/blog/por-que-nacio-don-ventas.html):
   carta fundacional sobre la distancia entre el valor que existe dentro de un negocio y lo que
   las personas alcanzan a entender, encontrar y elegir.
-- [Cómo crear contenido que atraiga clientes](https://www.donventas.mx/blog/contenido-que-atrae-clientes.html):
-  guía para responder dudas reales, demostrar por qué confiar y facilitar una siguiente acción.
+- [Antes de crear contenido, entiende qué resuelve el negocio](https://www.donventas.mx/blog/contenido-que-atrae-clientes.html):
+  artículo sobre cómo comprender la oferta, la operación y las decisiones del cliente antes de
+  definir mensajes, piezas o un calendario de publicaciones.
 - [Centro Legal](https://www.donventas.mx/15_LEGAL/Centro%20Legal.html): privacidad,
   términos y política de cookies.
 

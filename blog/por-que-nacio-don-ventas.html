@@ -33,6 +33,7 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="preload" href="/assets/fonts/schibsted-grotesk-latin-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/assets/fonts/schibsted-grotesk-latin-italic.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" as="image" href="/assets/editorial/fundador-editorial-768.webp" imagesrcset="/assets/editorial/fundador-editorial-480.webp 480w, /assets/editorial/fundador-editorial-768.webp 768w, /assets/editorial/fundador-editorial-1024.webp 1024w" imagesizes="(max-width: 900px) calc(100vw - 40px), 34vw">
 <link rel="stylesheet" href="/assets/fonts/fonts.css">
 <link rel="stylesheet" href="/styles.css">
 <link rel="stylesheet" href="/blog/blog.css">
@@ -70,7 +71,10 @@
         <div class="article-meta"><span>Por Arturo Villagomez</span><span>2 de octubre de 2026</span><span>Lectura aproximada: 8 min</span></div>
       </div>
       <figure class="founder-figure reveal d2">
-        <img src="/fundador.jpg" width="1024" height="1024" alt="Retrato de Arturo Villagomez, fundador de Don Ventas" loading="eager" fetchpriority="high">
+        <picture>
+          <source media="(max-width: 600px)" srcset="/assets/editorial/fundador-editorial-480.webp 480w, /assets/editorial/fundador-editorial-768.webp 768w" sizes="calc(100vw - 40px)">
+          <img src="/assets/editorial/fundador-editorial-768.webp" srcset="/assets/editorial/fundador-editorial-480.webp 480w, /assets/editorial/fundador-editorial-768.webp 768w, /assets/editorial/fundador-editorial-1024.webp 1024w" sizes="(max-width: 900px) calc(100vw - 40px), 34vw" width="1024" height="1024" alt="Retrato de Arturo Villagomez, fundador de Don Ventas" loading="eager" fetchpriority="high" decoding="async">
+        </picture>
         <figcaption><span>Arturo Villagomez</span><span>Fundador · Don Ventas</span></figcaption>
       </figure>
     </div>

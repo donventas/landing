@@ -55,7 +55,7 @@ test('provides article metadata, structured data and an accessible portrait', ()
     '/og-fundacional-1200x900.jpg',
     '/og-fundacional-1200x630.jpg'
   ]);
-  assert.match(article, /<img[^>]+src="\.\.\/fundador\.jpg"[^>]+alt="Retrato de Arturo Villagomez, fundador de Don Ventas"/);
+  assert.match(article, /<img[^>]+src="\/assets\/editorial\/fundador-editorial-768\.webp"[^>]+alt="Retrato de Arturo Villagomez, fundador de Don Ventas"/);
 });
 
 test('ships native social compositions for the three article image ratios', () => {
@@ -73,14 +73,14 @@ test('integrates the article into the homepage and broadens the public audience'
 });
 
 test('keeps a reciprocal editorial path between the foundation and the guide', () => {
-  assert.match(article, /href="contenido-que-atrae-clientes\.html">Leer la guía de contenido/);
-  assert.match(guide, /href="por-que-nacio-don-ventas\.html">Leer por qué nació Don Ventas/);
+  assert.match(article, /href="\/blog\/contenido-que-atrae-clientes\.html"[^>]*>Leer la guía de contenido/);
+  assert.match(guide, /href="\/blog\/por-que-nacio-don-ventas\.html"[^>]*>Leer por qué nació Don Ventas/);
   assert.doesNotMatch(guide, /diagnóstico en PDF/);
   assert.doesNotMatch(hub, /diagnóstico en PDF/);
 });
 
 test('links the hub, sitemap and llms index to the new article', () => {
-  assert.match(hub, /href="por-que-nacio-don-ventas\.html"/);
+  assert.match(hub, /href="\/blog\/por-que-nacio-don-ventas\.html"/);
   assert.match(fs.readFileSync(path.join(root, 'sitemap.xml'), 'utf8'), /blog\/por-que-nacio-don-ventas\.html/);
   assert.match(fs.readFileSync(path.join(root, 'llms.txt'), 'utf8'), /blog\/por-que-nacio-don-ventas\.html/);
 });
@@ -92,7 +92,53 @@ test('all local references in the article resolve', () => {
   );
   const missing = local.filter(value => {
     const clean = decodeURIComponent(value.split(/[?#]/)[0]);
-    return !fs.existsSync(path.resolve(path.dirname(articlePath), clean));
+    const resolved = clean.startsWith('/')
+      ? path.resolve(root, clean.slice(1))
+      : path.resolve(path.dirname(articlePath), clean);
+    return !fs.existsSync(resolved);
   });
   assert.deepEqual(missing, []);
+});
+
+test('presents the hub as an editorial cover and keeps routes situation-first', () => {
+  assert.match(hub, /class="blog-masthead publication-cover"/);
+  assert.match(hub, /class="publication-visual/);
+  assert.match(hub, /blog-hub-cover-480\.webp 480w, \/assets\/editorial\/blog-hub-cover-960\.webp 960w/);
+  assert.match(hub, /Desde el escritorio de Arturo/);
+  assert.match(hub, /class="situation-ledger\b/);
+  assert.equal((hub.match(/class="situation-row"/g) || []).length, 4);
+  assert.doesNotMatch(hub, /class="situation-grid"/);
+});
+
+test('ships responsive editorial covers without loading oversized source images', () => {
+  assert.match(article, /fundador-editorial-480\.webp 480w/);
+  assert.match(guide, /class="article-cover-figure/);
+  assert.match(guide, /article-understand-business-480\.webp 480w/);
+  assert.match(guide, /width="1440" height="960"/);
+
+  const optimized = [
+    'assets/editorial/blog-hub-cover-480.webp',
+    'assets/editorial/blog-hub-cover-960.webp',
+    'assets/editorial/blog-hub-cover-1440.webp',
+    'assets/editorial/blog-hub-cover-portrait-480.webp',
+    'assets/editorial/blog-hub-cover-portrait-720.webp',
+    'assets/editorial/article-understand-business-480.webp',
+    'assets/editorial/article-understand-business-960.webp',
+    'assets/editorial/article-understand-business-1440.webp',
+    'assets/editorial/fundador-editorial-480.webp',
+    'assets/editorial/fundador-editorial-768.webp',
+    'assets/editorial/fundador-editorial-1024.webp',
+  ];
+  for (const file of optimized) {
+    assert.ok(fs.statSync(path.join(root, file)).size < 100_000, `${file} should stay below 100 KB`);
+  }
+});
+
+test('gives the second article an authentic business point of view without invented results', () => {
+  assert.match(guide, /No escribo esto desde la historia de haber conseguido miles de clientes/);
+  assert.match(guide, /No llegué al marketing desde el marketing/);
+  assert.match(guide, /más de 20 empresas/);
+  assert.match(guide, /El contenido es una salida de un sistema/);
+  assert.match(guide, /Todavía no presento esta idea como una fórmula probada para garantizar clientes/);
+  assert.doesNotMatch(guide, /ventas garantizadas|resultados garantizados|millones de seguidores/i);
 });

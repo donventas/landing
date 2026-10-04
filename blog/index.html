@@ -13,20 +13,23 @@
 <meta property="og:locale" content="es_MX">
 <meta property="og:title" content="Ideas de contenido, marca y sitios web para atraer clientes — Don Ventas">
 <meta property="og:description" content="Respuestas claras para convertir lo que sabes en contenido que ayuda a entender, encontrar y elegir tu negocio.">
-<meta property="og:image" content="https://www.donventas.mx/og-content.png?v=20260927-2">
+<meta property="og:image" content="https://www.donventas.mx/og-blog-editorial.jpg?v=20261003-1">
+<meta property="og:image:type" content="image/jpeg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Don Ventas — ideas para atraer clientes con contenido">
+<meta property="og:image:alt" content="Una persona organiza ideas y materiales para convertir conocimiento de negocio en comunicación clara">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Ideas de contenido, marca y sitios web para atraer clientes — Don Ventas">
 <meta name="twitter:description" content="Guías claras para explicar mejor tu negocio y acercar conversaciones con posibles clientes.">
-<meta name="twitter:image" content="https://www.donventas.mx/og-content.png?v=20260927-2">
+<meta name="twitter:image" content="https://www.donventas.mx/og-blog-editorial.jpg?v=20261003-1">
 <meta name="theme-color" content="#0E1117">
 <link rel="icon" href="/favicon.svg">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="preload" href="/assets/fonts/schibsted-grotesk-latin-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/assets/fonts/schibsted-grotesk-latin-italic.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" as="image" href="/assets/editorial/blog-hub-cover-480.webp" imagesrcset="/assets/editorial/blog-hub-cover-480.webp 480w, /assets/editorial/blog-hub-cover-960.webp 960w" imagesizes="calc(100vw - 40px)" media="(max-width: 900px)">
+<link rel="preload" as="image" href="/assets/editorial/blog-hub-cover-portrait-720.webp" imagesrcset="/assets/editorial/blog-hub-cover-portrait-480.webp 480w, /assets/editorial/blog-hub-cover-portrait-720.webp 720w" imagesizes="38vw" media="(min-width: 901px)">
 <link rel="stylesheet" href="/assets/fonts/fonts.css">
 <link rel="stylesheet" href="/styles.css">
 <link rel="stylesheet" href="/blog/blog.css">
@@ -34,7 +37,7 @@
 {
   "@context":"https://schema.org",
   "@graph":[
-    {"@type":"CollectionPage","@id":"https://www.donventas.mx/blog/#page","url":"https://www.donventas.mx/blog/","name":"Ideas para atraer clientes con contenido y marca","description":"Guías de Don Ventas sobre contenido, marca, buscadores y decisiones de compra.","isPartOf":{"@id":"https://www.donventas.mx/#website"},"publisher":{"@id":"https://www.donventas.mx/#org"},"inLanguage":"es-MX","mainEntity":{"@type":"ItemList","numberOfItems":2,"itemListElement":[{"@type":"ListItem","position":1,"url":"https://www.donventas.mx/blog/por-que-nacio-don-ventas.html","name":"El valor no siempre habla por sí solo"},{"@type":"ListItem","position":2,"url":"https://www.donventas.mx/blog/contenido-que-atrae-clientes.html","name":"Cómo crear contenido que atraiga clientes y no solo reacciones"}]}},
+    {"@type":"CollectionPage","@id":"https://www.donventas.mx/blog/#page","url":"https://www.donventas.mx/blog/","name":"Ideas para atraer clientes con contenido y marca","description":"Guías de Don Ventas sobre contenido, marca, buscadores y decisiones de compra.","isPartOf":{"@id":"https://www.donventas.mx/#website"},"publisher":{"@id":"https://www.donventas.mx/#org"},"inLanguage":"es-MX","mainEntity":{"@type":"ItemList","numberOfItems":2,"itemListElement":[{"@type":"ListItem","position":1,"url":"https://www.donventas.mx/blog/por-que-nacio-don-ventas.html","name":"El valor no siempre habla por sí solo"},{"@type":"ListItem","position":2,"url":"https://www.donventas.mx/blog/contenido-que-atrae-clientes.html","name":"Antes de crear contenido, entiende qué resuelve el negocio"}]}},
     {"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Inicio","item":"https://www.donventas.mx/"},{"@type":"ListItem","position":2,"name":"Ideas","item":"https://www.donventas.mx/blog/"}]}
   ]
 }
@@ -59,45 +62,35 @@
 </div>
 
 <main class="blog-main" id="contenido">
-  <header class="blog-masthead">
-    <div class="wrap blog-mast-grid">
-      <div class="reveal">
+  <header class="blog-masthead publication-cover">
+    <div class="wrap publication-cover-grid">
+      <div class="publication-title reveal">
         <div class="blog-folio">Ideas · Don Ventas · Edición 01</div>
-        <h1>Ideas para que tu negocio pueda ser <em>entendido, encontrado y elegido.</em></h1>
-        <p class="blog-deck">Explicamos contenido, marca y buscadores sin palabras innecesarias. Cada guía debe ayudarte a tomar una decisión o aplicar algo útil.</p>
+        <p class="publication-name" aria-hidden="true">El cuaderno del Don</p>
+        <h1>Ideas para hacer visible el <em>valor de un negocio.</em></h1>
+        <p class="blog-deck">Contenido, marca, sitios y decisiones comerciales explicados con claridad. Sin palabras innecesarias y sin separar la comunicación de cómo funciona el negocio.</p>
       </div>
-      <aside class="editorial-note reveal d2" aria-labelledby="principio-editorial">
-        <span class="label" id="principio-editorial">Principio editorial</span>
-        <p><strong>No publicamos para llenar un calendario.</strong> Partimos de una pregunta real, mostramos el criterio y cerramos con una acción que el negocio pueda observar.</p>
-      </aside>
+      <figure class="publication-visual reveal d2">
+        <picture>
+          <source media="(min-width: 901px)" srcset="/assets/editorial/blog-hub-cover-portrait-480.webp 480w, /assets/editorial/blog-hub-cover-portrait-720.webp 720w" sizes="38vw">
+          <source media="(max-width: 600px)" srcset="/assets/editorial/blog-hub-cover-480.webp 480w, /assets/editorial/blog-hub-cover-960.webp 960w" sizes="calc(100vw - 40px)">
+          <img src="/assets/editorial/blog-hub-cover-960.webp" srcset="/assets/editorial/blog-hub-cover-480.webp 480w, /assets/editorial/blog-hub-cover-960.webp 960w, /assets/editorial/blog-hub-cover-1440.webp 1440w" sizes="(max-width: 900px) calc(100vw - 40px), 38vw" width="1440" height="960" alt="Una persona organiza notas y materiales de negocio sobre una mesa de trabajo" loading="eager" fetchpriority="high" decoding="async">
+        </picture>
+        <figcaption><span>Edición 01</span><span>Entender antes de comunicar</span></figcaption>
+      </figure>
+      <div class="publication-index reveal d2">
+        <span class="label">En esta edición</span>
+        <ol>
+          <li><a href="#carta"><span>00</span>El valor no siempre habla por sí solo</a></li>
+          <li><a href="#guia"><span>01</span>Entender antes de comunicar</a></li>
+          <li><a href="#situaciones"><span>02</span>Empieza por lo que necesitas resolver</a></li>
+        </ol>
+        <p><strong>Una idea debe servir para decidir.</strong> Por eso cada lectura parte de una situación real, explica el criterio y propone un siguiente paso.</p>
+      </div>
     </div>
   </header>
 
-  <section class="situation-section" aria-labelledby="situation-title">
-    <div class="wrap">
-      <div class="section-folio">Empieza por tu situación</div>
-      <div class="situation-heading reveal">
-        <h2 id="situation-title">¿Qué necesitas resolver ahora?</h2>
-        <p>No tienes que conocer términos de marketing. Elige la situación que más se parece a la tuya y continúa por una lectura o una ruta concreta.</p>
-      </div>
-      <div class="situation-grid reveal">
-        <a class="situation-card" href="/blog/contenido-que-atrae-clientes.html" data-blog-entry="situacion-que-publicar">
-          <span class="situation-no">01</span><h3>No sé qué publicar</h3><p>Convierte dudas reales de tus clientes en contenido útil que facilite el siguiente paso.</p><strong>Leer la guía <span aria-hidden="true">→</span></strong>
-        </a>
-        <a class="situation-card" href="/blog/por-que-nacio-don-ventas.html" data-blog-entry="situacion-no-entienden">
-          <span class="situation-no">02</span><h3>La gente no entiende lo que vendo</h3><p>Identifica por qué una oferta valiosa puede seguir siendo difícil de explicar y elegir.</p><strong>Leer la carta <span aria-hidden="true">→</span></strong>
-        </a>
-        <a class="situation-card" href="/#oferta" data-blog-entry="situacion-buscadores">
-          <span class="situation-no">03</span><h3>Quiero aparecer en buscadores</h3><p>Conoce la ruta para construir un sitio útil que ayude a Google y a las personas a entender tu negocio.</p><strong>Ver la ruta <span aria-hidden="true">→</span></strong>
-        </a>
-        <a class="situation-card" href="/branding.html" data-blog-entry="situacion-confianza">
-          <span class="situation-no">04</span><h3>Necesito transmitir más confianza</h3><p>Revisa cómo un sistema de marca puede dar consistencia a lo que dices, muestras y entregas.</p><strong>Ver sistemas de marca <span aria-hidden="true">→</span></strong>
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <section class="blog-section">
+  <section class="blog-section cover-story-section" id="carta">
     <div class="wrap">
       <div class="section-folio">00 · Carta fundacional</div>
       <a class="feature-story reveal" href="/blog/por-que-nacio-don-ventas.html" data-blog-entry="carta-fundacional">
@@ -122,14 +115,46 @@
     </div>
   </section>
 
-  <section class="blog-section">
-    <div class="wrap">
-      <div class="section-folio">01 · Guía más reciente</div>
-      <a class="story-row-card reveal" href="/blog/contenido-que-atrae-clientes.html" data-blog-entry="guia-contenido">
-        <div><span class="feature-kicker">Contenido · Guía práctica</span><h2>Cómo crear contenido que atraiga clientes y no solo reacciones</h2></div>
-        <p>Una forma sencilla de pasar de “¿qué publico?” a una pieza que responde una duda, demuestra por qué confiar y facilita el siguiente paso.</p>
-        <div class="story-row-end"><span>27 sep 2026 · 8 min</span><strong>Leer la guía →</strong></div>
-      </a>
+  <section class="blog-section desk-section" id="guia">
+    <div class="wrap desk-grid">
+      <div>
+        <div class="section-folio">01 · Guía de trabajo</div>
+        <a class="desk-story reveal" href="/blog/contenido-que-atrae-clientes.html" data-blog-entry="guia-contenido">
+          <span class="feature-kicker">Negocio · Contenido · Criterio</span>
+          <h2>Antes de crear contenido, entiende qué resuelve el negocio</h2>
+          <p>Por qué una buena comunicación empieza por comprender la oferta, la operación y las decisiones que el cliente necesita tomar.</p>
+          <div class="desk-story-meta"><span>3 oct 2026 · 5 min</span><strong>Leer el artículo <span aria-hidden="true">→</span></strong></div>
+        </a>
+      </div>
+      <aside class="from-desk reveal d2" aria-labelledby="desde-escritorio">
+        <span class="label" id="desde-escritorio">Desde el escritorio de Arturo</span>
+        <blockquote>“En finanzas no podía recomendar sin entender cómo funcionaba el negocio. Con la comunicación debería pasar lo mismo: primero comprendemos, después decidimos qué decir.”</blockquote>
+        <p>Esta edición conecta comunicación con producto, operación y ventas. Una buena idea pierde fuerza cuando se separa del negocio que debe sostener.</p>
+      </aside>
+    </div>
+  </section>
+
+  <section class="situation-section" id="situaciones" aria-labelledby="situation-title">
+    <div class="wrap situation-ledger-layout">
+      <div class="situation-sticky reveal">
+        <div class="section-folio">02 · Índice por situación</div>
+        <h2 id="situation-title">Empieza por lo que necesitas resolver.</h2>
+        <p>No tienes que conocer términos de marketing. Reconoce tu situación y continúa por la lectura o ruta más útil.</p>
+      </div>
+      <div class="situation-ledger reveal d2">
+        <a class="situation-row" href="/blog/contenido-que-atrae-clientes.html" data-blog-entry="situacion-que-publicar">
+          <span class="situation-no">01</span><div><h3>No sé qué publicar</h3><p>Convierte dudas reales de tus clientes en contenido que ayude a avanzar.</p></div><strong>Leer la guía <span aria-hidden="true">→</span></strong>
+        </a>
+        <a class="situation-row" href="/blog/por-que-nacio-don-ventas.html" data-blog-entry="situacion-no-entienden">
+          <span class="situation-no">02</span><div><h3>La gente no entiende lo que vendo</h3><p>Descubre por qué un negocio valioso también necesita aprender a hacerse entender.</p></div><strong>Leer la carta <span aria-hidden="true">→</span></strong>
+        </a>
+        <a class="situation-row" href="/#oferta" data-blog-entry="situacion-buscadores">
+          <span class="situation-no">03</span><div><h3>Quiero que me encuentren</h3><p>Conoce la ruta para que tu sitio ayude a personas y buscadores a comprender tu negocio.</p></div><strong>Ver la ruta <span aria-hidden="true">→</span></strong>
+        </a>
+        <a class="situation-row" href="/branding.html" data-blog-entry="situacion-confianza">
+          <span class="situation-no">04</span><div><h3>Necesito transmitir más confianza</h3><p>Construye consistencia entre lo que dices, muestras y entregas.</p></div><strong>Ver sistemas de marca <span aria-hidden="true">→</span></strong>
+        </a>
+      </div>
     </div>
   </section>
 
