@@ -73,7 +73,7 @@ test('integrates the article into the homepage and broadens the public audience'
 });
 
 test('keeps a reciprocal editorial path between the foundation and the guide', () => {
-  assert.match(article, /href="\/blog\/contenido-que-atrae-clientes\.html"[^>]*>Leer la guía de contenido/);
+  assert.match(article, /href="\/blog\/contenido-que-atrae-clientes\.html"[^>]*>Leer la experiencia y el criterio/);
   assert.match(guide, /href="\/blog\/por-que-nacio-don-ventas\.html"[^>]*>Leer por qué nació Don Ventas/);
   assert.doesNotMatch(guide, /diagnóstico en PDF/);
   assert.doesNotMatch(hub, /diagnóstico en PDF/);
@@ -114,7 +114,7 @@ test('presents the hub as an editorial cover and keeps routes situation-first', 
 test('ships responsive editorial covers without loading oversized source images', () => {
   assert.match(article, /fundador-editorial-480\.webp 480w/);
   assert.match(guide, /class="article-cover-figure/);
-  assert.match(guide, /article-understand-business-480\.webp 480w/);
+  assert.match(guide, /article-wrong-offer-480\.webp 480w/);
   assert.match(guide, /width="1440" height="960"/);
 
   const blogCss = fs.readFileSync(path.join(root, 'blog', 'blog.css'), 'utf8');
@@ -127,6 +127,9 @@ test('ships responsive editorial covers without loading oversized source images'
   assert.match(hub, /blog\.css\?v=20261003-responsive-cover-5/);
 
   const optimized = [
+    'assets/editorial/article-wrong-offer-480.webp',
+    'assets/editorial/article-wrong-offer-960.webp',
+    'assets/editorial/article-wrong-offer-1440.webp',
     'assets/editorial/blog-hub-cover-480.webp',
     'assets/editorial/blog-hub-cover-960.webp',
     'assets/editorial/blog-hub-cover-1440.webp',
@@ -145,10 +148,40 @@ test('ships responsive editorial covers without loading oversized source images'
 });
 
 test('gives the second article an authentic business point of view without invented results', () => {
-  assert.match(guide, /No escribo esto desde la historia de haber conseguido miles de clientes/);
-  assert.match(guide, /No llegué al marketing desde el marketing/);
+  assert.match(guide, /Nos preguntaban por un servicio que no vendíamos/);
   assert.match(guide, /más de 20 empresas/);
-  assert.match(guide, /El contenido es una salida de un sistema/);
-  assert.match(guide, /Todavía no presento esta idea como una fórmula probada para garantizar clientes/);
+  assert.match(guide, /Ejemplo ilustrativo de redacción/);
+  assert.match(guide, /no es una campaña probada/);
+  assert.match(guide, /No puedo prometer que una explicación clara, por sí sola, conseguirá una venta/);
   assert.doesNotMatch(guide, /ventas garantizadas|resultados garantizados|millones de seguidores/i);
+});
+
+test('integrates the conceptual cover without cropping or an intervening caption band', () => {
+  const css = fs.readFileSync(path.join(root, 'blog', 'blog.css'), 'utf8');
+  assert.match(guide, /article-cover-illustrated/);
+  assert.match(guide, /class="cover-source">Portada conceptual generada con IA/);
+  assert.match(css, /\.article-cover-illustrated \.article-cover-figure img\{[^}]*height:auto;object-fit:contain/);
+  assert.match(css, /\.article-cover-illustrated \.article-cover-figure picture::after\{[^}]*pointer-events:none;[^}]*linear-gradient/);
+  assert.match(css, /\.article-cover-illustrated \.article-cover-figure figcaption\{[^}]*clip-path:inset\(50%\)/);
+  assert.match(css, /@media\(max-width:1120px\)\{\s*\.article-cover-illustrated \.article-cover-grid\{grid-template-columns:1fr\}/);
+});
+
+test('uses approved editorial numbering and distinguishes publication from revision', () => {
+  assert.match(article, /Artículo 01 · Origen/);
+  assert.match(guide, /Artículo 02 · Experiencia y criterio/);
+  assert.match(hub, /Artículo 01 · Carta fundacional/);
+  assert.match(hub, /Artículo 02 · Experiencia y criterio/);
+  for (const html of [article, guide]) {
+    const published = html.match(/"datePublished":"([^"]+)"/)[1].slice(0,10);
+    const modified = html.match(/"dateModified":"([^"]+)"/)[1].slice(0,10);
+    assert.ok(html.includes(`Publicado el <time datetime="${published}">`));
+    assert.ok(html.includes(`Actualizado el <time datetime="${modified}">`));
+  }
+});
+
+test('preserves shared horizontal reading gutters on article layout', () => {
+  const css = fs.readFileSync(path.join(root, 'blog', 'blog.css'), 'utf8');
+  const rules = [...css.matchAll(/\.article-layout\{([^}]+)\}/g)].map(m => m[1]);
+  assert.ok(rules.some(rule => /padding-block:/.test(rule)));
+  assert.ok(rules.every(rule => !/(?:^|;)padding:|padding-inline:0/.test(rule)));
 });

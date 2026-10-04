@@ -138,7 +138,7 @@
 .article-hero h1 em{font-style:italic;color:var(--accent);font-weight:500}
 .article-dek{font-size:clamp(18px,2.2vw,24px);line-height:1.55;color:var(--fg-soft);max-width:44ch;margin-top:32px}
 .article-meta{display:flex;flex-wrap:wrap;gap:12px 28px;margin-top:38px;padding-top:20px;border-top:1px solid var(--line);font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--fg-faint)}
-.article-layout{display:grid;grid-template-columns:240px minmax(0,740px);gap:clamp(42px,8vw,110px);align-items:start;padding:clamp(64px,9vw,110px) 0}
+.article-layout{display:grid;grid-template-columns:240px minmax(0,740px);gap:clamp(42px,8vw,110px);align-items:start;padding-block:clamp(64px,9vw,110px)}
 .article-toc{position:sticky;top:112px}
 .article-toc .label{font-family:var(--mono);font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--fg-faint)}
 .article-toc ol{list-style:none;margin-top:18px;border-top:1px solid var(--line)}
@@ -402,4 +402,27 @@
 
 @media(prefers-reduced-motion:reduce){
   .manifesto-page .reveal{transform:none!important;transition:none!important}
+}
+
+/* A situational joke needs all its protagonists, not a portrait crop. */
+.article-cover-illustrated .article-cover-grid{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+.article-cover-illustrated .article-cover-figure{display:flex;flex-direction:column;justify-content:center;min-height:0;border:0;background:transparent;aspect-ratio:auto;overflow:visible}
+.article-cover-illustrated .article-cover-figure picture{position:relative;inset:auto;display:block;width:100%}
+.article-cover-illustrated .article-cover-figure img{display:block;width:100%;height:auto;object-fit:contain;filter:none}
+.article-cover-illustrated .article-cover-figure picture::after{content:"";position:absolute;inset:-1px;pointer-events:none;background:linear-gradient(90deg,#11161E,transparent 8%),linear-gradient(180deg,#11161E,transparent 6%,transparent 90%,#11161E)}
+.article-cover-illustrated .article-cover-figure::after{display:none}
+.article-cover-illustrated .article-cover-figure figcaption{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;padding:0;margin:-1px;border:0}
+.article-cover-illustrated .article-cover-copy{position:relative;z-index:3;padding:clamp(32px,4vw,54px)}
+.article-cover-illustrated .cover-source{font-size:11px;line-height:1.5;color:var(--fg-soft);margin-top:18px}
+.article-cover-illustrated h1{font-size:clamp(43px,5vw,72px)}
+@media(max-width:1120px){
+  .article-cover-illustrated .article-cover-grid{grid-template-columns:1fr}
+  .article-cover-illustrated .article-cover-figure{border:0}
+  .article-cover-illustrated .article-cover-figure picture::after{inset:0 0 -1px;background:linear-gradient(180deg,transparent 86%,#11161E 100%)}
+  .article-cover-illustrated .article-cover-copy{margin-top:-1px;padding-top:12px}
+  .article-cover-illustrated .article-folio-spaced{margin-top:20px}
+}
+@media(max-width:520px){
+  .article-cover-illustrated .article-cover-copy{padding:12px 22px 34px}
+  .article-cover-illustrated .article-breadcrumbs{font-size:9px}
 }

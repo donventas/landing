@@ -8,7 +8,10 @@ const root = path.join(__dirname, '..');
 const html = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
 
 function sha256(relativePath) {
-  return crypto.createHash('sha256').update(fs.readFileSync(path.join(root, relativePath))).digest('hex');
+  // Git checks out text SVGs with CRLF on Windows and LF in Linux CI.
+  // Normalize line endings only; all logo content remains protected by the hash.
+  const svg = fs.readFileSync(path.join(root, relativePath), 'utf8').replace(/\r\n/g, '\n');
+  return crypto.createHash('sha256').update(svg).digest('hex');
 }
 
 test('keeps the indexable SEO contract and one visible page topic', () => {
@@ -65,7 +68,7 @@ test('images have alternative text and external new tabs are isolated', () => {
 test('keeps the canonical wordmark without loading the 3D emblem in the hero', () => {
   assert.equal(
     sha256('assets/brand/donventas-wordmark-b6-reverse.svg'),
-    'c3a0810940289164ff5a40b3ac2524de10d43d12c98743ad41c4089aedb8a90a'
+    '94f2f1d53617e8611ca759b97ee3b7e390d60bb1587dbc2f5e0312ebce29edde'
   );
   assert.match(html, /donventas-wordmark-b6-reverse\.svg/);
   assert.doesNotMatch(html, /data-hero-mark|hero-mark-3d\.js/);

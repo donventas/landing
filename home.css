@@ -309,7 +309,7 @@ img{max-width:100%;display:block}
   .contact-copy{position:static}.contact-grid{gap:50px}
 }
 @media(max-width:620px){
-  .home-editorial .editorial-shell{width:calc(100% - 32px)}
+  .home-editorial .editorial-shell{width:calc(100% - 40px)}
   .nav-shell{min-height:62px;gap:12px}.wordmark img{width:124px}.nav-login{display:none}.editorial-button.compact{font-size:8px;padding:9px 10px;min-height:35px}
   .editorial-hero{padding-top:100px;padding-bottom:44px}
   .hero-copy{padding:26px 20px 30px;background:#11161e}
@@ -331,7 +331,7 @@ img{max-width:100%;display:block}
   .editorial-footer>.editorial-shell{grid-template-columns:1fr}.footer-links{justify-content:flex-start}.footer-meta{flex-direction:column;grid-column:auto}
 }
 @media(max-width:360px){
-  .home-editorial .editorial-shell{width:calc(100% - 24px)}
+  .home-editorial .editorial-shell{width:calc(100% - 40px)}
   .wordmark img{width:112px}.editorial-button.compact{padding-inline:8px;letter-spacing:.03em}
   .hero-copy{padding:23px 16px 27px}.hero-copy h1{font-size:43px}
 }
