@@ -56,12 +56,13 @@ la nueva versión se verificará tras un release autorizado, no se solicita rast
 
 ## QA y publicación
 
-Pendientes de registrar: pruebas automatizadas, responsive 320/390/768/escritorio,
-teclado, enlaces, formulario sin web, errores/éxito, carga de laboratorio, revisión
-independiente, preview y aceptación de Arturo. No se enviarán datos de clientes reales.
+Implementación de preview: `9a13710`. PR: https://github.com/donventas/landing/pull/24.
+Preview: https://landing-git-codex-branding-editorial-don-ventas.vercel.app/branding.html.
+Aceptación de la escena: aprobada. Aceptación de la página y publicación: pendientes.
+No se enviaron datos de clientes reales ni se generaron leads en producción.
 Rollback: revertir el commit de esta PR. No se eliminan fuentes ni activos históricos.
 
-### Verificación en curso
+### Verificación completada para revisión
 
 - Suite ampliada: 52 pruebas pasan; conserva las regresiones de sitio opcional,
   rechazo recuperable, origen, consentimiento, antispam y envío a almacenamiento simulado.
@@ -70,9 +71,66 @@ Rollback: revertir el commit de esta PR. No se eliminan fuentes ni activos hist�
   no incorpora grabación, cookies, proveedores de fuente ni acceso adicional a datos.
 - Revisión independiente de código: expectativa errónea de ruta en un test corregida;
   la ruta real de ambos artículos es `/branding.html`. Riesgo de correo largo en
-  error móvil atendido con ajuste de línea. Revisión visual y carga registradas al cierre.
+  error móvil atendido con ajuste de línea.
 - Relatos, fechas y autoría de blogs intactos. Solo se añade un enlace contextual
   al sistema de marca en cada cierre, sin reescritura editorial.
+
+### QA visual y funcional
+
+- Browser del usuario, preview autenticado: 320, 390, 768, 1000, 1001, 1280 y
+  1440 px simulados, sin desbordamiento horizontal. Márgenes exteriores desde
+  20 px. La misma imagen usa `contain` y proporción completa en todos los anchos.
+- Se inspeccionaron hero, aplicaciones, precios, FAQ y contacto. No se recorta
+  cabeza ni manos. En tableta se limita el ancho de la foto dentro del marco común
+  para no extender innecesariamente su altura; el texto continúa en ese marco.
+- Teclado: Tab revela «Saltar al contenido», foco visible de 2 px; Enter activa el
+  salto. FAQ abre/cierra. La navegación de home a Marca funciona; sin desbordamiento
+  a 1121 px (justo sobre su breakpoint). CTA móvil presente.
+- Ambos artículos: enlaces contextuales presentes y sin overflow a 320/390/768/1440.
+  No se cambió su historia ni fechas.
+- Formulario local: recorrido completo de marca (claridad → qué vendemos → redes →
+  uso propio → autonomía → respuesta abierta → explorando → alcance por definir →
+  contacto). La pregunta de inversión aparece al final, con MXN/IVA. Sitio y WhatsApp
+  vacíos aceptados; consentimiento requerido. Se usaron datos ficticios `qa@example.com`.
+- El servidor estático local devuelve 501 al POST: se comprobó el mensaje DV-501,
+  recomendación preliminar separada de recepción, conservación y botón de reintento.
+  No se interpreta como fallo del backend productivo. El reintento vuelve a intentarlo
+  sin obligar a recapturar. Estado de error medido sin overflow a 320 px.
+- Éxito y validaciones del backend probados por suite con almacenamiento simulado;
+  NO se afirma un nuevo envío real a Supabase/correo. Motor y API sin cambios.
+
+### Carga y accesibilidad de laboratorio
+
+Lighthouse 12.8.2, Chrome headless aislado, perfiles móvil predeterminado (red/CPU
+simuladas) y desktop. Fecha 4 de octubre de 2026. Mismo checkout y assets.
+
+| Entorno | Rendimiento | Accesibilidad | SEO | LCP | CLS | TBT |
+|---|---:|---:|---:|---:|---:|---:|
+| HTTP local sin compresión, móvil | 96 | 100 | 100 | 2.7 s | 0 | 0 ms |
+| HTTP local con proxy gzip, móvil | 99 | 100 | 100 | 2.1 s | 0 | 0 ms |
+| HTTP local sin compresión, escritorio | 100 | 100 | 100 | 0.6 s | 0.001 | 0 ms |
+
+El proxy gzip comprimió únicamente tipos textuales de los mismos archivos; no
+cambió ni simuló imágenes, API o analítica. Esto evalúa compresión, no latencia real
+de Vercel. Mejores prácticas 96 por el 404 de `/_vercel/insights/script.js`, que solo
+existe en Vercel; no se eliminó ni suplantó la medición para subir la puntuación.
+Los informes locales están en TEMP (`dv-branding-mobile-final-lh.json`,
+`dv-branding-gzip-mobile-lh.json`, `dv-branding-desktop-lh.json`).
+
+La auditoría externa del preview redirigió a login de Vercel: esos resultados se
+descartan, no describen el sitio. La revisión visual del preview sí se realizó en
+la sesión autenticada existente; no se extrajeron cookies ni se quitó protección.
+Las puntuaciones de accesibilidad corresponden al documento inicial; no certifican
+todos los estados dinámicos. TBT no sustituye INP; no hay medición nueva de CrUX/p75.
+
+### Compuertas que requieren el siguiente paso
+
+- Arturo revisa el preview y autoriza explícitamente el merge de este release.
+- Tras autorización, verificar producción, cabeceras/OG/canonical y medición sobre
+  URL pública (incluido flujo real solo con datos de QA y revisión operativa acordada).
+- Search Console: la URL ya figuraba indexada en la revisión anterior. Volver a
+  comprobar y solicitar actualización tras publicar, no indexar el preview.
+- Commit publicado: ninguno de este release; `main` no fue modificado.
 
 ### Activos y trazabilidad
 
