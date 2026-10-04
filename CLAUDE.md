@@ -3,6 +3,10 @@
 Repositorio del sitio **donventas.mx**. Desplegado en **Vercel** (rama `main` = producción).
 Este archivo lo lee Claude Code al inicio de cada sesión: síguelo siempre.
 
+> Actualización editorial: `AGENTS.md` gobierna la fuente y el flujo de ramas/PR;
+> sustituye las indicaciones históricas contradictorias de este archivo. Antes de
+> crear, revisar o publicar blogs, leer y aplicar `blog/WORKFLOW-EDITORIAL.md`.
+
 ## ⚙ Reglas de trabajo (dev → prod) — OBLIGATORIAS
 1. **Nunca** edites ni hagas commit directo a `main`. Todo cambio va en la rama `dev`
    (créala desde `main` si no existe: `git checkout main && git pull && git checkout -b dev`).

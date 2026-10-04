@@ -73,7 +73,7 @@ test('integrates the article into the homepage and broadens the public audience'
 });
 
 test('keeps a reciprocal editorial path between the foundation and the guide', () => {
-  assert.match(article, /href="\/blog\/contenido-que-atrae-clientes\.html"[^>]*>Leer la guía de contenido/);
+  assert.match(article, /href="\/blog\/contenido-que-atrae-clientes\.html"[^>]*>Leer la experiencia y el criterio/);
   assert.match(guide, /href="\/blog\/por-que-nacio-don-ventas\.html"[^>]*>Leer por qué nació Don Ventas/);
   assert.doesNotMatch(guide, /diagnóstico en PDF/);
   assert.doesNotMatch(hub, /diagnóstico en PDF/);
@@ -145,10 +145,10 @@ test('ships responsive editorial covers without loading oversized source images'
 });
 
 test('gives the second article an authentic business point of view without invented results', () => {
-  assert.match(guide, /No escribo esto desde la historia de haber conseguido miles de clientes/);
-  assert.match(guide, /No llegué al marketing desde el marketing/);
+  assert.match(guide, /Nos preguntaban por un servicio que no vendíamos/);
   assert.match(guide, /más de 20 empresas/);
-  assert.match(guide, /El contenido es una salida de un sistema/);
-  assert.match(guide, /Todavía no presento esta idea como una fórmula probada para garantizar clientes/);
+  assert.match(guide, /Ejemplo ilustrativo de redacción/);
+  assert.match(guide, /no es una campaña probada/);
+  assert.match(guide, /No puedo prometer que una explicación clara, por sí sola, conseguirá una venta/);
   assert.doesNotMatch(guide, /ventas garantizadas|resultados garantizados|millones de seguidores/i);
 });
