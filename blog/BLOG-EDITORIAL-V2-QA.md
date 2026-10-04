@@ -120,6 +120,14 @@ Condición simulada: Edge headless, servidor local, viewports 320/390/768/1440 p
 
 La precarga se limita a la imagen de portada correspondiente al viewport mediante `media`; no se descargan simultáneamente las adaptaciones horizontal y vertical.
 
+### Integración del retrato fundacional — 3 de octubre de 2026
+
+- La carta conserva el mismo retrato en todos los anchos. Hasta 1120 px, foto y encabezado forman una portada continua mediante fundido y superposición; en escritorio mantienen dos columnas.
+- El retrato se muestra completo con `object-fit: contain`, sin recortar la cabeza. Se eliminan la separación móvil y el espacio superior vacío del marco anterior.
+- Texto del artículo, SEO, analítica y rutas sin cambios. No se añaden imágenes ni JavaScript; se ajustan los tamaños de selección y precarga de la imagen existente.
+- QA local con viewports simulados de 320, 390, 768, 1024, 1120, 1121 y 1440 px: imagen cargada y 0 px de desbordamiento horizontal. Capturas de móvil y escritorio revisadas.
+- Suite: 39/39 pruebas aprobadas; `git diff --check` sin errores. Esta ronda no vuelve a medir LCP/CLS; las cifras anteriores corresponden a su ejecución original.
+
 ## Rollback
 
 Revertir el commit de esta rama restaura el hub y el artículo anteriores. No hay cambios de datos, infraestructura, formulario, sitemap, legales ni dependencias.
