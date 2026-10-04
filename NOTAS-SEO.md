@@ -1,12 +1,123 @@
 # Notas SEO / GEO — Don Ventas
 
-Referencia rápida para indexación del sitio. No afecta al sitio (archivo de documentación).
+Referencia operativa de posicionamiento e indexación. No afecta al sitio por sí sola.
+
+## Dirección aprobada — 2026-10-04
+
+Don Ventas es un estudio de estrategia de marca, contenido y sitios web. Ayudamos a
+profesionales, emprendimientos y empresas a comunicar lo que los hace valiosos,
+para que las personas puedan entenderlos, encontrarlos y elegirlos. Trabajamos
+desde México, de forma remota, con clientes de habla hispana.
+
+- La situación de entrada gobierna el mensaje; el tamaño de la empresa no es una
+  condición de elegibilidad. No volver a limitar la oferta a PyMEs por defecto.
+- México es la base, no el límite de cobertura. Tampoco afirmar oficinas o clientes
+  en otros países, disponibilidad 24/7 ni especialización local sin evidencia.
+- Mantener dominio `.mx` y canonicals. No crear duplicados por país ni `hreflang`
+  sin versiones realmente localizadas. `es-MX` y `og:locale` describen idioma/locale,
+  no una prohibición de prestar servicios a otras regiones.
+- La misma definición debe ser compatible en HTML, metadatos, JSON-LD, índice
+  auxiliar y perfiles oficiales. El relato aprobado no se reescribe por keywords.
+- Portal: **próximamente**, no seguimiento de proyectos ya disponible.
+- Moneda de los rangos: MXN; no incluyen IVA. Alcance, horarios y condiciones del
+  proyecto se confirman antes de empezar. No inventar reglas fiscales extranjeras.
+
+## Ejecución por etapas
+
+1. **Coherencia de identidad y cobertura:** inicio, marca, diagnóstico, navegación
+   compartida e información estructurada. Preview y aprobación antes del merge.
+2. **Páginas de servicio:** recuperar alcance, entregables y evidencia autorizada;
+   contrastar intención de búsqueda antes de crear destinos nuevos. `branding.html`
+   ya es una ruta comercial: fortalecerla, no duplicarla. Contenido y sitios web
+   pueden merecer páginas propias cuando cada una tenga utilidad independiente.
+3. **Artículos por situación:** continuar desde experiencias reales de Arturo;
+   aplicar `blog/WORKFLOW-EDITORIAL.md`, no publicar variaciones de keywords en masa.
+
+Mapa inicial aprobado como hipótesis editorial, no investigación de volumen:
+
+| Intención | Consultas candidatas | Destino/acción |
+| --- | --- | --- |
+| Marca | Don Ventas; qué es Don Ventas; Don Ventas Arturo Villagomez | Inicio, definición y carta fundacional |
+| Contratación | estrategia de marca; creación de contenido para negocios; diseño de páginas web para servicios | Marca existente; investigar contenido/sitio antes de nuevas páginas |
+| Situación | mi contenido atrae clientes equivocados; cómo explicar lo que hace mi negocio | Artículo existente sobre entender el negocio; no cambiar su promesa ni URL |
+| Situación | cómo diferenciar mi negocio | Investigar y recuperar una experiencia útil antes de redactar |
+
+Volumen, dificultad y demanda por país: **no medidos**, no cero. No se garantiza
+posición, indexación, citas de IA ni ventas. Aprobación editorial no valida mercado.
+
+### Señales externas y medición
+
+- Verificar URLs y titularidad de perfiles corporativos antes de añadir `sameAs`.
+  El sitio personal del fundador no es un perfil de la organización. Los enlaces
+  `founder`/`worksFor` mantienen esa relación sin fusionar identidades.
+- Perfiles, sitio personal y Portal están fuera del repositorio Landing: revisar
+  su coherencia, pero no modificarlos como efecto secundario de este release.
+- En Search Console, comparar marca/sin marca y páginas por país, usando periodos
+  comparables; conservar consultas, impresiones, clics y limitaciones de los datos.
+  Posición media no es un ranking fijo. Vincular después con conversaciones pertinentes,
+  no confundir tráfico con clientes. No exportar PII a informes públicos.
+- En asistentes registrar pregunta literal, fecha, motor/modelo conocido, país
+  declarado, modo con/sin búsqueda, sesión nueva, respuesta y fuentes. Distinguir
+  mención, cita, recomendación y descripción correcta; no inferir causalidad del país
+  con una captura ni presentar un porcentaje como visibilidad universal.
+- Revisar infraestructura/CDN con registros de bots verificados cuando estén
+  disponibles. Un HTTP 200 de un navegador normal no demuestra acceso de todos los bots.
+- No crear monitoreo recurrente ni modificar permisos de entrenamiento por defecto.
+
+### Evidencia de la primera ronda — rama `codex/hispanic-positioning`
+
+- Base preservada: `9378555`; repositorio editable: `donventas/landing`.
+- Mandato: corrección de expresión y cobertura aprobada el 2026-10-04. Se reutiliza
+  la dirección situacional y el relato autorizado; no hay nuevos testimonios,
+  territorios visuales, assets, resultados comerciales ni claims de liderazgo.
+- Ruta AVOS/BSB: adaptación de copy desde brief aprobado; evidencia, intención y
+  límites según ANC-01–12. No se instala/promueve una capacidad ni se modifican
+  Runtime, Portal, AVOS, BSB o perfiles externos.
+- Estado de superficies: repo y navegador local CONFIRMADOS; acceso de bots
+  reales a CDN no verificado. Search Console consultado de forma read-only; datos
+  de rendimiento y cuenta no se copian al repositorio público.
+- `node --test`: 66 pruebas, incluidos formatos internacionales de teléfono con
+  persistencia simulada; sin crear leads ni mandar correos reales. UI recorrida
+  hasta contacto: presupuesto después de problema/objetivo, MXN/IVA visibles,
+  sitio y WhatsApp opcionales, consentimiento sin marcar.
+- Productor: páginas comerciales, diagnóstico y tres páginas del blog comprobadas
+  a 320/390/768/1440 px; sin desbordamiento horizontal. En blog, enlaces del menú
+  dentro del viewport. Muestras visuales en móvil/tablet; FAQ nueva operable con
+  teclado. Ancla de definición con separación respecto del encabezado fijo.
+- Los `<main>` de ambos artículos coinciden con la base, normalizando solo saltos
+  de línea. Solo cambian navegación y versión del CSS compartido. El HUB corrige
+  además su enlace obsoleto `/#oferta` a `/#servicios`.
+- Laboratorio local comparativo: Lighthouse 12.8.2 móvil, una ejecución por variante,
+  mismo servidor de solo lectura y gzip; base 9378555 frente a esta rama.
+  Rendimiento 99→99; accesibilidad 100→100; SEO 100→100; buenas prácticas 96→96.
+  LCP 2.189→2.186 s; CLS 0.00028 en ambas; TBT 0 ms en ambas; sin advertencias.
+  No mide INP de campo ni prueba eficacia comercial o resultados en Google.
+- Payload gzip: inicio +274 bytes, home.css +56, formulario +42. Sin imágenes,
+  dependencias o peticiones adicionales. El CSS compartido del resto +118 bytes.
+- API, seguridad, privacidad, consentimiento, analítica, precios, robots y assets
+  sin cambios. No alterar GPTBot por objetivos de búsqueda.
+- Revisión independiente y aceptación visual de Arturo: pendientes. Publicación
+  e inspección del release en Search Console: pendientes de aprobación y despliegue.
+  No se solicita indexación de previews. La PR de notas editoriales es independiente.
+- Reversión: revertir únicamente el commit de esta PR; conservar el release previo.
+
+Pendientes explícitos: validar perfiles oficiales para `sameAs`; páginas de servicio
+con investigación suficiente; nuevos artículos autorizados; verificación de bots/CDN
+y nueva inspección de URLs productivas después del release. Sin migrar dominio,
+publicar páginas por país o atribuir a una única causa las respuestas de asistentes.
+
+Fuentes técnicas verificadas el 2026-10-04:
+[Google: sitios multirregionales](https://developers.google.com/search/docs/specialty/international/managing-multi-regional-sites),
+[Google: organización](https://developers.google.com/search/docs/appearance/structured-data/organization),
+[Google: optimización para IA](https://developers.google.com/search/docs/fundamentals/ai-optimization-guide),
+[OpenAI: bots](https://developers.openai.com/api/docs/bots).
 
 ## Archivos publicados (en producción)
 - `robots.txt` — permite crawlers web y de IA (GPTBot, OAI-SearchBot, ChatGPT-User,
   Google-Extended, PerplexityBot, ClaudeBot, Claude-Web, Applebot-Extended) y declara el sitemap.
-- `sitemap.xml` — home, `branding.html`, `diagnostico.html` y las 4 páginas legales de `15_LEGAL/`.
-- `llms.txt` — resumen del negocio para motores de IA.
+- `sitemap.xml` — inicio, marca, diagnóstico, HUB, dos artículos y cuatro páginas legales.
+- `llms.txt` — resumen auxiliar coherente con el contenido visible; no es requisito
+  de indexación ni una garantía de uso por asistentes. Google no lo utiliza para ranking.
 - `index.html` / `branding.html` / `diagnostico.html` — datos estructurados JSON-LD + canonical + OG/Twitter.
 - `scripts/audit_content.py` — control local de peso textual y jerarquía H1/H2/H3 por sección.
 - Host canónico vigente: `https://www.donventas.mx/`, alineado con la redirección efectiva.
@@ -26,9 +137,10 @@ Referencia rápida para indexación del sitio. No afecta al sitio (archivo de do
      archivo HTML subido a la raíz del repo (se puede automatizar por commit).
 
 ### 2. Enviar sitemap
-- GSC → **Sitemaps** → escribir `sitemap.xml` → Enviar. Debe quedar "Correcto" con 7 URLs.
+- GSC → **Sitemaps** → revisar el sitemap existente; enviarlo si falta o hay un error.
+  Contrastar el número de URLs con el archivo real (10 en esta revisión).
 
-### 3. Forzar primer rastreo (opcional)
+### 3. Solicitar revisión de URLs actualizadas (tras publicar)
 - GSC → **Inspección de URLs** → `https://www.donventas.mx/` → **Solicitar indexación**.
   Repetir con `https://www.donventas.mx/diagnostico.html` y
   `https://www.donventas.mx/branding.html`.
@@ -41,15 +153,16 @@ Referencia rápida para indexación del sitio. No afecta al sitio (archivo de do
 - https://www.bing.com/webmasters → importar propiedad desde GSC → reenviar `sitemap.xml`.
 
 ## Notas
-- La indexación no es inmediata (horas a días). El sitemap solo acelera el descubrimiento.
+- Solicitar indexación no fuerza el rastreo ni garantiza inclusión o plazo. El sitemap
+  ayuda a descubrir URLs. Registrar solicitud y estado observado como cosas distintas.
 - GEO (motores de IA): no hay consola universal de envío; se apoya en rastreo normal, entidad
-  consistente, respuestas claras, evidencia verificable, `robots.txt`, `llms.txt` y páginas citables.
+  consistente, respuestas claras, evidencia verificable, acceso de rastreadores y páginas citables.
 - SEO, AEO y GEO son complementarios: indexar no garantiza ranking; estructurar respuestas no
   garantiza citas; permitir crawlers no garantiza menciones.
 
 ## Peso editorial de la home
 
-Última actualización técnica de la home: **2026-10-02**. Esta fecha debe coincidir con
+Última revisión de contenido de la home en esta rama: **2026-10-04**. Esta fecha debe coincidir con
 `sitemap.xml` cuando la revisión sea publicada; no adelantar la fecha de páginas sin cambios.
 
 La home mantiene una arquitectura comercial breve y una zona de preguntas más explícita:

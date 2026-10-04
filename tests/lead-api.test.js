@@ -101,3 +101,17 @@ test('limits repeated server-side submissions in one window', async () => {
     assert.equal(blocked.statusCode, 429);
   } finally { global.fetch = originalFetch; }
 });
+
+test('preserves international phone prefixes and accepts absent WhatsApp without real external writes', async () => {
+  const originalFetch = global.fetch;
+  let stored;
+  global.fetch = async (_url, options) => { stored = JSON.parse(options.body); return new Response('', { status: 201 }); };
+  try {
+    for (const whatsapp of ['+34 600 000 000', '+52 55 0000 0000', '+54 9 11 0000 0000', '']) {
+      const res = response();
+      await handler(request({ body: { whatsapp } }), res);
+      assert.equal(res.statusCode, 201);
+      assert.equal(stored.whatsapp, whatsapp);
+    }
+  } finally { global.fetch = originalFetch; }
+});
