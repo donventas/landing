@@ -101,6 +101,10 @@ suite sin secretos y con permiso de lectura. No se cambia protección de ramas:
 un check fallido no es un bloqueo obligatorio del servidor salvo que el repositorio
 lo configure así. La instrucción operativa sigue siendo no fusionar con fallos.
 
+Portabilidad de CI: usar `node --test` (autodescubrimiento en Node 20/22) y
+normalizar solo CRLF→LF antes del hash del SVG canónico. Se verificó que el hash
+Linux corresponde exactamente al SVG local normalizado; el logo no se modifica.
+
 Este proceso adapta los criterios de evidencia/narrativa de BSB a Don Ventas; no
 declara evolución, sincronización ni instalación transversal en AVOS/BSB.
 
