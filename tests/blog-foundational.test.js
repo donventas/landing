@@ -103,7 +103,8 @@ test('all local references in the article resolve', () => {
 test('presents the hub as an editorial cover and keeps routes situation-first', () => {
   assert.match(hub, /class="blog-masthead publication-cover"/);
   assert.match(hub, /class="publication-visual/);
-  assert.match(hub, /blog-hub-cover-480\.webp 480w, \/assets\/editorial\/blog-hub-cover-960\.webp 960w/);
+  assert.match(hub, /blog-hub-cover-portrait-480\.webp 480w, \/assets\/editorial\/blog-hub-cover-portrait-720\.webp 720w/);
+  assert.doesNotMatch(hub, /blog-hub-cover-960\.webp/);
   assert.match(hub, /Desde el escritorio de Arturo/);
   assert.match(hub, /class="situation-ledger\b/);
   assert.equal((hub.match(/class="situation-row"/g) || []).length, 4);
@@ -120,7 +121,10 @@ test('ships responsive editorial covers without loading oversized source images'
   assert.match(blogCss, /@media\(max-width:1120px\)[\s\S]*?\.publication-cover-grid\{grid-template-columns:1fr;[^}]*grid-template-areas:"visual" "title" "index"/);
   assert.match(blogCss, /@media\(max-width:1120px\)[\s\S]*?\.article-cover-figure\{order:-1/);
   assert.match(blogCss, /@media\(max-width:1120px\)[\s\S]*?\.founder-figure\{order:-1/);
-  assert.match(hub, /blog\.css\?v=20261003-responsive-cover-3/);
+  assert.match(blogCss, /@media\(max-width:1120px\)[\s\S]*?\.publication-visual\{[^}]*aspect-ratio:4\/3/);
+  assert.match(blogCss, /@media\(max-width:1120px\)[\s\S]*?\.publication-visual img\{object-position:center top/);
+  assert.match(blogCss, /@media\(max-width:1120px\)[\s\S]*?\.publication-title\{[^}]*margin-top:clamp\(-260px,-25vw,-110px\)/);
+  assert.match(hub, /blog\.css\?v=20261003-responsive-cover-5/);
 
   const optimized = [
     'assets/editorial/blog-hub-cover-480.webp',

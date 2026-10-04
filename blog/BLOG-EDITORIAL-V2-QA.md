@@ -11,7 +11,7 @@
 
 | Superficie | Protagonista | Fuente | Comportamiento |
 |---|---|---|---|
-| Hub `/blog/` | una persona ordena señales dispersas hasta convertirlas en una secuencia | fotografía generada sin texto ni activos protegidos | adaptación 2:3 para la columna de escritorio; imagen completa 3:2 en móvil |
+| Hub `/blog/` | una persona ordena señales dispersas hasta convertirlas en una secuencia | fotografía generada sin texto ni activos protegidos | una sola fuente 2:3; columna vertical en escritorio y adaptación 4:3 con foco superior en el modo apilado |
 | Carta fundacional | Arturo Villagomez | fotografía real ya aprobada | mismo encuadre editorial, servido en WebP responsivo |
 | Artículo de criterio | una emprendedora conecta producto, operación y comunicación | fotografía generada sin logos, resultados ni interfaces reconocibles | columna editorial en escritorio; imagen completa 3:2 en móvil |
 
@@ -21,15 +21,15 @@ Los títulos, folios y pies permanecen en HTML: no se hornean dentro de las imá
 
 - Las portadas solo se dividen en texto + fotografía cuando el viewport supera 1120 px y ambas columnas conservan un ancho útil.
 - A 1120 px o menos, la fotografía ocupa primero el ancho completo y el texto continúa dentro del mismo marco editorial; nunca queda como un bloque suelto después del CTA.
+- El hub conserva la misma fotografía en todos los tamaños. En el modo apilado, un degradado y un solapamiento controlado sustituyen la separación rígida entre imagen y copy.
 - La escena principal de la landing usa proporción 4:3 y foco superior en el modo apilado. Esto conserva cabeza, gesto, manos y contexto suficiente sin alterar la imagen fuente.
-- El hub y los artículos usan sus adaptaciones 3:2 en el modo apilado. La carta fundacional conserva el retrato real con foco superior.
+- El hub usa una adaptación 4:3 de su misma fuente vertical; el artículo de criterio mantiene 3:2. La carta fundacional conserva el retrato real con foco superior.
 - Los bordes de fotografía, texto e índice coinciden para que la portada se lea como una sola unidad y no como módulos independientes.
 - No se generaron imágenes nuevas para esta corrección; el ajuste es de composición, selección responsiva y punto focal.
 
 ### Presupuesto visual
 
-- Portada de hub: 15.7 KB a 480 px, 40.9 KB a 960 px y 72.5 KB a 1440 px.
-- Adaptación vertical del hub: 33.8 KB a 480 px y 59.4 KB a 720 px.
+- Fuente única del hub: 33.8 KB a 480 px y 59.4 KB a 720 px. Las variantes horizontales exploratorias ya no se precargan ni se consumen en runtime.
 - Artículo de criterio: 16.9 KB a 480 px, 45.8 KB a 960 px y 78.0 KB a 1440 px.
 - Retrato fundacional: 10.4 KB a 480 px, 30.3 KB a 768 px y 58.2 KB a 1024 px.
 - Cada imagen declara `width`, `height`, `srcset`, `sizes`, `decoding="async"` y una alternativa textual contextual.
