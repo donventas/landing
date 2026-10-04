@@ -124,7 +124,7 @@ test('ships responsive editorial covers without loading oversized source images'
   assert.match(blogCss, /@media\(max-width:1120px\)[\s\S]*?\.publication-visual\{[^}]*aspect-ratio:4\/3/);
   assert.match(blogCss, /@media\(max-width:1120px\)[\s\S]*?\.publication-visual img\{object-position:center top/);
   assert.match(blogCss, /@media\(max-width:1120px\)[\s\S]*?\.publication-title\{[^}]*margin-top:clamp\(-260px,-25vw,-110px\)/);
-  assert.match(hub, /blog\.css\?v=20261003-responsive-cover-5/);
+  assert.match(hub, /blog\.css\?v=20261004-editorial-notes/);
 
   const optimized = [
     'assets/editorial/article-wrong-offer-480.webp',
@@ -159,7 +159,7 @@ test('gives the second article an authentic business point of view without inven
 test('integrates the conceptual cover without cropping or an intervening caption band', () => {
   const css = fs.readFileSync(path.join(root, 'blog', 'blog.css'), 'utf8');
   assert.match(guide, /article-cover-illustrated/);
-  assert.match(guide, /class="cover-source">Portada conceptual generada con IA/);
+  assert.match(guide, /class="cover-source">Ilustración con IA · escena ficticia/);
   assert.match(css, /\.article-cover-illustrated \.article-cover-figure img\{[^}]*height:auto;object-fit:contain/);
   assert.match(css, /\.article-cover-illustrated \.article-cover-figure picture::after\{[^}]*pointer-events:none;[^}]*linear-gradient/);
   assert.match(css, /\.article-cover-illustrated \.article-cover-figure figcaption\{[^}]*clip-path:inset\(50%\)/);
