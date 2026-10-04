@@ -513,6 +513,7 @@ section.band{padding:var(--gap) 0;position:relative}
 
 /* ══ diagnóstico dinámico compartido ═══════════════════════════════ */
 .diagnostic-embed{width:100%;min-width:0}
+.dv-hp{position:absolute!important;left:-10000px!important;width:1px!important;height:1px!important;overflow:hidden!important;opacity:0!important;pointer-events:none!important}
 .dv-form-shell{border:1px solid var(--line);border-radius:20px;background:rgba(20,26,34,.96);box-shadow:0 30px 100px rgba(0,0,0,.3);overflow:hidden;text-align:left}
 .dv-form-top{padding:18px 24px 0;border-bottom:1px solid var(--line-2)}
 .dv-form-top>div:first-child{display:flex;align-items:center;justify-content:space-between;gap:18px}

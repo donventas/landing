@@ -76,10 +76,14 @@ posición, indexación, citas de IA ni ventas. Aprobación editorial no valida m
 - Estado de superficies: repo y navegador local CONFIRMADOS; acceso de bots
   reales a CDN no verificado. Search Console consultado de forma read-only; datos
   de rendimiento y cuenta no se copian al repositorio público.
-- `node --test`: 66 pruebas, incluidos formatos internacionales de teléfono con
+- `node --test`: 67 pruebas, incluidos formatos internacionales de teléfono con
   persistencia simulada; sin crear leads ni mandar correos reales. UI recorrida
   hasta contacto: presupuesto después de problema/objetivo, MXN/IVA visibles,
   sitio y WhatsApp opcionales, consentimiento sin marcar.
+- Hallazgo adicional: el CSS de diagnóstico independiente no ocultaba el campo
+  antispam. Se incorpora la misma regla de la home al CSS compartido, con prueba
+  de regresión. Se conserva el campo y su validación en servidor; no se desactiva
+  la protección ni se atribuyen a este hallazgo fallos históricos no reproducidos.
 - Productor: páginas comerciales, diagnóstico y tres páginas del blog comprobadas
   a 320/390/768/1440 px; sin desbordamiento horizontal. En blog, enlaces del menú
   dentro del viewport. Muestras visuales en móvil/tablet; FAQ nueva operable con
@@ -87,19 +91,19 @@ posición, indexación, citas de IA ni ventas. Aprobación editorial no valida m
 - Los `<main>` de ambos artículos coinciden con la base, normalizando solo saltos
   de línea. Solo cambian navegación y versión del CSS compartido. El HUB corrige
   además su enlace obsoleto `/#oferta` a `/#servicios`.
-- Laboratorio local comparativo: Lighthouse 12.8.2 móvil, una ejecución por variante,
+- Laboratorio local comparativo de la home: Lighthouse 12.8.2 móvil, una ejecución por variante,
   mismo servidor de solo lectura y gzip; base 9378555 frente a esta rama.
   Rendimiento 99→99; accesibilidad 100→100; SEO 100→100; buenas prácticas 96→96.
   LCP 2.189→2.186 s; CLS 0.00028 en ambas; TBT 0 ms en ambas; sin advertencias.
   No mide INP de campo ni prueba eficacia comercial o resultados en Google.
 - Payload gzip: inicio +274 bytes, home.css +56, formulario +42. Sin imágenes,
-  dependencias o peticiones adicionales. El CSS compartido del resto +118 bytes.
+  dependencias o peticiones adicionales. El CSS compartido del resto +178 bytes.
 - API, seguridad, privacidad, consentimiento, analítica, precios, robots y assets
   sin cambios. No alterar GPTBot por objetivos de búsqueda.
 - Revisión independiente y aceptación visual de Arturo: pendientes. Publicación
   e inspección del release en Search Console: pendientes de aprobación y despliegue.
   No se solicita indexación de previews. La PR de notas editoriales es independiente.
-- Reversión: revertir únicamente el commit de esta PR; conservar el release previo.
+- Reversión: revertir únicamente los commits de esta PR; conservar el release previo.
 
 Pendientes explícitos: validar perfiles oficiales para `sameAs`; páginas de servicio
 con investigación suficiente; nuevos artículos autorizados; verificación de bots/CDN

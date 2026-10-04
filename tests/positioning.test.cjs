@@ -74,6 +74,17 @@ test('all affected pages preserve indexability and production canonicals, withou
   assert.match(read('robots.txt'), /User-agent: OAI-SearchBot\s+Allow: \//);
 });
 
+test('antispam stays out of the visible layout and keyboard flow on both form surfaces', () => {
+  for (const file of ['home.css', 'styles.css']) {
+    const rule = read(file).match(/\.dv-hp\{([^}]+)\}/);
+    assert.ok(rule, file);
+    assert.match(rule[1], /position:absolute!important/);
+    assert.match(rule[1], /left:-10000px!important/);
+    assert.match(rule[1], /pointer-events:none!important/);
+  }
+  assert.match(read('diagnostico-v2.js'), /<label class="dv-hp" aria-hidden="true">[^<]+<input data-field="website" name="website" tabindex="-1" autocomplete="off"/);
+});
+
 test('the discovery route from the editorial hub reaches an existing service section', () => {
   assert.match(read('blog/index.html'), /href="\/#servicios" data-blog-entry="situacion-buscadores"/);
   assert.match(read('index.html'), /id="servicios"/);
