@@ -114,7 +114,7 @@ test('presents the hub as an editorial cover and keeps routes situation-first', 
 test('ships responsive editorial covers without loading oversized source images', () => {
   assert.match(article, /fundador-editorial-480\.webp 480w/);
   assert.match(guide, /class="article-cover-figure/);
-  assert.match(guide, /article-understand-business-480\.webp 480w/);
+  assert.match(guide, /article-wrong-offer-480\.webp 480w/);
   assert.match(guide, /width="1440" height="960"/);
 
   const blogCss = fs.readFileSync(path.join(root, 'blog', 'blog.css'), 'utf8');
@@ -127,6 +127,9 @@ test('ships responsive editorial covers without loading oversized source images'
   assert.match(hub, /blog\.css\?v=20261003-responsive-cover-5/);
 
   const optimized = [
+    'assets/editorial/article-wrong-offer-480.webp',
+    'assets/editorial/article-wrong-offer-960.webp',
+    'assets/editorial/article-wrong-offer-1440.webp',
     'assets/editorial/blog-hub-cover-480.webp',
     'assets/editorial/blog-hub-cover-960.webp',
     'assets/editorial/blog-hub-cover-1440.webp',

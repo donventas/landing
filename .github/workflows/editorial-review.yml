@@ -14,4 +14,4 @@ jobs:
         with:
           node-version: '22'
       - name: Validate site and blog invariants
-        run: node --test tests
+        run: node --test

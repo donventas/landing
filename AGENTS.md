@@ -18,5 +18,5 @@ es una referencia de interpretación, no una fuente superior al repositorio.
 - No copiar contexto privado de clientes al repo público. Recuperar solo lo
   autorizado; abstraer preguntas y métodos sin exportar sus respuestas privadas.
 - No modificar Portal, Runtime, AVOS o BSB como efecto secundario de este workflow.
-- `node --test tests` y QA visual son verificaciones distintas; ninguna equivale
+- `node --test` y QA visual son verificaciones distintas; ninguna equivale
   a aceptación de Arturo, indexación, posicionamiento ni resultado comercial.

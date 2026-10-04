@@ -403,3 +403,15 @@
 @media(prefers-reduced-motion:reduce){
   .manifesto-page .reveal{transform:none!important;transition:none!important}
 }
+
+/* A situational joke needs all its protagonists, not a portrait crop. */
+.article-cover-illustrated .article-cover-figure{display:flex;flex-direction:column;justify-content:center;min-height:0;background:#11161E;aspect-ratio:auto}
+.article-cover-illustrated .article-cover-figure picture{position:relative;inset:auto;display:block;width:100%}
+.article-cover-illustrated .article-cover-figure img{display:block;width:100%;height:auto;object-fit:contain;filter:none}
+.article-cover-illustrated .article-cover-figure::after{display:none}
+.article-cover-illustrated .article-cover-figure figcaption{position:static;display:block;margin:20px 22px;padding-top:14px;color:var(--fg-soft);border-color:var(--line);font-size:10px;line-height:1.6;letter-spacing:.035em;text-transform:none}
+.article-cover-illustrated h1{font-size:clamp(43px,5vw,72px)}
+@media(max-width:1120px){
+  .article-cover-illustrated .article-cover-figure{border-bottom:0}
+  .article-cover-illustrated .article-cover-copy{padding-top:22px}
+}

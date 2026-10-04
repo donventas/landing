@@ -80,9 +80,13 @@ La identificación, comprensión y confianza de lectores reales permanecen sin m
   horizontal ni imágenes rotas; un h1 por página. Capturas de portada y demostración
   revisadas. Índice lleva al ejemplo; acceso por Tab al salto de contenido con foco
   visible. No auditoría completa con lector de pantalla ni prueba física.
-- Sin nuevas imágenes, CSS, fuentes, JS o dependencias de producción. HTML del
-  artículo 01: aproximadamente 18.2 → 19.6 KB sin comprimir. No nueva medición
-  Lighthouse/CrUX ni certificación de LCP/INP/CLS en esta ronda de texto.
+- Adición posterior solicitada: portada conceptual de confusión de oferta,
+  WebP de 23/64/95 KB, versión social JPEG y CSS acotado a esta portada.
+  Fuente, prompt y encuadre registrados en `PORTADA-CONFUSION-DE-OFERTA.md`.
+  Sin fuentes, JS ni dependencias de producción nuevas. No nueva medición
+  Lighthouse/CrUX ni certificación de LCP/INP/CLS: falta comparación de laboratorio
+  antes del merge por el cambio de imagen/layout. El presupuesto de bytes no
+  sustituye esa medición.
 - `robots.txt` público responde 200 y permite rastreo general y OAI-SearchBot.
   No se cambian permisos de entrenamiento. No se ha comprobado acceso desde IPs
   reales de bots, cobertura en Search Console ni citas en motores de IA.

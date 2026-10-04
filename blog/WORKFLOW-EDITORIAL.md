@@ -114,7 +114,7 @@ Fuentes técnicas a revalidar al ejecutar cambios relevantes:
 
 ## 6. QA antes de proponer el merge
 
-Ejecutar `node --test tests` y `git diff --check`. El workflow de GitHub corre la
+Ejecutar `node --test` y `git diff --check`. El workflow de GitHub corre la
 suite en PRs hacia `main`; su pase comprueba invariantes, no la verdad del relato.
 
 - Revisar ambas piezas afectadas y el HUB a 320/390/768/escritorio; sumar anchos
