@@ -116,6 +116,12 @@ test('ships responsive editorial covers without loading oversized source images'
   assert.match(guide, /article-understand-business-480\.webp 480w/);
   assert.match(guide, /width="1440" height="960"/);
 
+  const blogCss = fs.readFileSync(path.join(root, 'blog', 'blog.css'), 'utf8');
+  assert.match(blogCss, /@media\(max-width:1120px\)[\s\S]*?\.publication-cover-grid\{grid-template-columns:1fr;[^}]*grid-template-areas:"visual" "title" "index"/);
+  assert.match(blogCss, /@media\(max-width:1120px\)[\s\S]*?\.article-cover-figure\{order:-1/);
+  assert.match(blogCss, /@media\(max-width:1120px\)[\s\S]*?\.founder-figure\{order:-1/);
+  assert.match(hub, /blog\.css\?v=20261003-responsive-cover-3/);
+
   const optimized = [
     'assets/editorial/blog-hub-cover-480.webp',
     'assets/editorial/blog-hub-cover-960.webp',

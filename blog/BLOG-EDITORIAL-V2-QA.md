@@ -1,9 +1,9 @@
 # Blog editorial v2 — dirección y QA
 
 **Rama:** `codex/editorial-blog-v2`  
-**Superficies:** `/blog/` y `/blog/contenido-que-atrae-clientes.html`  
+**Superficies:** `/`, `/blog/`, `/blog/contenido-que-atrae-clientes.html` y `/blog/por-que-nacio-don-ventas.html`
 **Clasificación BSB:** A — `PRESENTATION_REFINEMENT` para el hub; revisión editorial aprobada para el artículo.  
-**Protección explícita:** el texto de `/blog/por-que-nacio-don-ventas.html` no cambia.
+**Protección explícita:** el texto de `/blog/por-que-nacio-don-ventas.html` no cambia; únicamente se integra su portada en el nuevo marco responsivo.
 
 ## Familia de portadas editoriales
 
@@ -16,6 +16,15 @@
 | Artículo de criterio | una emprendedora conecta producto, operación y comunicación | fotografía generada sin logos, resultados ni interfaces reconocibles | columna editorial en escritorio; imagen completa 3:2 en móvil |
 
 Los títulos, folios y pies permanecen en HTML: no se hornean dentro de las imágenes. Las fuentes generadas no simulan clientes, testimonios ni resultados y se usan como escenas conceptuales.
+
+### Regla de composición responsiva
+
+- Las portadas solo se dividen en texto + fotografía cuando el viewport supera 1120 px y ambas columnas conservan un ancho útil.
+- A 1120 px o menos, la fotografía ocupa primero el ancho completo y el texto continúa dentro del mismo marco editorial; nunca queda como un bloque suelto después del CTA.
+- La escena principal de la landing usa proporción 4:3 y foco superior en el modo apilado. Esto conserva cabeza, gesto, manos y contexto suficiente sin alterar la imagen fuente.
+- El hub y los artículos usan sus adaptaciones 3:2 en el modo apilado. La carta fundacional conserva el retrato real con foco superior.
+- Los bordes de fotografía, texto e índice coinciden para que la portada se lea como una sola unidad y no como módulos independientes.
+- No se generaron imágenes nuevas para esta corrección; el ajuste es de composición, selección responsiva y punto focal.
 
 ### Presupuesto visual
 
@@ -70,7 +79,7 @@ Quedan prohibidos la cuadrícula genérica de tarjetas equivalentes, el movimien
 |---|---|---|---|
 | `/blog/` | alineado con release anterior | `FROZEN_PENDING_REVIEW` hasta aprobación del preview | responsive, enlaces, SEO, Lighthouse |
 | Artículo de criterio | alineado con release anterior | `FROZEN_PENDING_REVIEW` hasta aprobación del copy | lectura, metadatos, estructura, enlaces |
-| Carta fundacional | alineada | `ALIGNED` sin modificación | hash del archivo sin cambios |
+| Carta fundacional | alineada | `ALIGNED` en copy; portada integrada | texto protegido y QA visual |
 | Sitemap y `llms.txt` | alineados | `ALIGNED` sin cambio de URL | prueba automatizada |
 
 ## Criterios de aceptación
@@ -80,7 +89,7 @@ Quedan prohibidos la cuadrícula genérica de tarjetas equivalentes, el movimien
 - El artículo reconoce de forma expresa que Don Ventas todavía no puede afirmar haber atraído miles de clientes mediante contenido.
 - La experiencia del autor se limita a afirmaciones aprobadas: finanzas, operación, producto y más de 20 empresas atendidas en AMEZ CFO.
 - Las cuatro situaciones siguen conduciendo a destinos reales.
-- La jerarquía se sostiene a 320, 390, 768 px y escritorio.
+- La jerarquía se sostiene a 320, 390, 768, 1024 y 1440 px.
 - No existe desplazamiento horizontal, texto cortado ni dependencia de `hover`.
 - Navegación por teclado, foco visible, encabezados, landmarks y enlaces siguen siendo comprensibles.
 - SEO, JSON-LD, canonical, indexación y analítica permanecen activos.
@@ -89,7 +98,9 @@ Quedan prohibidos la cuadrícula genérica de tarjetas equivalentes, el movimien
 ## Verificación ejecutada
 
 - Suite automatizada: 39/39 pruebas aprobadas.
-- Viewports medidos: 320, 390 y 768 px; `scrollWidth` coincide con `innerWidth` en hub y artículo.
+- Viewports medidos: 320, 390, 768, 1024 y 1440 px; no hay desbordamiento horizontal en landing, hub ni artículos.
+- A 390, 768 y 1024 px, la imagen precede al copy dentro de un marco continuo; a 1440 px, la portada cambia a dos columnas.
+- En la landing móvil, la imagen mantiene `object-position: center top` y muestra la cabeza completa del protagonista.
 - Una sola etiqueta `h1`, canonical e `index,follow` presentes en ambas superficies.
 - Capturas de escritorio y móvil revisadas sin texto cortado ni colisiones.
 - El único 404 observado en servidor local corresponde a `/_vercel/insights/script.js`, disponible únicamente en el despliegue de Vercel y no a un activo del sitio.

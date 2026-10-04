@@ -78,13 +78,15 @@ test('leads with a capable customer situation before the mobile copy', () => {
   assert.match(html, /hero-situacion-capacidad-v1-960\.webp 960w/);
   assert.match(html, /Ya conoce su negocio\. Necesita que otros entiendan su valor\./);
   assert.doesNotMatch(html, /class="hero-signature"/);
-  assert.match(homeCss, /@media\(max-width:620px\)[\s\S]*?\.situation-stage\{order:-1(?:;|\})/);
-  assert.match(homeCss, /@media\(max-width:620px\)[\s\S]*?\.hero-grid\{gap:0;align-items:stretch;border:/);
+  assert.match(homeCss, /@media\(max-width:1120px\)[\s\S]*?\.situation-stage\{order:-1(?:;|\})/);
+  assert.match(homeCss, /@media\(max-width:1120px\)[\s\S]*?\.hero-grid\{grid-template-columns:1fr;gap:0;align-items:stretch;border:/);
+  assert.match(homeCss, /@media\(max-width:1120px\)[\s\S]*?\.hero-scene\{min-height:0;aspect-ratio:4\/3\}/);
+  assert.match(homeCss, /@media\(max-width:1120px\)[\s\S]*?\.hero-scene img\{[^}]*object-position:center top/);
   assert.match(homeCss, /@media\(max-width:620px\)[\s\S]*?\.hero-copy::before\{[^}]*linear-gradient/);
 });
 
 test('uses the lean home stylesheet and responsive uncropped method image', () => {
-  assert.match(html, /href="home\.css"/);
+  assert.match(html, /href="home\.css(?:\?[^"\s]+)?"/);
   assert.doesNotMatch(html, /href="styles\.css"/);
   assert.match(html, /criterio-manos-metodo-01-06-480\.webp 480w/);
   assert.match(html, /criterio-manos-metodo-01-06-960\.webp 960w/);
