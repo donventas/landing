@@ -422,6 +422,8 @@
 .article-cover-illustrated .article-cover-figure figcaption{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;padding:0;margin:-1px;border:0}
 .article-cover-illustrated .article-cover-copy{position:relative;z-index:3;padding:clamp(32px,4vw,54px)}
 .article-cover-illustrated .cover-source{font-size:14px;line-height:1.5;color:var(--fg-soft);margin-top:14px}
+.from-desk img{display:block;width:100%;height:auto}
+.from-desk figcaption{font-size:14px;line-height:1.5;color:#5A554E;margin-top:12px}
 .article-cover-illustrated h1{font-size:clamp(43px,5vw,72px)}
 @media(max-width:1120px){
   .article-cover-illustrated .article-cover-grid{grid-template-columns:1fr}

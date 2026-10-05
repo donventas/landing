@@ -18,3 +18,27 @@ test('editorial hub has one consistent informational title, distinct from commer
   assert.match(html, /rel="canonical" href="https:\/\/www\.donventas\.mx\/blog\/"/);
   assert.match(html, /name="robots" content="index,follow/);
 });
+
+test('hub metadata keeps all published articles, their order and visible links', () => {
+  const html = read('blog/index.html');
+  const graph = JSON.parse(html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1])['@graph'];
+  const list = graph.find(item => item['@type'] === 'CollectionPage').mainEntity;
+  const articles = [
+    ['por-que-nacio-don-ventas.html', 'El valor no siempre habla por sí solo'],
+    ['contenido-que-atrae-clientes.html', 'Antes de crear contenido, entiende qué resuelve el negocio'],
+    ['tu-marca-es-tu-ventaja.html', 'Tu marca es tu ventaja'],
+  ];
+  assert.equal(list.numberOfItems, articles.length);
+  assert.deepEqual(list.itemListElement, articles.map(([file, name], index) => ({
+    '@type': 'ListItem', position: index + 1,
+    url: `https://www.donventas.mx/blog/${file}`, name,
+  })));
+  const body = html.slice(html.indexOf('<body'));
+  for (const [file] of articles) {
+    assert.ok(body.includes(`href="/blog/${file}"`), `Missing visible article link: ${file}`);
+    assert.ok(fs.existsSync(path.join(__dirname, '..', 'blog', file)));
+  }
+  assert.ok(body.includes('href="/blog/glosario.html"'), 'Missing glossary link');
+  assert.ok(body.includes('href="/branding.html"'), 'Missing branding route');
+  assert.ok(body.includes('href="/#contacto"'), 'Missing diagnosis route');
+});
