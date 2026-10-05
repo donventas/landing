@@ -1,0 +1,45 @@
+/* Scoped adaptation of the accepted Don Ventas editorial family. */
+.advantage-page{--fg-faint:#99A4B4}
+.advantage-page .article-hero{padding-top:clamp(32px,5vw,68px)}
+.advantage-page .article-cover-grid{max-width:1320px}
+.advantage-page .article-cover-illustrated h1{font-size:clamp(43px,5.3vw,78px);max-width:13ch}
+.advantage-page .article-dek{font-size:clamp(18px,1.8vw,23px)}
+.advantage-page .article-meta{font-size:11px}
+.advantage-page .article-cover-figure{align-self:center}
+.advantage-page .article-cover-copy{padding:clamp(28px,4vw,52px)}
+.advantage-page .article-layout{grid-template-columns:190px minmax(0,720px);gap:clamp(36px,5vw,72px);justify-content:center;padding-top:72px}
+.advantage-page .article-section{padding-top:64px}
+.advantage-page .article-section:first-child{padding-top:0}
+.advantage-page .article-section h2{max-width:20ch}
+.advantage-page .article-section>p{font-size:19px;line-height:1.8}
+.advantage-page .article-section .opening-line{font-size:clamp(25px,3.4vw,36px);line-height:1.35;letter-spacing:-.025em;color:var(--fg);margin-top:0}
+.advantage-page .article-section strong{color:#8DACFA}
+.advantage-page .article-toc a{min-height:44px;font-size:13px}
+.advantage-page .article-toc .label{font-size:11px}
+.advantage-page .memory-spread{display:block;margin:42px 0;scroll-margin-top:110px}
+.advantage-page .memory-spread figure{min-width:0}
+.advantage-page .memory-spread img{width:100%;height:auto;object-fit:contain}
+.advantage-page .memory-spread figcaption{font-size:14px;line-height:1.55;margin-top:12px;color:#AFB8C5}
+.advantage-page .memory-spread figcaption small{display:block;font-size:14px;margin-top:6px}
+.advantage-page .editorial-pause{padding:32px 0}
+.advantage-page .editorial-pause blockquote{max-width:26ch}
+.advantage-page .article-cta{border-radius:0;margin-top:58px}
+.advantage-page .related-reading{margin-top:42px}
+.advantage-page .preview-state{font-size:12px;line-height:1.6;letter-spacing:.04em;color:#BBC6D9}
+@media(max-width:1120px){
+  .advantage-page .article-cover-figure{align-self:stretch}
+  .advantage-page .article-cover-copy{padding-top:16px}
+}
+@media(max-width:900px){
+  .advantage-page .article-layout{grid-template-columns:minmax(0,720px);padding-top:48px}
+}
+@media(max-width:520px){
+  .advantage-page .article-cover-copy{padding:16px 22px 30px}
+  .advantage-page .article-cover-illustrated h1{font-size:clamp(39px,11.6vw,59px)}
+  .advantage-page .article-section>p{font-size:18px}
+  .advantage-page .memory-spread{grid-template-columns:1fr;gap:30px}
+  .advantage-page .article-layout{padding-inline:24px}
+  .advantage-page .article-section{padding-top:52px}
+  .advantage-page .article-meta{gap:12px}
+}
+@media(prefers-reduced-motion:reduce){html:has(.advantage-page){scroll-behavior:auto}}
