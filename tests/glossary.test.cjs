@@ -9,6 +9,42 @@ const entries = [...glossary.matchAll(/<section class="glossary-entry" id="([^"]
 const ids = new Set(entries.map(x => x[1]));
 const blogs = fs.readdirSync(path.join(root, 'blog')).filter(f => f.endsWith('.html'));
 
+test('native disclosures preserve content sequence and related deep links', () => {
+  const links = html => [...html.matchAll(/href="#([^"]+)"/g)].map(x => x[1]);
+  for (const [, id, content] of entries) {
+    assert.match(content, /<details class="term-disclosure">\s*<summary><h2/);
+    assert.doesNotMatch(content, /<details[^>]+(?:open|name=)/);
+    const sequence = ['term-definition','term-example','term-confusion','term-related','glossary-return'].map(c => content.indexOf('class="'+c+'"'));
+    assert.ok(sequence.every((n,i) => n >= 0 && (i === 0 || n > sequence[i-1])));
+    const related = content.match(/<p class="term-related">([\s\S]*?)<\/p>/);
+    assert.ok(related, id);
+    const targets = links(related[1]);
+    assert.equal(targets.length, 2);
+    assert.equal(new Set(targets).size, 2);
+    for (const target of targets) assert.ok(ids.has(target) && target !== id);
+  }
+});
+
+test('editorial glossary keeps one responsive static cover and bounded assets', () => {
+  assert.ok(Buffer.byteLength(glossary) < 28000);
+  assert.ok(Buffer.byteLength(read('blog/glosario.css')) < 11000);
+  assert.ok(Buffer.byteLength(read('blog/glosario.js')) < 6000, 'Search, sort and deep-link enhancement budget');
+  assert.equal((glossary.match(/<img\b/g) || []).length, 2, 'Existing wordmark and one cover');
+  assert.match(glossary, /width="1536" height="1024" fetchpriority="high"/);
+  assert.match(glossary, /glossary-hosts-v1-480.webp 480w/);
+  assert.match(glossary, /glossary-hosts-v1-1120.webp 1120w/);
+  for (const width of [480,768,1120]) {
+    assert.ok(fs.statSync(path.join(root, `assets/editorial/glossary-hosts-v1-${width}.webp`)).size < 150000);
+  }
+  assert.match(glossary, /Ilustración con IA/);
+  assert.match(read('blog/glosario.css'), /object-fit:contain/);
+  assert.doesNotMatch(glossary, /<video|<canvas|<iframe/);
+  const css = read('blog/glosario.css');
+  assert.doesNotMatch(css, /@import|url\(/);
+  assert.match(css, /@media\(max-width:680px\)/);
+  assert.match(css, /\[hidden\]\{display:none!important\}/);
+});
+
 test('glossary entries have stable IDs, readable definitions, examples and distinctions', () => {
   assert.ok(entries.length >= 10);
   assert.equal(ids.size, entries.length);
@@ -21,7 +57,7 @@ test('glossary entries have stable IDs, readable definitions, examples and disti
       assert.match(content, new RegExp(`class="${role}">[^<]*\\S|class="${role}"><strong>`));
     }
     assert.match(content, /<h2\b/);
-    assert.ok(glossary.includes(`href="#${id}"`), `Missing index: ${id}`);
+    assert.match(content, /<summary><h2/);
   }
 });
 
@@ -52,10 +88,39 @@ test('glossary local paths, cross-page anchors and index all resolve without scr
   }
   assert.doesNotMatch(glossary, /on(?:click|mouseover)=|role="tooltip"|<iframe/);
   const scripts = [...glossary.matchAll(/<script[^>]*src="([^"]+)"/g)].map(x => x[1]);
-  assert.deepEqual(scripts, ['/blog/glosario.js?v=return-1', '/app.js', '/blog/blog.js', '/_vercel/insights/script.js']);
+  assert.deepEqual(scripts, ['/blog/glosario.js?v=accordion-3', '/app.js', '/blog/blog.js', '/_vercel/insights/script.js']);
 });
 
 const { resolveReading } = require('../blog/glosario.js');
+const { matchesTerm, orderTerms } = require('../blog/glosario.js');
+const { inventory, articleText, mentions } = require('../scripts/glossary-frequency.cjs');
+test('article frequency and initial order stay current when new blogs are published', () => {
+  const counts = inventory(root);
+  assert.equal(counts.length, entries.length);
+  assert.deepEqual(entries.map(x=>x[1]), counts.map(x=>x.id));
+  for (const [tag,id] of entries) {
+    assert.equal(Number(tag.match(/data-frequency="(\d+)"/)[1]), counts.find(x=>x.id===id).count, 'Run node scripts/glossary-frequency.cjs and update reviewed HTML: '+id);
+  }
+  const sample = '<nav>SEO</nav><script>SEO</script><article>marca marca <article>campaña</article> UX <aside>SEO</aside></article>';
+  const text = articleText(sample);
+  assert.equal(mentions(text,['seo']), false);
+  assert.equal(mentions(text,['campaña']), true);
+  assert.equal(mentions(text,['ux']), true);
+  assert.equal(mentions('marketplace', ['marca']), false);
+});
+test('search normalizes accents, case and aliases; sort is deterministic', () => {
+  assert.ok(matchesTerm('  CONVERSION ', 'Conversión', 'conversiones'));
+  assert.ok(matchesTerm('landing', 'Página de destino', 'landing page'));
+  assert.ok(matchesTerm('experiencia usuario', 'Experiencia de usuario', 'UX'));
+  assert.equal(matchesTerm('inexistente', 'Marca', 'marcas'), false);
+  assert.ok(matchesTerm('', 'Marca', 'marcas'));
+  const items=[{title:'Marca',frequency:2},{title:'Contenido',frequency:3},{title:'Campaña',frequency:2}];
+  assert.deepEqual(orderTerms(items,'frequency').map(x=>x.title),['Contenido','Campaña','Marca']);
+  assert.deepEqual(orderTerms(items,'alphabetical').map(x=>x.title),['Campaña','Contenido','Marca']);
+  assert.equal(items[0].title,'Marca');
+  assert.match(glossary, /class="glossary-tools" hidden/);
+  assert.match(glossary, /<noscript>/);
+});
 const attribute = (tag, name) => tag.match(new RegExp(`\\b${name}="([^"]*)"`))?.[1];
 const sources = [...glossary.matchAll(/<a\b[^>]*data-reading-source="[^"]+"[^>]*>([^<]+)<\/a>/g)].map(([tag, title]) => ({
   key: attribute(tag, 'data-reading-source'), number: attribute(tag, 'data-reading-number'),
