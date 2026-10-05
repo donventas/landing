@@ -17,6 +17,15 @@
   };
   var terms = 'contenido-de-marca campana marca marketing promesa-de-marca branding experiencia-de-usuario pagina-de-destino conversion copy identidad-visual posicionamiento propuesta-de-valor seo'.split(' ');
   var steps = 'outcome salesProblem consistencyProblem searchProblem otherProblem nextAction attempted proof businessAudience timing budgetBand desired clarityProblem systemProblem launchProblem repositionProblem brandOtherProblem applications users autonomy difference contact'.split(' ');
+  // Reading order (includes the hero); independent of the decorative folio numbering.
+  var landingSections = [
+    { key: 'hero', heading: 'hero-title' }, { key: 'problema', heading: 'friction-title' },
+    { key: 'metodo', heading: 'method-title' }, { key: 'servicios', heading: 'services-title' },
+    { key: 'casos', heading: 'proof-title' }, { key: 'ideas', heading: 'ideas-title' },
+    { key: 'quien', heading: 'founder-title' }, { key: 'preguntas', heading: 'faq-title' },
+    { key: 'contacto', heading: 'contact-title' }
+  ];
+  function landingOrder(key) { return landingSections.findIndex(function (item) { return item.key === key; }) + 1; }
   function member(value, list) { return list.indexOf(value) >= 0 ? value : null; }
   function page(path) { return Object.prototype.hasOwnProperty.call(pages, path) ? pages[path] : null; }
   function validCampaign(value) {
@@ -57,7 +66,7 @@
       if (!member(data.destination, Object.keys(pages).map(function (p) { return pages[p]; }).concat(['servicios']))) return null;
       output.destination = data.destination;
     } else if (name === 'section_viewed') {
-      if (!member(data.section, ['hero', 'problema', 'metodo', 'servicios', 'casos', 'inversion', 'preguntas', 'contacto'])) return null;
+      if (!member(data.section, ['hero', 'problema', 'metodo', 'servicios', 'casos', 'ideas', 'quien', 'inversion', 'preguntas', 'contacto'])) return null;
       output.section = data.section;
     } else if (name === 'reading_progress') {
       if (!member(data.percent, [25, 50, 75, 90])) return null;
@@ -66,6 +75,10 @@
       if (!member(data.seconds, [10, 30, 60, 120])) return null;
       output.seconds = data.seconds;
     } else if (name !== 'whatsapp_click' && name !== 'page_view') return null;
+    if (['content_selected', 'service_selected', 'diagnostic_entry', 'whatsapp_click'].indexOf(name) >= 0 &&
+        member(data.origin_section, landingSections.map(function (item) { return item.key; }).concat(['header', 'footer', 'other']))) {
+      output.origin_section = data.origin_section;
+    }
     return output;
   }
   function readChoice(storage, now) {
@@ -75,7 +88,7 @@
         typeof value.at === 'number' && value.at <= now && now - value.at < TTL ? value.choice : null;
     } catch (_) { return null; }
   }
-  var api = { cleanEvent: cleanEvent, readChoice: readChoice, page: page, key: KEY, campaignFrom: campaignFrom, campaignKey: CAMPAIGN_KEY };
+  var api = { cleanEvent: cleanEvent, readChoice: readChoice, page: page, key: KEY, campaignFrom: campaignFrom, campaignKey: CAMPAIGN_KEY, landingSections: landingSections };
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
   if (!root.document || root.DVAnalytics) return;
   var doc = root.document, storage, session;
@@ -110,6 +123,13 @@
     if (choice !== 'accepted' || !source) return false;
     var clean = cleanEvent(name, data);
     if (!clean) return false;
+    if (source === 'inicio') {
+      if (name === 'section_viewed') {
+        if (!landingOrder(clean.section)) return false;
+        clean.section_order = landingOrder(clean.section);
+      }
+      if (clean.origin_section && landingOrder(clean.origin_section)) clean.origin_order = landingOrder(clean.origin_section);
+    } else delete clean.origin_section;
     var token = name + JSON.stringify(clean), now = Date.now();
     if (recent[token] && now - recent[token] < 1000) return false;
     if (name !== 'diagnostic_submit_failed' && name !== 'diagnostic_submit_attempted' &&
@@ -142,7 +162,9 @@
   function inView(el) {
     if (!el) return false;
     var box = el.getBoundingClientRect();
-    return box.width > 0 && box.height > 0 && box.bottom > 0 && box.top < root.innerHeight && box.right > 0 && box.left < root.innerWidth;
+    var height = Math.max(0, Math.min(box.bottom, root.innerHeight) - Math.max(box.top, 0));
+    var width = Math.max(0, Math.min(box.right, root.innerWidth) - Math.max(box.left, 0));
+    return box.width > 0 && box.height > 0 && height >= Math.min(box.height, root.innerHeight) * 0.5 && width >= Math.min(box.width, root.innerWidth) * 0.5;
   }
   function startJourney() {
     if (journeyTimer !== null || !root.setInterval) return;
@@ -152,6 +174,10 @@
       servicios: '#servicios h2, #sistema h2', casos: '#trabajo h2, #casos h2',
       inversion: '#inversion h2', preguntas: '#preguntas h2', contacto: '#contacto h2, #diagnostico h2'
     };
+    if (source === 'inicio') {
+      selectors = {};
+      landingSections.forEach(function (item) { selectors[item.key] = '#' + item.heading; });
+    }
     journeyTimer = root.setInterval(function () {
       var now = Date.now(), delta = now - lastTick; lastTick = now;
       if (choice !== 'accepted' || doc.visibilityState !== 'visible') { sectionSince = {}; lastStep = ''; return; }
@@ -248,14 +274,24 @@
       var link = event.target.closest && event.target.closest('a[href]');
       if (!link) return;
       var url; try { url = new URL(link.href, root.location.href); } catch (_) { return; }
-      if (url.protocol === 'https:' && ['wa.me', 'api.whatsapp.com'].indexOf(url.hostname) >= 0) { track('whatsapp_click'); return; }
+      function clickTrack(name, data) {
+        data = data || {};
+        if (source === 'inicio') {
+          var section = link.closest && link.closest('main > section');
+          var heading = section && section.getAttribute('aria-labelledby');
+          var item = landingSections.find(function (entry) { return entry.heading === heading; });
+          data.origin_section = item ? item.key : link.closest && link.closest('header, nav') ? 'header' : link.closest && link.closest('footer') ? 'footer' : 'other';
+        }
+        track(name, data);
+      }
+      if (url.protocol === 'https:' && ['wa.me', 'api.whatsapp.com'].indexOf(url.hostname) >= 0) { clickTrack('whatsapp_click'); return; }
       if (url.origin !== root.location.origin) return;
       var target = page(url.pathname);
       if (link.hasAttribute('data-reading-return') && target && target !== 'glosario') { track('reading_return', { destination: target }); return; }
       if (target === 'glosario' && url.hash) { track('glossary_lookup', { term: url.hash.slice(1) }); return; }
-      if (target === 'diagnostico' || (['inicio', 'marca'].indexOf(target) >= 0 && ['#contacto', '#diagnostico'].indexOf(url.hash) >= 0)) { track('diagnostic_entry', { destination: 'diagnostico' }); return; }
-      if (target === 'marca' || (target === 'inicio' && url.hash === '#servicios')) { track('service_selected', { destination: target === 'marca' ? 'marca' : 'servicios' }); return; }
-      if (target && target !== source) track('content_selected', { destination: target });
+      if (target === 'diagnostico' || (['inicio', 'marca'].indexOf(target) >= 0 && ['#contacto', '#diagnostico'].indexOf(url.hash) >= 0)) { clickTrack('diagnostic_entry', { destination: 'diagnostico' }); return; }
+      if (target === 'marca' || (target === 'inicio' && url.hash === '#servicios')) { clickTrack('service_selected', { destination: target === 'marca' ? 'marca' : 'servicios' }); return; }
+      if (target && target !== source) clickTrack('content_selected', { destination: target });
     });
     doc.addEventListener('toggle', function (event) {
       var entry = event.target.closest && event.target.closest('.glossary-entry');

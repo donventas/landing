@@ -212,3 +212,43 @@ test('diagnostic success is emitted only after acceptance; failures have no succ
   instance.submitLead('Private',{key:'test',gap:false});await new Promise(r=>setImmediate(r));
   assert.deepEqual(events,['diagnostic_submit_attempted','diagnostic_submit_failed']);
 });
+
+test('landing inventory covers every top-level section in actual DOM order', () => {
+  const html=fs.readFileSync(path.join(root,'index.html'),'utf8');
+  const headings=Array.from(html.matchAll(/<section\b[^>]*\baria-labelledby="([^"]+)"/g),m=>m[1]);
+  assert.deepEqual(api.landingSections.map(s=>s.heading),headings);
+  assert.equal(new Set(api.landingSections.map(s=>s.key)).size,9);
+});
+
+test('landing exposure emits all nine names/orders once, without manufacturing skipped sections', () => {
+  let current='metodo';
+  const dom={};
+  for(const section of api.landingSections)dom['#'+section.heading]={getBoundingClientRect:()=>({top:current===section.key?100:900,bottom:current===section.key?140:940,left:0,right:300,width:300,height:40})};
+  const f=fixture('preview.test',null,false,'/',{dom});f.accept.onclick();f.advance(1000);f.advance(1000);
+  let events=f.win.DVAnalytics.records.filter(x=>x.event==='section_viewed');
+  assert.deepEqual(Array.from(events,x=>[x.parameters.section,x.parameters.section_order]),[['metodo',3]]);
+  for(const section of api.landingSections){current=section.key;f.advance(1000);f.advance(1000);}
+  current='metodo';f.advance(1000);f.advance(1000);
+  events=f.win.DVAnalytics.records.filter(x=>x.event==='section_viewed');
+  assert.equal(events.length,9);
+  for(const [index,section] of api.landingSections.entries())assert.equal(events.find(x=>x.parameters.section===section.key).parameters.section_order,index+1);
+  assert.equal(f.win.DVAnalytics.track('section_viewed',{section:'inversion'}),false);
+});
+
+test('a heading edge flashing through the viewport is not a section exposure', () => {
+  let top=843;
+  const heading={getBoundingClientRect:()=>({top,bottom:top+40,left:0,right:300,width:300,height:40})};
+  const f=fixture('preview.test',null,false,'/',{dom:{'#hero-title':heading}});f.accept.onclick();f.advance(1000);f.advance(1000);
+  assert.equal(f.win.DVAnalytics.records.filter(x=>x.event==='section_viewed').length,0);
+  top=100;f.advance(1000);f.advance(1000);
+  assert.equal(f.win.DVAnalytics.records.filter(x=>x.event==='section_viewed').length,1);
+});
+
+test('landing CTA retains the source section but no label or arbitrary DOM data', () => {
+  const f=fixture('preview.test');f.accept.onclick();
+  const link={href:'https://preview.test/#contacto',hasAttribute:()=>false,closest:selector=>selector==='main > section'?{getAttribute:()=> 'method-title'}:null};
+  f.listeners.click({target:{closest:()=>link}});
+  const event=f.win.DVAnalytics.records.at(-1);
+  assert.equal(event.event,'diagnostic_entry');assert.equal(event.parameters.origin_section,'metodo');assert.equal(event.parameters.origin_order,3);
+  assert.equal(api.cleanEvent('diagnostic_entry',{destination:'diagnostico',origin_section:'private@example.com'}).origin_section,undefined);
+});

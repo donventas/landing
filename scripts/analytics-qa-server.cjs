@@ -9,8 +9,9 @@ http.createServer((req,res)=>{
   if(url.pathname==='/__qa') {
     const width = [320,390,768,1280].includes(Number(url.searchParams.get('width'))) ? Number(url.searchParams.get('width')) : 390;
     const campaign = url.searchParams.get('campaign') === '1' ? '?utm_source=instagram&amp;utm_medium=social&amp;utm_campaign=tu-marca-es-tu-ventaja&amp;utm_content=historia' : '';
+    const page = url.searchParams.get('page') === 'landing' ? '/' : '/blog/tu-marca-es-tu-ventaja.html';
     res.setHeader('Content-Type','text/html; charset=utf-8');
-    return res.end('<!doctype html><html lang="es"><meta name="viewport" content="width=device-width"><title>QA local de analítica</title><style>body{margin:0;background:#ddd}iframe{display:block;border:0;width:'+width+'px;height:844px}p{font:14px system-ui;margin:8px}pre{white-space:pre-wrap;overflow-wrap:anywhere}</style><p>QA local · '+width+' px · API simulada · sin datos enviados a Google</p><script src="/__qa-events.js" defer></script><iframe title="Sitio en viewport de prueba" src="/blog/tu-marca-es-tu-ventaja.html'+campaign+'"></iframe><h2>Eventos simulados (máximo 30)</h2><pre id="events">Esperando consentimiento</pre></html>');
+    return res.end('<!doctype html><html lang="es"><meta name="viewport" content="width=device-width"><title>QA local de analítica</title><style>body{margin:0;background:#ddd}iframe{display:block;border:0;width:'+width+'px;height:844px}p{font:14px system-ui;margin:8px}pre{white-space:pre-wrap;overflow-wrap:anywhere}</style><p>QA local · '+width+' px · API simulada · sin datos enviados a Google</p><script src="/__qa-events.js" defer></script><iframe title="Sitio en viewport de prueba" src="'+page+campaign+'"></iframe><h2>Eventos simulados (máximo 30)</h2><pre id="events">Esperando consentimiento</pre></html>');
   }
   if(url.pathname==='/__qa-events.js') {
     res.setHeader('Content-Type','text/javascript');
