@@ -31,7 +31,7 @@ Todo valor es enumerado. Se añade `content_id` y URL canónica sin consulta ni 
 
 ## Atribución y abandono — extensión aprobada
 
-Se implementó un vocabulario cerrado de campañas, canales y piezas, sin enviar URL cruda ni referentes. Detalle operativo, fórmulas, límites y enlaces en [ANALYTICS-FUNNEL.md](ANALYTICS-FUNNEL.md). La atribución está implementada y probada en simulación; su recepción en GA4 continúa pendiente.
+Se implementó un vocabulario cerrado de campañas, canales y piezas, sin enviar URL cruda ni referentes. Detalle operativo, fórmulas, límites y enlaces en [ANALYTICS-FUNNEL.md](ANALYTICS-FUNNEL.md). La atribución está implementada y probada en simulación y en una sesión local con Google real; evidencia y límites actualizados en [ANALYTICS-GA4-SETUP.md](ANALYTICS-GA4-SETUP.md).
 
 El contexto se conserva después de aceptar, durante 30 minutos sin eventos medidos, en sessionStorage. Una entrada externa sin UTM reconocido, UTM inválido o identificador publicitario borra la campaña anterior; no se etiqueta como directo lo que simplemente no está atribuido. No se escribe campaña antes del consentimiento. Retirada del permiso elimina el contexto. Las etiquetas nativas de GA y las dimensiones `entry_*` son capas distintas; la segunda expresa nuestro modelo acotado de última entrada etiquetada, no atribución causal ni multidispositivo.
 
@@ -43,12 +43,12 @@ El contexto se conserva después de aceptar, durante 30 minutos sin eventos medi
 - API de la prueba local está simulada: nunca atribuir su respuesta a Supabase ni a recepción comercial real.
 - Peso inicial de la primera versión: JS 10,820 bytes / gzip 3,856; CSS 1,596 / gzip 680. El nuevo peso se registra en ANALYTICS-FUNNEL.md. No equivale a Lighthouse ni a Core Web Vitals de campo. Google solo se descarga después de aceptar; medir también esa fase antes del release.
 
-Pendientes antes de activar:
+Compuertas de activación (estado detallado actualizado en ANALYTICS-GA4-SETUP.md; esta lista conserva el alcance completo):
 
 1. Revisar preview con Arturo; no fusionar ni publicar GTM sin autorización de este release.
 2. Tag Assistant con borrador GTM: comprobar consentimiento antes de inicialización, procesamiento de los comandos/eventos por la etiqueta y exactamente un page_view. No afirmar que basta con tener el código.
 3. Comprobar solicitudes de red/payloads, cookies y retirada con la etiqueta real. Confirmar en GA4 DebugView; borrar/filtrar la actividad de prueba según configuración revisada.
-4. Registrar dimensiones de evento `content_id`, `destination`, `term`, `route`, `step` y evento clave `diagnostic_completed` después de validar recepción. No marcar WhatsApp como venta.
+4. Las trece dimensiones de evento ya están registradas. Queda configurar evento clave `diagnostic_completed` después de cerrar su QA. No marcar WhatsApp como venta.
 5. Verificar CSP del despliegue y rendimiento con Google activo; sin ampliar a dominios publicitarios ni habilitar unsafe-eval.
 6. Tras aprobación, coordinar publicación de GTM y merge del sitio; prueba supervisada del envío real y revisión de informes. Un panel sin datos todavía no acredita que esté roto ni que funcione.
 

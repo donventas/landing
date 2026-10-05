@@ -3,9 +3,16 @@ const http = require('node:http');
 const fs = require('node:fs');
 const path = require('node:path');
 const root = path.resolve(__dirname, '..');
+// Explicit local-only opt-in. Public previews and the deployed analytics.js stay dry.
+const googleDebug = process.argv.includes('--google-debug');
+const port = googleDebug ? 8786 : 8785;
 const types = {'.html':'text/html; charset=utf-8','.js':'text/javascript; charset=utf-8','.css':'text/css; charset=utf-8','.svg':'image/svg+xml','.webp':'image/webp','.woff2':'font/woff2'};
 http.createServer((req,res)=>{
   const url = new URL(req.url,'http://127.0.0.1');
+  // The dry-run viewer must never claim that Google is disabled in live debug.
+  if (googleDebug && (url.pathname === '/__qa' || url.pathname === '/__qa-events.js')) {
+    res.writeHead(404); return res.end('Use the page directly for Google debug; the dry-run viewer is disabled.');
+  }
   if(url.pathname==='/__qa') {
     const width = [320,390,768,1280].includes(Number(url.searchParams.get('width'))) ? Number(url.searchParams.get('width')) : 390;
     const campaign = url.searchParams.get('campaign') === '1' ? '?utm_source=instagram&amp;utm_medium=social&amp;utm_campaign=tu-marca-es-tu-ventaja&amp;utm_content=historia' : '';
@@ -27,7 +34,23 @@ http.createServer((req,res)=>{
   if(fs.existsSync(filename)&&fs.statSync(filename).isDirectory())filename=path.join(filename,'index.html');
   fs.readFile(filename,(error,body)=>{
     if(error){res.writeHead(404);return res.end();}
+    if (googleDebug && url.pathname === '/analytics.js') {
+      const original = body.toString('utf8');
+      const replacements = [
+        ["production = root.location.hostname === 'www.donventas.mx' && root.location.protocol === 'https:'", "production = root.location.hostname === 'localhost' && root.location.port === '8786'"],
+        ["allow_google_signals: false, allow_ad_personalization_signals: false,", "debug_mode: true, traffic_type: 'developer', allow_google_signals: false, allow_ad_personalization_signals: false,"],
+        ["if (preview) status.textContent = 'Vista previa · no se envían datos a Google.';", "status.textContent = 'QA LOCAL: Google real solo después del permiso; eventos de depuración, no clientes.';"]
+      ];
+      let transformed = original;
+      for (const [from,to] of replacements) {
+        if (transformed.split(from).length !== 2) {res.writeHead(500);return res.end('QA substitution mismatch; refusing to enable Google.');}
+        transformed = transformed.replace(from,to);
+      }
+      body = Buffer.from(transformed);
+    }
     res.setHeader('Content-Type',types[path.extname(filename)]||'application/octet-stream');
     res.setHeader('X-Robots-Tag','noindex');res.end(body);
   });
-}).listen(8785,'127.0.0.1',()=>console.log('QA local: http://127.0.0.1:8785/__qa?width=390 (API mocked)'));
+}).listen(port,'127.0.0.1',()=>console.log(googleDebug
+  ? 'QA GOOGLE DEBUG: http://localhost:8786/ (Google real after consent; API mocked; connect GTM draft with Tag Assistant)'
+  : 'QA local: http://127.0.0.1:8785/__qa?width=390 (API mocked)'));

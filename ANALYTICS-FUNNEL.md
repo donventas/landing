@@ -42,7 +42,7 @@ Extensión solicitada por Arturo: medir pérdida de avance entre secciones aunqu
 | 8 | preguntas | Preguntas frecuentes |
 | 9 | contacto | Entrada al diagnóstico |
 
-Definir dos vistas complementarias en GA4, pendientes de configurar y validar:
+Definir dos vistas complementarias en GA4. La primera tiene una estructura inicial de recuentos; tasas y embudos siguen pendientes de completar y validar (estado en ANALYTICS-GA4-SETUP.md):
 
 - **Alcance por sección:** usuarios con exposición al bloque / usuarios medidos de la landing. Mostrar n/N y segmentar por dispositivo y campaña. No equivale al porcentaje de todas las visitas del servidor.
 - **No avance entre bloques A y B:** 1 − usuarios de la cohorte A que después alcanzan B dentro de 30 minutos / usuarios de A con ventana completa. Usar pares de secciones adyacentes como embudos cerrados; un solo embudo de nueve pasos excluiría a quienes saltan legítimamente secciones. La pérdida de avance es un proxy, no una salida confirmada.
@@ -87,9 +87,9 @@ Dimensiones `entry_source`, `entry_medium`, `entry_campaign`, `entry_content`: �
 
 ## Configuración de GA4 pendiente de validación real
 
-Registrar dimensiones de evento: content_id, destination, term, route, step, section, section_order, origin_section, origin_order, entry_source, entry_medium, entry_campaign, entry_content. Registrar seconds y percent como métricas personalizadas, o usar condiciones de evento sin agregarlas como tiempo total. Marcar únicamente diagnostic_completed como evento clave de solicitud aceptada (no venta).
+Dimensiones de evento ya registradas y verificadas el 2026-10-05: content_id, destination, term, route, step, section, section_order, origin_section, origin_order, entry_source, entry_medium, entry_campaign, entry_content. Registrar seconds y percent como métricas personalizadas, o usar condiciones de evento sin agregarlas como tiempo total. Marcar únicamente diagnostic_completed como evento clave de solicitud aceptada (no venta), después de cerrar su QA.
 
-Crear las transiciones descritas como exploraciones y segmentarlas por campaña, página de entrada y categoría de dispositivo. Separar el diagnóstico de marca y contenido. No crear un único embudo de todas las preguntas opcionales. La UI/informes todavía no están configurados ni validados: el preview simula eventos. Tag Assistant y DebugView deben demostrar recepción, atribución persistida entre páginas y ausencia de duplicados/PII antes de activar producción.
+Crear las transiciones descritas como exploraciones y segmentarlas por campaña, página de entrada y categoría de dispositivo. Separar el diagnóstico de marca y contenido. No crear un único embudo de todas las preguntas opcionales. La exploración de alcance está iniciada como borrador sin tasas. El preview público simula eventos; la sesión local con Google real ya demostró recepción y atribución entre páginas. Alcance exacto y compuertas restantes en ANALYTICS-GA4-SETUP.md; no extrapolar una rama probada a todas las rutas.
 
 QA debe cubrir permiso previo/tardío, rechazo y retirada, UTM válido/inválido/duplicado, paso interno, vencimiento, almacenamiento bloqueado, pestaña oculta, salto de lectura, preguntas condicionales, recuperación de errores, éxito y exclusión de pruebas. No atribuir una simulación a datos de clientes.
 
@@ -98,7 +98,7 @@ QA debe cubrir permiso previo/tardío, rechazo y retirada, UTM válido/inválido
 - 119 pruebas automatizadas pasan (23 específicas de analítica); incluyen atribución interna, expiración, parámetros rechazados, pestaña oculta, suspensión, exposición de pasos, salto de lectura y éxito solo después de respuesta del servidor simulado. La ampliación de landing comprueba inventario y orden contra el HTML real, las nueve exposiciones deduplicadas, entrada por un ancla sin fabricar pasos anteriores, visibilidad mínima y origen de los CTA sin texto libre.
 - Navegador local: evento page_view con campaña Instagram/historia, sección hero y tiempo visible comprobados en visor de eventos; CTA de branding registra diagnostic_entry y la pregunta condicional se muestra después de avanzar. No se envió a Google ni se creó un lead real.
 - JS de analítica: 20,569 bytes, gzip 6,563. CSS: 1,596 bytes, gzip 680. Incremento inicial combinado aproximado: 7.2 KB gzip, sin biblioteca adicional. El muestreo se instala solo tras aceptar y se detiene al retirar. Esto no certifica Core Web Vitals ni el coste de Google después del permiso.
-- No hubo cambios de artículos, imágenes, backend de leads, Portal, Runtime ni AVOS. Configuración GA4 de dimensiones/embudos y recepción real continúan como compuertas explícitas; no hay tasas reales de abandono que reportar todavía.
+- No hubo cambios de artículos, imágenes, backend de leads, Portal, Runtime ni AVOS. Actualización del 2026-10-05: dimensiones guardadas, exploración inicial y recepción real comprobada con el alcance de ANALYTICS-GA4-SETUP.md. No hay tasas reales de abandono que reportar todavía.
 
 ## Referencias oficiales
 
