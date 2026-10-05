@@ -125,6 +125,26 @@ con teclado/teléfono y vuelta al artículo. Añadir entradas no requiere crear
 páginas SEO individuales ni prometer posicionamiento. Mostrar cambios de voz y
 nuevas definiciones a Arturo antes del release.
 
+#### Orden y consulta del glosario
+
+- Cada término se presenta en un `details/summary` nativo, con significado,
+  ejemplo, aclaración «No confundir con», relaciones, lectura y retorno al origen.
+  No imponer exclusividad: se pueden comparar varias entradas abiertas.
+- Orden inicial: número de artículos publicados que mencionan el concepto en
+  su cuerpo, agrupando aliases editoriales de `data-aliases`. Desempatar por
+  nombre en español. No contar repeticiones, menú, metadatos, lecturas relacionadas
+  ni el glosario; no presentarlo como demanda o búsquedas de usuarios.
+- Ejecutar `node scripts/glossary-frequency.cjs` al crear/revisar blogs o aliases.
+  Revisar las coincidencias y actualizar `data-frequency` y el orden HTML de
+  las entradas en la misma PR. El test falla si el inventario queda desactualizado.
+  Es una aproximación léxica revisable, no inferencia automática del significado.
+- Búsqueda por término/alias sin distinguir mayúsculas o acentos; orden alfabético
+  opcional. Sin resultados: explicación y acción para restablecer la lista.
+- Al llegar por fragmento o seguir un concepto relacionado, abrir su entrada y
+  conservar el contexto de origen. Si un filtro la ocultaba, limpiar el filtro.
+  Sin JS, las definiciones siguen completas en HTML y se abren manualmente;
+  ocultar controles que no funcionarían. Probar enlaces, teclado y dos orígenes.
+
 ### Regla de notas: transparencia sin interrumpir el relato
 
 La narración lleva el hilo; las notas ayudan a comprobarlo. No convertir cada

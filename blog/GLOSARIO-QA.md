@@ -169,3 +169,49 @@ no permite certificar la exclusión por entrada reciente ni el CLS de campo.
 Rollback: revertir únicamente la PR editorial; no eliminar el glosario, los IDs
 ni las solicitudes de indexación ya realizadas. No repetir solicitudes por un
 cambio exclusivamente visual ni prometer mejores posiciones por el rediseño.
+
+## Revisión aprobada: consulta desplegable
+
+Sustituye la composición de consulta anterior, no el contenido de las definiciones.
+Arturo aprobó lista desplegable, frecuencia por artículos, búsqueda y orden
+alfabético opcional. Continúa en PR #31; no autoriza su merge a producción.
+
+- Portada compacta sin nota lateral; lista única de 14 `details/summary`, cerrados
+  al explorar. Se pueden mantener varios abiertos. Secuencia: significado,
+  ejemplo, aclaración «No confundir con», conceptos relacionados, lectura y regreso.
+- 42 párrafos de definición/ejemplo/aclaración preservados. Se retiran solo los
+  pequeños encabezados decorativos previos y se simplifica la introducción.
+- Corpus: HTML del blog con BlogPosting, exclusivamente cuerpos `article`, con
+  soporte de artículos anidados. Excluye nav, aside, scripts, estilos, metadatos
+  y glosario. Aliases explícitos, normalización de acentos y límites de palabra.
+- Reporte reproducible: `node scripts/glossary-frequency.cjs`. Conteo por artículo,
+  no repeticiones. Coincidencias léxicas, no demanda medida ni clasificación
+  semántica perfecta. Contenido: 3; Campaña/Marca/Marketing/Promesa: 2;
+  Branding/Experiencia de usuario/Página de destino: 1; los demás: 0.
+  Empates alfabéticos; orden inicial ya presente en HTML, sin salto por reordenar
+  en carga. Tests exigen actualizar atributos y orden si cambia el corpus.
+- Búsqueda por nombre y alias (no por todo el texto); acentos/mayúsculas indiferentes.
+  Estado sin coincidencias con acción para ver todos. Contador anunciado por status.
+- Llegada por hash abre el término; relaciones conservan `from/at`. Si el destino
+  estaba filtrado se limpia la búsqueda. Hash malformado se ignora sin lanzar error.
+  No cookies, storage, fetch, retorno arbitrario ni contenido inyectado como HTML.
+- Pruebas reales locales: buscar landing, abrir Página de destino y seguir SEO
+  (limpia filtro y deja ambos abiertos); cero coincidencias/restablecer; orden
+  alfabético; Marca → Identidad visual → retorno exacto al artículo 03.
+  Origen fundacional devuelve otro enlace; apertura/cierre con Enter comprobados.
+- Copia local sin scripts: controles de búsqueda/orden ocultos, apertura nativa
+  con Enter y definición disponible. No se afirma emulación global de JS desactivado:
+  se verificó una copia sin elementos script. Sin JS, el hash llega a la barra y
+  el lector la abre manualmente; no se finge recordar el origen.
+- 91 pruebas Node. QA del implementador, no revisión independiente. Anchos de
+  contenido 320/390/768/1440 px en iframe local, sin overflow; no teléfono físico.
+- HTML ~25.6 KB, CSS ~6.2 KB, JS ~4.5 KB sin comprimir. Aumento acotado del script
+  existente para búsqueda, orden y apertura; sin librerías, imágenes o fuentes nuevas.
+  Pruebas fijan presupuestos HTML 28 KB, CSS 11 KB y JS 6 KB.
+- Muestras exploratorias locales sin red/CPU limitadas ni caché controlada:
+  LCP 320 px 624 ms (antes del último acortamiento de portada); 390 px con hash al
+  índice 68 ms; 768 px 56 ms; 1440 px 68 ms; CLS 0 en esas cargas. No se certifican
+  CWV/INP ni se comparan estas muestras como mejora causal.
+- SEO, IDs, canonical, sitemap, enlaces entrantes, privacidad, formularios y
+  medición conservados. Publicación e indexación de esta revisión pendientes;
+  no se repitió solicitud de indexación de la versión ya publicada.
