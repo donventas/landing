@@ -6,9 +6,14 @@ html:has(.glossary-page){scroll-behavior:auto}
 .blog-page a.glossary-link:focus-visible,.glossary-page a:focus-visible{outline:2px solid #8DACFA;outline-offset:5px}
 .glossary-page [hidden]{display:none!important}
 .glossary-page .glossary-shell{max-width:1080px;padding:128px 32px 72px}
-.glossary-header{border-bottom:1px solid var(--line);padding-bottom:28px}
+.glossary-header{display:grid;grid-template-columns:1fr 1.08fr;border:1px solid var(--line);background:#11161E;overflow:hidden}
+.glossary-cover{grid-column:2;grid-row:1;margin:0;align-self:center;min-width:0}
+.glossary-cover img{display:block;width:100%;height:auto;aspect-ratio:3/2;object-fit:contain}
+.glossary-cover figcaption{padding:12px 20px;font-size:14px;line-height:1.6;color:#BBC3D0}
+.glossary-intro{grid-column:1;grid-row:1;padding:28px;min-width:0}
+.glossary-start{display:inline-flex;align-items:center;min-height:44px;margin-top:12px;color:#8DACFA;text-decoration:underline;text-underline-offset:4px;font-size:15px}
 .glossary-intro .chapter-kicker{margin-top:22px}
-.glossary-header h1{font-size:clamp(38px,5.4vw,64px);font-weight:500;line-height:1.04;letter-spacing:-.05em;margin:20px 0}
+.glossary-header h1{font-size:clamp(38px,4.2vw,52px);font-weight:500;line-height:1.04;letter-spacing:-.05em;margin:20px 0}
 .glossary-header h1 em{color:#8DACFA;font-weight:400}
 .glossary-intro>p:not(.chapter-kicker){font-size:18px;line-height:1.65;color:#BBC3D0;max-width:65ch}
 .glossary-reader{margin-top:28px}
@@ -62,11 +67,18 @@ html:has(.glossary-page){scroll-behavior:auto}
 .glossary-sources h2{font-size:22px;line-height:1.3}
 .glossary-sources p{font-size:15px;line-height:1.8;color:#BBC3D0;margin:16px 0}
 .glossary-sources p a{color:#8DACFA;text-decoration:underline}
+@media(max-width:900px){
+ .glossary-header{grid-template-columns:minmax(0,1fr)}
+ .glossary-cover{grid-column:1;grid-row:1}
+ .glossary-intro{grid-column:1;grid-row:2;padding:24px}
+}
 @media(max-width:680px){
  .glossary-page .glossary-shell{padding:112px 24px 56px}
  .glossary-tools{grid-template-columns:minmax(0,1fr)}
  .glossary-header h1{font-size:clamp(36px,8vw,48px)}
  .glossary-intro>p:not(.chapter-kicker){font-size:17px}
+ .glossary-intro{padding:20px}
+ .glossary-cover figcaption{padding:12px 20px}
  .term-disclosure summary{padding:18px 12px;gap:16px;min-height:68px}
  .term-body{padding:4px 0 20px}
  .term-body .term-example{padding:20px}

@@ -215,3 +215,27 @@ alfabético opcional. Continúa en PR #31; no autoriza su merge a producción.
 - SEO, IDs, canonical, sitemap, enlaces entrantes, privacidad, formularios y
   medición conservados. Publicación e indexación de esta revisión pendientes;
   no se repitió solicitud de indexación de la versión ya publicada.
+
+## Portada aprobada e integración · 2026-10-05
+
+- Dirección e imagen de pie aceptadas; integración, revisión y merge autorizados
+  por Arturo. Referencias B14 fijadas a Runtime `47232b1`; trazabilidad en
+  `assets/editorial/glossary-hosts-v1-source.md`. No cambia los maestros.
+- Un solo marco para portada/título, imagen completa con dimensiones y srcset.
+  OG/Twitter actualizados a la misma escena, sin recorte. Caption breve; consulta
+  por anclas no obliga a volver a pasar por la portada.
+- WebP: 18.6 / 33.9 / 55.1 KB según resolución; social JPEG 102.7 KB no cargado
+  en el cuerpo. Sin JS, librerías, fuentes, trackers o animación adicionales.
+- 91 pruebas Node y diff-check. Imagen, SEO, enlaces, orden y retorno cubiertos.
+  Revisión visual del implementador en navegador: escritorio nativo y anchos
+  simulados 320, 390, 768, 901 y 1440. Sin overflow; imagen sin crop.
+- Búsqueda landing, apertura/cierre por Enter, enlace al índice, llegada directa
+  a Marca y retornos separados para artículo fundacional y artículo 03 probados.
+- Muestras locales exploratorias: LCP 332 ms (320), 364 ms (390), 268 ms (768),
+  200 ms (901); CLS 0. Sin limitar red/CPU ni controlar caché; no son métricas
+  de campo ni certificación de CWV, INP, teléfono físico o eficacia comercial.
+- Formularios, datos, configuración, legales y analítica no modificados. No se
+  envían leads por una revisión de portada. QA independiente no realizado.
+- Publicación se verifica tras merge; indexación se solicitó anteriormente,
+  no se repite por esta adaptación visual ni se afirma inclusión confirmada.
+- Rollback: revertir el commit del PR 31; no borrar narrativas ni referencias.

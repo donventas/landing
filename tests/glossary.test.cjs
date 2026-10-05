@@ -25,11 +25,19 @@ test('native disclosures preserve content sequence and related deep links', () =
   }
 });
 
-test('editorial glossary stays lightweight and does not add visual media or fonts', () => {
+test('editorial glossary keeps one responsive static cover and bounded assets', () => {
   assert.ok(Buffer.byteLength(glossary) < 28000);
   assert.ok(Buffer.byteLength(read('blog/glosario.css')) < 11000);
   assert.ok(Buffer.byteLength(read('blog/glosario.js')) < 6000, 'Search, sort and deep-link enhancement budget');
-  assert.equal((glossary.match(/<img\b/g) || []).length, 1, 'Only the existing wordmark');
+  assert.equal((glossary.match(/<img\b/g) || []).length, 2, 'Existing wordmark and one cover');
+  assert.match(glossary, /width="1536" height="1024" fetchpriority="high"/);
+  assert.match(glossary, /glossary-hosts-v1-480.webp 480w/);
+  assert.match(glossary, /glossary-hosts-v1-1120.webp 1120w/);
+  for (const width of [480,768,1120]) {
+    assert.ok(fs.statSync(path.join(root, `assets/editorial/glossary-hosts-v1-${width}.webp`)).size < 150000);
+  }
+  assert.match(glossary, /Ilustración con IA/);
+  assert.match(read('blog/glosario.css'), /object-fit:contain/);
   assert.doesNotMatch(glossary, /<video|<canvas|<iframe/);
   const css = read('blog/glosario.css');
   assert.doesNotMatch(css, /@import|url\(/);
