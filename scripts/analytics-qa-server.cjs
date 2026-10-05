@@ -5,6 +5,10 @@ const path = require('node:path');
 const root = path.resolve(__dirname, '..');
 // Explicit local-only opt-in. Public previews and the deployed analytics.js stay dry.
 const googleDebug = process.argv.includes('--google-debug');
+const failFirst = process.argv.includes('--fail-first');
+const health = process.argv.includes('--health');
+const csp = process.argv.includes('--csp');
+let leadAttempts = 0;
 const port = googleDebug ? 8786 : 8785;
 const types = {'.html':'text/html; charset=utf-8','.js':'text/javascript; charset=utf-8','.css':'text/css; charset=utf-8','.svg':'image/svg+xml','.webp':'image/webp','.woff2':'font/woff2'};
 http.createServer((req,res)=>{
@@ -26,6 +30,10 @@ http.createServer((req,res)=>{
   }
   if(url.pathname==='/api/lead' && req.method==='POST') {
     req.resume(); res.setHeader('Content-Type','application/json');
+    leadAttempts++;
+    if (failFirst && leadAttempts === 1) {
+      res.writeHead(503); return res.end(JSON.stringify({ok:false,code:'qa_temporary_failure'}));
+    }
     return res.end(JSON.stringify({ok:true,qa:true}));
   }
   let filename;
@@ -34,11 +42,23 @@ http.createServer((req,res)=>{
   if(fs.existsSync(filename)&&fs.statSync(filename).isDirectory())filename=path.join(filename,'index.html');
   fs.readFile(filename,(error,body)=>{
     if(error){res.writeHead(404);return res.end();}
+    if (health && path.extname(filename) === '.html') {
+      body = Buffer.from(body.toString('utf8').replace('<head>', '<head><script src="/scripts/analytics-qa-health.js"></script>'));
+    }
+    if (csp && path.extname(filename) === '.html') {
+      const config = JSON.parse(fs.readFileSync(path.join(root,'vercel.json'),'utf8'));
+      const route = url.pathname.startsWith('/blog/') ? '/blog/(.*)' : url.pathname;
+      const rule = config.headers.find(item=>item.source===route);
+      const policy = rule && rule.headers.find(item=>item.key==='Content-Security-Policy');
+      if (!policy) {res.writeHead(500);return res.end('No matching production CSP: refusing unprotected QA.');}
+      res.setHeader('Content-Security-Policy', policy.value);
+    }
     if (googleDebug && url.pathname === '/analytics.js') {
       const original = body.toString('utf8');
       const replacements = [
         ["production = root.location.hostname === 'www.donventas.mx' && root.location.protocol === 'https:'", "production = root.location.hostname === 'localhost' && root.location.port === '8786'"],
         ["allow_google_signals: false, allow_ad_personalization_signals: false,", "debug_mode: true, traffic_type: 'developer', allow_google_signals: false, allow_ad_personalization_signals: false,"],
+        ["clean.send_to = ID;", "clean.send_to = ID; clean.debug_mode = true; clean.traffic_type = 'developer';"],
         ["if (preview) status.textContent = 'Vista previa · no se envían datos a Google.';", "status.textContent = 'QA LOCAL: Google real solo después del permiso; eventos de depuración, no clientes.';"]
       ];
       let transformed = original;

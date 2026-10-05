@@ -48,7 +48,7 @@ Compuertas de activación (estado detallado actualizado en ANALYTICS-GA4-SETUP.m
 1. Revisar preview con Arturo; no fusionar ni publicar GTM sin autorización de este release.
 2. Tag Assistant con borrador GTM: comprobar consentimiento antes de inicialización, procesamiento de los comandos/eventos por la etiqueta y exactamente un page_view. No afirmar que basta con tener el código.
 3. Comprobar solicitudes de red/payloads, cookies y retirada con la etiqueta real. Confirmar en GA4 DebugView; borrar/filtrar la actividad de prueba según configuración revisada.
-4. Las trece dimensiones de evento ya están registradas. Queda configurar evento clave `diagnostic_completed` después de cerrar su QA. No marcar WhatsApp como venta.
+4. Las trece dimensiones de evento ya están registradas. `diagnostic_completed` está guardado como evento clave, una vez por evento y sin valor monetario predeterminado, tras comprobar su recepción en la ruta de marca. No marcar WhatsApp como venta. Las dimensiones aún necesitan propagación en el selector de embudos.
 5. Verificar CSP del despliegue y rendimiento con Google activo; sin ampliar a dominios publicitarios ni habilitar unsafe-eval.
 6. Tras aprobación, coordinar publicación de GTM y merge del sitio; prueba supervisada del envío real y revisión de informes. Un panel sin datos todavía no acredita que esté roto ni que funcione.
 

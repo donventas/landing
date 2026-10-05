@@ -87,7 +87,7 @@ Dimensiones `entry_source`, `entry_medium`, `entry_campaign`, `entry_content`: �
 
 ## Configuración de GA4 pendiente de validación real
 
-Dimensiones de evento ya registradas y verificadas el 2026-10-05: content_id, destination, term, route, step, section, section_order, origin_section, origin_order, entry_source, entry_medium, entry_campaign, entry_content. Registrar seconds y percent como métricas personalizadas, o usar condiciones de evento sin agregarlas como tiempo total. Marcar únicamente diagnostic_completed como evento clave de solicitud aceptada (no venta), después de cerrar su QA.
+Dimensiones de evento ya registradas y verificadas el 2026-10-05: content_id, destination, term, route, step, section, section_order, origin_section, origin_order, entry_source, entry_medium, entry_campaign, entry_content. Usar seconds y percent como condiciones de evento, no sumarlos como tiempo total o lectura. `diagnostic_completed` ya se guardó como evento clave de solicitud aceptada (no venta), sin importe predeterminado. No se modificaron otros eventos clave preexistentes.
 
 Crear las transiciones descritas como exploraciones y segmentarlas por campaña, página de entrada y categoría de dispositivo. Separar el diagnóstico de marca y contenido. No crear un único embudo de todas las preguntas opcionales. La exploración de alcance está iniciada como borrador sin tasas. El preview público simula eventos; la sesión local con Google real ya demostró recepción y atribución entre páginas. Alcance exacto y compuertas restantes en ANALYTICS-GA4-SETUP.md; no extrapolar una rama probada a todas las rutas.
 
@@ -99,6 +99,12 @@ QA debe cubrir permiso previo/tardío, rechazo y retirada, UTM válido/inválido
 - Navegador local: evento page_view con campaña Instagram/historia, sección hero y tiempo visible comprobados en visor de eventos; CTA de branding registra diagnostic_entry y la pregunta condicional se muestra después de avanzar. No se envió a Google ni se creó un lead real.
 - JS de analítica: 20,569 bytes, gzip 6,563. CSS: 1,596 bytes, gzip 680. Incremento inicial combinado aproximado: 7.2 KB gzip, sin biblioteca adicional. El muestreo se instala solo tras aceptar y se detiene al retirar. Esto no certifica Core Web Vitals ni el coste de Google después del permiso.
 - No hubo cambios de artículos, imágenes, backend de leads, Portal, Runtime ni AVOS. Actualización del 2026-10-05: dimensiones guardadas, exploración inicial y recepción real comprobada con el alcance de ANALYTICS-GA4-SETUP.md. No hay tasas reales de abandono que reportar todavía.
+- Cierre parcial posterior: 124 pruebas pasan, filtro de desarrolladores activado
+  y evento clave guardado. Error 503 → reintento 200 comprobado en interfaz local
+  con datos sintéticos y respaldado por el test de secuencia sin éxito prematuro.
+  Falta confirmar recepción de esa secuencia en GA4, disponibilidad de dimensiones
+  para terminar embudos y rendimiento móvil del release con etiqueta activa.
+  El panel de carga local no sustituye esas compuertas.
 
 ## Referencias oficiales
 

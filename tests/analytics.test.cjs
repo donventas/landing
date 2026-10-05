@@ -211,6 +211,9 @@ test('diagnostic success is emitted only after acceptance; failures have no succ
   instance.sendLead=()=>Promise.reject(new Error('Private error'));
   instance.submitLead('Private',{key:'test',gap:false});await new Promise(r=>setImmediate(r));
   assert.deepEqual(events,['diagnostic_submit_attempted','diagnostic_submit_failed']);
+  instance.sendLead=()=>Promise.resolve();
+  instance.submitLead('Private',{key:'test',gap:false});await new Promise(r=>setImmediate(r));
+  assert.deepEqual(events,['diagnostic_submit_attempted','diagnostic_submit_failed','diagnostic_submit_attempted','diagnostic_completed']);
 });
 
 test('landing inventory covers every top-level section in actual DOM order', () => {

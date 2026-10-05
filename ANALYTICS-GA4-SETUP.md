@@ -25,9 +25,11 @@ Trece dimensiones, todas de alcance **Evento**, verificadas en la tabla de GA4:
 | DV Pieza de entrada | entry_content |
 
 Filtro `DV Trafico de pruebas`: tipo desarrolladores, operación Excluir,
-estado **Prueba**. En este estado identifica, pero NO excluye definitivamente.
-El filtro Internal Traffic existente se conserva. Antes del lanzamiento se debe
-validar y activar la exclusión de QA o configurar filtros explícitos en informes.
+estado **Activo**, guardado y verificado el 2026-10-05. Excluye eventos que llevan
+debug_mode o debug_event; no excluye por país ni por una IP supuesta.
+El filtro Internal Traffic existente se conserva en Prueba. La configuración
+activa no acredita todavía su efecto en los informes: puede tardar 24–36 horas.
+La exclusión no es retroactiva; no se eliminó historial ni se crearon filtros de país.
 La actividad de esta fecha es de implementación: no interpretarla como clientes.
 
 ## Prueba local con Google real
@@ -36,6 +38,8 @@ La actividad de esta fecha es de implementación: no interpretarla como clientes
 loopback, puerto 8786. Usar `http://localhost:8786/` y conectar desde Vista previa
 del borrador GTM, sin publicarlo. El servidor modifica en memoria únicamente el
 control del host y añade `debug_mode=true`, `traffic_type=developer` y aviso QA.
+El marcado se aplica tanto a la configuración global como a cada evento local
+para no depender de la herencia de parámetros de una etiqueta o del asistente.
 El archivo desplegable analytics.js no se modifica. Las sustituciones fallan
 cerrado si el código esperado cambia. Consentimiento sigue siendo obligatorio.
 El endpoint de leads sigue simulado; nunca usar datos de clientes.
@@ -69,7 +73,7 @@ Verificado mediante interfaz de Tag Assistant y GA4 DebugView:
 - GA4 DebugView confirma diagnostic_completed en el flujo del dispositivo de
   prueba, además del intento y de los eventos de pasos; no es solo dataLayer.
 
-Validación del repositorio: 122 pruebas automatizadas pasan; tres nuevas verifican
+Validación del repositorio: 124 pruebas automatizadas pasan; cinco verifican
 que el servidor QA sea local, opt-in, marque depuración y falle cerrado ante un
 cambio del contrato. No alteran el script de producción. `git diff --check` pasa.
 
@@ -77,7 +81,39 @@ Límites: esta comprobación de DOM no es una captura de red completa, ni acredi
 el borrado físico de cookies. No se inspeccionaron cookies ni almacenamiento del
 navegador mediante herramientas. La prueba no certifica CSP/rendimiento en
 Vercel, recepción comercial de un lead, ni todas las ramas del formulario con
-Google real. Esas compuertas siguen abiertas.
+Google real. Esas compuertas siguen abiertas donde se señala abajo.
+
+## Cierre parcial adicional — 2026-10-05
+
+- Evento clave `diagnostic_completed` creado y verificado en su tabla, con
+  recuento una vez por evento y **sin valor monetario predeterminado**. Se usa el
+  evento del código existente, no una regla que convierta cualquier page_view.
+  La recepción de la finalización de marca ya estaba comprobada; no es una venta.
+- Servidor QA: `--fail-first` devuelve 503 solo en el primer envío y permite un
+  reintento 200. La ruta de contenido se recorrió completa dos veces con datos
+  sintéticos, sin WhatsApp ni sitio. En ambos recorridos la interfaz mostró
+  `DV-503`, conservó las respuestas y luego `Solicitud recibida` al reintentar.
+  No se enviaron leads al backend comercial.
+- Las pruebas automatizadas verifican que el rechazo no produce finalización.
+  **La recepción de error/reintento en GA4 no está confirmada**: Tag Assistant
+  queda `Not Connected` en la pestaña controlada y su reapertura no restableció
+  una sesión utilizable. DebugView mostraba otra sesión con page_view y
+  visible_time, no evidencia del recorrido que acabábamos de hacer. No usar esa
+  otra sesión para certificarlo. Tras reforzar debug por evento se repitió el
+  flujo, pero siguió sin confirmación en GA4.
+- `--csp` aplica exactamente la CSP de vercel.json para la ruta; si no existe,
+  rechaza el HTML. No se relajó la política productiva. `--health` añade solo en
+  localhost un panel de métricas y violaciones; está excluido de Vercel. No lee
+  cookies, almacenamiento ni valores del formulario. No muestra querystrings.
+- En escritorio local de 1280 px se observaron cero violaciones CSP. Una carga
+  mostró LCP 232 ms, suma de shifts 0.047, DCL 188 ms; tras consentimiento cargó
+  gtm.js, gtag/destination y recursos g/collect. Otra carga con consentimiento
+  guardado mostró LCP 272 ms, suma de shifts 0.0115, DCL 222 ms, pero solo scripts
+  Google y bootstrap de depuración sin recepción comprobada. Son observaciones
+  locales sin limitación de red/CPU, no Lighthouse, INP, p75 ni datos móviles.
+  El tiempo bloqueante acumulado de una sesión larga no es TBT; el panel ahora
+  separa una ventana inicial de 10 segundos y explicita estos límites.
+- No se fusionó PR33, no se publicó el contenedor ni se cambió producción.
 
 ## Análisis preparado
 
@@ -89,18 +125,23 @@ inicial de recuentos de alcance, todavía sin denominador ni tasas. No hay tasas
 comparación móvil/escritorio interpretable todavía. No confundir ceros de la
 plantilla con falta de demanda. Terminar y validar los embudos adyacentes, origen
 de CTA, denominadores y exclusiones antes de compartir como informe operativo.
+La pestaña adicional `PENDIENTE propagacion - no interpretar` es una plantilla
+vacía: DV Seccion/section todavía no aparece en el selector de condiciones del
+embudo. No se crearon dimensiones duplicadas para intentar sortear la espera.
 
 ## Pendiente antes de publicar
 
 1. Finalizar exploraciones de no avance y diagnóstico; contrastar configuraciones
    con las definiciones de ANALYTICS-FUNNEL.md. No inferir salida de la última
    exposición ni forzar un embudo único de nueve secciones.
-2. Validar filtros de QA y proteger informes de actividad de implementación.
+2. Validar el efecto del filtro de QA ya activo y usar un periodo comercial
+   posterior a las pruebas; no interpretar el histórico de implementación.
 3. Completar error de servidor/reintento y las otras ramas del diagnóstico con
    Google real. La rama de marca con validación local y éxito simulado ya se
    comprobó; no equivale a recepción del lead en producción.
 4. Validar CSP y rendimiento del release con la etiqueta real activada.
-5. Marcar diagnostic_completed como evento clave solo tras validar recepción.
+5. Evento clave configurado; contrastar sus recuentos con solicitudes aceptadas
+   después del lanzamiento, sin equipararlas a ventas.
 6. Obtener aprobación de publicación; coordinar GTM y merge, sin publicar uno
    como sustituto de las verificaciones pendientes.
 

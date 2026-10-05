@@ -8,7 +8,7 @@ const serverSource = fs.readFileSync(path.join(root, 'scripts/analytics-qa-serve
 const analyticsSource = fs.readFileSync(path.join(root, 'analytics.js'), 'utf8');
 
 // Exercise request handling without opening a socket or contacting Google.
-function server(debug, script = analyticsSource) {
+function server(debug, script = analyticsSource, extra = []) {
   let handler, binding;
   vm.runInNewContext(serverSource, {
     require(name) {
@@ -18,11 +18,12 @@ function server(debug, script = analyticsSource) {
       }};
       if (name === 'node:fs') return {
         existsSync() {return false;},
+        readFileSync: fs.readFileSync,
         readFile(filename, callback) {callback(null, Buffer.from(script));}
       };
       return require(name);
     },
-    __dirname: path.join(root, 'scripts'), process: {argv: debug ? ['--google-debug'] : []},
+    __dirname: path.join(root, 'scripts'), process: {argv: (debug ? ['--google-debug'] : []).concat(extra)},
     URL, Buffer, console
   });
   return {binding, request(url, method = 'GET') {
@@ -48,6 +49,7 @@ test('Google QA is explicit, marked developer/debug, restricted to localhost and
   assert.equal(result.status, 200);
   assert.match(result.body, /hostname === 'localhost' && root.location.port === '8786'/);
   assert.match(result.body, /debug_mode: true, traffic_type: 'developer'/);
+  assert.match(result.body, /clean\.debug_mode = true; clean\.traffic_type = 'developer'/);
   assert.match(result.body, /QA LOCAL: Google real/);
   assert.equal(qa.request('/__qa').status, 404);
   assert.equal(qa.request('/__qa-events.js').status, 404);
@@ -59,4 +61,22 @@ test('Google QA refuses to enable when the deployment source contract changes', 
   const result = server(true, 'changed source').request('/analytics.js');
   assert.equal(result.status, 500);
   assert.match(result.body, /refusing to enable Google/);
+});
+
+test('QA failure is explicit and only the first attempt fails, allowing a genuine UI retry', () => {
+  const qa = server(true, analyticsSource, ['--fail-first']);
+  assert.equal(qa.request('/api/lead', 'POST').status, 503);
+  const retry = qa.request('/api/lead', 'POST');
+  assert.equal(retry.status, 200);
+  assert.equal(JSON.parse(retry.body).qa, true);
+});
+
+test('CSP QA reuses the exact production policy and refuses unknown HTML routes', () => {
+  const qa = server(true, '<head></head>', ['--csp','--health']);
+  const result = qa.request('/branding.html');
+  const config = JSON.parse(fs.readFileSync(path.join(root,'vercel.json'),'utf8'));
+  assert.equal(result.headers['Content-Security-Policy'], config.headers.find(r=>r.source==='/branding.html').headers[0].value);
+  assert.match(result.body, /analytics-qa-health.js/);
+  assert.equal(qa.request('/unknown.html').status, 500);
+  assert.match(fs.readFileSync(path.join(root,'.vercelignore'),'utf8'), /scripts\/analytics-qa-health.js/);
 });
