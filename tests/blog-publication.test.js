@@ -34,6 +34,14 @@ for (const file of files) {
       return data['@graph'] || [data];
     });
     const posts = nodes.filter(item => item['@type'] === 'BlogPosting');
+    // The glossary is a reference collection, not an authored story with a folio.
+    if (file === 'glosario.html') {
+      assert.equal(posts.length, 0);
+      const collections = nodes.filter(item => item['@type'] === 'CollectionPage');
+      assert.equal(collections.length, 1);
+      assert.equal(collections[0].url, url);
+      return;
+    }
     assert.equal(posts.length, 1);
     const post = posts[0];
     assert.equal(post.mainEntityOfPage, url);

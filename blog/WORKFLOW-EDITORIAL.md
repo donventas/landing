@@ -1,7 +1,7 @@
 # Workflow editorial de Don Ventas
 
-Versión 1.1 · Dirección del 3 de octubre de 2026; ajuste de jerarquía de notas
-solicitado por Arturo el 4 de octubre de 2026 (implementación en revisión).
+Versión 1.2 · Dirección del 3 de octubre de 2026; jerarquía de notas y glosario
+progresivo aprobados por Arturo el 4 de octubre de 2026.
 Ámbito: este sitio; no modifica el método universal de BSB/AVOS.
 
 ## Activación y resultado
@@ -84,6 +84,38 @@ registra como desconocida; no bloquea un ensayo útil aprobado como exploración
 
 **Compuerta:** revisión editorial de Arturo. La aprobación anterior de otra pieza
 no autoriza un relato nuevo; un cambio técnico no debe reabrir copy protegido.
+
+### Regla de lenguaje claro y glosario progresivo
+
+En cada blog nuevo o revisión, detectar términos de marketing, negocio y web
+que una persona sin formación en esas áreas pudiera no entender. No depender
+solo de una lista fija o un detector automático: revisar la frase y su contexto.
+
+1. Sustituir el tecnicismo cuando no aporte precisión. El artículo debe entenderse
+   sin consultar el glosario; preservar la voz y las historias aprobadas.
+2. Si conviene conservarlo, revisar `blog/glosario.html` y reutilizar su entrada.
+   Si falta, añadirla en la misma PR: significado sencillo, ejemplo ilustrativo,
+   confusión frecuente y lectura relacionada cuando exista. No inventar casos.
+3. Enlazar solo la primera aparición útil en el cuerpo mediante un enlace HTML
+   descriptivo a `/blog/glosario.html#id-del-termino`, nunca al inicio genérico
+   del glosario. No marcar todos los términos ni introducir jerga para enlazarla.
+4. Los IDs son estables, en minúsculas y sin acentos; reutilizar sinónimos bajo
+   una misma entrada. No renombrar ni eliminar un ID con enlaces entrantes.
+5. La definición completa debe estar en HTML y ser alcanzable sin JavaScript,
+   con encabezado visible, margen para la navegación fija y foco perceptible.
+   La primera versión usa enlaces directos, sin popups ni iconos repetidos.
+6. Dar contexto sencillo a fuentes especializadas cuando se necesiten. Las
+   explicaciones propias no se atribuyen automáticamente a una institución.
+7. Ejecutar `node --test`: la prueba del glosario recorre todos los blogs y
+   falla ante enlaces genéricos en artículos, destinos inexistentes, IDs
+   duplicados o entradas sin definición, ejemplo y aclaración. No sustituye
+   la detección editorial de palabras nuevas ni la prueba con personas.
+
+Registrar en QA/PR: términos detectados; cuáles se simplificaron, reutilizaron,
+añadieron o se dejaron sin vínculo y por qué; enlaces directos probados; recorrido
+con teclado/teléfono y vuelta al artículo. Añadir entradas no requiere crear
+páginas SEO individuales ni prometer posicionamiento. Mostrar cambios de voz y
+nuevas definiciones a Arturo antes del release.
 
 ### Regla de notas: transparencia sin interrumpir el relato
 
