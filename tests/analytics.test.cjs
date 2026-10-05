@@ -7,24 +7,30 @@ const root = path.resolve(__dirname, '..');
 const source = fs.readFileSync(path.join(root, 'analytics.js'), 'utf8');
 const api = require('../analytics.js');
 
-function fixture(host = 'www.donventas.mx', saved = null, deniedStorage = false, pathname = '/') {
+function fixture(host = 'www.donventas.mx', saved = null, deniedStorage = false, pathname = '/', options = {}) {
   const values = new Map(saved ? [[api.key, JSON.stringify(saved)]] : []);
+  const sessionValues = options.sessionValues || new Map(), timers = new Map();
+  let clock = Date.now(), timerId = 0;
   const scripts = [], cookies = [], listeners = {}, windowListeners = {};
   const button = value => ({ focus() {}, getAttribute() { return value; } });
   const reject = button('rejected'), accept = button('accepted'), prefs = button();
   const panel = { hidden: true, querySelector() { return reject; } }, status = {};
   const wrap = { querySelector(selector) { return selector === '.dv-analytics-panel' ? panel : selector === '[data-analytics-settings]' ? prefs : status; }, querySelectorAll() { return [reject, accept]; } };
-  const doc = { readyState: 'complete', head: { appendChild(node) { scripts.push(node); } }, body: { appendChild() {} },
+  const doc = { readyState: 'complete', visibilityState:'visible', referrer:options.referrer || '', querySelector(selector) { return (options.dom || {})[selector] || null; }, head: { appendChild(node) { scripts.push(node); } }, body: { appendChild() {} },
     createElement(tag) { return tag === 'div' ? wrap : {}; }, addEventListener(name, fn) { listeners[name] = fn; }, dispatchEvent() {} };
   Object.defineProperty(doc, 'cookie', { set(value) { cookies.push(value); }, get() { return ''; } });
   let reloads = 0;
   const win = { document: doc, location: { pathname, hostname: host, protocol: 'https:', origin: 'https://' + host,
+    search:options.search || '',
     href: 'https://' + host + pathname + '?email=private@example.com&utm_campaign=secret#private', reload() { reloads++; } },
     localStorage: { getItem(k) { if (deniedStorage) throw Error('denied'); return values.get(k) || null; }, setItem(k,v) { if (deniedStorage) throw Error('denied'); values.set(k,v); } },
+    sessionStorage: { getItem(k) { if (deniedStorage) throw Error('denied'); return sessionValues.get(k) || null; }, setItem(k,v) { if (deniedStorage) throw Error('denied'); sessionValues.set(k,v); }, removeItem(k) { sessionValues.delete(k); } },
+    innerWidth:390, innerHeight:844, setInterval(fn) { const id=++timerId; timers.set(id,fn);return id; }, clearInterval(id) { timers.delete(id); },
     addEventListener(name, fn) { windowListeners[name] = fn; }, CustomEvent: function (name, options) { this.type = name; this.detail = options.detail; } };
-  vm.runInNewContext(source, { window: win, URL });
+  vm.runInNewContext(source, { window: win, URL, URLSearchParams, Date:{now:()=>clock} });
   const commands = () => (win.dataLayer || []).filter(x => typeof x.length === 'number').map(x => Array.from(x));
-  return { win, doc, scripts, cookies, panel, status, accept, reject, prefs, values, listeners, windowListeners, commands, reloads: () => reloads };
+  return { win, doc, scripts, cookies, panel, status, accept, reject, prefs, values, sessionValues, timers, listeners, windowListeners, commands, reloads: () => reloads,
+    advance(ms) {clock+=ms;Array.from(timers.values()).forEach(fn=>fn());} };
 }
 test('nothing reaches Google before consent; reject does not install a tag', () => {
   const f = fixture();
@@ -103,5 +109,106 @@ test('all public reading and diagnostic entry points include the first-party mod
     assert.equal((html.match(/src="\/analytics.js"/g)||[]).length,1,name);
     assert.doesNotMatch(html, /googletagmanager\.com\/(?:ns|gtm|gtag)/);
   }
-  assert.ok(Buffer.byteLength(source)<15000);
+  assert.ok(Buffer.byteLength(source)<24000);
+});
+
+const campaignQuery = '?utm_source=instagram&utm_medium=social&utm_campaign=tu-marca-es-tu-ventaja&utm_content=historia';
+test('campaigns use a closed vocabulary and reject duplicate, unknown or Ads parameters', () => {
+  assert.deepEqual(api.campaignFrom(campaignQuery,null,Date.now(),true),{source:'instagram',medium:'social',name:'tu-marca-es-tu-ventaja',content:'historia'});
+  for(const query of [campaignQuery+'&utm_source=facebook',campaignQuery.replace('social','email'),campaignQuery.replace('historia','private@example.com'),campaignQuery+'&gclid=private',campaignQuery.replace('tu-marca-es-tu-ventaja','private-customer')]) {
+    assert.equal(api.campaignFrom(query,null,Date.now(),false),null);
+  }
+});
+test('campaign attribution is never persisted before consent and carries only registered fields', () => {
+  const f=fixture('www.donventas.mx',null,false,'/',{search:campaignQuery+'&email=private@example.com&utm_term=secret'});
+  assert.equal(f.sessionValues.size,0); assert.equal(f.timers.size,0);
+  f.accept.onclick();
+  const payload=f.commands().find(x=>x[0]==='event')[2];
+  assert.equal(payload.entry_campaign,'tu-marca-es-tu-ventaja');
+  assert.equal(payload.page_location,'https://www.donventas.mx/');
+  assert.doesNotMatch(JSON.stringify(f.commands()),/private|secret/);
+  assert.equal(f.sessionValues.size,1);
+  f.reject.onclick();assert.equal(f.sessionValues.size,0);assert.equal(f.timers.size,0);
+});
+test('consented campaign survives internal navigation; external/invalid/expired entry clears it', () => {
+  const first=fixture('www.donventas.mx',null,false,'/',{search:campaignQuery});first.accept.onclick();
+  const accepted={version:1,choice:'accepted',at:Date.now()-1};
+  const next=fixture('www.donventas.mx',accepted,false,'/branding.html',{sessionValues:first.sessionValues,referrer:'https://www.donventas.mx/'});
+  assert.equal(next.commands().find(x=>x[0]==='event')[2].entry_source,'instagram');
+  const saved=next.sessionValues.get(api.campaignKey);
+  for(const options of [{referrer:'https://external.test/private'},{search:'?utm_campaign=unknown'}]) {
+    const f=fixture('www.donventas.mx',accepted,false,'/',{...options,sessionValues:new Map([[api.campaignKey,saved]])});
+    assert.equal(f.commands().find(x=>x[0]==='event')[2].entry_campaign,undefined);
+    assert.equal(f.sessionValues.size,0);
+  }
+  for(const at of [Date.now()-1800001,Date.now()+60000]) {
+    const value=JSON.parse(saved);value.at=at;
+    assert.equal(api.campaignFrom('',{getItem:()=>JSON.stringify(value)},Date.now(),false),null);
+  }
+});
+test('visible time excludes background, preconsent and suspension; withdrawal stops sampler', () => {
+  const f=fixture('preview.test'); f.advance(10000);assert.equal(f.win.DVAnalytics.records.length,0);
+  f.accept.onclick();for(let i=0;i<9;i++)f.advance(1000);
+  assert.equal(f.win.DVAnalytics.records.filter(x=>x.event==='visible_time').length,0);
+  f.doc.visibilityState='hidden';f.listeners.visibilitychange();for(let i=0;i<30;i++)f.advance(1000);
+  f.doc.visibilityState='visible';f.listeners.visibilitychange();f.advance(60000);
+  assert.equal(f.win.DVAnalytics.records.filter(x=>x.event==='visible_time').length,0);
+  f.advance(1000);f.advance(1000);
+  assert.equal(f.win.DVAnalytics.records.filter(x=>x.event==='visible_time').length,1);
+  f.reject.onclick();f.advance(10000);assert.equal(f.win.DVAnalytics.records.length,0);
+});
+test('step/section exposure needs visibility and dwell; reading jumps do not manufacture skipped bands', () => {
+  let top=900;
+  const heading={getBoundingClientRect:()=>({top,bottom:top+40,left:0,right:300,width:300,height:40})};
+  const form={querySelector:()=>heading,getAttribute:k=>k==='data-route-name'?'branding':'desired'};
+  const article={getBoundingClientRect:()=>({top:-760,bottom:1240,height:2000})};
+  const f=fixture('preview.test',null,false,'/blog/tu-marca-es-tu-ventaja.html',{dom:{'main h1':heading,'.dv-form-shell[data-analytics-step]':form,'article.article-copy, article.manifesto-story':article}});
+  f.accept.onclick();f.advance(1000);f.advance(1000);
+  assert.equal(f.win.DVAnalytics.records.filter(x=>/viewed/.test(x.event)).length,0);
+  top=100;f.advance(1000);f.advance(1000);f.advance(1000);
+  const events=f.win.DVAnalytics.records;
+  assert.equal(events.filter(x=>x.event==='diagnostic_step_viewed').length,1);
+  assert.equal(events.filter(x=>x.event==='section_viewed').length,1);
+  assert.deepEqual(Array.from(events.filter(x=>x.event==='reading_progress'),x=>x.parameters.percent),[75]);
+});
+test('funnel payloads exclude invalid step ids, error messages and arbitrary timings', () => {
+  assert.deepEqual(api.cleanEvent('diagnostic_validation_error',{route:'branding',message:'private',field:'email'}),{route:'branding',step:'contact'});
+  assert.equal(api.cleanEvent('visible_time',{seconds:12345}),null);
+  assert.equal(api.cleanEvent('reading_progress',{percent:99}),null);
+  assert.equal(api.cleanEvent('section_viewed',{section:'private'}),null);
+  assert.equal(api.cleanEvent('diagnostic_step_viewed',{route:'branding',step:'private'}),null);
+});
+test('branding diagnostic anchors are diagnosed as entry, not generic service clicks', () => {
+  const f=fixture('preview.test',null,false,'/branding.html');f.accept.onclick();
+  const link={href:'https://preview.test/branding.html#diagnostico',hasAttribute:()=>false};
+  f.listeners.click({target:{closest:()=>link}});
+  assert.equal(f.win.DVAnalytics.records.at(-1).event,'diagnostic_entry');
+});
+
+test('campaign expiry during a long-open page and blocked storage remain privacy-safe', () => {
+  const f=fixture('preview.test',null,false,'/',{search:campaignQuery});f.accept.onclick();
+  f.doc.visibilityState='hidden';f.advance(1800001);
+  f.win.DVAnalytics.track('whatsapp_click');
+  assert.equal(f.win.DVAnalytics.records.at(-1).parameters.entry_campaign,undefined);
+  assert.equal(f.sessionValues.size,0);
+  const blocked=fixture('preview.test',null,true,'/',{search:campaignQuery});
+  blocked.accept.onclick();assert.equal(blocked.sessionValues.size,0);
+  assert.equal(blocked.win.DVAnalytics.records[0].parameters.entry_campaign,'tu-marca-es-tu-ventaja');
+  blocked.reject.onclick();assert.equal(blocked.win.DVAnalytics.track('whatsapp_click'),false);
+});
+
+test('diagnostic success is emitted only after acceptance; failures have no success event', async () => {
+  const events=[], win={DVAnalytics:{track:(name)=>events.push(name)}};
+  vm.runInNewContext(fs.readFileSync(path.join(root,'diagnostico-v2.js'),'utf8'),{window:win});
+  const instance=Object.create(win.DVDiagnostic.Diagnostic.prototype);
+  let resolve;
+  Object.assign(instance,{route:'contenido',el:{querySelectorAll:()=>[]},sendLead:()=>new Promise(r=>{resolve=r;}),resultMarkup:()=>'',bindResultActions:()=>{}});
+  instance.submitLead('Private',{key:'test',gap:false});
+  assert.deepEqual(events,['diagnostic_submit_attempted']);
+  resolve();await new Promise(r=>setImmediate(r));
+  assert.deepEqual(events,['diagnostic_submit_attempted','diagnostic_completed']);
+  events.length=0;
+  instance.sendLead=()=>Promise.reject(new Error('Private error'));
+  instance.submitLead('Private',{key:'test',gap:false});await new Promise(r=>setImmediate(r));
+  assert.deepEqual(events,['diagnostic_submit_attempted','diagnostic_submit_failed']);
 });

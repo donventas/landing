@@ -29,11 +29,11 @@ Fecha: 2026-10-05. Base: `ee52a9c`. Rama: `codex/consent-first-analytics`.
 
 Todo valor es enumerado. Se añade `content_id` y URL canónica sin consulta ni fragmento. No se envían respuestas, montos, nombre, contacto, URL aportada, ID de lead, textos de enlace ni errores crudos. Inicio, pasos y finalización se deduplican por documento/ruta/paso; no son una contabilidad de ventas. Un mismo visitante puede contarse distinto entre dispositivos. La muestra excluye a quien rechaza y puede tener sesgo.
 
-## Atribución: límite explícito y siguiente paso propuesto
+## Atribución y abandono — extensión aprobada
 
-Esta versión elimina referentes y parámetros de campaña. Sirve para recorridos internos, **no permite dar por validada la atribución de campañas**. No presentar tráfico directo como prueba de ausencia de campañas.
+Se implementó un vocabulario cerrado de campañas, canales y piezas, sin enviar URL cruda ni referentes. Detalle operativo, fórmulas, límites y enlaces en [ANALYTICS-FUNNEL.md](ANALYTICS-FUNNEL.md). La atribución está implementada y probada en simulación; su recepción en GA4 continúa pendiente.
 
-Recomendación: registro cerrado de enlaces con `utm_source`, `utm_medium`, `utm_campaign` y `utm_content`; validar valores contra ese registro, mapearlos a los campos de campaña GA y seguir eliminando la URL cruda. No admitir valores libres que puedan contener datos personales. No etiquetar enlaces internos con UTM. Capturar exclusivamente con consentimiento, explicar pérdida de atribución cuando se rechaza y probar navegación entre páginas. Para Ads se revisará por separado el etiquetado automático, sin mezclar indiscriminadamente GCLID y UTM. Ventas posteriores por WhatsApp requieren otro proceso comercial, no se deducen del clic.
+El contexto se conserva después de aceptar, durante 30 minutos sin eventos medidos, en sessionStorage. Una entrada externa sin UTM reconocido, UTM inválido o identificador publicitario borra la campaña anterior; no se etiqueta como directo lo que simplemente no está atribuido. No se escribe campaña antes del consentimiento. Retirada del permiso elimina el contexto. Las etiquetas nativas de GA y las dimensiones `entry_*` son capas distintas; la segunda expresa nuestro modelo acotado de última entrada etiquetada, no atribución causal ni multidispositivo.
 
 ## Comprobación y compuertas
 
@@ -41,7 +41,7 @@ Recomendación: registro cerrado de enlaces con `utm_source`, `utm_medium`, `utm
 - Navegador local: aceptar, rechazar, reabrir preferencias y artículo → término → retorno contextual funcionan. Vistas de 320/390/768 px revisadas mediante iframe local; escritorio en navegador. No son pruebas en dispositivos físicos.
 - Diagnóstico recorrido completo en navegador con sitio web y WhatsApp vacíos: éxito del endpoint local simulado y evento `diagnostic_completed` visible. 106 pruebas automatizadas pasan; no equivalen a recepción de GA4 ni de un lead real.
 - API de la prueba local está simulada: nunca atribuir su respuesta a Supabase ni a recepción comercial real.
-- Peso inicial añadido medido: JS 10,820 bytes / gzip 3,856; CSS 1,596 / gzip 680. No equivale a Lighthouse ni a Core Web Vitals de campo. Google solo se descarga después de aceptar; medir también esa fase antes del release.
+- Peso inicial de la primera versión: JS 10,820 bytes / gzip 3,856; CSS 1,596 / gzip 680. El nuevo peso se registra en ANALYTICS-FUNNEL.md. No equivale a Lighthouse ni a Core Web Vitals de campo. Google solo se descarga después de aceptar; medir también esa fase antes del release.
 
 Pendientes antes de activar:
 

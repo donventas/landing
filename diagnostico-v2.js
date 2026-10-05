@@ -369,7 +369,7 @@
     var total=list.length+(pendingBranch?1:0);
     var progress=Math.round(((this.index+1)/total)*100);
     var routeLabel=this.route==='branding'?'Sistema de marca':'Contenido, sitio y buscadores';
-    var h='<div class="dv-form-shell" data-route-name="'+this.route+'">';
+    var h='<div class="dv-form-shell" data-route-name="'+this.route+'" data-analytics-step="'+q.id+'">';
     h+='<div class="dv-form-top"><div><span class="dv-form-kicker">Diagnóstico · '+routeLabel+'</span><strong>'+(this.index+1)+' / '+total+'</strong></div><div class="dv-progress" role="progressbar" aria-label="Progreso del diagnóstico" aria-valuemin="0" aria-valuemax="100" aria-valuenow="'+progress+'"><i style="width:'+progress+'%"></i></div></div>';
     var title=questionText(q.title,this.state),hint=questionText(q.hint,this.state),context=questionText(q.context,this.state);
     h+='<div class="dv-step" aria-live="polite">';
@@ -446,7 +446,7 @@
         }
         var n=self.el.querySelector('.dv-next');if(n)n.disabled=!self.hasAnswer(q);self.persist();
       });
-      if(q.type==='contact')field.addEventListener('blur',function(){self.captureFields();var fieldName=field.getAttribute('data-field'),errors=contactErrors(self.state);self.setFieldError(fieldName,errors[fieldName]||'');});
+      if(q.type==='contact')field.addEventListener('blur',function(){self.captureFields();var fieldName=field.getAttribute('data-field'),errors=contactErrors(self.state);self.setFieldError(fieldName,errors[fieldName]||'');if(errors[fieldName])self.track('diagnostic_validation_error',{route:self.route});});
     });
   };
   Diagnostic.prototype.captureFields=function(){
@@ -487,6 +487,7 @@
   };
   Diagnostic.prototype.submitLead=function(summary,result){
     var self=this;
+    self.track('diagnostic_submit_attempted',{route:self.route});
     this.el.querySelectorAll('button').forEach(function(btn){btn.disabled=true;});
     this.sendLead(summary,result).then(function(){
       self.track('diagnostic_completed',{route:self.route,recommendation:result.key,budget_gap:result.gap});
@@ -520,7 +521,13 @@
     }).finally(function(){clearTimeout(timeout);});
   };
   Diagnostic.prototype.track=function(name,data){
-    try{if(root.DVAnalytics)root.DVAnalytics.track(name,data);}catch(_e){}
+    try{if(root.DVAnalytics){
+      if(name==='diagnostic_started'){
+        root.DVAnalytics.track('diagnostic_viewed',{route:this.route});
+        root.DVAnalytics.track('diagnostic_step_viewed',{route:this.route,step:this.current().q.id});
+      }
+      root.DVAnalytics.track(name,data);
+    }}catch(_e){}
     this._tracked=this._tracked||{};
     var key=name+':'+(data&&data.step||'');
     if(name!=='diagnostic_submit_failed'&&this._tracked[key])return;
