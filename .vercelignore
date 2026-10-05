@@ -1,0 +1,2 @@
+# Local-only QA server; never make the simulated endpoint part of a deployment.
+scripts/analytics-qa-server.cjs
