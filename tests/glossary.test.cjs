@@ -36,8 +36,8 @@ test('every article glossary link reaches a specific existing entry, including f
     }
   }
   const pilot = read('blog/tu-marca-es-tu-ventaja.html');
-  assert.match(pilot, /glosario\.html#marca/);
-  assert.match(pilot, /glosario\.html#promesa-de-marca/);
+  assert.match(pilot, /glosario\.html\?from=ventaja&amp;at=marca#marca/);
+  assert.match(pilot, /glosario\.html\?from=ventaja&amp;at=promesa-de-marca#promesa-de-marca/);
   assert.doesNotMatch(pilot, /aunque tu campaña diga otra cosa|tu operación tiene que acompañarte/);
 });
 
@@ -52,7 +52,65 @@ test('glossary local paths, cross-page anchors and index all resolve without scr
   }
   assert.doesNotMatch(glossary, /on(?:click|mouseover)=|role="tooltip"|<iframe/);
   const scripts = [...glossary.matchAll(/<script[^>]*src="([^"]+)"/g)].map(x => x[1]);
-  assert.deepEqual(scripts, ['/app.js', '/blog/blog.js', '/_vercel/insights/script.js']);
+  assert.deepEqual(scripts, ['/blog/glosario.js?v=return-1', '/app.js', '/blog/blog.js', '/_vercel/insights/script.js']);
+});
+
+const { resolveReading } = require('../blog/glosario.js');
+const attribute = (tag, name) => tag.match(new RegExp(`\\b${name}="([^"]*)"`))?.[1];
+const sources = [...glossary.matchAll(/<a\b[^>]*data-reading-source="[^"]+"[^>]*>([^<]+)<\/a>/g)].map(([tag, title]) => ({
+  key: attribute(tag, 'data-reading-source'), number: attribute(tag, 'data-reading-number'),
+  terms: attribute(tag, 'data-reading-terms').split(/\s+/), href: attribute(tag, 'href'), title
+}));
+
+test('each glossary origin returns to the exact source term and registry covers all articles', () => {
+  assert.ok(sources.length >= 3);
+  for (const source of sources) {
+    const html = read(source.href.slice(1));
+    const links = [...html.matchAll(/<a\b[^>]*class="glossary-link"[^>]*>/g)].map(x => x[0]);
+    assert.ok(links.length >= 1);
+    const seen = [];
+    for (const link of links) {
+      const url = new URL(attribute(link, 'href').replaceAll('&amp;', '&'), 'https://www.donventas.mx');
+      const at = url.searchParams.get('at');
+      assert.equal(url.searchParams.get('from'), source.key);
+      assert.equal(url.hash, '#' + at);
+      assert.ok(ids.has(at));
+      assert.equal(attribute(link, 'id'), 'termino-' + at);
+      assert.equal((html.match(new RegExp(`id="termino-${at}"`, 'g')) || []).length, 1);
+      const resolved = resolveReading(url.search, sources);
+      assert.equal(resolved.href, source.href + '#termino-' + at);
+      seen.push(at);
+    }
+    assert.deepEqual(seen.sort(), [...source.terms].sort());
+    assert.equal(seen.length, new Set(seen).size);
+  }
+  for (const file of blogs.filter(f => !['index.html', 'glosario.html'].includes(f))) {
+    if (read('blog/' + file).includes('class="glossary-link"')) {
+      assert.ok(sources.some(s => s.href === '/blog/' + file), `Register glossary returns for ${file}`);
+    }
+  }
+});
+
+test('the same term in two articles and multiple tabs retains its own origin', () => {
+  const first = resolveReading('?from=fundacional&at=marca', sources);
+  const second = resolveReading('?from=ventaja&at=marca', sources);
+  assert.notEqual(first.href, second.href);
+  assert.equal(first.href, '/blog/por-que-nacio-don-ventas.html#termino-marca');
+  assert.equal(second.href, '/blog/tu-marca-es-tu-ventaja.html#termino-marca');
+  assert.deepEqual(resolveReading('?from=fundacional&at=marca', sources), first);
+  assert.equal((glossary.match(/data-reading-return/g) || []).length, entries.length);
+});
+
+test('direct, invalid and adversarial origins never produce an arbitrary return URL', () => {
+  for (const query of ['', '?from=ventaja', '?from=unknown&at=marca', '?from=ventaja&at=campana',
+    '?from=https://evil.example&at=marca', '?from=//evil.example&at=marca',
+    '?from=javascript:alert(1)&at=marca', '?from=ventaja&at=../marca',
+    '?from=ventaja&from=fundacional&at=marca', '?from=ventaja&at=marca&at=campana']) {
+    assert.equal(resolveReading(query, sources), null, query);
+  }
+  const script = read('blog/glosario.js');
+  assert.doesNotMatch(script, /document\.referrer|localStorage|sessionStorage|document\.cookie|innerHTML|fetch\(/);
+  assert.match(glossary, /href="#lecturas" data-reading-return/);
 });
 
 test('glossary discoverability and editorial workflow remain explicit', () => {

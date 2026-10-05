@@ -7,16 +7,18 @@ Estado: implementación para preview; no autorizado ni publicado en producción.
 
 Arturo aprobó lenguaje más claro, glosario y revisión de términos con cada nuevo
 blog. Los enlaces deben apuntar a la entrada, no al inicio del glosario.
-Implementación mínima: enlaces HTML nativos; no ventanas emergentes, scripts,
-imágenes, fuentes ni dependencias nuevas. Solo repositorio Landing.
+Implementación mínima: enlaces HTML nativos; no ventanas emergentes, imágenes,
+fuentes ni dependencias nuevas. Un script de retorno de ~1.6 KB se carga solo en
+el glosario, añadido por la petición posterior de Arturo. Solo repositorio Landing.
 
 - Workflow 1.2: detectar, simplificar, reutilizar o añadir entrada en la misma PR;
   conservar IDs; revisar contexto; no confundir comprobación mecánica con comprensión.
 - Piloto en artículo 03: «operación» se explica como organizar el trabajo;
   «campaña» se sustituye por anuncios y publicaciones. Dos enlaces a marca y promesa.
-- 12 términos iniciales presentes en el lenguaje del sitio: branding, campaña,
+- 14 términos presentes en el lenguaje del sitio: branding, campaña,
   contenido, conversión, copy, identidad visual, marca, marketing, posicionamiento,
-  promesa de marca, propuesta de valor y SEO. No son consultas de demanda medida.
+  promesa de marca, propuesta de valor, SEO, experiencia de usuario y página de
+  destino. No son consultas de demanda medida.
 - «Capacidad humana» y «recursos» quedan acompañados de contexto, sin saturar enlaces.
 - Historias, imágenes, permisos, fuentes académicas, fecha de publicación y oferta
   de diagnóstico preservados. El ajuste ocurre el mismo día de publicación.
@@ -33,7 +35,7 @@ Fuentes abiertas el 4 de octubre de 2026. No resultados comerciales inventados.
 
 ## Comprobaciones
 
-- 84 pruebas Node aprobadas; diff sin errores de whitespace.
+- 87 pruebas Node aprobadas en la ampliación; diff sin errores de whitespace.
 - Nueva prueba recorre los HTML del blog: todos los enlaces de artículos al glosario
   requieren un ID existente; entradas únicas con definición, ejemplo y distinción.
   Comprueba índice, rutas locales, enlaces de vuelta y metadatos. El detector no
@@ -52,9 +54,10 @@ Fuentes abiertas el 4 de octubre de 2026. No resultados comerciales inventados.
 
 ## Carga y límites
 
-HTML nuevo: 15,976 bytes. CSS compartido nuevo: ~2.4 KB sin comprimir.
-Artículo solo incorpora ese CSS, enlaces y edición breve; mismas imágenes y scripts.
-No se incorpora una librería de popups o búsqueda.
+HTML del glosario: ~20.6 KB. CSS compartido nuevo: ~3.1 KB sin comprimir.
+Los artículos solo incorporan ese CSS y enlaces; mismas imágenes y scripts.
+El glosario añade `glosario.js`, ~1.6 KB, sin librerías ni peticiones adicionales
+para obtener el origen. No se incorpora una librería de popups o búsqueda.
 
 Observación local, iframe 768 px, sin limitar red/CPU, caché no controlada:
 
@@ -74,3 +77,30 @@ QA realizado por el implementador; no se declara revisión independiente en esta
 Aceptación de la voz, definiciones y preview pendiente de Arturo. Merge/producción e
 indexación son compuertas separadas; sitemap no prueba que Google haya indexado.
 Rollback: revertir la PR, no borrar historias o documentos históricos.
+
+## Ampliación: regreso al artículo correcto
+
+Petición posterior de Arturo: un mismo término puede aparecer en distintos blogs;
+debe poder regresarse al origen correcto y enlazar los demás artículos.
+
+- Cada enlace contiene `from` (clave de artículo) y `at` (término de salida), además
+  del fragmento de la definición. Solo se aceptan pares registrados en los enlaces
+  HTML de lecturas. No hay URLs de retorno libres, cookies, referrer ni storage.
+- «Volver al artículo 01/02/03» aparece junto a cada definición y regresa al ID
+  `termino-…` del enlace original, no al inicio del artículo. El nombre accesible
+  contiene el título completo. Consultar otro término conserva el punto inicial.
+- Sin origen válido o con JS deshabilitado: enlace nativo a lecturas para elegir
+  manualmente. No se simula recordar un origen. Canonical del glosario sin parámetros.
+- Fundacional: campaña, experiencia de usuario, marca, contenido. Artículo 02:
+  contenido, página de destino y campaña. Artículo 03: marca y promesa. Solo se
+  añaden enlaces; no se reescriben los relatos de los artículos 01 y 02.
+- Prueba real local con dos pestañas: «marca» desde artículos 01 y 03 produjo dos
+  retornos distintos; ambos llegaron al ID correcto con foco. En el primero se
+  consultó también SEO antes del regreso: siguió regresando a «marca» del 01.
+- Origen inválido probado en navegador: fallback a lecturas. Tests comprueban
+  origen/término inexistentes, parámetros duplicados y URLs externas/javascript.
+- Glosario con retorno: simulación 320/390/768/1440 px, sin overflow. Laboratorio
+  local sin throttling/caché controlada: LCP 352/112/432/340 ms; CLS 0/~0.0002/0/0.
+  No es una certificación CWV, y las limitaciones de la medición inicial permanecen.
+- Se comprobó el margen de regreso: término a ~140 px, por debajo del header
+  de ~91 px en escritorio. No se afirma prueba en dispositivo físico ni INP.

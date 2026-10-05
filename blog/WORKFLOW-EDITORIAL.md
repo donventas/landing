@@ -97,13 +97,21 @@ solo de una lista fija o un detector automático: revisar la frase y su contexto
    Si falta, añadirla en la misma PR: significado sencillo, ejemplo ilustrativo,
    confusión frecuente y lectura relacionada cuando exista. No inventar casos.
 3. Enlazar solo la primera aparición útil en el cuerpo mediante un enlace HTML
-   descriptivo a `/blog/glosario.html#id-del-termino`, nunca al inicio genérico
+   descriptivo a `/blog/glosario.html?from=clave-articulo&at=id-del-termino#id-del-termino`, nunca al inicio genérico
    del glosario. No marcar todos los términos ni introducir jerga para enlazarla.
 4. Los IDs son estables, en minúsculas y sin acentos; reutilizar sinónimos bajo
    una misma entrada. No renombrar ni eliminar un ID con enlaces entrantes.
 5. La definición completa debe estar en HTML y ser alcanzable sin JavaScript,
    con encabezado visible, margen para la navegación fija y foco perceptible.
-   La primera versión usa enlaces directos, sin popups ni iconos repetidos.
+   Usar enlaces directos, sin popups ni iconos repetidos. Cada enlace de origen
+   lleva `id="termino-id-del-termino"` para regresar al punto exacto de lectura.
+   Registrar el artículo y sus términos en los enlaces HTML `data-reading-source`
+   del glosario. La prueba comprueba que origen, término y regreso coincidan.
+   El script mínimo del glosario lee solo ese registro permitido; no acepta una
+   URL arbitraria de retorno, no usa referrer, cookies ni almacenamiento compartido.
+   Si se consultan otros términos, se conserva el punto de lectura inicial.
+   Sin origen válido o sin JavaScript, ofrecer las lecturas sin fingir cuál era
+   el artículo de origen. Probar dos artículos y dos pestañas para un mismo término.
 6. Dar contexto sencillo a fuentes especializadas cuando se necesiten. Las
    explicaciones propias no se atribuyen automáticamente a una institución.
 7. Ejecutar `node --test`: la prueba del glosario recorre todos los blogs y
