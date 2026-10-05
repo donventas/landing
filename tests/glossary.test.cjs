@@ -9,6 +9,36 @@ const entries = [...glossary.matchAll(/<section class="glossary-entry" id="([^"]
 const ids = new Set(entries.map(x => x[1]));
 const blogs = fs.readdirSync(path.join(root, 'blog')).filter(f => f.endsWith('.html'));
 
+test('editorial indexes stay equivalent and every related term is a stable native deep link', () => {
+  const indexes = [...glossary.matchAll(/<nav class="glossary-index"[^>]*>([\s\S]*?)<\/nav>/g)];
+  assert.equal(indexes.length, 2);
+  const links = html => [...html.matchAll(/href="#([^"]+)"/g)].map(x => x[1]);
+  assert.deepEqual(links(indexes[0][1]), [...ids]);
+  assert.deepEqual(links(indexes[1][1]), [...ids]);
+  assert.match(glossary, /<details class="glossary-mobile-index">\s*<summary>/);
+  for (const [, id, content] of entries) {
+    const related = content.match(/<p class="term-related">([\s\S]*?)<\/p>/);
+    assert.ok(related, id);
+    const targets = links(related[1]);
+    assert.equal(targets.length, 2);
+    assert.equal(new Set(targets).size, 2);
+    for (const target of targets) assert.ok(ids.has(target) && target !== id);
+  }
+});
+
+test('editorial glossary stays lightweight and does not add visual media or fonts', () => {
+  assert.ok(Buffer.byteLength(glossary) < 28000);
+  assert.ok(Buffer.byteLength(read('blog/glosario.css')) < 11000);
+  assert.ok(Buffer.byteLength(read('blog/glosario.js')) < 2000);
+  assert.equal((glossary.match(/<img\b/g) || []).length, 1, 'Only the existing wordmark');
+  assert.doesNotMatch(glossary, /<video|<canvas|<iframe/);
+  const css = read('blog/glosario.css');
+  assert.doesNotMatch(css, /@import|url\(/);
+  assert.match(css, /position:sticky/);
+  assert.match(css, /@media\(max-width:959px\)/);
+  assert.match(css, /\.glossary-directory\{position:static/);
+});
+
 test('glossary entries have stable IDs, readable definitions, examples and distinctions', () => {
   assert.ok(entries.length >= 10);
   assert.equal(ids.size, entries.length);

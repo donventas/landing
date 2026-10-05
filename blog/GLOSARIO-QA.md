@@ -1,7 +1,10 @@
 # Glosario progresivo — piloto editorial
 
 Fecha: 2026-10-04. Base: `b5ef37b50b832b2820e30c85848b897a39baacca`.
-Estado: implementación para preview; no autorizado ni publicado en producción.
+Estado del piloto original: publicado mediante PR #30, commit `5b787c7`.
+Search Console aceptó la solicitud de indexación del glosario y del artículo 03;
+no se afirma incorporación al índice. El registro inferior conserva la evidencia
+histórica previa al release. La pasada editorial siguiente queda en preview.
 
 ## Decisión y alcance
 
@@ -104,3 +107,65 @@ debe poder regresarse al origen correcto y enlazar los demás artículos.
   No es una certificación CWV, y las limitaciones de la medición inicial permanecen.
 - Se comprobó el margen de regreso: término a ~140 px, por debajo del header
   de ~91 px en escritorio. No se afirma prueba en dispositivo físico ni INP.
+
+## Pasada editorial de consulta — base 5b787c7
+
+Dirección aprobada por Arturo después del release anterior. Clasificación:
+adaptación de presentación en Landing, no cambio de fundamentos BSB/AVOS.
+Sin experimento AVOS activo. Superficie HTML/CSS y navegador local confirmados.
+Merge de la nueva pasada pendiente de revisión del preview.
+
+### Composición y límites
+
+- Portada tipográfica dentro de un marco común, título oscuro y nota en papel
+  claro. Derivada de `blog/blog.css`: Schibsted local, azul, papel, notas e índices
+  editoriales; no referencias visuales de otras marcas ni una foto decorativa.
+- La nota «Una marca. No solo un logo» remite al significado ya aprobado.
+- Columna de consulta lateral con desplazamiento propio en escritorio; índice
+  nativo `details/summary` en móvil. Las dos listas tienen los mismos 14 destinos,
+  comprobados por test, y solo una es visible por breakpoint.
+- Definición protagonista, ejemplo sobre papel, aclaración secundaria legible,
+  dos términos relacionados y una lectura contextual. No se esconden definiciones.
+- 42 párrafos protegidos (definiciones, ejemplos, distinciones) idénticos a main.
+  IDs, canonical, fuentes, enlaces desde artículos, registro de origen y script
+  de retorno preservados. No cambia sitemap ni fechas por estética.
+- Consumidores: glosario y CSS compartido por los artículos. Las reglas de los
+  enlaces de artículos se mantienen idénticas; el resto se limita al glosario.
+  Sin cambios a formularios, servicios, privacidad, medición, Portal o Runtime.
+
+### Verificación de implementación
+
+- 89 tests: los 87 anteriores más paridad de índices/relaciones y presupuesto
+  de recursos. Enlaces locales, anclas, origen adversarial y metadatos pasan.
+- 320/390/768/959/960/1440 px de contenido simulados en iframe Chromium local:
+  sin overflow horizontal. También revisión de escritorio real a ~1264 px.
+  El iframe reserva 15 px adicionales para scrollbar; no es teléfono físico.
+- Revisión visual: portada en escritorio/tableta/móvil, definición a 320 px,
+  índice móvil cerrado y abierto, salto a Campaña, foco y contraste de ejemplos.
+- Recorrido real con Enter: Marca → Identidad visual, manteniendo `from/at`;
+  regreso al artículo 03 con foco en `termino-marca` a ~140 px del borde superior.
+  Entrada directa a Marca queda a ~130 px, por debajo del menú.
+- Contraste calculado: azul sobre papel 5.73:1; tinta sobre papel 13.99:1;
+  texto secundario sobre fondo oscuro 10.65:1; enlace sobre panel 8.13:1.
+- HTML ~23.6 KB; CSS ~7.7 KB; JS original 1,619 bytes. Sin imágenes, fuentes,
+  librerías ni peticiones de datos nuevas. El único `img` sigue siendo el wordmark.
+- Autorrevisión del implementador, no QA independiente ni prueba con clientes.
+  Mantener aprobación visual y publicación separadas de pruebas mecánicas.
+
+### Rendimiento observado y límites
+
+Muestras locales en iframe, sin throttling de CPU/red y sin controlar caché;
+no constituyen certificación de Core Web Vitals ni medición de INP.
+Desde arriba: 768 px LCP 76 ms, 959 px 88 ms, 960 px 64 ms, 1440 px 56 ms;
+CLS 0 en estas cargas. Entrada directa a Marca, 320 px: 56 ms / CLS 0.
+Comparación desde arriba con referencia de `5b787c7` servida por el mismo servidor:
+320 px LCP 52 → 52 ms; 1440 px 60 → 56 ms; CLS 0 en ambas versiones.
+Son muestras individuales exploratorias, no evidencia de mejora estadística.
+Al abrir el índice mediante automatización, el observador del iframe reportó
+CLS ~0.546; se conserva esta observación de interacción separada de la carga.
+La expansión desplaza contenido intencionadamente; esta captura automatizada
+no permite certificar la exclusión por entrada reciente ni el CLS de campo.
+
+Rollback: revertir únicamente la PR editorial; no eliminar el glosario, los IDs
+ni las solicitudes de indexación ya realizadas. No repetir solicitudes por un
+cambio exclusivamente visual ni prometer mejores posiciones por el rediseño.
