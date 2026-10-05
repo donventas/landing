@@ -130,4 +130,57 @@ La precarga se limita a la imagen de portada correspondiente al viewport mediant
 
 ## Rollback
 
+## Portadas de las cuatro lecturas — 5 de octubre de 2026
+
+Rama `codex/hub-editorial-covers`, base productiva `d8d69490`. Esta entrada
+documenta una ronda nueva; las métricas y decisiones históricas anteriores no
+se presentan como mediciones de esta versión.
+
+- Dirección aprobada: carta fundacional destacada; artículos 02 y 03 con la
+  misma estructura; glosario como recurso, nunca como artículo 04. Los cuatro
+  enlaces integran imagen, título, resumen y acción en un solo marco.
+- Se reutilizan retrato y escenas aprobadas. No hay generación, recorte ni
+  cambio de escena por viewport. La nota de Arturo se conserva entre lecturas;
+  se elimina el resumen lateral redundante de la carta en el índice, no del relato.
+- Notas visibles: ilustraciones ficticias de barbería/joyería y avatares con IA.
+  Términos nuevos: ninguno; no cambian entradas ni vínculos del glosario.
+- Textos, fechas, SEO, autoría y portadas de los artículos individuales intactos.
+  Se conserva el título informativo del HUB publicado mediante PR 28, JSON-LD
+  con tres artículos, canonical, robots, medición y rutas comerciales. Solo se
+  actualiza `lastmod` del HUB al día de esta modificación.
+- CSS nuevo exclusivo del índice: 2.884 bytes, 1.096 bytes gzip en medición local.
+  Sin JavaScript ni dependencias nuevos. Las cuatro imágenes usan lazy loading,
+  dimensiones y srcset. Variantes de 480 px: 10.440 / 22.744 / 33.294 / 18.606
+  bytes (fundador / barbería / joyería / glosario). La carga completa aumenta;
+  no se afirma que añadir imágenes tenga coste cero. No se precargan las tarjetas.
+
+### Verificación de esta ronda
+
+- 96/96 pruebas automatizadas; `git diff --check` sin errores. Nuevas pruebas
+  para cuatro portadas, enlaces únicos, nombres accesibles, inventario,
+  fragmentos, carga diferida, tamaños, notas y aislamiento del CSS.
+- Navegador integrado, iframe de prueba a 320/390/768/900/901/1440 px: sin
+  desbordamiento horizontal en ninguno. Una columna hasta 900 px, dos desde
+  901 px. Revisión visual de escenas completas en móvil/tablet/escritorio.
+  Son anchos simulados, no teléfonos físicos ni una matriz multinavegador.
+- Enter abre artículo 02; clic en imágenes de carta, artículo 03 y glosario
+  abre el destino correcto. Tab pasa de carta a artículo 02, con contorno de
+  3 px y separación de 5 px. No hay enlaces/botones anidados. Contrastes del
+  texto secundario y acciones de los bloques nuevos: mínimo 6,16:1.
+- Comparación directa local de escritorio a 1280 px, viewport nativo, sin
+  throttling, servidor no-store, misma instrumentación: base LCP 216 ms / CLS 0;
+  propuesta LCP 224 ms / CLS 0. Una muestra por versión, no Lighthouse ni datos
+  de campo, sin conclusión sobre INP o p75. Recursos observados al inicio:
+  439.327 vs 452.651 bytes; las imágenes lejanas siguen sin descargarse.
+- Los valores CLS de la simulación en iframe incluyen un cambio de margen del
+  body sin estilos a body con estilos en ambas versiones (~0,22). Se descartan
+  como medida del sitio publicado; ese efecto no apareció en la prueba nativa.
+- No se envían leads reales: formularios, servidor, datos, privacidad y legales
+  no cambian. No se repite indexación ni se promete ranking. Auto-revisión;
+  sin QA independiente ni aprobación visual del release todavía.
+- Estado: preview para revisión. Sin merge ni despliegue a producción autorizado
+  en esta ronda. Revertir el commit restaura los bloques anteriores.
+
+## Rollback histórico
+
 Revertir el commit de esta rama restaura el hub y el artículo anteriores. No hay cambios de datos, infraestructura, formulario, sitemap, legales ni dependencias.
