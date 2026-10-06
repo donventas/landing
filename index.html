@@ -36,7 +36,10 @@
   "@context": "https://schema.org",
   "@graph": [
     {
-      "@type": ["ProfessionalService", "Organization"],
+      "@type": [
+        "ProfessionalService",
+        "Organization"
+      ],
       "@id": "https://www.donventas.mx/#org",
       "name": "Don Ventas",
       "url": "https://www.donventas.mx/",
@@ -45,10 +48,27 @@
       "description": "Don Ventas es un estudio de estrategia de marca, contenido y sitios web. Ayudamos a profesionales, emprendimientos y empresas a comunicar lo que los hace valiosos, para que las personas puedan entenderlos, encontrarlos y elegirlos. Trabajamos desde México, de forma remota, con clientes de habla hispana.",
       "slogan": "Entender. Encontrar. Elegir.",
       "email": "arturo.villagomez@donventas.mx",
-      "founder": {"@id": "https://www.donventas.mx/#quien"},
-      "contactPoint": {"@type": "ContactPoint", "contactType": "Atención a clientes", "email": "arturo.villagomez@donventas.mx", "availableLanguage": "es", "url": "https://www.donventas.mx/diagnostico.html"},
+      "founder": {
+        "@id": "https://www.donventas.mx/#quien"
+      },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "Atención a clientes",
+        "email": "arturo.villagomez@donventas.mx",
+        "availableLanguage": "es",
+        "url": "https://www.donventas.mx/diagnostico.html"
+      },
       "areaServed": "Atención remota internacional en español",
-      "knowsAbout": ["Estrategia de contenido", "Contenido para redes sociales", "Diseño web", "SEO", "AEO", "GEO", "Branding", "Identidad de marca"]
+      "knowsAbout": [
+        "Estrategia de contenido",
+        "Contenido para redes sociales",
+        "Diseño web",
+        "SEO",
+        "AEO",
+        "GEO",
+        "Branding",
+        "Identidad de marca"
+      ]
     },
     {
       "@type": "WebSite",
@@ -56,24 +76,52 @@
       "url": "https://www.donventas.mx/",
       "name": "Don Ventas",
       "inLanguage": "es-MX",
-      "publisher": {"@id": "https://www.donventas.mx/#org"}
+      "publisher": {
+        "@id": "https://www.donventas.mx/#org"
+      }
     },
     {
       "@type": "Service",
       "@id": "https://www.donventas.mx/#service",
       "name": "Contenido, sitios web y sistemas de marca",
       "serviceType": "Estrategia, diseño y producción de contenido y marca",
-      "provider": {"@id": "https://www.donventas.mx/#org"},
+      "provider": {
+        "@id": "https://www.donventas.mx/#org"
+      },
       "areaServed": "Atención remota internacional en español",
-      "audience": {"@type": "Audience", "audienceType": "Profesionales, emprendimientos y empresas de habla hispana"},
+      "audience": {
+        "@type": "Audience",
+        "audienceType": "Profesionales, emprendimientos y empresas de habla hispana"
+      },
       "description": "Tres rutas para que un negocio se entienda, se encuentre y convierta interés en conversaciones o pedidos: contenido, sitio web o un sistema conectado de marca y contenido.",
       "hasOfferCatalog": {
         "@type": "OfferCatalog",
         "name": "Rutas de trabajo de Don Ventas",
         "itemListElement": [
-          {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Contenido que atrae", "description": "Estrategia, textos y diseño para convertir conocimiento en publicaciones útiles y consistentes."}},
-          {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Sitio que explica y aparece", "description": "Sitio claro, útil y preparado para que buscadores y herramientas de inteligencia artificial entiendan el negocio."}},
-          {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Marca y contenido conectados", "description": "Un sistema de marca, sitio y contenido que mantiene consistencia en cada punto de contacto."}}
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Contenido que atrae",
+              "description": "Estrategia, textos y diseño para convertir conocimiento en publicaciones útiles y consistentes."
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Sitio que explica y aparece",
+              "description": "Sitio claro, útil y preparado para que buscadores y herramientas de inteligencia artificial entiendan el negocio."
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Marca y contenido conectados",
+              "description": "Un sistema de marca, sitio y contenido que mantiene consistencia en cada punto de contacto."
+            }
+          }
         ]
       }
     },
@@ -81,9 +129,15 @@
       "@type": "Person",
       "@id": "https://www.donventas.mx/#quien",
       "name": "Arturo Villagomez",
-      "url": "https://www.arturovillagomez.com/",
+      "url": "https://www.donventas.mx/arturo-villagomez.html",
       "jobTitle": "Fundador de Don Ventas",
-      "worksFor": {"@id": "https://www.donventas.mx/#org"}
+      "worksFor": {
+        "@id": "https://www.donventas.mx/#org"
+      },
+      "alternateName": "Arturo Villagomez Gomez",
+      "sameAs": [
+        "https://www.arturovillagomez.com/"
+      ]
     },
     {
       "@type": "FAQPage",
@@ -92,27 +146,42 @@
         {
           "@type": "Question",
           "name": "¿Puedo trabajar con Don Ventas desde otro país?",
-          "acceptedAnswer": {"@type": "Answer", "text": "Sí. Trabajamos desde México, de forma remota, con profesionales, emprendimientos y empresas de habla hispana. Revisamos tu situación y acordamos el alcance y los horarios antes de empezar. Los rangos del sitio están en MXN y no incluyen IVA; la cotización confirma las condiciones de tu proyecto."}
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sí. Trabajamos desde México, de forma remota, con profesionales, emprendimientos y empresas de habla hispana. Revisamos tu situación y acordamos el alcance y los horarios antes de empezar. Los rangos del sitio están en MXN y no incluyen IVA; la cotización confirma las condiciones de tu proyecto."
+          }
         },
         {
           "@type": "Question",
           "name": "¿Qué recibo después de solicitar el diagnóstico?",
-          "acceptedAnswer": {"@type": "Answer", "text": "Arturo revisa personalmente cada solicitud. Si hay información suficiente y existe encaje, recibirás por correo o WhatsApp una lectura de las oportunidades prioritarias y una propuesta del siguiente paso."}
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Arturo revisa personalmente cada solicitud. Si hay información suficiente y existe encaje, recibirás por correo o WhatsApp una lectura de las oportunidades prioritarias y una propuesta del siguiente paso."
+          }
         },
         {
           "@type": "Question",
           "name": "¿Puedo contratar solo contenido o solo un sitio web?",
-          "acceptedAnswer": {"@type": "Answer", "text": "Sí. Puedes empezar por contenido, por un sitio web o por un sistema de marca. La recomendación depende del problema principal, el cambio que buscas y lo que ya tienes."}
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sí. Puedes empezar por contenido, por un sitio web o por un sistema de marca. La recomendación depende del problema principal, el cambio que buscas y lo que ya tienes."
+          }
         },
         {
           "@type": "Question",
           "name": "¿Qué significan SEO, AEO y GEO?",
-          "acceptedAnswer": {"@type": "Answer", "text": "SEO ayuda a que un sitio pueda aparecer en buscadores como Google. AEO y GEO organizan respuestas e información verificable para que herramientas de inteligencia artificial puedan entender y citar una marca. Ningún método garantiza una posición o mención."}
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "SEO ayuda a que un sitio pueda aparecer en buscadores como Google. AEO y GEO organizan respuestas e información verificable para que herramientas de inteligencia artificial puedan entender y citar una marca. Ningún método garantiza una posición o mención."
+          }
         },
         {
           "@type": "Question",
           "name": "¿Don Ventas garantiza ventas o aparecer primero en Google?",
-          "acceptedAnswer": {"@type": "Answer", "text": "No. Trabajamos para que el negocio se entienda mejor, sea más fácil de encontrar y mantenga una comunicación consistente. Los resultados también dependen de la oferta, el mercado, la difusión y la ejecución."}
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Trabajamos para que el negocio se entienda mejor, sea más fácil de encontrar y mantenga una comunicación consistente. Los resultados también dependen de la oferta, el mercado, la difusión y la ejecución."
+          }
         }
       ]
     }
@@ -262,7 +331,7 @@
   <section class="editorial-section founder-section" id="quien" aria-labelledby="founder-title">
     <div class="editorial-shell founder-grid reveal">
       <figure><img src="fundador.jpg" alt="Arturo Villagomez, fundador de Don Ventas" width="900" height="1080" loading="lazy" decoding="async"></figure>
-      <div><p class="folio">06 · Qué es Don Ventas</p><h2 id="founder-title">Un sistema detrás.<br><em>Una persona al frente.</em></h2><p id="que-es-don-ventas">Don Ventas es un estudio de estrategia de marca, contenido y sitios web. Ayudamos a profesionales, emprendimientos y empresas a comunicar lo que los hace valiosos, para que las personas puedan entenderlos, encontrarlos y elegirlos.</p><p>Trabajamos desde México, de forma remota, con clientes de habla hispana.</p><p>Don Ventas es dirigido por Arturo Villagomez. Cada solicitud se revisa antes de recomendar una ruta, porque un formulario puede ordenar la información, pero no debe fingir que ya entendió todo tu negocio.</p><a class="founder-story" href="blog/por-que-nacio-don-ventas.html">Conoce por qué nació Don Ventas <span aria-hidden="true">→</span></a><p class="founder-note">Estrategia · diseño · contenido · operación</p></div>
+      <div><p class="folio">06 · Qué es Don Ventas</p><h2 id="founder-title">Un sistema detrás.<br><em>Una persona al frente.</em></h2><p id="que-es-don-ventas">Don Ventas es un estudio de estrategia de marca, contenido y sitios web. Ayudamos a profesionales, emprendimientos y empresas a comunicar lo que los hace valiosos, para que las personas puedan entenderlos, encontrarlos y elegirlos.</p><p>Trabajamos desde México, de forma remota, con clientes de habla hispana.</p><p>Don Ventas es dirigido por <a href="/arturo-villagomez.html">Arturo Villagomez</a>. Cada solicitud se revisa antes de recomendar una ruta, porque un formulario puede ordenar la información, pero no debe fingir que ya entendió todo tu negocio.</p><a class="founder-story" href="blog/por-que-nacio-don-ventas.html">Conoce por qué nació Don Ventas <span aria-hidden="true">→</span></a><p class="founder-note">Estrategia · diseño · contenido · operación</p></div>
     </div>
   </section>
 

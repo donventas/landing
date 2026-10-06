@@ -30,6 +30,12 @@
       ]
     },
     {
+      "source": "/arturo-villagomez.html",
+      "headers": [
+        { "key": "Content-Security-Policy", "value": "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; img-src 'self' data:; font-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self'; connect-src 'self' https://vitals.vercel-insights.com; upgrade-insecure-requests" }
+      ]
+    },
+    {
       "source": "/branding.html",
       "headers": [
         { "key": "Content-Security-Policy", "value": "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; img-src 'self' data: https://www.googletagmanager.com https://*.google-analytics.com; font-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self' https://www.googletagmanager.com; connect-src 'self' https://www.googletagmanager.com https://*.google-analytics.com https://www.google.com https://vitals.vercel-insights.com; upgrade-insecure-requests" }
