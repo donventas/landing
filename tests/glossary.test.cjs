@@ -191,5 +191,7 @@ test('glossary discoverability and editorial workflow remain explicit', () => {
   assert.match(read('blog/glosario.css'), /scroll-margin-top:130px/);
   const data = [...glossary.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)];
   assert.equal(data.length, 1);
-  assert.equal(JSON.parse(data[0][1])['@type'], 'CollectionPage');
+  const graph=JSON.parse(data[0][1])['@graph'];
+  assert.ok(graph.some(x=>x['@type']==='CollectionPage'));
+  assert.ok(graph.some(x=>x['@type']==='BreadcrumbList' && x.itemListElement.length===3));
 });

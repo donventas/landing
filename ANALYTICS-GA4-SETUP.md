@@ -1,5 +1,14 @@
 # GA4 — configuración y evidencia de QA
 
+## Actualización preparada: rutas de evolución
+
+Antes de publicar la rama `codex/brand-evolution-routes`, usar el plan de migración
+de `ANALYTICS-FUNNEL.md`: ruta `evolucion`, ocho preguntas y recepción por API;
+añadir `fundador` al análisis de exploración. Las tablas siguientes son evidencia
+histórica del formulario anterior, no validación del formulario nuevo ni del
+estado actual de la interfaz Google. Este cambio no publica GTM ni modifica las
+exploraciones guardadas. Registrar la fecha efectiva cuando se autorice el release.
+
 Fecha: 2026-10-05. Propiedad Don Ventas — sitio público, `557370059`.
 Cuenta operadora verificada en la interfaz: `arturo.villagomez@donventas.mx`.
 Este registro no autoriza el merge ni la publicación de GTM.

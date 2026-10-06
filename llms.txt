@@ -1,23 +1,21 @@
 # Don Ventas
 
-> Don Ventas es un estudio de estrategia de marca, contenido y sitios web. Ayudamos a profesionales, emprendimientos y empresas a comunicar lo que los hace valiosos, para que las personas puedan entenderlos, encontrarlos y elegirlos.
+> Tu negocio evoluciona. Tu marca también debería hacerlo.
+> Don Ventas conecta estrategia, identidad, contenido y sitios web. Construye sistemas de marca utilizables y ofrece acompañamiento para revisarlos y desarrollarlos conforme cambian la oferta, las prioridades y los aprendizajes del negocio.
 > Trabajamos desde México, de forma remota, con clientes de habla hispana.
 
 ## Qué hace Don Ventas
 
-- **Contenido para redes:** temas, textos y diseño para atraer personas con una necesidad real y
-  acercarlas a una conversación o pedido.
-- **Sitio que explica y aparece:** páginas, artículos y respuestas útiles para que las personas
-  entiendan la oferta y el sitio pueda aparecer en buscadores. Incluye trabajo de SEO.
-- **Redes, sitio, buscadores e inteligencia artificial:** una solución conectada de contenido,
-  SEO, AEO y GEO para atraer personas, responder preguntas y mejorar con resultados reales.
-- **Sistema de marca:** mensaje, identidad, reglas, archivos y plantillas para que equipos y
-  proveedores puedan publicar, presentar y vender sin improvisar cada decisión.
-- **Presencia en herramientas de IA:** información pública, consistente y verificable para que
-  los motores de inteligencia artificial comprendan la marca, citen sus páginas y describan
-  correctamente su oferta. Las prácticas técnicas se conocen como AEO y GEO.
-- **Método:** cada cliente conserva contexto versionado de negocio, audiencia, voz y marca para
-  producir con consistencia sin empezar de cero cada semana.
+- **Estrategia de marca:** oferta, audiencia, diferencia y mensajes prioritarios.
+- **Identidad y sistemas de marca:** reglas, archivos y recursos utilizables por el equipo o sus proveedores.
+- **Contenido:** temas, textos y diseño que expliquen lo que resuelve el negocio; piezas puntuales o producción acordada.
+- **Sitios web:** estructura, contenido y desarrollo con criterios de carga, accesibilidad, seguridad y SEO.
+- **Acompañamiento opcional:** revisión y desarrollo con alcance, responsable, cadencia y capacidad acordados. Favorece autonomía, no dependencia.
+
+El acercamiento parte del momento: lanzar, alinear, conectar, integrar, delegar o evolucionar acompañado.
+Tamaño y sector son contexto secundario. Construir, activar y evolucionar no son un paquete obligatorio.
+Se acuerda también la participación del cliente. No hay disponibilidad ilimitada ni promesa de cero participación.
+El Portal de clientes sigue próximamente; no se incluye como una funcionalidad disponible.
 
 Don Ventas no garantiza ventas, alcance, viralidad, rankings ni menciones en motores de
 IA. La recomendación depende de la oferta, la evidencia, el mercado, la distribución y
@@ -26,9 +24,9 @@ la capacidad de ejecución del negocio.
 ## Primer paso
 
 La llamada a la acción principal es **Solicita tu diagnóstico**. El formulario pregunta
-primero por el problema y el cambio que la persona busca. Después adapta las preguntas a
-esa situación y muestra una recomendación preliminar determinista. El presupuesto se pregunta
-al final mediante rangos abreviados en MXN que no incluyen IVA. Arturo Villagomez revisa
+primero por el momento, el servicio y la forma de trabajo que la persona busca. Recoge lo que
+quiere cambiar y lo que ya funciona. Muestra una orientación preliminar basada en esas elecciones,
+no una cotización ni una evaluación automática. El presupuesto y la moneda son opcionales. Arturo Villagomez revisa
 personalmente cada solicitud antes de contactar por correo o WhatsApp y proponer el siguiente
 paso. El sitio no promete un PDF automático ni un plazo fijo de entrega.
 
@@ -38,7 +36,7 @@ paso. El sitio no promete un PDF automático ni un plazo fijo de entrega.
 - [Sistema de marca](https://www.donventas.mx/branding.html): ruta para construir una marca
   clara, consistente y operable con autonomía.
 - [Diagnóstico](https://www.donventas.mx/diagnostico.html): formulario compartido para recomendar
-  contenido, mejoras al sitio y buscadores, o un sistema de marca.
+  estrategia, identidad, contenido, web o acompañamiento con alcance acordado.
 - [Ideas](https://www.donventas.mx/blog/): biblioteca editorial sobre contenido, marca,
   buscadores y decisiones de compra.
 - [Por qué nació Don Ventas](https://www.donventas.mx/blog/por-que-nacio-don-ventas.html):

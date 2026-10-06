@@ -272,9 +272,57 @@
     return {route:'branding',key:need,name:catalog[need].name,band:catalog[need].band,desc:catalog[need].desc,gap:gap||a.budgetBand==='b_lt18',start:start,reasons:reasons,score:score};
   }
 
-  function recommendation(route,a){return route==='branding'?recommendBrand(a):recommendContent(a);}
+  var MOMENTS=['lanzar','alinear','conectar','integrar','delegar','evolucionar','orientacion'];
+  var SERVICES=['estrategia','identidad','contenido','web','orientacion'];
+  var MODES=['proyecto','acompanamiento','autonomia','orientacion'];
+  var EVOLUTION_QUESTIONS=[
+    {id:'moment',type:'single',title:'¿Qué momento describe mejor tu prioridad de hoy?',hint:'Puedes tener varias necesidades. Elige por dónde te gustaría empezar.',required:true,options:[
+      {id:'lanzar',label:'Lanzar una oferta o una marca'},
+      {id:'alinear',label:'Alinear una marca que se quedó atrás'},
+      {id:'conectar',label:'Conectar con las personas adecuadas'},
+      {id:'integrar',label:'Integrar piezas que hoy están dispersas'},
+      {id:'delegar',label:'Delegar con una dirección y recursos claros'},
+      {id:'evolucionar',label:'Seguir evolucionando con acompañamiento'},
+      {id:'orientacion',label:'Necesito ayuda para definir la prioridad'}]},
+    {id:'serviceNeeded',type:'single',title:'¿En qué te gustaría trabajar primero?',hint:'No necesitas contratar todos los servicios. Podemos revisar esta elección contigo.',required:true,options:[
+      {id:'estrategia',label:'Estrategia: oferta, audiencia, diferencia y mensajes'},
+      {id:'identidad',label:'Identidad o sistema de marca utilizable'},
+      {id:'contenido',label:'Contenido para explicar lo que resuelvo'},
+      {id:'web',label:'Un sitio web nuevo o mejoras al actual'},
+      {id:'orientacion',label:'Todavía no sé qué servicio necesito'}]},
+    {id:'workingMode',type:'single',title:'¿Qué forma de trabajar te sería útil?',hint:'El acompañamiento tiene alcance y capacidad acordados; no implica disponibilidad ilimitada.',required:true,options:[
+      {id:'proyecto',label:'Resolver un proyecto concreto'},
+      {id:'acompanamiento',label:'Revisar y desarrollar la marca con acompañamiento'},
+      {id:'autonomia',label:'Preparar recursos para mi equipo u otros proveedores'},
+      {id:'orientacion',label:'Quiero entender las opciones antes de decidir'}]},
+    {id:'currentNeed',type:'text',title:'¿Qué cambió o qué te gustaría resolver?',hint:'Cuéntanos qué ofreces, a quién y qué debería ser diferente después del trabajo.',placeholder:'Tu situación y el cambio que buscas, con tus palabras.',required:true},
+    {id:'existingAssets',type:'text',title:'¿Qué ya funciona y con qué recursos cuentas?',hint:'Por ejemplo: mensajes, identidad, sitio, materiales, aprendizajes, equipo o proveedores. No compartas información confidencial.',placeholder:'Lo que conviene conservar y quién participaría.',required:true},
+    CONTENT_QUESTIONS[9],
+    {id:'budgetNote',type:'text',title:'¿Tienes un presupuesto de referencia?',hint:'Es opcional. Indica importe, moneda y si es por proyecto o periódico. Si no lo sabes, continuamos con la revisión del alcance.',placeholder:'Por ejemplo: necesito orientación antes de definirlo.',required:false},
+    {id:'contact',type:'contact',title:'¿Cómo podemos darte seguimiento?',hint:'Arturo revisa personalmente tu situación antes de confirmar alcance, inversión y disponibilidad.',required:true}
+  ];
+  function entryContext(params,el){
+    var legacy=params.get('ruta')||el.getAttribute('data-route');
+    var entry=params.get('entrada')||el.getAttribute('data-entry');
+    var service=params.get('servicio')||el.getAttribute('data-service')||(legacy==='branding'?'identidad':entry==='autoridad'?'web':entry==='contenido'?'contenido':'');
+    var values={moment:params.get('momento'),serviceNeeded:service,workingMode:params.get('modalidad')};
+    var lists={moment:MOMENTS,serviceNeeded:SERVICES,workingMode:MODES},out={};
+    Object.keys(values).forEach(function(k){if(lists[k].indexOf(values[k])>=0)out[k]=values[k];});
+    return out;
+  }
+  function recommendEvolution(a){
+    var option=EVOLUTION_QUESTIONS[1].options.find(function(o){return o.id===a.serviceNeeded;});
+    var name=option&&a.serviceNeeded!=='orientacion'?option.label:'Definir juntos el primer alcance';
+    return {route:'evolucion',key:a.serviceNeeded||'orientacion',name:name,band:'A confirmar según alcance',gap:false,
+      desc:'Esta orientación recoge lo que elegiste; no es una evaluación automática de tu negocio ni una cotización.',
+      start:'Arturo revisará tu contexto y qué conviene conservar antes de proponerte un siguiente paso.',
+      reasons:[a.workingMode==='acompanamiento'?'El acompañamiento requiere acordar alcance, responsable, frecuencia de revisión y capacidad.':'Podemos trabajar un alcance independiente, sin obligarte a contratar todos los servicios.',
+        'Los recursos acordados deben favorecer tu autonomía. Necesitaremos tu información, decisiones y aprobaciones.',
+        'No garantizamos ventas, posiciones en buscadores ni menciones en herramientas de IA.']};
+  }
+  function recommendation(route,a){return route==='evolucion'?recommendEvolution(a):(route==='branding'?recommendBrand(a):recommendContent(a));}
 
-  function questionsFor(route){return route==='branding'?BRAND_QUESTIONS:CONTENT_QUESTIONS;}
+  function questionsFor(route){return route==='evolucion'?EVOLUTION_QUESTIONS:(route==='branding'?BRAND_QUESTIONS:CONTENT_QUESTIONS);}
   function visibleQuestions(route,state){return questionsFor(route).filter(function(q){return !q.showIf||q.showIf(state);});}
 
   function summarize(route,state,result){
@@ -325,19 +373,34 @@
   function Diagnostic(el){
     this.el=el;
     var params=new URLSearchParams(location.search);
-    this.route=(params.get('ruta')||el.getAttribute('data-route')||'contenido').toLowerCase();
-    if(['contenido','branding'].indexOf(this.route)<0)this.route='contenido';
-    this.storageKey='dv-diagnostic-v3-'+this.route;
-    this.state={entry:params.get('entrada')||el.getAttribute('data-entry')||''};
+    // Old URLs remain valid, but public entry always starts from the business situation.
+    this.route='evolucion';
+    this.storageKey='dv-diagnostic-v4-evolucion';
+    var oldRoute=params.get('ruta')||params.get('servicio')||el.getAttribute('data-service')||el.getAttribute('data-route');
+    this.legacyStorageKey='dv-diagnostic-v3-'+(['branding','identidad'].indexOf(oldRoute)>=0?'branding':'contenido');
+    this.state={};
     this.index=0;
     this.load();
+    var context=entryContext(params,el),signature=JSON.stringify(context);
+    if(Object.keys(context).length&&this.state.entryContext!==signature){
+      Object.assign(this.state,context);this.state.entryContext=signature;this.index=0;
+    }
     if(!this.state.startedAt)this.state.startedAt=Date.now();
+    this.persist();
     this.render();
     this.bindEntryLinks();
   }
 
   Diagnostic.prototype.load=function(){
-    try{var saved=JSON.parse(localStorage.getItem(this.storageKey)||'null');if(saved&&saved.state){this.state=saved.state;this.index=saved.index||0;}}catch(_e){}
+    try{var saved=JSON.parse(localStorage.getItem(this.storageKey)||'null');if(saved&&saved.state){this.state=saved.state;this.index=Number.isInteger(saved.index)&&saved.index>=0?saved.index:0;}
+      else{var old=JSON.parse(localStorage.getItem(this.legacyStorageKey)||'null');if(old&&old.state){
+        var legacy=old.state,self=this;
+        ['name','business','email','url','whatsapp','timing'].forEach(function(k){if(legacy[k])self.state[k]=legacy[k];});
+        this.state.currentNeed=legacy.businessAudience||legacy.difference||legacy.otherProblem||legacy.brandOtherProblem||'';
+        // Keep the original draft intact; restart with the new questions and fresh consent.
+        this.state.migratedDraft=true;this.index=0;
+      }}
+    }catch(_e){}
   };
   Diagnostic.prototype.persist=function(){
     try{localStorage.setItem(this.storageKey,JSON.stringify({state:this.state,index:this.index}));}catch(_e){}
@@ -368,7 +431,7 @@
     var pendingBranch=(this.route==='contenido'&&!this.state.outcome)||(this.route==='branding'&&!this.state.desired);
     var total=list.length+(pendingBranch?1:0);
     var progress=Math.round(((this.index+1)/total)*100);
-    var routeLabel=this.route==='branding'?'Sistema de marca':'Contenido, sitio y buscadores';
+    var routeLabel=this.route==='evolucion'?'Tu situación primero':(this.route==='branding'?'Sistema de marca':'Contenido, sitio y buscadores');
     var h='<div class="dv-form-shell" data-route-name="'+this.route+'" data-analytics-step="'+q.id+'">';
     h+='<div class="dv-form-top"><div><span class="dv-form-kicker">Diagnóstico · '+routeLabel+'</span><strong>'+(this.index+1)+' / '+total+'</strong></div><div class="dv-progress" role="progressbar" aria-label="Progreso del diagnóstico" aria-valuemin="0" aria-valuemax="100" aria-valuenow="'+progress+'"><i style="width:'+progress+'%"></i></div></div>';
     var title=questionText(q.title,this.state),hint=questionText(q.hint,this.state),context=questionText(q.context,this.state);
@@ -379,6 +442,7 @@
     h+=this.fieldHtml(q);
     h+='<div class="dv-form-nav">'+(this.index?'<button type="button" class="btn dv-back">← Atrás</button>':'<span></span>')+'<button type="button" class="btn solid dv-next"'+(this.hasAnswer(q)?'':' disabled')+'>'+(q.type==='contact'?'Enviar y ver recomendación':'Continuar')+' <span class="ar">→</span></button></div>';
     if(this.index===0)h+='<p class="dv-form-note">4–6 minutos · preguntas según tu situación · revisión y respuesta personal</p>';
+    if(this.index===0&&this.state.migratedDraft)h+='<p class="dv-form-note">Conservamos tus datos de contacto y el contexto escrito del borrador anterior. Revisa las nuevas preguntas antes de enviar.</p>';
     h+='</div></div>';
     this.el.innerHTML=h;
     this.bind(q);
@@ -473,12 +537,14 @@
   };
   Diagnostic.prototype.bindResultActions=function(summary,result){
     var self=this,restart=this.el.querySelector('.dv-restart'),retry=this.el.querySelector('.dv-retry');
-    if(restart)restart.onclick=function(){self.state={entry:'',startedAt:Date.now()};self.index=0;self.render();};
+    if(restart)restart.onclick=function(){self.state={startedAt:Date.now()};self.index=0;self.persist();self.render();};
     if(retry)retry.onclick=function(){self.submitLead(summary,result);};
   };
   Diagnostic.prototype.finish=function(){
     this.captureFields();
     if(Object.keys(this.showContactErrors()).length)return;
+    var self=this,missing=visibleQuestions(this.route,this.state).findIndex(function(q){return !self.hasAnswer(q);});
+    if(missing>=0){this.index=missing;this.persist();this.render();return;}
     var result=recommendation(this.route,this.state),summary=summarize(this.route,this.state,result);
     this.result=result;
     this.el.innerHTML='<div class="dv-result dv-result-loading" role="status" aria-live="polite"><span class="dv-result-kicker">Guardando diagnóstico</span><h3>Un momento…</h3><p>Estamos registrando tus respuestas de forma segura.</p></div>';
@@ -491,7 +557,7 @@
     this.el.querySelectorAll('button').forEach(function(btn){btn.disabled=true;});
     this.sendLead(summary,result).then(function(){
       self.track('diagnostic_completed',{route:self.route,recommendation:result.key,budget_gap:result.gap});
-      try{localStorage.removeItem(self.storageKey);sessionStorage.removeItem('dv-lead-pending');}catch(_e){}
+      try{localStorage.removeItem(self.storageKey);if(self.state.migratedDraft)localStorage.removeItem(self.legacyStorageKey);sessionStorage.removeItem('dv-lead-pending');}catch(_e){}
       self.el.innerHTML=self.resultMarkup(result,'success');self.bindResultActions(summary,result);
     }).catch(function(error){
       self.track('diagnostic_submit_failed',{route:self.route,status:error&&error.status||0,code:error&&error.code||'unknown'});
@@ -500,6 +566,7 @@
   };
   Diagnostic.prototype.sendLead=function(summary,result){
     if(!this.state.submissionKey)this.state.submissionKey=(root.crypto&&root.crypto.randomUUID)?root.crypto.randomUUID():('dv-'+Date.now()+'-'+Math.random().toString(16).slice(2));
+    this.persist(); // Keep the idempotency key if the response is lost and the page reloads.
     var body={
       nombre:this.state.name||'',correo:this.state.email||'',negocio:this.state.business||'',whatsapp:this.state.whatsapp||'',
       reto:summary+(this.state.url?' | URL: '+this.state.url:''),paquete:result.name+' · '+result.band,consent:!!this.state.consent,

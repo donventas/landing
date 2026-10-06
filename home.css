@@ -340,3 +340,12 @@ img{max-width:100%;display:block}
 @media(prefers-reduced-motion:reduce){
   .home-editorial *{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
 }
+/* Reuse the editorial surface; the six moments are links, not new landing pages. */
+.friction-grid a{display:inline-block;margin-top:20px;color:inherit;text-underline-offset:5px;font-weight:600}
+.friction-grid article:nth-child(3n+1){border-left:0;padding-left:0}
+.continuity-note{margin-top:50px;border-top:1px solid rgba(17,22,30,.25);padding-top:32px;max-width:76ch}
+.continuity-note h3{font-size:clamp(28px,4vw,42px);line-height:1.1;color:inherit}
+.continuity-note p{line-height:1.65}.continuity-note a{color:inherit;text-underline-offset:5px;font-weight:600}
+.service-ledger article[id],.continuity-note{scroll-margin-top:110px}
+.hero-copy h1{font-size:clamp(48px,5.6vw,90px);max-width:14ch}
+@media(max-width:620px){.hero-copy h1{font-size:clamp(35px,8.8vw,48px);max-width:none}}

@@ -11,7 +11,7 @@ test('branding keeps one topic, canonical, indexability and existing lead route'
   assert.equal((html.match(/<h1\b/g) || []).length, 1);
   assert.match(html, /rel="canonical" href="https:\/\/www\.donventas\.mx\/branding.html"/);
   assert.match(html, /name="robots" content="index,follow/);
-  assert.match(html, /data-dv-diagnostic data-route="branding"/);
+  assert.match(html, /data-dv-diagnostic data-route="evolucion" data-service="identidad"/);
   assert.match(html, /src="app.js"/);
   assert.match(html, /src="\/_vercel\/insights\/script.js"/);
   for (const legal of ['Aviso de Privacidad', 'Terminos y Condiciones', 'Politica de Cookies']) assert.ok(html.includes(`15_LEGAL/${legal}.html`));
