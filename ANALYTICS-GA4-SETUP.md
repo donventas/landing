@@ -163,6 +163,41 @@ embudo. No se crearon dimensiones duplicadas para intentar sortear la espera.
 - No se ha publicado GTM ni fusionado PR33 en esta pasada. La autorización de
   merge queda vigente, condicionada al cierre verificable de las compuertas.
 
+### Prueba en Chrome — 2026-10-06, 10:38–10:44 CDMX
+
+- Arturo seleccionó en Chrome la cuenta corporativa. La interfaz confirmó
+  `arturo.villagomez@donventas.mx`, contenedor `GTM-M6J49828` y la etiqueta base
+  todavía en borrador. No se publicó el contenedor.
+- La primera ventana no respondió al consentimiento y Tag Assistant agotó su
+  conexión. Una pestaña normal sí aceptó el permiso; al volver a iniciar Vista
+  previa desde GTM, la ventana controlada y Tag Assistant mostraron conexión.
+  No se atribuyeron los eventos de la pestaña auxiliar al recorrido conectado.
+- En esa misma ventana se completó la ruta de contenido con datos sintéticos,
+  WhatsApp y sitio vacíos. El servidor local `--google-debug --fail-first --csp
+  --health` devolvió primero 503: interfaz `DV-503`, sin finalización. Al pulsar
+  Intentar de nuevo mostró Solicitud recibida. El backend comercial no participó.
+- Tag Assistant, destino `G-YD4BFZTY4V`, pestaña **Hits enviados**: dos
+  `diagnostic_submit_attempted`, un `diagnostic_submit_failed` y un
+  `diagnostic_completed`. Una sola etiqueta base activada y un hit de vista de
+  página en el documento conectado. Esto confirma envío, no procesamiento en
+  informes ni exclusión del tráfico de prueba.
+- Capa de datos inspeccionada para fallo y finalización: `route=contenido`,
+  `content_id=inicio`, URL canónica sin consulta, título neutral, referente vacío,
+  `debug_mode=true`, `traffic_type=developer`. Sin nombre, correo, WhatsApp,
+  respuestas libres, monto ni mensaje crudo del servidor en esos eventos.
+- Panel local con la CSP del release y GTM real: viewport 958 px, LCP observado
+  464 ms, suma de shifts 0.014, bloqueo en ventana inicial de 10 s de 368 ms.
+  Registró una violación `img-src: https://fonts.gstatic.com`; origen del intento
+  no resuelto. No se amplió la CSP. No presentar esta sesión como libre de
+  violaciones ni extrapolar estas medidas locales al rendimiento productivo.
+- Analytics abierto en Chrome mostró Empezar a medir, no la propiedad. Se pidió
+  al usuario seleccionar la cuenta corporativa y la propiedad existente; no se
+  creó otra ni se cambió de cuenta automáticamente. **La recepción de esta
+  secuencia en DebugView sigue pendiente**, aunque sus hits ya están comprobados.
+- Nueva ejecución local: 124/124 pruebas pasan. Continúan pendientes las
+  exploraciones, exclusión efectiva, demás ramas y comprobación de rendimiento
+  del release. No se fusionó PR33 ni se modificó PR34 de identidad.
+
 1. Finalizar exploraciones de no avance y diagnóstico; contrastar configuraciones
    con las definiciones de ANALYTICS-FUNNEL.md. No inferir salida de la última
    exposición ni forzar un embudo único de nueve secciones.
