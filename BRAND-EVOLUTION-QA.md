@@ -1,6 +1,7 @@
 # Alineación web · evolución de marca
 
-Implementación para revisión, 6 de octubre de 2026. No autoriza producción.
+Implementación del 6 de octubre de 2026. Arturo autorizó el release condicionado
+a pasar las comprobaciones de carga. Este registro no sustituye esa autorización.
 Base de código: `0b8701a748621b9de2be6a2e9ea623d6400b5660`.
 Decisión fuente: Customer Taste v0.4 local aprobado, SHA256
 `C97EEB35CACA78E0117BEBBDB425F61B55D3F1C69E62C40B0488B731D01A136F`.
@@ -62,6 +63,49 @@ expandir arquitectura; no sumar métricas solapadas ni prometer citas en IA.
   integrada y márgenes. Aceptación final corresponde a Arturo.
 
 ## Antes del release y después
+
+### Cierre de rendimiento previo al merge
+
+Lighthouse 12.8.2, Chrome headless, móvil simulado (412 × 823, DPR 1.75,
+RTT 150 ms, 1638.4 kbps, CPU ×4), almacenamiento nuevo. Archivos del candidato
+servidos por HTTP local con gzip y sin caché, conservando la CSP. El preview de
+Vercel exige autenticación: no se midió su pantalla de login como si fuera el sitio.
+Son pruebas de velocidad de carga, no pruebas de concurrencia ni Core Web Vitals
+de usuarios reales. El endpoint local de Vercel Insights devuelve 404; la CDN y
+los servicios externos necesitan una comprobación posterior en producción.
+
+| Ruta | Performance móvil | LCP | CLS | TBT |
+|---|---:|---:|---:|---:|
+| Inicio, dos corridas | 99 / 99 | 2.182 / 2.178 s | 0.000280 | 0 ms |
+| Branding, dos corridas finales | 98 / 98 | 2.406 / 2.409 s | 0 | 0 ms |
+| Diagnóstico, final | 99 | 1.729 s | 0.000007 | 0 ms |
+| Arturo, final | 98 | 2.105 s | 0.000105 | 0 ms |
+| Blog, dos corridas finales | 99 / 99 | 2.184 / 2.178 s | 0.000173 | 0 ms |
+| Glosario, final | 98 | 2.259 s | 0.000334 | 0 ms |
+| Artículo de contenido, final | 99 | 2.029 s | 0.000173 | 41 ms |
+
+Inicio escritorio: 100/100, LCP 0.544 s, CLS 0.000463, TBT 0 ms.
+La referencia anterior tiene el mismo árbol que main `0b8701a`: inicio móvil
+99/100 y LCP 2.181 s; branding 97/100 y 2.557 s. No hubo regresión de inicio.
+
+Se corrigieron dos costes comprobados antes del merge: descubrimiento tardío de
+Space Mono en branding (2.55 → 2.41 s), y `@import` de fuentes redundante dentro
+de `styles.css` cuando el HTML ya las declaraba (blog 2.70 → 2.18 s; glosario
+2.56 → 2.26 s). Diagnóstico y perfil ahora declaran fuentes en HTML, sin depender
+del import. Se versionó la URL de estilos. No se eliminaron fuentes ni imágenes,
+no se ocultó el aviso de consentimiento ni se desactivaron scripts para medir.
+Una prueba de preload de imagen no mejoró branding y se descartó; el preload
+adicional de mono en blog/glosario tampoco se conservó.
+
+Regresión tras el ajuste: cinco páginas × cinco anchos, sin overflow horizontal
+ni errores JavaScript; revisión de portada móvil. Los tests cubren descubrimiento
+de fuentes y ausencia de importación duplicada. Informes JSON locales de esta
+sesión: `dv-release-*.json`; resultados finales distinguidos arriba, sin ocultar
+las mediciones previas que motivaron el ajuste.
+
+GTM público consultado: `GTM-M6J49828` sirve la etiqueta `G-YD4BFZTY4V`.
+Esto no acredita por sí solo recepción de eventos en GA4 ni actualización de sus
+exploraciones. Esa configuración sigue separada de esta publicación web.
 
 1. Revisar preview y aceptar copy, formulario y aclaración de Términos. Los rangos
    de branding existentes se conservan; acompañamiento se cotiza según alcance.

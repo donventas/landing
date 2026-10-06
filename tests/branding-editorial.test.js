@@ -44,6 +44,22 @@ test('branding uses one complete approved scene, responsive derivatives and expl
   for (const size of [480,768,1120]) assert.ok(fs.statSync(path.join(root, `assets/editorial/branding-owner-v2-${size}.webp`)).size < 150000);
 });
 
+test('branding discovers its above-the-fold mono font before the stylesheet dependency chain', () => {
+  const preload = '<link rel="preload" href="assets/fonts/space-mono-latin-400.woff2" as="font" type="font/woff2" crossorigin>';
+  assert.equal(html.split(preload).length - 1, 1);
+  assert.ok(html.indexOf(preload) < html.indexOf('<link rel="stylesheet"'));
+  assert.ok(fs.existsSync(path.join(root, 'assets/fonts/space-mono-latin-400.woff2')));
+});
+
+test('shared styles do not chain or duplicate font CSS; every consumer declares fonts', () => {
+  assert.doesNotMatch(fs.readFileSync(path.join(root, 'styles.css'), 'utf8'), /@import/);
+  for (const file of ['diagnostico.html', 'arturo-villagomez.html', 'blog/index.html', 'blog/glosario.html', 'blog/contenido-que-atrae-clientes.html', 'blog/por-que-nacio-don-ventas.html', 'blog/tu-marca-es-tu-ventaja.html']) {
+    const page = fs.readFileSync(path.join(root, file), 'utf8');
+    assert.equal((page.match(/rel="stylesheet" href="\/?assets\/fonts\/fonts.css"/g) || []).length, 1, file);
+    assert.ok(page.indexOf('assets/fonts/fonts.css') < page.indexOf('styles.css?v='), file);
+  }
+});
+
 test('branding references, anchors, metadata images and srcsets resolve', () => {
   const refs = [...html.matchAll(/(?:src|href)="([^"]+)"/g)].map(m=>m[1]);
   for (const match of html.matchAll(/srcset="([^"]+)"/g)) refs.push(...match[1].split(',').map(v=>v.trim().split(' ')[0]));
