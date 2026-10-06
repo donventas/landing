@@ -11,7 +11,7 @@ test('branding keeps one topic, canonical, indexability and existing lead route'
   assert.equal((html.match(/<h1\b/g) || []).length, 1);
   assert.match(html, /rel="canonical" href="https:\/\/www\.donventas\.mx\/branding.html"/);
   assert.match(html, /name="robots" content="index,follow/);
-  assert.match(html, /data-dv-diagnostic data-route="branding"/);
+  assert.match(html, /data-dv-diagnostic data-route="evolucion" data-service="identidad"/);
   assert.match(html, /src="app.js"/);
   assert.match(html, /src="\/_vercel\/insights\/script.js"/);
   for (const legal of ['Aviso de Privacidad', 'Terminos y Condiciones', 'Politica de Cookies']) assert.ok(html.includes(`15_LEGAL/${legal}.html`));
@@ -42,6 +42,22 @@ test('branding uses one complete approved scene, responsive derivatives and expl
   assert.match(css, /\.brand-cover-scene img\{[^}]*height:auto[^}]*object-fit:contain/);
   assert.match(css, /prefers-reduced-motion:reduce/);
   for (const size of [480,768,1120]) assert.ok(fs.statSync(path.join(root, `assets/editorial/branding-owner-v2-${size}.webp`)).size < 150000);
+});
+
+test('branding discovers its above-the-fold mono font before the stylesheet dependency chain', () => {
+  const preload = '<link rel="preload" href="assets/fonts/space-mono-latin-400.woff2" as="font" type="font/woff2" crossorigin>';
+  assert.equal(html.split(preload).length - 1, 1);
+  assert.ok(html.indexOf(preload) < html.indexOf('<link rel="stylesheet"'));
+  assert.ok(fs.existsSync(path.join(root, 'assets/fonts/space-mono-latin-400.woff2')));
+});
+
+test('shared styles do not chain or duplicate font CSS; every consumer declares fonts', () => {
+  assert.doesNotMatch(fs.readFileSync(path.join(root, 'styles.css'), 'utf8'), /@import/);
+  for (const file of ['diagnostico.html', 'arturo-villagomez.html', 'blog/index.html', 'blog/glosario.html', 'blog/contenido-que-atrae-clientes.html', 'blog/por-que-nacio-don-ventas.html', 'blog/tu-marca-es-tu-ventaja.html']) {
+    const page = fs.readFileSync(path.join(root, file), 'utf8');
+    assert.equal((page.match(/rel="stylesheet" href="\/?assets\/fonts\/fonts.css"/g) || []).length, 1, file);
+    assert.ok(page.indexOf('assets/fonts/fonts.css') < page.indexOf('styles.css?v='), file);
+  }
 });
 
 test('branding references, anchors, metadata images and srcsets resolve', () => {

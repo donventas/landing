@@ -61,7 +61,9 @@ test('profile is connected, locally complete, script-light and covered by CSP', 
   }
   assert.match(page, /width="1024" height="1024"/);
   assert.match(page, /fetchpriority="high" loading="eager"/);
-  assert.doesNotMatch(page, /googletagmanager|analytics\.js|<iframe/);
+  assert.doesNotMatch(page, /googletagmanager|<iframe/);
+  assert.match(page, /src="\/analytics\.js"/);
+  assert.equal(require('../analytics.js').page('/arturo-villagomez.html'), 'fundador');
   const headers = JSON.parse(read('vercel.json')).headers;
   const route = headers.find(h => h.source.includes('arturo-villagomez'));
   assert.ok(route.headers.some(h => h.key === 'Content-Security-Policy' && h.value.includes("object-src 'none'")));

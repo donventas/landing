@@ -16,7 +16,7 @@ function sha256(relativePath) {
 
 test('keeps the indexable SEO contract and one visible page topic', () => {
   assert.equal((html.match(/<h1\b/gi) || []).length, 1);
-  assert.match(html, /<title>Contenido, sitios y marcas que ayudan a vender — Don Ventas<\/title>/);
+  assert.match(html, /<title>Estrategia, identidad, contenido y sitios web — Don Ventas<\/title>/);
   assert.match(html, /<meta name="description" content="[^"]+">/);
   assert.match(html, /<meta name="robots" content="index,follow,/);
   assert.match(html, /<link rel="canonical" href="https:\/\/www\.donventas\.mx\/">/);
@@ -76,7 +76,7 @@ test('keeps the canonical wordmark without loading the 3D emblem in the hero', (
 
 test('leads with a capable customer situation before the mobile copy', () => {
   const homeCss = fs.readFileSync(path.join(root, 'home.css'), 'utf8');
-  assert.match(html, /Para cuando tienes algo valioso que todavía pocos entienden/);
+  assert.match(html, /Tu negocio evoluciona\.<br><em>Tu marca también debería hacerlo\./);
   assert.match(html, /hero-situacion-capacidad-v1-640\.webp/);
   assert.match(html, /hero-situacion-capacidad-v1-960\.webp 960w/);
   assert.match(html, /Ya conoce su negocio\. Necesita que otros entiendan su valor\./);

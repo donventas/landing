@@ -1,5 +1,31 @@
 # Campañas y puntos de interrupción
 
+## Migración preparada — precisión estratégica, 6 de octubre de 2026
+
+La rama `codex/brand-evolution-routes` usa `route=evolucion` en todas las entradas
+públicas. No sobrescribir las exploraciones históricas contenido/branding ni
+interpretar su caída como abandono: describen otro formulario. Antes de interpretar
+el siguiente release, duplicar el embudo con filtro `route=evolucion` y anotar su
+fecha/hora real de publicación (todavía pendiente).
+
+Orden nuevo: `moment` → `serviceNeeded` → `workingMode` → `currentNeed` →
+`existingAssets` → `timing` → `budgetNote` (opcional) → `contact` →
+`diagnostic_submit_attempted` → `diagnostic_completed`. Para preguntas comparar
+exposición y paso completado; para contacto, exposición e intento; después separar
+intento/error/recepción. Mantener los denominadores y ventanas descritos abajo.
+No se recopilan las opciones elegidas ni texto libre en Analytics.
+
+El perfil del fundador incorpora `content_id=fundador`; sus clics internos permiten
+observar perfil → servicios/artículos/diagnóstico bajo el mismo consentimiento.
+Las anclas de los cuatro servicios y acompañamiento emiten `service_selected`.
+Se conservan las nueve secciones de landing y sus órdenes; cambia la narrativa
+de problema/servicios, por lo que tampoco son un experimento causal comparable.
+
+Preparado y comprobado localmente, **no guardado en la interfaz GA4 en este cambio**.
+No hace falta publicar GTM si la etiqueta vigente transmite route/step sin filtrar
+sus valores, pero esa condición debe comprobarse en la compuerta de release.
+La indexación y los informes productivos no se acreditan con pruebas locales.
+
 Decisión de Arturo, 2026-10-05: incorporar atribución y tasas de abandono al PR #33. Preparación en preview, no permiso para merge ni publicación GTM. Propietario de decisiones: Arturo; fuente técnica: Landing. Revisión propuesta semanal, acumulando 28 días cuando el volumen sea bajo; sin objetivos porcentuales inventados antes de una línea base.
 
 ## Qué podremos saber y qué no

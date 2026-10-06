@@ -10,13 +10,13 @@
   var campaignPieces = ['bio', 'publicacion', 'historia', 'video', 'correo', 'enlace'];
   var pages = {
     '/': 'inicio', '/index.html': 'inicio', '/branding.html': 'marca',
-    '/diagnostico.html': 'diagnostico', '/blog/': 'ideas', '/blog/index.html': 'ideas',
+    '/diagnostico.html': 'diagnostico', '/arturo-villagomez.html': 'fundador', '/blog/': 'ideas', '/blog/index.html': 'ideas',
     '/blog/por-que-nacio-don-ventas.html': 'fundacional',
     '/blog/contenido-que-atrae-clientes.html': 'entender',
     '/blog/tu-marca-es-tu-ventaja.html': 'ventaja', '/blog/glosario.html': 'glosario'
   };
   var terms = 'contenido-de-marca campana marca marketing promesa-de-marca branding experiencia-de-usuario pagina-de-destino conversion copy identidad-visual posicionamiento propuesta-de-valor seo'.split(' ');
-  var steps = 'outcome salesProblem consistencyProblem searchProblem otherProblem nextAction attempted proof businessAudience timing budgetBand desired clarityProblem systemProblem launchProblem repositionProblem brandOtherProblem applications users autonomy difference contact'.split(' ');
+  var steps = 'moment serviceNeeded workingMode currentNeed existingAssets budgetNote outcome salesProblem consistencyProblem searchProblem otherProblem nextAction attempted proof businessAudience timing budgetBand desired clarityProblem systemProblem launchProblem repositionProblem brandOtherProblem applications users autonomy difference contact'.split(' ');
   // Reading order (includes the hero); independent of the decorative folio numbering.
   var landingSections = [
     { key: 'hero', heading: 'hero-title' }, { key: 'problema', heading: 'friction-title' },
@@ -49,7 +49,7 @@
   }
   function cleanEvent(name, data) {
     data = data || {};
-    var output = {}, route = member(data.route, ['contenido', 'branding']);
+    var output = {}, route = member(data.route, ['contenido', 'branding', 'evolucion']);
     if (['diagnostic_viewed', 'diagnostic_started', 'diagnostic_step_viewed', 'diagnostic_step_completed', 'diagnostic_submit_attempted', 'diagnostic_completed', 'diagnostic_submit_failed', 'diagnostic_validation_error'].indexOf(name) >= 0) {
       if (!route) return null;
       output.route = route;
@@ -290,7 +290,7 @@
       if (link.hasAttribute('data-reading-return') && target && target !== 'glosario') { track('reading_return', { destination: target }); return; }
       if (target === 'glosario' && url.hash) { track('glossary_lookup', { term: url.hash.slice(1) }); return; }
       if (target === 'diagnostico' || (['inicio', 'marca'].indexOf(target) >= 0 && ['#contacto', '#diagnostico'].indexOf(url.hash) >= 0)) { clickTrack('diagnostic_entry', { destination: 'diagnostico' }); return; }
-      if (target === 'marca' || (target === 'inicio' && url.hash === '#servicios')) { clickTrack('service_selected', { destination: target === 'marca' ? 'marca' : 'servicios' }); return; }
+      if (target === 'marca' || (target === 'inicio' && ['#servicios','#estrategia','#identidad','#contenido-servicio','#web','#acompanamiento'].indexOf(url.hash)>=0)) { clickTrack('service_selected', { destination: target === 'marca' ? 'marca' : 'servicios' }); return; }
       if (target && target !== source) clickTrack('content_selected', { destination: target });
     });
     doc.addEventListener('toggle', function (event) {

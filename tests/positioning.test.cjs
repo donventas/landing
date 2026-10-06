@@ -60,7 +60,7 @@ test('international contact stays optional and includes a country-code hint', ()
   assert.doesNotMatch(input, /required|pattern=/);
   assert.match(source, /incluye el código de país/);
   assert.doesNotMatch(read('diagnostico.html'), /Presupuesto al inicio/);
-  assert.match(read('diagnostico.html'), /el presupuesto se pregunta después/);
+  assert.match(read('diagnostico.html'), /el presupuesto es opcional y se pregunta después/);
 });
 
 test('all affected pages preserve indexability and production canonicals, without artificial locales', () => {
@@ -86,7 +86,7 @@ test('antispam stays out of the visible layout and keyboard flow on both form su
 });
 
 test('the discovery route from the editorial hub reaches an existing service section', () => {
-  assert.match(read('blog/index.html'), /href="\/#servicios" data-blog-entry="situacion-buscadores"/);
-  assert.match(read('index.html'), /id="servicios"/);
+  assert.match(read('blog/index.html'), /href="\/#web" data-blog-entry="situacion-buscadores"/);
+  assert.match(read('index.html'), /id="web"/);
   assert.doesNotMatch(read('blog/index.html'), /href="\/#oferta"/);
 });
