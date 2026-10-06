@@ -56,7 +56,7 @@ for (const file of files) {
     const byline = html.match(/<a\b[^>]*rel="author"[^>]*>([\s\S]*?)<\/a>/);
     assert.ok(byline, 'Visible author link required');
     assert.equal(text(byline[1]), author.name);
-    assert.equal(attr(html, 'a', 'rel', 'author', 'href'), author.url);
+    assert.equal(new URL(attr(html, 'a', 'rel', 'author', 'href'), 'https://www.donventas.mx/').href, author.url);
   });
 
   test(`${file}: local destinations and image candidates exist`, () => {

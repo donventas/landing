@@ -1,0 +1,42 @@
+/* Same-brand editorial adaptation: existing type, palette, wordmark and portrait. */
+.founder-page{--fg-faint:#8E99AA}
+.founder-page :focus-visible{outline:2px solid var(--accent-2);outline-offset:5px}
+.founder-page .founder-skip{position:fixed;top:12px;left:16px;z-index:200;transform:translateY(-180%);background:var(--fg);color:var(--bg);padding:12px 16px}
+.founder-page .founder-skip:focus{transform:none}
+.founder-main{padding-top:120px}
+.founder-breadcrumbs{font-size:14px;color:var(--fg-soft);padding:20px 0}
+.founder-page a:not(.btn):not(.brand){color:var(--accent-2)}
+.founder-cover{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.9fr);border:1px solid var(--line);background:#11161E}
+.founder-intro{padding:clamp(24px,4vw,54px)}
+.founder-label{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent-2)}
+.founder-intro h1{font-size:clamp(44px,5.7vw,76px);font-weight:500;line-height:1;letter-spacing:-.05em;margin:28px 0 20px;overflow-wrap:anywhere}
+.founder-page h1 em,.founder-page h2 em{color:var(--accent-2);font-weight:500}
+.founder-role{font-size:14px;color:var(--fg-soft);line-height:1.6}
+.founder-dek{font-size:clamp(23px,2.4vw,32px);line-height:1.25;letter-spacing:-.02em;margin:32px 0 22px}
+.founder-dek strong{font-weight:500}
+.founder-intro>p:last-of-type{color:var(--fg-soft);font-size:17px;line-height:1.75}
+.founder-link{display:inline-block;padding:12px 0;text-decoration:underline;text-underline-offset:5px;font-size:16px;line-height:1.6}
+.founder-intro .founder-link{margin-top:18px}
+.founder-portrait{min-width:0;align-self:center;padding:26px 26px 26px 0}
+.founder-portrait img{width:100%;height:auto;aspect-ratio:1;object-fit:contain}
+.founder-portrait figcaption{font-family:var(--mono);font-size:11px;color:var(--fg-soft);padding-top:14px}
+.founder-section{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(32px,6vw,80px);padding-block:clamp(60px,8vw,100px);border-bottom:1px solid var(--line)}
+.founder-section h2,.founder-closeout h2{font-size:clamp(30px,3.6vw,46px);font-weight:500;line-height:1.1;letter-spacing:-.035em;margin-top:18px;text-wrap:balance}
+.founder-copy p{font-size:18px;line-height:1.8;color:var(--fg-soft);margin-bottom:22px}
+.founder-copy strong{color:var(--fg)}
+.founder-readings{padding-block:clamp(60px,8vw,100px)}
+.founder-readings h2{font-size:clamp(32px,4vw,48px);font-weight:500;line-height:1.1;letter-spacing:-.03em;margin:18px 0 32px}
+.founder-readings ol{list-style:none;border-top:1px solid var(--line)}
+.founder-readings li{border-bottom:1px solid var(--line)}
+.founder-readings li a{display:block;padding:26px 0}
+.founder-readings li a:hover h3{text-decoration:underline;text-underline-offset:5px}
+.founder-readings li span{font-family:var(--mono);font-size:11px;letter-spacing:.08em}
+.founder-readings h3{font-size:clamp(23px,3vw,32px);font-weight:500;line-height:1.2;color:var(--fg);margin:12px 0}
+.founder-readings li p{color:var(--fg-soft);max-width:70ch}
+.founder-closeout{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:50px;padding-block:50px 90px;border-top:3px solid var(--accent)}
+.founder-closeout p:not(.founder-label){margin:22px 0;color:var(--fg-soft)}
+.founder-closeout aside{border-left:1px solid var(--line);padding-left:32px}
+.founder-page section[id]{scroll-margin-top:120px}
+@media(max-width:900px){.founder-cover{grid-template-columns:1fr}.founder-portrait{grid-row:1;padding:24px 24px 0;max-width:520px;width:100%;justify-self:center}.founder-intro h1{font-size:clamp(40px,8vw,64px)}.founder-section,.founder-closeout{grid-template-columns:1fr;gap:28px}.founder-closeout aside{border-left:0;border-top:1px solid var(--line);padding:28px 0 0}.founder-page .nav .links{display:none}}
+@media(max-width:480px){.founder-main{padding-top:90px}.founder-intro{padding:24px 20px 30px}.founder-portrait{padding:16px 16px 0}.founder-intro h1{font-size:clamp(36px,10vw,48px)}.founder-copy p{font-size:17px}.founder-page .nav-cta .btn.solid{display:inline-flex;font-size:10px;padding:12px}.founder-closeout .btn{max-width:100%;font-size:11px}.founder-page section[id]{scroll-margin-top:105px}}
+@media(prefers-reduced-motion:reduce){.founder-page{scroll-behavior:auto}html:has(.founder-page){scroll-behavior:auto}}

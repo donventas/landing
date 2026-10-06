@@ -49,7 +49,8 @@ test('provides article metadata, structured data and an accessible portrait', ()
   const posting = graph.find(item => item['@type'] === 'BlogPosting');
   const author = graph.find(item => item['@type'] === 'Person');
   assert.equal(posting.author['@id'], 'https://www.donventas.mx/#quien');
-  assert.equal(author.url, 'https://www.arturovillagomez.com/');
+  assert.equal(author.url, 'https://www.donventas.mx/arturo-villagomez.html');
+  assert.deepEqual(author.sameAs, ['https://www.arturovillagomez.com/']);
   assert.deepEqual(posting.image.map(value => new URL(value).pathname), [
     '/og-fundacional-1200x1200.jpg',
     '/og-fundacional-1200x900.jpg',
