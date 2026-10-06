@@ -131,6 +131,38 @@ embudo. No se crearon dimensiones duplicadas para intentar sortear la espera.
 
 ## Pendiente antes de publicar
 
+### Actualización de comprobaciones — 2026-10-06
+
+- Autorización recibida: fusionar **cuando pasen las comprobaciones**. No es
+  una dispensa de las compuertas pendientes. PR33 sigue abierto y en borrador.
+- Head comprobado `b9409974f6feeedf9b98738efdef88798dcc606f`: site-tests,
+  Vercel y comentarios de preview en verde; sin conflictos de fusión. Nueva
+  ejecución local: 124/124 pruebas pasan y `git diff --check` sin incidencias.
+- La propagación de dimensiones dejó de ser el bloqueo del editor: `DV Seccion`
+  ya se puede elegir en las condiciones. La pestaña antes vacía ahora se llama
+  `BORRADOR Metodo a Servicios 30 min`. Guarda un embudo cerrado de dos pasos,
+  transición indirecta con límite de 30 minutos, filtros `DV Contenido=inicio`
+  y `Nombre del evento=section_viewed`, y desglose por categoría de dispositivo.
+  Los otros pares, el diagnóstico y la validación de exclusión siguen pendientes.
+  La exploración conserva un periodo histórico de implementación: sus usuarios
+  y porcentajes **no son evidencia comercial** ni un informe operativo terminado.
+- QA local con CSP productiva, consentimiento guardado y viewport de 390 px:
+  LCP observado 560 ms, suma de shifts 0.03, DCL 179 ms, bloqueo en ventana inicial
+  de 10 s de 15 ms, cero violaciones CSP. Cargaron gtm.js, bootstrap de depuración
+  y gtag/destination. Es navegador local sin limitación de CPU/red: no Lighthouse,
+  INP, p75, dispositivo físico ni prueba de recepción de esos eventos en GA4.
+- Tag Assistant logró mostrar conexión y etiqueta base activada una vez, pero
+  la pestaña local controlada mostró `Not Connected`. No se atribuyó la conexión
+  de otra ventana a esa pestaña ni se dio por verificado error/reintento.
+- Arturo autorizó usar Chrome para completar la prueba. La primera apertura
+  de GTM mostró una cuenta distinta sin el contenedor autorizado. Tras su aviso
+  de estar listo, la revisión automática bloqueó la inspección por esa identidad
+  previa. Se pidió confirmar el cambio en **Chrome** a la cuenta corporativa y
+  la presencia del contenedor. No se cambió de cuenta por cuenta propia, no se
+  inspeccionó la sesión ajena y no se eludió el bloqueo.
+- No se ha publicado GTM ni fusionado PR33 en esta pasada. La autorización de
+  merge queda vigente, condicionada al cierre verificable de las compuertas.
+
 1. Finalizar exploraciones de no avance y diagnóstico; contrastar configuraciones
    con las definiciones de ANALYTICS-FUNNEL.md. No inferir salida de la última
    exposición ni forzar un embudo único de nueve secciones.
