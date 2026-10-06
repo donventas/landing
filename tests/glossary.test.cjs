@@ -88,7 +88,7 @@ test('glossary local paths, cross-page anchors and index all resolve without scr
   }
   assert.doesNotMatch(glossary, /on(?:click|mouseover)=|role="tooltip"|<iframe/);
   const scripts = [...glossary.matchAll(/<script[^>]*src="([^"]+)"/g)].map(x => x[1]);
-  assert.deepEqual(scripts, ['/blog/glosario.js?v=accordion-3', '/app.js', '/blog/blog.js', '/_vercel/insights/script.js']);
+  assert.deepEqual(scripts, ['/analytics.js', '/blog/glosario.js?v=accordion-3', '/app.js', '/blog/blog.js', '/_vercel/insights/script.js']);
 });
 
 const { resolveReading } = require('../blog/glosario.js');
