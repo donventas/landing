@@ -198,6 +198,43 @@ embudo. No se crearon dimensiones duplicadas para intentar sortear la espera.
   exploraciones, exclusión efectiva, demás ramas y comprobación de rendimiento
   del release. No se fusionó PR33 ni se modificó PR34 de identidad.
 
+### Recepción y alertas de Google — 2026-10-06, 10:54–11:05 CDMX
+
+- Acceso confirmado en Chrome a la propiedad Don Ventas — sitio público con la
+  cuenta corporativa, mediante el enlace del selector de productos de GTM.
+- **DebugView confirma recepción**: dos `diagnostic_submit_attempted`, un
+  `diagnostic_submit_failed` (10:41:41) y un `diagnostic_completed` (10:42:47).
+  Se inspeccionó `route=contenido` y `traffic_type=developer` del fallo.
+  Horas y secuencia corresponden al recorrido conectado anterior. El agregado
+  de 30 minutos incluye dos page_view de las pestañas de prueba; no se declara
+  una sola vista global ni se atribuye todo el agregado a un documento.
+- Se encontró una discrepancia con el registro anterior: el evento completado
+  tenía `value=1` y `currency=USD`. La configuración efectiva de GA4 estaba en
+  **Definir un valor predeterminado**, 1 USD. Se seleccionó **No asignar ningún
+  valor predeterminado**, se guardó y se verificó de nuevo tras cargar la página
+  y reabrir el ajuste. No se modificaron otros eventos clave. La afirmación previa
+  de ausencia de importe no acreditaba el estado efectivo; queda rectificada por
+  esta evidencia. No se borró ni corrigió retrospectivamente el evento de QA.
+  Falta comprobar un nuevo hit de finalización después de propagarse el cambio.
+- La etiqueta Google presenta un aviso: consentimiento del 0 % en territorios,
+  cuyo texto se refiere a medición/personalización de anuncios. GTM presenta ese
+  mismo aviso y uno adicional: falta un segundo administrador.
+- Tag Assistant del borrador, evento 4 Actualización del consentimiento:
+  `analytics_storage` pasa de Denegado a Concedido; `ad_storage`, `ad_user_data`
+  y `ad_personalization` permanecen Denegado. Se conserva esta separación
+  intencional: el sitio solicita analítica opcional, no permisos publicitarios.
+  No se fuerza granted, activa Ads o comparte datos de usuarios para silenciar
+  el diagnóstico. El aviso de Google **sigue visible**; la evidencia comprueba el
+  estado de esta prueba, no explica todo el histórico de señales del diagnóstico.
+- Administrador de respaldo: se solicitó autorización expresa para
+  `hola@arturovillagomez.com`; no se otorgó el rol antes de recibir respuesta.
+- No se publicaron GTM ni PR33. Permanecen las compuertas de informes, exclusión
+  efectiva de QA, demás ramas y rendimiento/CSP del release. La advertencia de
+  imagen `fonts.gstatic.com` de la sesión anterior no se ha resuelto ni autorizado.
+
+Fuentes del diagnóstico: [Google, alertas de etiquetas](https://support.google.com/tagmanager/answer/14681508),
+[Google, comprobación de consentimiento](https://support.google.com/tagmanager/answer/14522438).
+
 1. Finalizar exploraciones de no avance y diagnóstico; contrastar configuraciones
    con las definiciones de ANALYTICS-FUNNEL.md. No inferir salida de la última
    exposición ni forzar un embudo único de nueve secciones.
