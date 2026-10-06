@@ -69,6 +69,31 @@ test('keeps only one budget field across the diagnostic source', () => {
   assert.equal((source.match(/id:'budgetBand'/g) || []).length, 2);
 });
 
+test('each conditional route exposes only its own problem and retains contact last', () => {
+  const cases = [
+    ['contenido','outcome','qualified','salesProblem'],
+    ['contenido','outcome','orders','salesProblem'],
+    ['contenido','outcome','trust','salesProblem'],
+    ['contenido','outcome','consistency','consistencyProblem'],
+    ['contenido','outcome','search','searchProblem'],
+    ['contenido','outcome','other','otherProblem'],
+    ['branding','desired','clarity','clarityProblem'],
+    ['branding','desired','consistency','systemProblem'],
+    ['branding','desired','autonomy','systemProblem'],
+    ['branding','desired','launch','launchProblem'],
+    ['branding','desired','reposition','repositionProblem'],
+    ['branding','desired','other','brandOtherProblem']
+  ];
+  const problemIds = new Set(cases.map(c=>c[3]));
+  for (const [route,key,choice,problem] of cases) {
+    const ids = diagnostic.visibleQuestions(route, {[key]:choice}).map(q=>q.id);
+    assert.deepEqual(ids.filter(id=>problemIds.has(id)), [problem], `${route}/${choice}`);
+    assert.equal(ids.at(-1), 'contact');
+    assert.equal(ids.filter(id=>id==='budgetBand').length, 1);
+    assert.equal(new Set(ids).size, ids.length);
+  }
+});
+
 test('routes lead delivery through the same-origin server endpoint', () => {
   const source = fs.readFileSync(path.join(__dirname, '..', 'diagnostico-v2.js'), 'utf8');
   assert.match(source, /LEAD_ENDPOINT:'\/api\/lead'/);

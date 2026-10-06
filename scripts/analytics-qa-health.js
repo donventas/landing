@@ -2,7 +2,7 @@
 (function () {
   'use strict';
   if (location.hostname !== 'localhost' || location.port !== '8786') return;
-  var lcp = 0, cls = 0, longTasks = [], violations = [];
+  var lcp = 0, cls = 0, longTasks = [], violations = [], violationSources = [];
   function observe(type, callback) {
     try {new PerformanceObserver(function (list) {list.getEntries().forEach(callback);}).observe({type:type,buffered:true});} catch (_) {}
   }
@@ -14,6 +14,10 @@
     try {origin = new URL(origin).origin;} catch (_) {}
     var value = event.effectiveDirective + ': ' + origin;
     if (violations.indexOf(value)<0) violations.push(value);
+    var source = '';
+    try {var u = new URL(event.sourceFile); source = u.origin + u.pathname;} catch (_) {}
+    var detail = {directive:event.effectiveDirective,blockedOrigin:origin,source:source,line:event.lineNumber,column:event.columnNumber};
+    if (!violationSources.some(function (item) {return JSON.stringify(item)===JSON.stringify(detail);})) violationSources.push(detail);
   });
   document.addEventListener('DOMContentLoaded', function () {
     var panel = document.createElement('details');
@@ -35,6 +39,7 @@
         lifetimeLongTaskCount:longTasks.length,
         googleResources:google.map(function (r) {var u=new URL(r.name);return {origin:u.origin,path:u.pathname,ms:Math.round(r.duration)};}),
         cspViolations:violations,
+        cspViolationSources:violationSources,
         limits:'Unthrottled local browser; CLS is a sum, not the CWV session-window metric; initial 10s blocking is not Lighthouse TBT; resource presence is not GA receipt; observer adds overhead; not INP or p75.'
       },null,2);
     }

@@ -4,6 +4,30 @@ Fecha: 2026-10-05. Propiedad Don Ventas — sitio público, `557370059`.
 Cuenta operadora verificada en la interfaz: `arturo.villagomez@donventas.mx`.
 Este registro no autoriza el merge ni la publicación de GTM.
 
+## Estado vigente de cierre — 2026-10-06
+
+Las secciones siguientes preservan el historial; este resumen distingue lo
+cerrado de lo pendiente sin sustituir una comprobación por otra.
+
+| Compuerta | Estado y evidencia |
+|---|---|
+| Autorización | Arturo autorizó publicar GTM y fusionar PR33 cuando pasen las verificaciones; PR34 de identidad sigue separado. |
+| Error y reintento | Cerrado para contenido: 503 → reintento → 200 local, hits de Tag Assistant y recepción DebugView de fallo/completado comprobados el 6 de octubre. API comercial no probada por esta simulación. |
+| Importe indebido | Cerrado para la nueva recepción de las 13:45:31: sin `value` ni `currency`. No se corrigió retrospectivamente el dato anterior. |
+| Respaldo administrativo | Invitación a `hola@arturovillagomez.com` autorizada y aceptada; ambos usuarios aparecen como administradores con acceso. Ya no figura la alerta de administrador único. |
+| Consentimiento | Estado real verificado: analítica concedida después del permiso; tres permisos de anuncios denegados. La alerta territorial publicitaria sigue visible; no se silencia otorgando permisos de Ads. |
+| Diagnóstico independiente | Se encontró una CSP ausente para `/diagnostico.html`; el servidor QA devolvía 500 deliberadamente. Corregida en `vercel.json`, prueba de regresión añadida, carga y conexión de Tag Assistant comprobadas. Finalización desde esa URL pendiente. |
+| Ramas condicionales | Test nuevo cubre las 12 opciones iniciales y pregunta aplicable única, presupuesto único y contacto al final. No equivale a recorrer las 12 variantes en navegador con Google. |
+| Exploraciones | Guardados alcance inicial y pares Hero→Problema, Problema→Método, Método→Servicios, cerrados/indirectos/30 min. Restan cinco pares, diagnóstico, origen de CTA y denominadores. El embudo nativo usa Usuarios activos; no mezclarlo sin etiquetar con Total de usuarios del alcance. |
+| Exclusión de QA | Filtro Activo comprobado; efecto en datos procesados aún no acreditado. |
+| CSP y rendimiento | Prueba local exacta a la política; origen de la incidencia `fonts.gstatic.com` y verificación final del release pendientes. No hay certificación de campo ni Lighthouse. |
+| Publicación | GTM sin publicar; PR33 borrador sin fusionar. |
+
+La automatización de Chrome sufrió interrupciones de interacción y agotamientos
+de tiempo durante el cierre. No se registran clics enviados como acciones
+completadas sin comprobar su resultado. Se pidió ayuda manual únicamente para
+terminar el recorrido conectado, usando datos sintéticos.
+
 ## Configuración guardada y verificada
 
 Trece dimensiones, todas de alcance **Evento**, verificadas en la tabla de GA4:
@@ -248,6 +272,31 @@ Fuentes del diagnóstico: [Google, alertas de etiquetas](https://support.google.
    después del lanzamiento, sin equipararlas a ventas.
 6. Obtener aprobación de publicación; coordinar GTM y merge, sin publicar uno
    como sustituto de las verificaciones pendientes.
+
+### Verificación posterior al diagnóstico manual — 2026-10-06
+
+- Arturo informó haber terminado el diagnóstico. En DebugView de la propiedad
+  `557370059` se observó una finalización a las **13:45:31 CDMX**, después de un
+  intento de envío a las 13:45:30. El agregado de los últimos 30 minutos mostraba
+  una finalización, un intento y un error de validación; no se atribuye todo ese
+  agregado a una sola pestaña ni se confunde validación con fallo del servidor.
+- Parámetros inspeccionados del evento: `route=contenido`, `content_id=inicio`,
+  `page_location=https://www.donventas.mx/`, `traffic_type=developer`. La lista
+  completa de parámetros no contiene `value` ni `currency`: queda comprobada
+  una nueva recepción sin el importe predeterminado de 1 USD detectado antes.
+- La página atribuida es la landing. Aunque el contexto de la conversación
+  mostraba `/diagnostico.html`, esta evidencia **no acredita la recepción desde
+  esa página independiente** ni permite asegurar que sea exactamente la misma
+  pestaña que terminó Arturo. No se pidió repetir ni recargar su formulario.
+- El endpoint del servidor de QA continúa simulado: no es un lead comercial.
+- Nueva ejecución local: **125/125 pruebas pasan**, incluida la prueba nueva de
+  diagnóstico CSP que elimina consulta y fragmento de la fuente del bloqueo y
+  deduplica las incidencias. No se amplió la CSP productiva ni se da por resuelta
+  la incidencia anterior de `fonts.gstatic.com` por el mero hecho de tener este
+  instrumento.
+- GTM y PR33 no se publicaron en esta verificación. Siguen pendientes las
+  compuertas de exploraciones, exclusión efectiva de QA, cobertura restante y
+  rendimiento/CSP del release.
 
 Fuentes: [dimensiones de evento](https://support.google.com/analytics/answer/14239696),
 [filtro de desarrolladores](https://support.google.com/analytics/answer/13296662),

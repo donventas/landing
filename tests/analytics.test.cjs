@@ -99,6 +99,19 @@ test('saved consent starts once; step and success counts are deduplicated per pa
   for (let i=0;i<2;i++) f.win.DVAnalytics.track('diagnostic_completed',{route:'branding'});
   assert.equal(f.commands().filter(x=>x[0]==='event'&&x[1]==='diagnostic_completed').length,1);
 });
+
+test('standalone diagnostic retains its own canonical and content id without form data', () => {
+  const f = fixture('www.donventas.mx', null, false, '/diagnostico.html');
+  f.accept.onclick();
+  f.win.DVAnalytics.track('diagnostic_completed', {route:'contenido',email:'private@example.com',value:1,currency:'USD'});
+  const events = f.commands().filter(x=>x[0]==='event');
+  for (const event of events) {
+    assert.equal(event[2].content_id, 'diagnostico');
+    assert.equal(event[2].page_location, 'https://www.donventas.mx/diagnostico.html');
+  }
+  assert.equal(events.filter(x=>x[1]==='diagnostic_completed').length, 1);
+  assert.doesNotMatch(JSON.stringify(events), /private|currency|USD|"value"/);
+});
 test('unknown/legal paths can manage preferences but never send page data', () => {
   const f = fixture('www.donventas.mx',null,false,'/15_LEGAL/Politica%20de%20Cookies.html');
   f.accept.onclick(); assert.equal(f.win.dataLayer,undefined);

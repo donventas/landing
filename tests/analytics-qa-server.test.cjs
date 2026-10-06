@@ -77,6 +77,34 @@ test('CSP QA reuses the exact production policy and refuses unknown HTML routes'
   const config = JSON.parse(fs.readFileSync(path.join(root,'vercel.json'),'utf8'));
   assert.equal(result.headers['Content-Security-Policy'], config.headers.find(r=>r.source==='/branding.html').headers[0].value);
   assert.match(result.body, /analytics-qa-health.js/);
+  const diagnostic = qa.request('/diagnostico.html');
+  assert.equal(diagnostic.status, 200);
+  assert.equal(diagnostic.headers['Content-Security-Policy'], config.headers.find(r=>r.source==='/diagnostico.html').headers[0].value);
+  assert.doesNotMatch(diagnostic.headers['Content-Security-Policy'], /unsafe-eval|script-src[^;]*unsafe-inline/);
   assert.equal(qa.request('/unknown.html').status, 500);
   assert.match(fs.readFileSync(path.join(root,'.vercelignore'),'utf8'), /scripts\/analytics-qa-health.js/);
+});
+
+test('local CSP diagnostics redact source querystrings and deduplicate violations', () => {
+  const handlers = {}, output = {textContent: ''};
+  const panel = {querySelector: () => output, addEventListener() {}};
+  vm.runInNewContext(fs.readFileSync(path.join(root, 'scripts/analytics-qa-health.js'), 'utf8'), {
+    location: {hostname: 'localhost', port: '8786'}, URL, innerWidth: 390,
+    performance: {now: () => 11000, getEntriesByType: () => []},
+    document: {addEventListener: (name, fn) => {handlers[name] = fn;},
+      createElement: () => panel, body: {appendChild() {}}},
+    setInterval() {}
+  });
+  const event = {effectiveDirective: 'img-src',
+    blockedURI: 'https://fonts.gstatic.com/image?q=private',
+    sourceFile: 'https://www.googletagmanager.com/debug/bootstrap?token=private#secret',
+    lineNumber: 12, columnNumber: 4};
+  handlers.securitypolicyviolation(event);
+  handlers.securitypolicyviolation(event);
+  handlers.DOMContentLoaded();
+  const result = JSON.parse(output.textContent);
+  assert.equal(result.cspViolationSources.length, 1);
+  assert.equal(result.cspViolationSources[0].source, 'https://www.googletagmanager.com/debug/bootstrap');
+  assert.equal(result.cspViolationSources[0].blockedOrigin, 'https://fonts.gstatic.com');
+  assert.doesNotMatch(output.textContent, /private|secret|token=|\?q=/);
 });
