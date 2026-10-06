@@ -16,11 +16,11 @@ cerrado de lo pendiente sin sustituir una comprobación por otra.
 | Importe indebido | Cerrado para la nueva recepción de las 13:45:31: sin `value` ni `currency`. No se corrigió retrospectivamente el dato anterior. |
 | Respaldo administrativo | Invitación a `hola@arturovillagomez.com` autorizada y aceptada; ambos usuarios aparecen como administradores con acceso. Ya no figura la alerta de administrador único. |
 | Consentimiento | Estado real verificado: analítica concedida después del permiso; tres permisos de anuncios denegados. La alerta territorial publicitaria sigue visible; no se silencia otorgando permisos de Ads. |
-| Diagnóstico independiente | Se encontró una CSP ausente para `/diagnostico.html`; el servidor QA devolvía 500 deliberadamente. Corregida en `vercel.json`, prueba de regresión añadida, carga y conexión de Tag Assistant comprobadas. Finalización desde esa URL pendiente. |
+| Diagnóstico independiente | Cerrado: después de corregir la CSP, recorrido completo con datos sintéticos y recepción DebugView a las 15:04:42 CDMX del 6 de octubre; `content_id=diagnostico`, URL canónica independiente y `route=contenido`. Sin importe ni contacto en parámetros. |
 | Ramas condicionales | Test nuevo cubre las 12 opciones iniciales y pregunta aplicable única, presupuesto único y contacto al final. No equivale a recorrer las 12 variantes en navegador con Google. |
-| Exploraciones | Guardados alcance inicial y pares Hero→Problema, Problema→Método, Método→Servicios, cerrados/indirectos/30 min. Restan cinco pares, diagnóstico, origen de CTA y denominadores. El embudo nativo usa Usuarios activos; no mezclarlo sin etiquetar con Total de usuarios del alcance. |
-| Exclusión de QA | Filtro Activo comprobado; efecto en datos procesados aún no acreditado. |
-| CSP y rendimiento | Prueba local exacta a la política; origen de la incidencia `fonts.gstatic.com` y verificación final del release pendientes. No hay certificación de campo ni Lighthouse. |
+| Exploraciones | Guardados los ocho pares adyacentes de landing, alcance y base de page_view; ocho vistas de diagnóstico (cuatro transiciones por ruta) y origen de clics. Cerrados/indirectos/30 min. Condiciones de los cinco pares nuevos revisadas al reabrir. Permanecen rotuladas BORRADOR sin datos productivos. Usuarios activos en embudos y clics; Total de usuarios en alcance/base, sin mezclarlos. |
+| Exclusión de QA | Filtro de desarrolladores Excluir/Activo reconfirmado el 6 de octubre. Hoy, acciones y diagnóstico muestran sin datos en informes procesados; esto no distingue latencia de exclusión efectiva. Compuerta pendiente, no acreditada por DebugView. |
+| CSP y rendimiento | Muestras locales finales a 1280 y 390 px con Google activo, sin Tag Assistant superpuesto: cero violaciones CSP y cero bloqueo observado en primeros 10 s. Son pruebas sin limitación de red y con caché; no certifican campo/Lighthouse. La incidencia anterior aislada de `fonts.gstatic.com` no se reprodujo; su causa exacta no se atribuye sin evidencia. Smoke de producción pendiente del release. |
 | Publicación | GTM sin publicar; PR33 borrador sin fusionar. |
 
 La automatización de Chrome sufrió interrupciones de interacción y agotamientos
@@ -303,3 +303,50 @@ Fuentes: [dimensiones de evento](https://support.google.com/analytics/answer/142
 [preview de GTM](https://support.google.com/tagmanager/answer/6107056).
 Google indica 24–48 h para disponibilidad de datos de dimensiones en informes;
 un filtro puede tardar 24–36 h en aplicarse. DebugView no sustituye esa validación.
+
+### Cierre técnico en navegador integrado autorizado — 2026-10-06
+
+- Se preservó sin recargar la pestaña previa de Arturo. El recorrido independiente
+  se ejecutó en una pestaña nueva, usando únicamente contacto sintético y API local
+  simulada. Recibido en DebugView a las 15:04:42 CDMX: `diagnostic_completed`,
+  `content_id=diagnostico`, `route=contenido`, URL canónica sin query y
+  `traffic_type=developer`. Lista inspeccionada sin nombre, correo, respuesta libre,
+  `value` ni `currency`. No equivale a una venta ni a entrega comercial en producción.
+- Nueva ejecución: **127/127 pruebas pasan**. PR33 en `edc8e64` tenía site-tests y
+  Vercel correctos, mergeable, todavía borrador. PR34 no forma parte de este cierre.
+- Muestreo de carga local, consentimiento concedido y Google real activo:
+
+  | Viewport | LCP observado | Suma CLS observada | DOMContentLoaded | Bloqueo primeros 10 s |
+  |---|---:|---:|---:|---:|
+  | 1280 px | 184 ms | 0 | 147 ms | 0 ms |
+  | 390 × 844 px | 112 ms | 0.0002 | 89 ms | 0 ms |
+
+  Ambas muestras registraron recursos GTM/Google y solicitudes `g/collect`, con
+  lista de violaciones CSP vacía. Caché local, sin throttling: no comparar estos
+  tiempos con p75 de usuarios reales, INP, Lighthouse o móviles físicos. Se descarta
+  una muestra anterior tomada durante un cambio de viewport y con panel de Tag
+  Assistant: no representa un recorrido estable. No se relajó CSP para depuración.
+- Se detuvo la sesión de Tag Assistant antes de las muestras finales. Se revisó
+  la etiqueta Google: `send_page_view=false`, señales de Google y personalización
+  de anuncios desactivadas, permiso adicional `analytics_storage` requerido.
+- [Recorrido landing](https://analytics.google.com/analytics/web/?authuser=1#/analysis/a410707546p557370059/edit/FvgmjU3lSEGrL1jcQxrbZQ):
+  alcance, base de usuarios con page_view e inicio, ocho pares adyacentes. Se
+  revisaron tras reabrir los valores servicios/casos/ideas/quien/preguntas/contacto.
+  La base no es todas las visitas del servidor ni el número de sesiones.
+- [Diagnóstico y acciones](https://analytics.google.com/analytics/web/?authuser=1#/analysis/a410707546p557370059/edit/G1neRna4QlyVsXD8nW393w):
+  para contenido y branding, exposición→inicio, inicio→solicitud aceptada,
+  contacto→intento y tentativa→aceptación. Contacto restringe solo el primer paso a
+  `diagnostic_step_viewed` con `step=contact`; no filtra el segundo evento por step.
+  Tabla adicional por sección de origen y nombre de evento, usuarios activos,
+  limitada a diagnostic_entry/service_selected/content_selected. No suma usuarios
+  entre acciones ni interpreta el clic como una carga de destino confirmada.
+- Filtros de ruta se seleccionaron explícitamente desde las opciones, no solo
+  escribiéndolos. Se comprobó la persistencia del contacto de marca y su filtro
+  branding al reabrir. Fecha de diagnóstico queda en Hoy (6 octubre), sin datos;
+  landing conserva los últimos 28 días hasta el 5 de octubre. Unificar periodos
+  antes de comparar. El histórico previo es QA, no una tasa comercial.
+- **Pendiente externo:** acreditar efecto del filtro de QA con datos procesados
+  y una ventana ya madura. La ausencia actual no basta y no se desactivó el filtro
+  ni se generó tráfico no marcado para fabricar una comparación. No se publicaron
+  GTM ni PR33. Después de esta compuerta: checks del HEAD, publicación coordinada,
+  smoke en producción y fecha de inicio de la línea base comercial.

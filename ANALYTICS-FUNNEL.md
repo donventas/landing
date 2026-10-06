@@ -42,10 +42,26 @@ Extensión solicitada por Arturo: medir pérdida de avance entre secciones aunqu
 | 8 | preguntas | Preguntas frecuentes |
 | 9 | contacto | Entrada al diagnóstico |
 
-Definir dos vistas complementarias en GA4. La primera tiene una estructura inicial de recuentos; tasas y embudos siguen pendientes de completar y validar (estado en ANALYTICS-GA4-SETUP.md):
+Dos vistas complementarias guardadas en GA4 al 6 de octubre (estado y límites en ANALYTICS-GA4-SETUP.md). No hay todavía una línea base comercial validada:
 
 - **Alcance por sección:** usuarios con exposición al bloque / usuarios medidos de la landing. Mostrar n/N y segmentar por dispositivo y campaña. No equivale al porcentaje de todas las visitas del servidor.
 - **No avance entre bloques A y B:** 1 − usuarios de la cohorte A que después alcanzan B dentro de 30 minutos / usuarios de A con ventana completa. Usar pares de secciones adyacentes como embudos cerrados; un solo embudo de nueve pasos excluiría a quienes saltan legítimamente secciones. La pérdida de avance es un proxy, no una salida confirmada.
+
+Las pestañas de alcance y base usan **Total de usuarios**; los embudos nativos
+usan **Usuarios activos**. No dividir un numerador de un tipo por el denominador
+del otro. La base de alcance filtra `page_view` y `content_id=inicio`; calcular n/N
+con el mismo periodo y dispositivo. El porcentaje de no avance ya lo calcula cada
+embudo sobre su propio primer paso. No sumar tasas entre pares ni presentar el
+total de filas de clics como personas únicas globales.
+
+La segunda exploración separa contenido y marca con cuatro transiciones por ruta:
+exposición→inicio, inicio→aceptación, contacto→intento e intento→aceptación,
+todas cerradas, indirectas y de 30 minutos. La tabla de origen del clic distingue
+diagnostic_entry/service_selected/content_selected por sección de origen. Es
+recuento de usuarios activos, no tasa de conversión ni prueba de destino cargado.
+Las preguntas opcionales siguen analizándose por su exposición, no se impone
+una secuencia única. Los informes permanecen como BORRADOR hasta disponer de una
+ventana comercial y acreditar exclusión de QA.
 
 Ejemplo hipotético, no datos del sitio: 100 personas medidas ven Método y 60 de ellas alcanzan Servicios en la ventana; 40% no avanzó a ese bloque. Antes de concluir que Método falla, revisar qué hicieron esas 40: CTA al diagnóstico, apertura de otra página, regreso o ausencia de más actividad medida. No sumar porcentajes de categorías que pueden solaparse.
 
