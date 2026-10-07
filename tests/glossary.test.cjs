@@ -26,7 +26,8 @@ test('native disclosures preserve content sequence and related deep links', () =
 });
 
 test('editorial glossary keeps one responsive static cover and bounded assets', () => {
-  assert.ok(Buffer.byteLength(glossary) < 28000);
+  // One new native definition; no new images, fonts or scripts. Raw HTML budget.
+  assert.ok(Buffer.byteLength(glossary) < 30000);
   assert.ok(Buffer.byteLength(read('blog/glosario.css')) < 11000);
   assert.ok(Buffer.byteLength(read('blog/glosario.js')) < 6000, 'Search, sort and deep-link enhancement budget');
   assert.equal((glossary.match(/<img\b/g) || []).length, 2, 'Existing wordmark and one cover');

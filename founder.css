@@ -1,5 +1,8 @@
 /* Same-brand editorial adaptation: existing type, palette, wordmark and portrait. */
 .founder-page{--fg-faint:#8E99AA}
+.founder-page .btn.solid{background:#2F65D8;border-color:#2F65D8}
+.founder-page .btn.solid:hover{background:#285AC6;border-color:#285AC6}
+.founder-breadcrumbs a{text-decoration:underline;text-underline-offset:4px}
 .founder-page :focus-visible{outline:2px solid var(--accent-2);outline-offset:5px}
 .founder-page .founder-skip{position:fixed;top:12px;left:16px;z-index:200;transform:translateY(-180%);background:var(--fg);color:var(--bg);padding:12px 16px}
 .founder-page .founder-skip:focus{transform:none}

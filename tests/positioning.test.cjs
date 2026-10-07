@@ -36,7 +36,7 @@ test('international coverage FAQ agrees with visible text on both commercial pag
   for (const file of ['index.html', 'branding.html']) {
     const question = graph(file).find(node => node['@type'] === 'FAQPage').mainEntity.find(q => q.name === '¿Puedo trabajar con Don Ventas desde otro país?');
     assert.ok(question);
-    const details = [...read(file).matchAll(/<details[^>]*><summary>([\s\S]*?)<\/summary><p>([\s\S]*?)<\/p><\/details>/g)].find(match => plain(match[1]) === question.name);
+    const details = [...read(file).matchAll(/<details[^>]*><summary>((?:(?!<\/summary>)[\s\S])*?)<\/summary><p>([\s\S]*?)<\/p><\/details>/g)].find(match => plain(match[1]) === question.name);
     assert.ok(details);
     assert.equal(plain(details[2]), question.acceptedAnswer.text);
     assert.match(question.acceptedAnswer.text, /MXN y no incluyen IVA/);

@@ -12,6 +12,7 @@
 .branding-editorial section[id]{scroll-margin-top:112px}
 .brand-opening{padding-top:38px}
 .brand-breadcrumbs{padding-top:24px;color:#A6B0C0;font-size:13px}
+.brand-breadcrumbs a,.brand-heading p a{text-decoration:underline;text-underline-offset:4px}
 .brand-cover{display:grid;grid-template-columns:minmax(0,1.12fr) minmax(0,1fr);background:#11161E;border:1px solid #303844}
 .brand-copy{align-self:center;position:relative;z-index:1;padding:clamp(28px,4vw,62px)}
 .brand-copy h1{font-size:clamp(40px,4.65vw,70px);line-height:1.03;letter-spacing:-.05em;font-weight:600;margin:28px 0 24px}

@@ -2,3 +2,5 @@
 scripts/analytics-qa-server.cjs
 scripts/analytics-qa-health.js
 scripts/qa-brand-evolution.cjs
+scripts/editorial-qa-server.cjs
+scripts/qa-editorial-strategy.cjs
