@@ -1,0 +1,60 @@
+{
+  "status": "RELEASE_CANDIDATE_SOURCE_VERIFIED_OWNER_AUTHORIZED_LOCAL_CHECKS_PASSED",
+  "landing": {
+    "repository": "donventas/landing",
+    "branch": "codex/method-photo-analytics-detail",
+    "baseline": "533025d7e5109d533b87cd42cda23edf94023189",
+    "baselineStatus": "New clean worktree from fetched origin/main; existing worktrees preserved",
+    "preview": "http://127.0.0.1:8790/#metodo"
+  },
+  "source": {
+    "repository": "FinDataMan/don-ventas-runtime",
+    "handoff": "fotos/editorial-conceptual/metodo-web-handoff.json",
+    "releaseCommit": "afee147450d102f73e55c7a3b0044f459955023f",
+    "releaseVerification": "Master and all three derivative blobs from this commit match the handoff SHA-256 values and Landing bytes. GitHub confirms the commit is an ancestor of Runtime main.",
+    "handoffMetadataNote": "Runtime handoff still says PENDING_RUNTIME_COMMIT. This Landing receipt records the verified immutable source without modifying Runtime.",
+    "master": "criterio-metodo-01-06-v2.png",
+    "masterSha256": "0648dbe029f26a4853178bb0d8bfb687560109842d63c1bbdd17deb09f3284b3",
+    "sourceHandling": "Read-only. Master verified but not copied. Only the three specified derivatives copied byte-for-byte."
+  },
+  "assets": [
+    {"file":"assets/editorial/criterio-metodo-01-06-v2-480.webp","width":480,"height":360,"bytes":31172,"previousBytes":22672,"sha256":"970f7be14d19261f0e09319aa1839ea44d95c9386f5dc01c5e2189b3fff579a2"},
+    {"file":"assets/editorial/criterio-metodo-01-06-v2-960.webp","width":960,"height":720,"bytes":70750,"previousBytes":54552,"sha256":"a4c09ff8f1646dd9ffee98fa87de803727ff191ae9723a6e12602c704f7bffd5"},
+    {"file":"assets/editorial/criterio-metodo-01-06-v2-1448.webp","width":1448,"height":1086,"bytes":111620,"previousBytes":108300,"sha256":"52dfcf2f5a28775944ab08dc8998d7974fa616f51f80ff55eab17d8693d6e715"}
+  ],
+  "consumers": ["index.html: method-photo img src and all three srcset entries", "vercel.json: immutable cache rule for versioned WebPs", "tests/landing-editorial.test.js: responsive image assertions"],
+  "preserved": ["4:3 without cropping", "width=960 height=720", "sizes", "loading=lazy", "decoding=async", "Existing CSS and caption", "Intentional thumb occlusion and printed scale", "Copy, SEO, navigation routes, analytics and forms"],
+  "retirement": {
+    "removed": ["assets/editorial/criterio-manos-metodo-01-06-480.webp", "assets/editorial/criterio-manos-metodo-01-06-960.webp", "assets/editorial/criterio-manos-metodo-01-06.webp"],
+    "evidence": "Zero active code/markup/config consumers after substitution; each removed file was tracked and byte-identical to HEAD before deletion.",
+    "historicalReference": "AUDITORIA-RUNTIME-A650-LANDING.md retains its historical filename; not an active web consumer.",
+    "rollback": "All three old assets and old consumer definitions remain recoverable from Landing baseline Git commit."
+  },
+  "analyticsDetail": {
+    "route": "/15_LEGAL/Politica%20de%20Cookies.html",
+    "productionObservation": "HTTP 200, existing content and visible heading after clicking Cómo usamos la analítica in an isolated Chromium session. The reported blank page was not reproduced in production.",
+    "localDefect": "editorial-qa-server rejected existing legal HTML without a route-specific CSP, returning a false 404.",
+    "fix": "Local fixture now mirrors only declared headers and serves existing pages without requiring a CSP per route. No production analytics or legal copy was changed.",
+    "regression": "New test failed with 404 before the fix and passes with 200 after it. Browser click-through passes at 320,390,1440px; legal HTML readable without JS.",
+    "remaining": "If the blank persists on the published site, obtain exact failing URL, browser and screenshot; the local fixture fix alone cannot prove a production/browser-specific issue resolved."
+  },
+  "validation": {
+    "unitTests": {"passed":146,"failed":0,"command":"node --test"},
+    "browserCommand": "node scripts/qa-method-photo.cjs",
+    "browser": "Isolated headless Chrome, local server, reduced motion, fresh contexts",
+    "responsiveCases": ["320@1:480", "390@1:480", "390@2:960", "768@1:960", "820@1:960", "821@1:480", "1440@1:960", "1440@2:1448", "1920@1:1448"],
+    "photoLayoutShift": 0,
+    "pageObservedLayoutShiftRangeAcrossThreeRuns": [0,0.058254],
+    "browserEvidence": "Latest generated results and screenshots: temporary QA directory dv-method-photo-18owpm; rerun script to reproduce",
+    "horizontalOverflow": 0,
+    "downloads": "All three HTTP 200 image/webp responses hash-identical to supplied bytes",
+    "cache": "Versioned URLs with declared public,max-age=31536000,immutable; local conditional requests return 304; clean browser navigation reused 960px from cache with transferSize=0",
+    "limitations": "Local cache fixture is not a deployed Vercel CDN verification. No field Core Web Vitals or new Lighthouse score claimed. Owner authorized publication after preview review."
+  },
+  "releaseGates": [
+    "PASSED: definitive Runtime source commit recorded and byte identity verified",
+    "PASSED: explicit owner authorization after local preview",
+    "PASSED: Landing main remains 533025d; 146 unit tests and nine browser cases rerun successfully",
+    "After authorized deployment, verify actual Vercel cache headers, response hashes and both breakpoints"
+  ]
+}

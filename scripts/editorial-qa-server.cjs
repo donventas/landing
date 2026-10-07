@@ -1,6 +1,6 @@
 // Loopback-only rendering/performance fixture. No real leads or Google events.
 // --baseline serves the pre-alignment revision for matched comparisons after commits.
-const http=require('node:http'),fs=require('node:fs'),path=require('node:path'),zlib=require('node:zlib'),cp=require('node:child_process');
+const http=require('node:http'),fs=require('node:fs'),path=require('node:path'),zlib=require('node:zlib'),cp=require('node:child_process'),crypto=require('node:crypto');
 const root=path.resolve(__dirname,'..');
 const baselineRef='c13f0dc04f87680ae72501f5fadc2bd8434247aa';
 function createServer(baseline=false){
@@ -23,17 +23,23 @@ function createServer(baseline=false){
    if(!file||file.endsWith('/')||fs.statSync(abs).isDirectory())file+=(file&&!file.endsWith('/')?'/':'')+'index.html';
    if(file.split('/').some(part=>part.startsWith('.')))throw Error('private');
    const ext=path.extname(file);let body=bytes(file);
-   if(ext==='.html'){
-    const route=url.pathname.startsWith('/blog/')?'/blog/(.*)':url.pathname;
-    const policy=config.headers.find(x=>x.source===route)?.headers.find(x=>x.key==='Content-Security-Policy');
-    if(!policy)throw Error('missing CSP');res.setHeader('Content-Security-Policy',policy.value);
+   // Mirror declared deployment headers. An existing HTML file without a
+   // route-specific CSP (e.g. the cookies policy) must not become a false 404.
+   for(const rule of config.headers){
+    const pattern=rule.source.split('(.*)').map(part=>part.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')).join('.*');
+    if(new RegExp('^'+pattern+'$').test(url.pathname)){
+     for(const header of rule.headers)res.setHeader(header.key,header.value);
+    }
    }
    res.setHeader('Content-Type',({'.html':'text/html; charset=utf-8','.css':'text/css','.js':'application/javascript','.svg':'image/svg+xml','.webp':'image/webp','.jpg':'image/jpeg','.png':'image/png','.woff2':'font/woff2','.xml':'application/xml','.txt':'text/plain'})[ext]||'application/octet-stream');
    res.setHeader('Vary','Accept-Encoding');
    if(/gzip/.test(req.headers['accept-encoding']||'')){body=zlib.gzipSync(body);res.setHeader('Content-Encoding','gzip');}
+   const etag='"'+crypto.createHash('sha256').update(body).digest('hex')+'"';res.setHeader('ETag',etag);
+   if(req.headers['if-none-match']===etag){res.writeHead(304);return res.end();}
+   if(req.method==='HEAD')return res.end();
    res.end(body);
   }catch{res.writeHead(404);res.end('Not found in local QA fixture');}
  });
 }
 module.exports={createServer};
-if(require.main===module){const baseline=process.argv.includes('--baseline'),port=baseline?8789:8788;createServer(baseline).listen(port,'127.0.0.1',()=>console.log('Local QA '+(baseline?baselineRef:'candidate')+': http://127.0.0.1:'+port));}
+if(require.main===module){const baseline=process.argv.includes('--baseline'),port=Number(process.env.PORT)||(baseline?8789:8788);createServer(baseline).listen(port,'127.0.0.1',()=>console.log('Local QA '+(baseline?baselineRef:'candidate')+': http://127.0.0.1:'+port));}

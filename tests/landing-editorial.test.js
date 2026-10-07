@@ -91,8 +91,9 @@ test('leads with a capable customer situation before the mobile copy', () => {
 test('uses the lean home stylesheet and responsive uncropped method image', () => {
   assert.match(html, /href="home\.css(?:\?[^"\s]+)?"/);
   assert.doesNotMatch(html, /href="styles\.css"/);
-  assert.match(html, /criterio-manos-metodo-01-06-480\.webp 480w/);
-  assert.match(html, /criterio-manos-metodo-01-06-960\.webp 960w/);
+  assert.match(html, /criterio-metodo-01-06-v2-480\.webp 480w/);
+  assert.match(html, /criterio-metodo-01-06-v2-960\.webp 960w/);
+  assert.match(html, /criterio-metodo-01-06-v2-1448\.webp 1448w/);
   assert.match(html, /width="960" height="720"/);
 });
 
