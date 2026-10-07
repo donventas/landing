@@ -6,3 +6,7 @@ scripts/editorial-qa-server.cjs
 scripts/qa-editorial-strategy.cjs
 scripts/qa-method-photo.cjs
 METHOD-PHOTO-REVIEW.json
+.qa-manual/
+BLOG-MANUAL-REVIEW.md
+scripts/build-manual-assets.cjs
+scripts/qa-manual-blog.cjs

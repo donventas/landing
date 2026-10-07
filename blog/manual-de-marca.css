@@ -1,0 +1,55 @@
+/* Article-only layout. Diagrams are editable, selectable HTML, not baked-in text. */
+.manual-page{--fg-faint:#A8B2C2}
+.manual-page .article-hero{padding-top:clamp(32px,5vw,68px)}
+.manual-page .article-cover-grid{max-width:1320px}
+.manual-page .article-cover-illustrated h1{font-size:clamp(38px,4.2vw,62px);max-width:17ch}
+.manual-page .article-dek{font-size:clamp(18px,1.8vw,23px)}
+.manual-page .article-meta{font-size:14px;line-height:1.6}
+.manual-page .article-cover-figure{align-self:center}
+.manual-page .article-cover-figure picture::after{display:none}
+.manual-page .article-layout{grid-template-columns:190px minmax(0,720px);gap:clamp(36px,5vw,72px);justify-content:center;padding-top:72px}
+.manual-page .article-section{padding-top:64px}
+.manual-page .article-section h2{max-width:24ch;font-size:clamp(30px,4vw,44px);line-height:1.12}
+.manual-page .article-section>p,.manual-opening>p{font-size:19px;line-height:1.8;color:#CFD5DE;margin-top:22px}
+.manual-page .opening-line{font-size:clamp(25px,3.3vw,36px)!important;line-height:1.35!important;letter-spacing:-.025em;color:var(--fg);margin-top:0}
+.manual-page .article-section strong{color:#A9C1FF}
+.manual-page .article-toc a{min-height:44px;font-size:14px}
+.manual-page .article-toc .label{font-size:12px}
+.manual-list,.manual-checklist{padding-left:25px;margin:24px 0;font-size:19px;line-height:1.7;color:#CFD5DE}
+.manual-list li,.manual-checklist li{padding-left:8px;margin:14px 0}
+.manual-checklist li::marker{color:#A9C1FF;font-weight:650}
+.manual-checklist code{font-size:.88em;overflow-wrap:anywhere}
+.manual-plate{margin:36px 0 40px}
+.manual-sheet{background:#EEF1F6;color:#17202D;padding:clamp(22px,4vw,40px);border-top:5px solid #3B74F2}
+.manual-sheet .sheet-label{font-size:14px;line-height:1.5;letter-spacing:.06em;text-transform:uppercase;margin:0 0 24px;color:#374356}
+.manual-sheet .sheet-headline{font-size:clamp(27px,3.8vw,40px);font-weight:650;line-height:1.2;letter-spacing:-.03em;margin:0 0 30px}
+.manual-sheet mark{background:#CEE0FF;color:inherit;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+.annotated-rule{display:grid;grid-template-columns:30px minmax(0,1fr);gap:14px;align-items:start;margin-top:24px}
+.marker{display:grid;place-items:center;width:30px;height:30px;border:2px solid #204EA4;color:#204EA4;border-radius:50%;font-size:16px;font-weight:650;line-height:1}
+.manual-sheet .annotated-rule strong{font-size:19px;line-height:1.45;color:#17202D}
+.manual-sheet .annotated-rule p{font-size:17px;line-height:1.6;margin:5px 0 0;color:#374356}
+.manual-sheet .sheet-check{font-size:15px;line-height:1.6;margin:30px 0 0;padding-top:18px;border-top:1px solid #A5AFBD;color:#374356}
+.manual-sheet .annotated-rule .application-headline{font-size:clamp(24px,3.8vw,36px);font-weight:650;line-height:1.2;letter-spacing:-.025em;color:#17202D;margin:0}
+.manual-sheet .annotated-rule .application-explanation{font-size:clamp(17px,2.2vw,22px);line-height:1.5;margin:0}
+.plate-key{display:flex;flex-wrap:wrap;gap:12px 24px;border-top:1px solid #A5AFBD;margin-top:28px;padding-top:18px;font-size:14px;line-height:1.6;color:#374356}
+.plate-key b{color:#204EA4;margin-right:5px}
+.manual-plate figcaption{font-size:14px;line-height:1.6;margin-top:12px;color:#AFB8C5}
+.manual-page .manual-readings{margin-top:40px}
+.manual-page .editorial-detail-body p+p{margin-top:16px}
+.manual-page .article-cta{border-radius:0;margin-top:48px}
+.manual-page .article-cta p a{color:#A9C1FF;text-decoration:underline;text-underline-offset:3px}
+.manual-page .related-reading{margin-top:42px}
+.manual-page a:focus-visible,.manual-page summary:focus-visible{outline:3px solid #A9C1FF;outline-offset:4px}
+@media(max-width:1120px){.manual-page .article-cover-figure{align-self:stretch}}
+@media(max-width:900px){.manual-page .article-layout{grid-template-columns:minmax(0,720px);padding-top:48px}}
+@media(max-width:520px){
+  .manual-page .article-cover-copy{padding:20px 22px 30px}
+  .manual-page .article-cover-illustrated h1{font-size:clamp(34px,9.3vw,48px)}
+  .manual-page .article-layout{padding-inline:24px}
+  .manual-page .article-section{padding-top:52px}
+  .manual-page .article-section>p,.manual-opening>p,.manual-list,.manual-checklist{font-size:18px}
+  .manual-sheet{padding:22px 18px}
+  .annotated-rule{gap:10px;grid-template-columns:26px minmax(0,1fr)}
+  .marker{width:26px;height:26px;font-size:14px}
+}
+@media(prefers-reduced-motion:reduce){html:has(.manual-page){scroll-behavior:auto}}

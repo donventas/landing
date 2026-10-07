@@ -13,9 +13,10 @@
     '/diagnostico.html': 'diagnostico', '/arturo-villagomez.html': 'fundador', '/blog/': 'ideas', '/blog/index.html': 'ideas',
     '/blog/por-que-nacio-don-ventas.html': 'fundacional',
     '/blog/contenido-que-atrae-clientes.html': 'entender',
-    '/blog/tu-marca-es-tu-ventaja.html': 'ventaja', '/blog/glosario.html': 'glosario'
+    '/blog/tu-marca-es-tu-ventaja.html': 'ventaja', '/blog/glosario.html': 'glosario',
+    '/blog/manual-de-marca.html': 'manual'
   };
-  var terms = 'contenido-de-marca campana marca marketing promesa-de-marca branding experiencia-de-usuario pagina-de-destino conversion copy identidad-visual posicionamiento propuesta-de-valor seo'.split(' ');
+  var terms = 'contenido-de-marca campana marca marketing promesa-de-marca branding experiencia-de-usuario pagina-de-destino conversion copy identidad-visual posicionamiento propuesta-de-valor seo manual-de-marca sistema-de-marca'.split(' ');
   var steps = 'moment serviceNeeded workingMode currentNeed existingAssets budgetNote outcome salesProblem consistencyProblem searchProblem otherProblem nextAction attempted proof businessAudience timing budgetBand desired clarityProblem systemProblem launchProblem repositionProblem brandOtherProblem applications users autonomy difference contact'.split(' ');
   // Reading order (includes the hero); independent of the decorative folio numbering.
   var landingSections = [

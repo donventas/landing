@@ -1,2 +1,4 @@
 # Source brand kits stay local; only approved portfolio selections are published.
 portafolio/source/
+# Generated QA screenshots and the uncompressed illustration master stay local.
+.qa-manual/
