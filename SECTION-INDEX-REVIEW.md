@@ -38,3 +38,11 @@ Pruebas unitarias, comparación de contenido y SEO contra el baseline; comprobac
 Evidencias reproducibles: `scripts/qa-section-index.cjs`, `scripts/qa-manual-blog.cjs`; informes y capturas locales en `.qa-manual/` (excluidos de Git y del despliegue). Los scripts QA y este registro están excluidos de Vercel.
 
 La aprobación del artículo no se usa como aprobación automática del release del índice compartido. Entrega en PR/preview separado; producción conserva PR #38 hasta una aprobación posterior.
+
+## Corrección posterior: barra de progreso — 7 de octubre
+
+Base: `0e2d40676f834466523110fc74a05fa8f037afa9` (PR #39 ya fusionada por autorización). Los cuatro artículos tenían HTML y cálculo de progreso; tres conservaban offsets fijos de 65/69 px y z-index 95, detrás del encabezado (83/91 px y z-index 100). Solo el manual tenía la corrección. Reproducción en Chrome local: los tres anteriores quedaban ocultos a 390 y 1440 px.
+
+Se reutiliza la altura real compartida `--section-nav` y la capa 102 del manual. Se conserva el cálculo de avance; no se añaden eventos, scripts de producción ni recursos gráficos. Los seis consumidores de blog.css actualizan su versión de caché. No cambia contenido, SEO, imágenes, formularios ni analítica; el hub y glosario no reciben una barra de lectura artificial.
+
+QA productor: 167/167 pruebas unitarias; 60 muestras (4 artículos × 5 anchos × inicio/mitad/final), barra visible, avance 0/50/100 %, sin desbordamientos y por encima del índice desplegado. Resize de móvil a escritorio y viceversa comprobado. Capturas móviles/escritorio revisadas. Evidencia local `.qa-manual/progress-before.json`, `progress-after.json` y capturas; script reproducible `scripts/qa-reading-progress.cjs`, excluido del despliegue. No se repitió la medición de rendimiento de campo ni se solicita como condición para este cambio de posición fija sin nuevos recursos; sin QA independiente nuevo. Corrección en preview, no autorizada aún para producción.

@@ -126,7 +126,7 @@ test('ships responsive editorial covers without loading oversized source images'
   assert.match(blogCss, /@media\(max-width:1120px\)[\s\S]*?\.publication-visual\{[^}]*aspect-ratio:4\/3/);
   assert.match(blogCss, /@media\(max-width:1120px\)[\s\S]*?\.publication-visual img\{object-position:center top/);
   assert.match(blogCss, /@media\(max-width:1120px\)[\s\S]*?\.publication-title\{[^}]*margin-top:clamp\(-260px,-25vw,-110px\)/);
-  assert.match(hub, /blog\.css\?v=20261004-editorial-notes/);
+  assert.match(hub, /blog\.css\?v=20261007-reading-progress/);
 
   const optimized = [
     'assets/editorial/article-wrong-offer-480.webp',

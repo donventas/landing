@@ -11,4 +11,5 @@ BLOG-MANUAL-REVIEW.md
 scripts/build-manual-assets.cjs
 scripts/qa-manual-blog.cjs
 scripts/qa-section-index.cjs
+scripts/qa-reading-progress.cjs
 SECTION-INDEX-REVIEW.md
