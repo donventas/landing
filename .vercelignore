@@ -35,3 +35,8 @@ assets/editorial/logo-metodo-v1-*
 assets/editorial/logo-metodo-v2-*
 scripts/qa-logos-blog.cjs
 scripts/qa-logos-production.cjs
+.qa-editorial/
+BLOG-DISENO-EDITORIAL-REVIEW.md
+scripts/build-editorial-assets.cjs
+scripts/editorial-preview-check.cjs
+assets/editorial/editorial-reporte-v1-PROMPT.md

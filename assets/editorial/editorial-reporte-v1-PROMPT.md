@@ -1,0 +1,17 @@
+# Portada: Diseño editorial
+
+Modo: herramienta integrada image_gen. Escena ficticia con IA, no fotografía de una reunión real.
+
+Referencias visuales: `manual-busqueda-v3-1536.webp` y `logo-vitrina-v5-1536.webp`, ambas del sitio de Don Ventas. Su función es conservar personajes/estilo, no reproducir esas escenas ni regenerar logotipos.
+
+Fuente: PNG generado, 1536 × 1024; SHA-256 `e86f2f22796b44e3b8d3240d0542c8833f23d49833ead8bfe871f84d903a3ea8`. Master de trabajo preservado en `.qa-editorial/`. WebP 480/960/1536 generados proporcionalmente sin recorte, retoque ni composición adicional, mediante `scripts/build-editorial-assets.cjs`.
+
+## Prompt ejecutado
+
+Use case: illustration-story / character-consistent continuation. Create a new 1536x1024 horizontal editorial illustration using the two attached images ONLY as character and rendering references, not as scene composition. Match the EXACT established visual identities of Arturo's stylized avatar and El Don mascot. Arturo: warm tan skin, short dense dark curls, strong eyebrows, subtle moustache, dark charcoal button-up shirt with sleeves rolled, blue monocle with cord at his left eye (viewer right), thoughtful expressive face. El Don: compact mascot, large round ivory head, single thick black horizontal eyebrow, one small black dot eye and one cobalt blue circular monocle with dangling blue cord, NO human nose or mouth, navy tailored suit, white shirt and white gloved hands. Preserve character proportions and premium warm 3D illustration finish from references. Scene: a warm minimalist office, both seated closely at the SAME natural wood desk, waist-up/three-quarter camera. Arturo on left has just received a dense report and holds one sheet tilted toward himself, brows mildly furrowed and one eyebrow lifted, focused directly on its text, not the viewer. El Don on right leans in toward the SAME report, one gloved index finger tracing a paragraph on the page between them while his other gloved hand spreads a few pages on the desk searching for the conclusion. All hands, fingers, page grips and eyelines physically coherent. Subtle shared bewilderment, not stupidity or slapstick. Dense unbranded report pages have small abstract grey text rows, a compact chart and a table; no actual readable confidential content, no lorem ipsum headlines, no company names. Three or four sheets and one forgotten coffee cup on the desk, no extra props. Soft daylight, off-white wall, minimal plant in distance, navy/cobalt details from characters, realistic paper and fabric materials, refined soft shadows. Faces, report, pointing hand and tabletop are primary composition; keep BOTH heads and key hands fully inside frame with at least 8% breathing room. No furniture assembly, no vitrine, no shirt-on-hanger, no brand logos/symbols/signage, no subtitles or text overlays, no question marks, no lightbulbs, no speech bubbles, no watermark. Image fills a blog hero next to HTML headline; do not put title in picture. Return the local saved file path.
+
+## Consumo y revisión
+
+Consumidor: `previews/diseno-editorial.html`, revisión editorial-v2. Misma escena completa en todos los anchos, sin oscurecer para superponer texto. Título y leyenda son HTML.
+
+Producción raster confirmada; integración y QA en el expediente `BLOG-DISENO-EDITORIAL-REVIEW.md`. La aprobación del concepto no equivale a aprobación de esta imagen final ni autorización de publicación.
