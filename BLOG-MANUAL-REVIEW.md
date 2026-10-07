@@ -27,6 +27,50 @@ ni modifica layout; no se vuelve a medir rendimiento por este ajuste.
 Las dos láminas interiores no convencieron al autor: siguen provisionales y no se
 consideran aceptadas para release. Su reemplazo se plantea antes de ejecutarlo.
 
+### Revisión de piezas y navegación — especificación previa
+
+Mandato del 07-oct: reemplazar ambas láminas y mejorar el ritmo/navegación.
+Baseline: `aa4085a`. Texto, portada v3, SEO, rutas, glosario y consentimiento
+protegidos. Solo Landing editable; Runtime/Portal/AVOS en lectura. Sin release.
+AVOS/BSB: refinamiento de presentación (A) y ejemplos derivados (B), no cambio
+canónico. Reutiliza el brief editorial aprobado; no abre una nueva narrativa.
+No experimento activo. HTML/CSS nativo y Chrome local son superficies confirmadas.
+
+Composición antes de ensamblar:
+
+- Pieza 01, `manual-interior-v2`: apertura editorial de dos páginas, firma/paleta
+  a la izquierda y voz a la derecha, con tres notas fuera del espécimen. En móvil
+  se apilan, sin miniaturizar ni recortar texto. Fragmentos exactos recompuestos,
+  no captura ni reproducción integral del manual. Todo el texto es seleccionable.
+- Pieza 02, `manual-aplicaciones-v2`: presentación horizontal, publicación cuadrada
+  y fragmento web; distinta jerarquía para argumento, observación y exploración.
+  Ejemplos ilustrativos con dirección aprobada, no artefactos históricos ni
+  resultados. Firma B6 íntegra; foto de método ya publicada, completa en 4:3.
+- Márgenes internos 24–40 px; cuerpos de anotación >=14 px; sin solapes, giros,
+  perspectivas o recortes de logos/documentos. Piezas hasta1120px; lectura740px.
+- Ritmo: apertura oscura; definición/criterios sobre papel; experiencia oscura;
+  coherencia sobre papel; sistema oscuro; prueba sobre papel; cierre oscuro.
+  El cambio de campo separa tareas, no cada párrafo. Solo negro/papel y azul.
+- Navegación: índice nativo desplegable compacto, accesible en móvil y escritorio,
+  fijo durante la lectura, con cierre al elegir sección y Escape. Siete destinos
+  estables, foco al encabezado y margen libre bajo ambas barras. Sin scroll-jacking.
+- Derivación: folios, contraste de campos y jerarquía de los blogs de Don Ventas;
+  reglas de color/voz del Brandbook, no otras marcas o galerías. Movimiento nuevo
+  N/A. Marca nueva, PDF, Office, escenas físicas y export raster N/A: entrega web.
+- Consumidores: artículo y sus dos piezas, escritorio/móvil son adaptaciones
+  responsivas de un solo DOM. HUB/OG/hero sin cambios; probar sus regresiones.
+  Revisión individual y colección, teclado/sinJS/zoom, carga y consentimiento.
+  Revisión independiente requerida por BSB; aceptación creativa final de Arturo
+  y autorización de producción permanecen separadas.
+
+Fuente read-only: Runtime commit `19a55a24a93716d4f5407653a0968b70b32f41e5`,
+Brandbook secciones voz/logo/color; sin cambios locales en ese archivo al leerlo.
+SHA256 HTML `b5ae89f4ba3e7c766d629d7ee457469f23e7dfcd07faa761ffc2575259fed289`.
+Firma B6 reversa existente, byte-idéntica a Runtime:
+`c3a0810940289164ff5a40b3ac2524de10d43d12c98743ad41c4089aedb8a90a`.
+No se exporta el libro, sus enlaces internos, clientes o expedientes privados.
+Usos autorizados: solo los fragmentos propios y aplicaciones ilustrativas aprobadas.
+
 ## 3. Fuentes, permisos y límites
 
 - *Click: How to Make What People Want*, Jake Knapp con John Zeratsky.
@@ -82,7 +126,7 @@ BreadcrumbList coherentes. No se declara indexación o rich result comprobado.
 La fecha editorial es de preparación del candidato; revalidarla al autorizar
 release si se publica en un día distinto.
 
-## 7. QA ejecutado
+## 7. QA del baseline anterior (conservado como historial)
 
 - `node --test`: **153/153**; `git diff --check`: sin errores.
 - Chrome headless, laboratorio local con CSP del repositorio y noindex de fixture.
@@ -117,10 +161,43 @@ Referencias técnicas revalidadas:
 y [Web Vitals](https://web.dev/articles/vitals). Disponibilidad y pruebas locales
 no prueban indexación, resultados enriquecidos, rankings o resultados comerciales.
 
+### QA de piezas y navegación v2 — 07-oct-2026
+
+Esta tanda sustituye los resultados de layout/carga de arriba para el candidato
+actual. 153/153 tests; inventario del glosario consistente; diff sin errores.
+Chrome headless local: 40 combinaciones de cinco páginas y ocho anchos, sin
+desbordamiento; 42 saltos de índice con teclado en320/390/700/701/768/1440,
+foco H2 y encabezados descubiertos, Escape y cierre exterior correctos.
+Sin JavaScript, el índice nativo pasa a flujo normal y mantiene enlaces operativos.
+24 pruebas de consentimiento conservan scroll y devolución del foco; tres regresos
+de glosario, dos pestañas y CTA sin envío real. Cero errores JS/peticiones externas.
+
+Ambas piezas revisadas individualmente en390/1440 sin la interfaz fija tapando la
+captura; además, viewport con interfaz intacta y recorrido completo para la colección.
+La apertura se conserva; bandas papel/negro separan explicación, ejemplo, sistema
+y prueba. Textos del cuerpo fuera de figuras permanecen intactos.
+Revisión independiente: agente `manual_visual_qa`, fuente + Chrome320/390/1440
+y cuatro capturas limpias. Corrigió y volvió a comprobar foco al saltar y contraste
+del foco en los cuatro campos claros (`#1B49A0`). Sin hallazgos bloqueantes restantes.
+Aceptación estética de Arturo pendiente; esto no la sustituye.
+
+HTML27,672B, CSS10,414B y JS acotado2,112B sin comprimir. El JS solo mejora el índice;
+sin dependencias, rastreo o almacenamiento nuevos. Firma reutilizada y foto de método
+existente en carga diferida; portada y sus pesos sin cambios. DPR1/DPR2 de portada
+siguen480/960, una descarga, foto del método completa4:3. ETag/304 y bytes de portada
+verificados en fixture. Runtime leído sin escribir ni exportar el manual completo.
+
+Tres cargas frías con las condiciones anteriores: LCP1.520–1.700s,
+CLS0.000447; control1.380–1.416s/CLS0.000727. Es un incremento de coste de carga
+respecto al baseline, no se declara mejora de velocidad. Laboratorio local,
+sin evidencia nueva de INP/p75, tráfico concurrente ni CDN real. Preview local8791
+responde200 y contiene las dos piezas/índice actualizados. Preview remoto sujeto
+a protección de acceso; producción y su caché no se han tocado.
+
 ## 8. Estado y compuertas
 
 Texto: aprobado previamente. Ejecución: preparada en rama aislada. QA: autorrevisión
-técnica/editorial; no se presenta como QA independiente. Imagenv1 rechazada por
+técnica/editorial y revisión independiente acotada de piezas/navegación v2. Imagenv1 rechazada por
 postura desconectada; imagenv2 rechazada por deformación de caja; **imagenv3 candidata**
 con búsqueda detrás del mueble. Aceptación visual de Arturo: pendiente.
 Merge, producción e indexación: NO ejecutados. Reversión mediante el commit de la PR.

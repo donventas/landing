@@ -3,7 +3,7 @@ const {chromium}=require('playwright');
 const fs=require('node:fs'),path=require('node:path'),assert=require('node:assert/strict');
 const root=path.resolve(__dirname,'..'),out=path.join(root,'.qa-manual');
 const {createServer}=require('./editorial-qa-server.cjs');
-const report={layouts:[],images:[],returns:[],consent:[],performance:[],errors:[],external:[],notes:[]};
+const report={layouts:[],images:[],navigation:[],returns:[],consent:[],performance:[],errors:[],external:[],notes:[]};
 const article='/blog/manual-de-marca.html';
 fs.mkdirSync(out,{recursive:true});
 (async()=>{
@@ -56,7 +56,13 @@ fs.mkdirSync(out,{recursive:true});
       await p.evaluate(()=>{document.activeElement.blur();scrollTo(0,0)});
       await p.waitForTimeout(100);
       await p.screenshot({path:path.join(out,'article-hero-'+width+'.png')});
+      // Isolated proofs exclude sticky chrome; viewport proofs keep it intact.
+      await p.evaluate(()=>document.activeElement.blur());
+      const proofStyle=await p.addStyleTag({content:'.nav,.manual-index,.reading-progress,.skip-link{visibility:hidden!important}'});
       for(const [i,plate] of (await p.locator('.manual-plate').all()).entries())await plate.screenshot({path:path.join(out,'plate-'+(i+1)+'-'+width+'.png')});
+      await proofStyle.evaluate(e=>e.remove());
+      await p.locator('#coherencia').evaluate(e=>e.scrollIntoView());await p.waitForTimeout(80);
+      await p.screenshot({path:path.join(out,'article-navigation-'+width+'.png')});
       const summary=p.locator('.manual-readings summary');await summary.focus();await p.keyboard.press('Enter');
       assert.equal(await p.locator('.manual-readings').getAttribute('open'),'');
       assert.notEqual(await summary.evaluate(e=>getComputedStyle(e).outlineStyle),'none');
@@ -77,6 +83,25 @@ fs.mkdirSync(out,{recursive:true});
      await p.locator('#manual').screenshot({path:path.join(out,'hub-manual-'+width+'.png')});
     }
    }await c.close();
+  }
+  for(const width of [320,390,700,701,768,1440]){
+   const c=await context({viewport:{width,height:844}}),p=await c.newPage();
+   await p.goto(origin+article);await dismiss(p);
+   const index=p.locator('[data-manual-index]'),summary=index.locator('summary');
+   for(const id of ['que-es','criterios','nuestra-marca','coherencia','sistema','prueba','a-la-mano']){
+    await summary.focus();await p.keyboard.press('Enter');
+    const link=index.locator('a[href="#'+id+'"]');await link.focus();await p.keyboard.press('Enter');await p.waitForTimeout(100);
+    assert.equal(await index.getAttribute('open'),null);
+    assert.equal(new URL(p.url()).hash,'#'+id);
+    assert.equal(await p.evaluate(()=>document.activeElement.tagName),'H2');
+    const bounds=await p.evaluate(id=>({top:document.querySelector('#'+id+' h2').getBoundingClientRect().top,bottom:document.querySelector('.manual-index').getBoundingClientRect().bottom}),id);
+    assert.ok(bounds.top>=bounds.bottom,id+' heading under sticky navigation');
+    assert.equal(await index.locator('[aria-current="location"]').getAttribute('href'),'#'+id);
+   }
+   await summary.focus();await p.keyboard.press('Enter');await p.keyboard.press('Escape');
+   assert.equal(await index.getAttribute('open'),null);assert.equal(await summary.evaluate(e=>e===document.activeElement),true);
+   await p.keyboard.press('Enter');await p.locator('#a-la-mano h2').click();assert.equal(await index.getAttribute('open'),null);
+   report.navigation.push({width,anchors:7,focus:true,escape:true,noHeadingOcclusion:true});await c.close();
   }
   // Both mobile densities, no duplicate hero preloads, and no unexpected layout movement.
   for(const dpr of [1,2]){
@@ -110,7 +135,11 @@ fs.mkdirSync(out,{recursive:true});
   report.notes.push('200% zoom reflow simulated at 720 CSS px; no real lead submitted.');
   await c.close();
   const nojs=await context({javaScriptEnabled:false,viewport:{width:390,height:844}}),n=await nojs.newPage();
-  await n.goto(origin+article);await n.locator('#termino-manual-de-marca').click();
+  await n.goto(origin+article);
+  await n.locator('[data-manual-index] summary').click();await n.locator('[data-manual-index] a[href="#sistema"]').click();
+  assert.equal(new URL(n.url()).hash,'#sistema');
+  assert.equal(await n.locator('.manual-index').evaluate(e=>getComputedStyle(e).position),'relative');
+  await n.locator('#termino-manual-de-marca').click();
   await n.locator('#manual-de-marca summary').click();assert.ok(await n.locator('#manual-de-marca .term-definition').isVisible());
   await n.locator('#manual-de-marca [data-reading-return]').click();assert.ok(n.url().endsWith('#lecturas'));
   await nojs.close();
