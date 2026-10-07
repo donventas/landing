@@ -57,3 +57,13 @@ defecto. Los caches externos y buscadores pueden tardar en refrescar.
 Release en rama propia, pendiente de aceptación de preview y autorización
 de merge. No implica indexación ni refresco de caché de Google/WhatsApp.
 Rollback: revertir el commit del release con sus referencias y rasterizaciones.
+
+## Artículo sobre logotipos — candidato de desarrollo, 7-oct-2026
+
+Se incorporan B6-INK, B-INK y BS-INK del mismo canon 3.0 para las láminas
+didácticas. Copias exactas de los SVG originales; sus hashes normalizados a LF
+coinciden con el manifiesto y quedan fijados en `tests/blog-logos.test.cjs`.
+No se modifica ninguna marca existente ni se crea un lockup nuevo.
+La portada generada recibe la firma reversa original mediante inserción
+determinista. El prompt, colocación, permisos y QA se documentan en la revisión
+del artículo; las aplicaciones se identifican como ilustrativas.
