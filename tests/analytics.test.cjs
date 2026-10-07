@@ -41,6 +41,21 @@ test('nothing reaches Google before consent; reject does not install a tag', () 
   assert.equal(f.panel.hidden, true);
   assert.equal(JSON.parse(f.values.get(api.key)).choice, 'rejected');
 });
+
+test('initial consent restores the reading landmark without scrolling; preferences restore their opener', () => {
+  for (const choice of ['accept','reject']) {
+    const attributes = new Map(), events = {}, focuses = [];
+    const main = {isConnected:true, hasAttribute:name=>attributes.has(name), setAttribute:(name,value)=>attributes.set(name,value), removeAttribute:name=>attributes.delete(name), addEventListener:(name,fn)=>{events[name]=fn;}, focus:options=>focuses.push(options)};
+    const f=fixture('preview.test',null,false,'/blog/manual-de-marca.html',{dom:{main}});
+    f[choice].onclick();
+    assert.equal(focuses.length,1);assert.equal(focuses[0].preventScroll,true);
+    assert.equal(attributes.get('tabindex'),'-1');events.blur();assert.equal(attributes.has('tabindex'),false);
+    let returned;
+    const opener={isConnected:true,focus:options=>{returned=options;}};
+    f.doc.activeElement=opener;f.prefs.onclick();f.reject.onclick();
+    assert.equal(returned.preventScroll,true);assert.equal(focuses.length,1);
+  }
+});
 test('accept installs exactly one tag and one sanitized page event; no preconsent backfill', () => {
   const f = fixture();
   f.win.DVAnalytics.track('whatsapp_click');

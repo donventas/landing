@@ -245,8 +245,16 @@
     var stored = false;
     try { storage.setItem(KEY, JSON.stringify({ version: 1, choice: value, at: Date.now() })); stored = true; } catch (_) {}
     panel.hidden = true;
-    if (previousFocus && previousFocus.isConnected) previousFocus.focus();
-    else prefs.focus();
+    // The initial notice has no opener. Do not send readers to the footer when
+    // they accept/reject: return to the reading landmark without scrolling.
+    var reading = doc.querySelector('main');
+    var target = previousFocus && previousFocus.isConnected ? previousFocus : reading || prefs;
+    if (target === reading && !reading.hasAttribute('tabindex')) {
+      reading.setAttribute('tabindex', '-1');
+      reading.addEventListener('blur', function () { reading.removeAttribute('tabindex'); }, { once: true });
+    }
+    target.focus({ preventScroll: true });
+    previousFocus = null;
     if (value === 'accepted') start();
     else {
       stopCookies(); records.length = 0;
@@ -269,7 +277,7 @@
     panel = wrap.querySelector('.dv-analytics-panel'); prefs = wrap.querySelector('[data-analytics-settings]'); status = wrap.querySelector('[role="status"]');
     panel.hidden = !!choice;
     if (preview) status.textContent = 'Vista previa · no se envían datos a Google.';
-    prefs.onclick = function () { previousFocus = doc.activeElement; panel.hidden = false; panel.querySelector('button').focus(); };
+    prefs.onclick = function () { previousFocus = doc.activeElement; panel.hidden = false; panel.querySelector('button').focus({ preventScroll: true }); };
     wrap.querySelectorAll('[data-analytics-choice]').forEach(function (button) { button.onclick = function () { choose(button.getAttribute('data-analytics-choice')); }; });
     doc.addEventListener('click', function (event) {
       var link = event.target.closest && event.target.closest('a[href]');

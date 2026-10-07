@@ -63,6 +63,13 @@ sitemap y llms.txt. Se registra únicamente el identificador `manual` y dos tér
 en el vocabulario cerrado de analítica existente. No se cambia consentimiento,
 GTM, formularios, API, servicios, robots ni páginas legales.
 
+Corrección adicional solicitada durante el preview: aceptar/rechazar la analítica
+enviaba el foco al botón de preferencias del pie y provocaba scroll hasta el final.
+La primera elección devuelve ahora el foco a `main` con `preventScroll`, eliminando
+su tabindex temporal al salir. Reabrir preferencias sigue devolviendo el foco al
+control que las abrió, también sin desplazar la lectura. No cambia qué se mide
+ni cuándo se permite medir.
+
 Metadatos: un H1, autor enlazado, canonical de producción, BlogPosting y
 BreadcrumbList coherentes. No se declara indexación o rich result comprobado.
 La fecha editorial es de preparación del candidato; revalidarla al autorizar
@@ -70,7 +77,7 @@ release si se publica en un día distinto.
 
 ## 7. QA ejecutado
 
-- `node --test`: **152/152**; `git diff --check`: sin errores.
+- `node --test`: **153/153**; `git diff --check`: sin errores.
 - Chrome headless, laboratorio local con CSP del repositorio y noindex de fixture.
 - 40 combinaciones: 5 páginas × 320/390/768/900/901/1120/1121/1440 px; sin
   overflow horizontal, un H1, imágenes disponibles y enlaces locales comprobados.
@@ -78,6 +85,9 @@ release si se publica en un día distinto.
 - Teclado: notas y tres enlaces de glosario con regreso al término. Dos pestañas
   conservan orígenes independientes. Sin JS: definición nativa y retorno a lecturas.
 - Reflow de zoom 200% simulado a 720 CSS px; no es prueba con un teléfono físico.
+- Aviso de analítica: 24 casos de navegador (inicio, branding y artículo;390/1440px;
+  aceptar/rechazar; scroll0/1500px) conservan exactamente la posición. Preferencias
+  reabiertas con teclado regresan a su control de origen.
 - No hay scripts nuevos en la página. Cero errores JS o solicitudes externas en QA.
   CTA abre el diagnóstico con integrar/identidad; no se envían leads reales.
 - WebP: 480 px **20,338 B**; 960 px **52,326 B**; 1536 px **101,646 B**.
@@ -87,10 +97,10 @@ release si se publica en un día distinto.
   Proporción3:2, dimensiones explícitas y object-fit:contain. Láminas no añaden descargas.
 - Descarga íntegra por bytes, ETag/304 y política existente de caché604800 s
   verificados en fixture. CDN real pendiente de preview.
-- Dos tandas de tres cargas frías,390×844 DPR2, CPU4×, latencia150ms,
-  descarga200,000B/s, Chrome CDP. Artículo: LCP **1.304–1.540s** y
+- Última tanda de tres cargas frías,390×844 DPR2, CPU4×, latencia150ms,
+  descarga200,000B/s, Chrome CDP. Artículo: LCP **1.332–1.444s** y
   CLS **0.000447**. Comparador existente «Tu marca es tu ventaja»: LCP
-  **1.388–1.476s**, CLS **0.000727**. Datos de laboratorio, no p75 de campo,
+  **1.400–1.416s**, CLS **0.000727**. Datos de laboratorio, no p75 de campo,
   no certificación Core Web Vitals ni prueba de concurrencia. INP de campo no medido.
 - Los screenshots y JSON reproducibles quedan locales en `.qa-manual/`, ignorados
   por Git y despliegue. El runner y este documento también se excluyen de Vercel.

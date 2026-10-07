@@ -3,7 +3,7 @@ const {chromium}=require('playwright');
 const fs=require('node:fs'),path=require('node:path'),assert=require('node:assert/strict');
 const root=path.resolve(__dirname,'..'),out=path.join(root,'.qa-manual');
 const {createServer}=require('./editorial-qa-server.cjs');
-const report={layouts:[],images:[],returns:[],performance:[],errors:[],external:[],notes:[]};
+const report={layouts:[],images:[],returns:[],consent:[],performance:[],errors:[],external:[],notes:[]};
 const article='/blog/manual-de-marca.html';
 fs.mkdirSync(out,{recursive:true});
 (async()=>{
@@ -21,6 +21,22 @@ fs.mkdirSync(out,{recursive:true});
  }
  async function dismiss(p){const b=p.locator('[data-analytics-choice="rejected"]');if(await b.isVisible())await b.click();}
  try{
+  for(const width of [390,1440])for(const route of [article,'/','/branding.html'])for(const choice of ['accepted','rejected'])for(const y of [0,1500]){
+   const c=await context({viewport:{width,height:900}}),p=await c.newPage();
+   await p.goto(origin+route);await p.evaluate(()=>document.fonts.ready);
+   await p.evaluate(y=>scrollTo({top:y,behavior:'instant'}),y);await p.waitForTimeout(60);
+   const before=await p.evaluate(()=>scrollY);
+   await p.locator('[data-analytics-choice="'+choice+'"]').click();await p.waitForTimeout(100);
+   const after=await p.evaluate(()=>scrollY);
+   assert.ok(Math.abs(after-before)<=1,`Consent scroll ${route} ${width} ${choice}: ${before} -> ${after}`);
+   assert.equal(await p.evaluate(()=>document.activeElement.tagName),'MAIN');
+   const prefs=p.locator('[data-analytics-settings]');await prefs.scrollIntoViewIfNeeded();await prefs.focus();
+   const footerY=await p.evaluate(()=>scrollY);await p.keyboard.press('Enter');
+   await p.locator('[data-analytics-choice="rejected"]').focus();await p.keyboard.press('Enter');
+   assert.equal(await prefs.evaluate(e=>e===document.activeElement),true);
+   assert.ok(Math.abs(await p.evaluate(()=>scrollY)-footerY)<=1);
+   report.consent.push({width,route,choice,before,after,openerRestored:true});await c.close();
+  }
   for(const width of [320,390,768,900,901,1120,1121,1440]){
    const c=await context({viewport:{width,height:900}}),p=await c.newPage();
    for(const route of [article,'/blog/','/blog/glosario.html','/blog/tu-marca-es-tu-ventaja.html','/arturo-villagomez.html']){
