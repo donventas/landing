@@ -153,7 +153,14 @@
     return {id:'contact',type:'contact',title:'¿Cómo podemos darte seguimiento?',hint:route==='branding'?'Arturo revisará tu sistema actual antes de recomendar un alcance.':'Arturo revisará tu contenido, presencia y oportunidades antes de proponerte el siguiente paso.',required:true};
   }
 
-  function questionOptions(question,state){return typeof question.options==='function'?question.options(state):question.options||[];}
+  function questionOptions(question,state){
+    var options=typeof question.options==='function'?question.options(state):question.options||[];
+    // Preserve an in-flight legacy choice and label; question wording can evolve.
+    // New requests do not present autonomy as a separate mode of engagement.
+    if(question.id==='workingMode'&&state&&state.workingMode==='autonomia'&&state.submissionKey)
+      return options.concat([{id:'autonomia',label:'Preparar recursos para mi equipo u otros proveedores'}]);
+    return options;
+  }
   function questionText(value,state){return typeof value==='function'?value(state):value||'';}
   function optionLabelById(question,value,state){
     var option=questionOptions(question,state).filter(function(o){return o.id===value;})[0];
@@ -274,7 +281,7 @@
 
   var MOMENTS=['lanzar','alinear','conectar','integrar','delegar','evolucionar','orientacion'];
   var SERVICES=['estrategia','identidad','contenido','web','orientacion'];
-  var MODES=['proyecto','acompanamiento','autonomia','orientacion'];
+  var MODES=['proyecto','acompanamiento','orientacion'];
   var EVOLUTION_QUESTIONS=[
     {id:'moment',type:'single',title:'¿Qué momento describe mejor tu prioridad de hoy?',hint:'Puedes tener varias necesidades. Elige por dónde te gustaría empezar.',required:true,options:[
       {id:'lanzar',label:'Lanzar una oferta o una marca'},
@@ -290,13 +297,12 @@
       {id:'contenido',label:'Contenido para explicar lo que resuelvo'},
       {id:'web',label:'Un sitio web nuevo o mejoras al actual'},
       {id:'orientacion',label:'Todavía no sé qué servicio necesito'}]},
-    {id:'workingMode',type:'single',title:'¿Qué forma de trabajar te sería útil?',hint:'El acompañamiento tiene alcance y capacidad acordados; no implica disponibilidad ilimitada.',required:true,options:[
-      {id:'proyecto',label:'Resolver un proyecto concreto'},
+    {id:'workingMode',type:'single',title:'¿Qué forma de trabajar te sería útil?',hint:'En ambos casos, los recursos acordados pueden usarse con tu equipo u otros colaboradores. El acompañamiento tiene alcance y capacidad acordados, no disponibilidad ilimitada.',required:true,options:[
+      {id:'proyecto',label:'Construir o actualizar algo en un proyecto concreto'},
       {id:'acompanamiento',label:'Revisar y desarrollar la marca con acompañamiento'},
-      {id:'autonomia',label:'Preparar recursos para mi equipo u otros proveedores'},
       {id:'orientacion',label:'Quiero entender las opciones antes de decidir'}]},
-    {id:'currentNeed',type:'text',title:'¿Qué cambió o qué te gustaría resolver?',hint:'Cuéntanos qué ofreces, a quién y qué debería ser diferente después del trabajo.',placeholder:'Tu situación y el cambio que buscas, con tus palabras.',required:true},
-    {id:'existingAssets',type:'text',title:'¿Qué ya funciona y con qué recursos cuentas?',hint:'Por ejemplo: mensajes, identidad, sitio, materiales, aprendizajes, equipo o proveedores. No compartas información confidencial.',placeholder:'Lo que conviene conservar y quién participaría.',required:true},
+    {id:'currentNeed',type:'text',title:'¿Qué quieres lanzar, mejorar o desarrollar?',hint:'Cuéntanos qué ofreces, a quién y qué te gustaría hacer posible con este trabajo.',placeholder:'Tu situación y lo que quieres conseguir, con tus palabras.',required:true},
+    {id:'existingAssets',type:'text',title:'¿Qué ya funciona y quién usaría los recursos?',hint:'Puede ser tu equipo, otros colaboradores o Don Ventas. Cuéntanos qué mensajes, identidad, sitio o aprendizajes conviene conservar. Si empiezas desde cero, también está bien. No compartas información confidencial.',placeholder:'Lo que ya tienes y quién participaría; o: empiezo desde cero.',required:true},
     CONTENT_QUESTIONS[9],
     {id:'budgetNote',type:'text',title:'¿Tienes un presupuesto de referencia?',hint:'Es opcional. Indica importe, moneda y si es por proyecto o periódico. Si no lo sabes, continuamos con la revisión del alcance.',placeholder:'Por ejemplo: necesito orientación antes de definirlo.',required:false},
     {id:'contact',type:'contact',title:'¿Cómo podemos darte seguimiento?',hint:'Arturo revisa personalmente tu situación antes de confirmar alcance, inversión y disponibilidad.',required:true}
@@ -305,7 +311,8 @@
     var legacy=params.get('ruta')||el.getAttribute('data-route');
     var entry=params.get('entrada')||el.getAttribute('data-entry');
     var service=params.get('servicio')||el.getAttribute('data-service')||(legacy==='branding'?'identidad':entry==='autoridad'?'web':entry==='contenido'?'contenido':'');
-    var values={moment:params.get('momento'),serviceNeeded:service,workingMode:params.get('modalidad')};
+    var mode=params.get('modalidad');
+    var values={moment:params.get('momento'),serviceNeeded:service,workingMode:mode==='autonomia'?'orientacion':mode};
     var lists={moment:MOMENTS,serviceNeeded:SERVICES,workingMode:MODES},out={};
     Object.keys(values).forEach(function(k){if(lists[k].indexOf(values[k])>=0)out[k]=values[k];});
     return out;
@@ -382,7 +389,7 @@
     this.index=0;
     this.load();
     var context=entryContext(params,el),signature=JSON.stringify(context);
-    if(Object.keys(context).length&&this.state.entryContext!==signature){
+    if(Object.keys(context).length&&this.state.entryContext!==signature&&!this.state.submissionKey){
       Object.assign(this.state,context);this.state.entryContext=signature;this.index=0;
     }
     if(!this.state.startedAt)this.state.startedAt=Date.now();
@@ -400,6 +407,10 @@
         // Keep the original draft intact; restart with the new questions and fresh consent.
         this.state.migratedDraft=true;this.index=0;
       }}
+      if(this.state.workingMode==='autonomia'&&!this.state.submissionKey){
+        // Do not assume a project or subscription from a preference for autonomy.
+        this.state.workingMode='orientacion';this.index=Math.min(this.index,2);
+      }
     }catch(_e){}
   };
   Diagnostic.prototype.persist=function(){

@@ -590,6 +590,8 @@ section.band{padding:var(--gap) 0;position:relative}
 .investment-note b{font-size:clamp(26px,3vw,38px);line-height:1.05}
 .investment-note p{color:var(--fg-soft);font-size:15px}
 .diagnostic-page{min-height:100vh;padding:130px 0 90px}
+.diagnostic-standalone{--fg-faint:#8E99AA}
+.diagnostic-form-heading{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;border:0}
 .diagnostic-page .diag-intro{max-width:760px;margin-bottom:36px}
 .diagnostic-page .diag-intro h1{margin-top:18px;font-size:clamp(36px,6vw,72px);line-height:1;letter-spacing:-.035em;overflow-wrap:anywhere}
 .diagnostic-page .diag-intro p{margin-top:18px;color:var(--fg-soft);max-width:60ch}

@@ -2,6 +2,33 @@
 
 Referencia operativa de posicionamiento e indexación. No afecta al sitio por sí sola.
 
+## Alineación editorial — candidato del 6 de octubre de 2026
+
+La dirección vigente parte de momentos y aspiraciones: lanzar, alinear, conectar,
+integrar, delegar y evolucionar acompañado. Estrategia, identidad, contenido y web
+son servicios conectados, no un paquete obligatorio. Autonomía con equipo propio,
+otros colaboradores o Don Ventas tanto en proyecto como en acompañamiento acordado.
+Conservamos «entender, encontrar y elegir», México como base y atención remota en español.
+Esta precisión prevalece sobre las formulaciones históricas registradas más abajo.
+
+- Arquitectura conservada: 13 URLs en sitemap, tres artículos y glosario; las nuevas
+  rutas son anclas y enlaces, no páginas adicionales ni redirecciones innecesarias.
+- Branding: título y descripción explican crear o actualizar una marca; home/schema
+  nombran los cuatro servicios. Se mantienen canonical, entidades y robots.
+- Blog: cada entrada promete la lectura que realmente ofrece; relatos protegidos.
+- Glosario: «sistema de marca» se explica y enlaza con branding, sin URL SEO separada.
+- «Crear una marca», «actualizar identidad», «estrategia de marca» y «sitio web para
+  explicar una oferta» son intenciones candidatas, no consultas o demanda medidas.
+- Search Console: no se han recuperado datos autenticados en esta ronda. Para decidir
+  ampliaciones se requieren consultas/páginas de 90 días, país y dispositivo, separando
+  marca/no marca. Falta de acceso no significa cero búsquedas. No se crean páginas
+  geográficas ni se promete posicionamiento por añadir términos.
+- Solicitudes de indexación y verificación en producción: posteriores a un release
+  autorizado; este candidato no las acredita. El preview/local tiene noindex.
+
+QA y estado del candidato en `EDITORIAL-STRATEGY-QA.md`. Las notas siguientes
+conservan el historial; sus recuentos y fechas no son el estado actual.
+
 ## Dirección aprobada — 2026-10-04
 
 Don Ventas es un estudio de estrategia de marca, contenido y sitios web. Ayudamos a

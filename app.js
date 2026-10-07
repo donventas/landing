@@ -11,6 +11,23 @@
    se carga desde index.html justo después de este archivo). */
 window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
 
+/* Native mobile navigation also works without JavaScript. */
+document.querySelectorAll('.mobile-explore').forEach(function(menu){
+  menu.addEventListener('keydown',function(event){
+    if(event.key==='Escape'){menu.open=false;menu.querySelector('summary').focus();}
+  });
+  menu.addEventListener('click',function(event){
+    var link=event.target.closest('a');
+    if(!link)return;
+    menu.open=false;
+    if(link.hash&&link.pathname===location.pathname){
+      var target=document.getElementById(link.hash.slice(1));
+      if(target){target.setAttribute('tabindex','-1');target.focus({preventScroll:true});}
+    }
+  });
+  document.addEventListener('click',function(event){if(!menu.contains(event.target))menu.open=false;});
+});
+
 /* ── formulario dinámico · carga solo cuando puede ser útil ─────── */
 (function(){
   var target=document.querySelector('[data-dv-diagnostic]');
