@@ -41,8 +41,9 @@
 <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=canon-3-20261004">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png?v=canon-3-20261004">
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=canon-3-20261004">
+<link rel="stylesheet" href="/section-index.css?v=20261007-1">
 </head>
-<body class="blog-page manifesto-page" data-screen-label="Carta fundacional — Don Ventas">
+<body class="has-section-index blog-page manifesto-page" data-screen-label="Carta fundacional — Don Ventas">
 <a class="skip-link" href="#contenido">Saltar al contenido</a>
 <div class="nav">
   <div class="in">
@@ -73,14 +74,26 @@
     </div>
   </header>
 
-  <article class="manifesto-story">
+  <aside class="section-index" aria-label="Navegación del artículo">
+<details data-section-index>
+<summary><span>En este artículo</span><span class="section-index-current" aria-hidden="true">5 secciones</span></summary>
+<nav aria-label="Secciones del artículo"><ol>
+<li><a href="#origen"><span>01</span>El origen</a></li>
+<li><a href="#trayectoria"><span>02</span>La trayectoria</a></li>
+<li><a href="#aprendizaje"><span>03</span>El aprendizaje</a></li>
+<li><a href="#proposito"><span>04</span>Por qué existe Don Ventas</a></li>
+<li><a href="#compartir"><span>05</span>Lo que quiero compartir</a></li>
+</ol></nav>
+</details>
+</aside>
+<article class="manifesto-story">
     <section class="manifesto-opening wrap reveal">
       <p class="manifesto-lead">Durante mucho tiempo creí que el buen trabajo terminaría por ser reconocido. Que una idea sólida, un producto bien construido o años de experiencia encontrarían por sí mismos a las personas adecuadas.</p>
       <p>Hoy sé que no siempre sucede. He visto negocios capaces de resolver problemas reales pasar desapercibidos. También lo he vivido: ideas que nadie entendía hasta que lograba ejecutarlas y darles una forma visible.</p>
       <p>Don Ventas nació de esa distancia entre <strong>el valor que existe dentro de un negocio</strong> y lo poco que, a veces, el mundo alcanza a percibir desde afuera.</p>
     </section>
 
-    <section class="origin-panel">
+    <section class="origin-panel" id="origen" data-section-target>
       <div class="wrap origin-grid">
         <div class="origin-number" aria-hidden="true">01</div>
         <div>
@@ -95,7 +108,7 @@
       </div>
     </section>
 
-    <section class="trajectory-section wrap">
+    <section class="trajectory-section wrap" id="trayectoria" data-section-target>
       <div class="trajectory-intro reveal">
         <span class="chapter-kicker">Una trayectoria que fue conectando piezas</span>
         <h2>No cambié de camino. <em>Fui ampliando la forma de ayudar.</em></h2>
@@ -116,7 +129,7 @@
       </div>
     </aside>
 
-    <section class="revelation-section wrap">
+    <section class="revelation-section wrap" id="aprendizaje" data-section-target>
       <div class="revelation-copy reveal">
         <span class="chapter-kicker">Lo que aprendí al intentar explicarme</span>
         <h2>El problema no siempre era la idea. Era la distancia entre la idea y las personas.</h2>
@@ -134,7 +147,7 @@
       </div>
     </section>
 
-    <section class="definition-section">
+    <section class="definition-section" id="proposito" data-section-target>
       <div class="wrap definition-grid">
         <div class="definition-heading reveal"><span class="chapter-kicker">Por qué existe Don Ventas</span><h2>Hacer visible el valor que ya existe.</h2></div>
         <div class="definition-copy reveal d2">
@@ -162,7 +175,7 @@
       <a href="/blog/contenido-que-atrae-clientes.html" data-blog-entry="relacionado-guia-contenido">Leer la experiencia y el criterio <span aria-hidden="true">→</span></a>
     </aside>
 
-    <section class="founder-close wrap">
+    <section class="founder-close wrap" id="compartir" data-section-target>
       <div class="founder-signature reveal">
         <span class="chapter-kicker">Una invitación</span>
         <h2>Quiero compartirte lo que me hubiera gustado entender antes.</h2>
@@ -187,5 +200,6 @@
 <script defer src="/app.js"></script>
 <script defer src="/blog/blog.js"></script>
 <script defer src="/_vercel/insights/script.js"></script>
+<script defer src="/section-index.js?v=20261007-1"></script>
 </body>
 </html>

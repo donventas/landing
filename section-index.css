@@ -1,0 +1,27 @@
+/* Shared reading navigation; no content or heading hierarchy is generated. */
+.has-section-index{--section-nav:0px;--section-bar:0px}
+.has-section-index:has(.editorial-nav,.nav){--section-nav:150px}
+.section-index,.section-index *{box-sizing:border-box}
+.section-index{position:relative;z-index:90;top:0;border-block:1px solid #364051;background:#0E1117;color:#EEF1F6;font-family:inherit;text-align:left}
+.section-index-enhanced .section-index{position:sticky;top:var(--section-nav)}
+.section-index details{max-width:1120px;margin:auto;position:relative;border:0;padding:0;background:none}
+.section-index summary{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px 24px;min-height:56px;cursor:pointer;font-size:15px;font-weight:400;line-height:1.5;list-style:none;color:#EEF1F6}
+.section-index summary::-webkit-details-marker{display:none}
+.section-index summary::after{content:'+';font-size:24px;line-height:1;width:20px;flex-shrink:0;text-align:center}
+.section-index details[open] summary::after{content:'−'}
+.section-index-current{margin-left:auto;color:#AFB8C5;font-size:14px;font-weight:400}
+.section-index nav{position:static;background:#0E1117;border:1px solid #364051;padding:16px 24px 24px}
+.section-index-enhanced .section-index nav{position:absolute;top:100%;left:0;right:0;max-height:calc(100dvh - var(--section-nav) - var(--section-bar) - 16px);overflow:auto;overscroll-behavior:contain;box-shadow:0 16px 24px #0003}
+.section-index ol{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:0 32px;margin:0;padding:0}
+.section-index li{margin:0;padding:0;min-width:0}
+.section-index a{display:grid;grid-template-columns:28px 1fr;align-items:center;gap:8px;min-height:48px;padding:10px 0;border:0;border-bottom:1px solid #364051;color:#CFD5DE;font-size:15px;font-weight:400;line-height:1.45;text-decoration:none;overflow-wrap:anywhere}
+.section-index a span{font-family:var(--mono,monospace);font-size:12px;color:#AFB8C5}
+.section-index a:hover,.section-index a[aria-current],.section-index a[aria-current] span{color:#A9C1FF}
+.section-index a:focus-visible,.section-index summary:focus-visible{outline:3px solid #A9C1FF;outline-offset:3px}
+.has-section-index [data-section-target]{scroll-margin-top:calc(var(--section-nav) + var(--section-bar) + 24px)}
+.has-section-index h2[tabindex="-1"]:focus,.has-section-index h3[tabindex="-1"]:focus{outline:3px solid #3B74F2;outline-offset:4px}
+.has-section-index:not(.manual-page) .article-layout{display:block;max-width:850px}
+@media(max-width:700px){.section-index ol{grid-template-columns:1fr}.section-index-current{max-width:42%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}}
+@media(max-width:520px){.section-index summary{font-size:14px}}
+@media(prefers-reduced-motion:reduce){html:has(.has-section-index){scroll-behavior:auto}}
+@media print{.section-index{display:none}}
