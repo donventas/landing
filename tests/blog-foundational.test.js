@@ -108,7 +108,8 @@ test('presents the hub as an editorial cover and keeps routes situation-first', 
   assert.doesNotMatch(hub, /blog-hub-cover-960\.webp/);
   assert.match(hub, /Desde el escritorio de Arturo/);
   assert.match(hub, /class="situation-ledger\b/);
-  assert.equal((hub.match(/class="situation-row"/g) || []).length, 4);
+  assert.equal((hub.match(/class="situation-row"/g) || []).length, 5);
+  assert.match(hub, /data-blog-entry="situacion-manual"/);
   assert.doesNotMatch(hub, /class="situation-grid"/);
 });
 
