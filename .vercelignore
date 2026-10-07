@@ -15,3 +15,23 @@ scripts/qa-reading-progress.cjs
 scripts/qa-article-rhythm.cjs
 tests/article-rhythm.test.cjs
 SECTION-INDEX-REVIEW.md
+.qa-logos/
+BLOG-LOGOTIPOS-REVIEW.md
+scripts/build-logo-assets.cjs
+scripts/build-logo-scenes-v2.cjs
+scripts/build-logo-scenes-v3.cjs
+scripts/build-logo-scenes-v4.cjs
+scripts/build-logo-scenes-v5.cjs
+scripts/build-logo-finish-v6.cjs
+scripts/prepare-logo-photo-v3.cjs
+# Superseded local exploration retained for rollback, never active on the site.
+assets/editorial/logo-vitrina-v1-*
+assets/editorial/logo-vitrina-v2-*
+assets/editorial/logo-vitrina-v3-*
+assets/editorial/logo-vitrina-v4-*
+assets/editorial/logo-conversacion-v1-*
+assets/editorial/logo-conversacion-v2-*
+assets/editorial/logo-metodo-v1-*
+assets/editorial/logo-metodo-v2-*
+scripts/qa-logos-blog.cjs
+scripts/qa-logos-production.cjs
