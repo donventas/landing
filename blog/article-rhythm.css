@@ -1,0 +1,92 @@
+/* Approved-family adaptation: four articles only. No new assets or interaction. */
+.reading-rhythm .article-cta{padding:clamp(28px,4vw,44px);margin-top:48px}
+.reading-rhythm .article-cta h2{font-size:clamp(28px,3.1vw,40px);line-height:1.16;max-width:28ch;letter-spacing:-.035em}
+.reading-rhythm .article-cta .eyebrow{line-height:1.6}
+.reading-rhythm .article-cta p{max-width:62ch}
+.reading-rhythm .article-cta p a{color:#A9C1FF;text-decoration:underline;text-underline-offset:3px}
+.reading-rhythm .reading-next{display:grid;grid-template-columns:1fr 1fr;gap:28px;border-block:1px solid #536072;padding-block:28px;margin-top:56px}
+.reading-rhythm .reading-next .related-reading{margin:0;padding:0;background:none;border:0;border-radius:0;min-width:0}
+.reading-rhythm .reading-next h2{font-size:clamp(23px,2.3vw,29px);line-height:1.2;max-width:none}
+.reading-rhythm .reading-next p{font-size:16px;line-height:1.65}
+.reading-rhythm .reading-next .chapter-kicker{font-size:11px;line-height:1.6;color:#A9C1FF}
+.reading-rhythm .reading-next a{display:inline-flex;align-items:center;min-height:44px;line-height:1.6;color:#A9C1FF}
+
+/* Narrative and practical guide: same reading measure, different chapter roles. */
+.has-section-index.reading-rhythm:is(.advantage-page,.content-page) .article-layout{max-width:none;padding:0}
+.reading-rhythm:is(.advantage-page,.content-page) .article-copy{width:100%;padding-bottom:80px}
+.reading-rhythm:is(.advantage-page,.content-page) .article-section{padding:clamp(52px,6vw,80px) 24px}
+.reading-rhythm:is(.advantage-page,.content-page) .article-section>*{max-width:740px;margin-inline:auto}
+.reading-rhythm:is(.advantage-page,.content-page) .article-section h2{max-width:740px}
+.reading-rhythm:is(.advantage-page,.content-page) .article-section>.chapter-kicker{display:block}
+.reading-rhythm:is(.advantage-page,.content-page) .article-copy>.reading-next,
+.reading-rhythm:is(.advantage-page,.content-page) .article-copy>.article-cta{max-width:740px;margin-inline:auto}
+.reading-rhythm .paper-chapter{background:#EEF1F6;color:#0E1117}
+.reading-rhythm .paper-chapter :is(h2,h3,blockquote,strong){color:#0E1117}
+.reading-rhythm .paper-chapter p{color:#374356}
+.reading-rhythm .paper-chapter :is(a,.chapter-kicker,cite){color:#1B49A0}
+.reading-rhythm .paper-chapter :is(a,summary,h2):focus-visible{outline:3px solid #1B49A0;outline-offset:4px}
+.reading-rhythm .paper-chapter .editorial-pause{border-color:#9BAABD;padding:28px 0;margin-block:36px}
+.reading-rhythm .paper-chapter .editorial-pause blockquote{font-size:clamp(27px,3vw,38px);max-width:30ch}
+.reading-rhythm .paper-chapter .editorial-pause cite{font-size:12px;line-height:1.6}
+.advantage-page.reading-rhythm #experiencia{padding-top:0}
+.advantage-page.reading-rhythm #eleccion{padding-top:24px;border-bottom:1px solid #364051}
+.advantage-page.reading-rhythm .promise-resources{margin-block:32px;border-block:1px solid #536072}
+.promise-resources>div{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.6fr);gap:28px;padding-block:24px}
+.promise-resources>div+div{border-top:1px solid #364051}
+.promise-resources dt{font-size:21px;font-weight:600;line-height:1.4;color:#A9C1FF}
+.promise-resources dd{margin:0;font-size:18px;line-height:1.7;color:#CFD5DE}
+.advantage-page.reading-rhythm #historia>.opening-line{margin-top:36px;padding-top:28px;border-top:1px solid #536072}
+
+/* Content guide: questions on paper, native comparison, final checklist. */
+.content-page.reading-rhythm #problema{padding-top:0}
+.content-page.reading-rhythm .framework{margin-block:32px}
+.content-page.reading-rhythm .framework li{padding-block:22px;border-color:#BCC4D0}
+.content-page.reading-rhythm .framework li::before{color:#1B49A0}
+.content-page.reading-rhythm .framework p{font-size:17px;line-height:1.65}
+.content-page.reading-rhythm .example-grid{margin-block:32px}
+.content-page.reading-rhythm .example-grid>div{padding:clamp(24px,3vw,36px)}
+.content-page.reading-rhythm .example-grid .after{background:#EEF1F6}
+.content-page.reading-rhythm .example-grid .after p{color:#17202D}
+.content-page.reading-rhythm .example-grid .after .label{color:#1B49A0}
+.content-page.reading-rhythm .example-grid p{font-size:18px;line-height:1.7}
+.content-page.reading-rhythm #diferencia{background:#151B25}
+.content-page.reading-rhythm .checklist{margin-block:32px;border-top:1px solid #536072}
+.content-page.reading-rhythm .checklist li{font-size:18px;line-height:1.65;padding-block:20px}
+
+/* Foundational letter retains its expressive color fields and asymmetry. */
+.manifesto-page.reading-rhythm .origin-grid{grid-template-columns:56px minmax(0,1fr) minmax(0,1.2fr)}
+.manifesto-page.reading-rhythm .origin-panel h2{font-size:clamp(36px,4.1vw,60px);max-width:16ch;line-height:1.06}
+.manifesto-page.reading-rhythm .revelation-section{display:block;max-width:1080px}
+.manifesto-page.reading-rhythm .revelation-copy h2{font-size:clamp(34px,4.2vw,60px);max-width:26ch;line-height:1.08;margin-bottom:36px}
+.manifesto-page.reading-rhythm .revelation-copy>p{max-width:740px;margin-inline:auto}
+.manifesto-page.reading-rhythm .revelation-copy .revelation-turn{margin-top:36px;padding-top:32px;border-top:1px solid #536072}
+.manifesto-page.reading-rhythm .value-gap{display:grid;grid-template-columns:1fr 40px 1fr;align-items:center;gap:24px;max-width:740px;margin:40px auto 0}
+.manifesto-page.reading-rhythm .value-gap>div{padding:0}
+.manifesto-page.reading-rhythm .value-gap .gap-arrow{transform:none;padding:0}
+.manifesto-page.reading-rhythm .founder-close{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:48px;align-items:start}
+.manifesto-page.reading-rhythm .founder-signature h2{font-size:clamp(34px,3.5vw,50px);max-width:20ch;line-height:1.08}
+.manifesto-page.reading-rhythm .manifesto-cta{margin-top:0}
+
+/* Mobile adaptations preserve all text and complete specimens. */
+@media(max-width:800px){
+ .reading-rhythm:is(.advantage-page,.content-page) .article-copy>.reading-next,
+ .reading-rhythm:is(.advantage-page,.content-page) .article-copy>.article-cta{margin-inline:24px}
+ .manifesto-page.reading-rhythm .origin-grid,.manifesto-page.reading-rhythm .founder-close{grid-template-columns:1fr;gap:32px}
+ .manifesto-page.reading-rhythm .origin-panel h2{max-width:22ch}
+ .manifesto-page.reading-rhythm .origin-number{display:none}
+}
+@media(max-width:600px){
+ .reading-rhythm .reading-next{grid-template-columns:1fr;gap:24px;margin-top:36px;padding-block:24px}
+ .reading-rhythm .reading-next .related-reading+.related-reading{border-top:1px solid #364051;padding-top:24px}
+ .reading-rhythm .article-cta{margin-top:32px}
+ .promise-resources>div{grid-template-columns:1fr;gap:8px;padding-block:20px}
+ .content-page.reading-rhythm .framework li{padding-block:18px;gap:14px}
+ .content-page.reading-rhythm .framework h3{font-size:20px}
+ .manifesto-page.reading-rhythm .value-gap{grid-template-columns:1fr;gap:20px}
+ .manifesto-page.reading-rhythm .value-gap .gap-arrow{transform:rotate(90deg);justify-self:center}
+ .manifesto-page.reading-rhythm .revelation-section{padding-block:64px}
+ .manual-page.reading-rhythm .article-section>.manual-plate{margin-block:32px}
+ .manual-page.reading-rhythm .manual-applications{gap:24px}
+ .manual-page.reading-rhythm .manual-annotations{gap:12px;padding-top:20px}
+ .manual-page.reading-rhythm .application-constants{gap:12px;margin-top:24px}
+}
