@@ -20,6 +20,13 @@ tres conceptos y CTA de autonomía/nueva etapa. No se añaden clientes, cifras,
 anécdotas ni resultados. Dos láminas HTML adaptan la relación entre personalidad,
 claridad, dirección y oferta; se identifican como explicaciones, no capturas.
 
+Ajuste posterior aprobado: «El de tu marca merece estar donde sucede la acción»
+en bajada, cierre, Open Graph y títulos auxiliares del cierre. Cambio solo de texto;
+se vuelven a comprobar tests, glosario y reflujo320/390/768/1440. No añade recursos
+ni modifica layout; no se vuelve a medir rendimiento por este ajuste.
+Las dos láminas interiores no convencieron al autor: siguen provisionales y no se
+consideran aceptadas para release. Su reemplazo se plantea antes de ejecutarlo.
+
 ## 3. Fuentes, permisos y límites
 
 - *Click: How to Make What People Want*, Jake Knapp con John Zeratsky.
