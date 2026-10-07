@@ -12,4 +12,6 @@ scripts/build-manual-assets.cjs
 scripts/qa-manual-blog.cjs
 scripts/qa-section-index.cjs
 scripts/qa-reading-progress.cjs
+scripts/qa-article-rhythm.cjs
+tests/article-rhythm.test.cjs
 SECTION-INDEX-REVIEW.md

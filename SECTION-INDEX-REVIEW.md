@@ -46,3 +46,72 @@ Base: `0e2d40676f834466523110fc74a05fa8f037afa9` (PR #39 ya fusionada por autori
 Se reutiliza la altura real compartida `--section-nav` y la capa 102 del manual. Se conserva el cálculo de avance; no se añaden eventos, scripts de producción ni recursos gráficos. Los seis consumidores de blog.css actualizan su versión de caché. No cambia contenido, SEO, imágenes, formularios ni analítica; el hub y glosario no reciben una barra de lectura artificial.
 
 QA productor: 167/167 pruebas unitarias; 60 muestras (4 artículos × 5 anchos × inicio/mitad/final), barra visible, avance 0/50/100 %, sin desbordamientos y por encima del índice desplegado. Resize de móvil a escritorio y viceversa comprobado. Capturas móviles/escritorio revisadas. Evidencia local `.qa-manual/progress-before.json`, `progress-after.json` y capturas; script reproducible `scripts/qa-reading-progress.cjs`, excluido del despliegue. No se repitió la medición de rendimiento de campo ni se solicita como condición para este cambio de posición fija sin nuevos recursos; sin QA independiente nuevo. Corrección en preview, no autorizada aún para producción.
+
+## Ritmo visual de la familia — 7 de octubre
+
+Base vigente: `24598ce367bb6239c51486b52e42136a852fa58e` (PR #40, ya publicada).
+Rama de trabajo: `codex/blog-visual-rhythm`. Arturo aprobó aplicar el diagnóstico
+visual de los cuatro artículos; esta ronda no autoriza merge ni producción.
+
+### Composición y consumidores
+
+Refinamiento de presentación / assembly-led. Se reutiliza la familia aprobada,
+sin nuevas imágenes, marcas, mensajes, fuentes, scripts de producción ni motion.
+La especificación acordada es variar el ritmo según la función narrativa, no
+alternar colores mecánicamente ni convertir todos los artículos en una plantilla.
+EA: implementación HTML/CSS local, render confirmado en Chrome; VAP no requerido
+porque las imágenes y láminas existentes no cambian. AVOS/BSB se consulta en modo
+lectura; no hay cambios de canon ni otras marcas en el conjunto de referencias.
+
+- Ventaja: relato íntimo; capítulo familiar claro, cita con jerarquía propia,
+  tres relaciones promesa/recursos en HTML semántico, lecturas agrupadas y CTA menor.
+- Contenido: experiencia, preguntas, comparación y revisión como momentos distintos;
+  preguntas sobre papel, contraste entre función/utilidad, checklist diferenciado.
+- Carta fundacional: conserva campos crema/azul y asimetría. Se amplían titulares
+  estrechos, el aprendizaje recupera ancho de lectura y el cierre usa columnas parejas.
+- Manual: conserva las dos láminas, el orden y los cambios de fondo. Solo espaciado
+  móvil de aplicaciones/anotaciones y jerarquía más contenida del CTA.
+- Cuatro adaptaciones responsive, no reproducciones proporcionales. Columnas
+  reordenadas en flujo nativo en móvil; sin recorte de imágenes ni contenido oculto.
+- Ancho de lectura de 740 px en ensayo/guía; márgenes móviles de 24 px. Fondos y
+  colores vienen de la familia publicada. Un CSS nuevo, versionado y opt-in,
+  evita propagar cambios al hub, glosario, páginas legales o servicios.
+
+### Relato y descubrimiento protegidos
+
+No se introducen experiencias, claims, datos, hipótesis comerciales ni tecnicismos.
+Comparación DOM contra el baseline: todos los caracteres de `main` (salvo espacios),
+enlaces e imágenes preservados. El párrafo de promesas se divide en `dt/dd` sin
+reescribir sus palabras. Title, descriptions, canonical, fechas, OG y JSON-LD
+idénticos; URLs, sitemap, inventario del glosario y analítica sin cambios. No se
+reabre la demanda ni se simula frescura por una modificación de presentación.
+
+### Evidencia de QA
+
+- Suite completa: 170/170 pruebas aprobadas y `git diff --check` limpio.
+- Regresión de progreso: 60 muestras (inicio/mitad/final, cuatro artículos y cinco
+  anchos), barra visible, porcentaje correcto, índice abierto y resize sin fallos.
+- `scripts/qa-article-rhythm.cjs`: 36 combinaciones de artículo/ancho
+  (320/390/599/601/768/799/801/900/1440), contenido/SEO idénticos al baseline,
+  imágenes completas, notas operativas y cero desbordamientos de documento.
+- Capturas nuevas `rhythm-v2-*` y reporte `rhythm-v2-report.json` en `.qa-manual/`,
+  excluidos de Git y del despliegue. Revisión individual y de colección en
+  390/1440; son viewports simulados de Chrome, no teléfonos físicos.
+- QA técnica independiente: 16 combinaciones adicionales, 23 destinos del índice
+  con foco y título visible a 390 px, y contraste de bloques claros comprobado.
+- QA visual independiente: cuatro panoramas de escritorio, familia/promesa a
+  tamaño real en 390/1440, preguntas y manual móvil, cierre y comparación de la
+  carta. Sin bloqueos; la transparencia previa del encabezado se conserva.
+- CSS adicional: 7340 bytes sin comprimir / 1807 gzip; ninguna imagen ni JS nuevos.
+- Laboratorio local pareado, una carga fría por artículo/versión, viewport390,
+  CPU×4, latencia150 ms y 200000 B/s; HTML/CSS interceptados simétricamente para
+  comparar versiones. LCP baseline→candidato (segundos): carta1.372→1.152,
+  contenido1.152→1.068, ventaja1.116→1.188, manual1.348→1.236. CLS idéntico
+  por pareja, entre0.000393 y0.000965. No son métricas de campo, benchmark de
+  producción ni evidencia de mejora estadística; no se midió INP de campo.
+- Los scripts de QA y este registro no se despliegan. Sin formularios enviados,
+  eventos a terceros, cambios en Runtime/Portal ni solicitud de indexación.
+
+Aceptación estética del nuevo preview y autorización de release pendientes de
+Arturo. Reversión: revertir el commit de esta rama restaura el baseline sin borrar
+el relato ni los assets. Pasar pruebas no demuestra retención ni conversiones.
