@@ -7,13 +7,14 @@ const html = fs.readFileSync(path.join(root, 'blog/index.html'), 'utf8');
 const css = fs.readFileSync(path.join(root, 'blog/hub-covers.css'), 'utf8');
 const cards = [...html.matchAll(/<a class="hub-story\b[^>]*>[\s\S]*?<\/a>/g)].map(m => m[0]);
 
-test('all five stories and the glossary have a single image-and-title destination', () => {
+test('all six stories and the glossary have a single image-and-title destination', () => {
   const expected = [
     ['por-que-nacio-don-ventas.html', 'fundador-editorial', 'carta-fundacional'],
     ['contenido-que-atrae-clientes.html', 'article-wrong-offer', 'guia-contenido'],
     ['tu-marca-es-tu-ventaja.html', 'marca-confianza', 'marca-ventaja'],
     ['manual-de-marca.html', 'manual-busqueda-v3', 'manual-marca'],
     ['logotipos-mitos.html', 'logo-vitrina-v5', 'logos-mitos'],
+    ['diseno-editorial.html', 'editorial-reporte-v1', 'diseno-editorial'],
     ['glosario.html', 'glossary-hosts-v1', 'glosario'],
   ];
   assert.equal(cards.length, expected.length);
@@ -34,7 +35,8 @@ test('all five stories and the glossary have a single image-and-title destinatio
   assert.match(cards[2], /Ilustración con IA · escena ficticia/);
   assert.match(cards[3], /Ilustración con IA · escena ficticia/);
   assert.match(cards[4], /Ilustración con IA · escena ficticia/);
-  assert.match(cards[5], /Arturo y El Don · Ilustración con IA/);
+  assert.match(cards[5], /Ilustración con IA · escena ficticia/);
+  assert.match(cards[6], /Arturo y El Don · Ilustración con IA/);
   assert.match(html, /Artículo 04/);
   assert.match(html, /Recurso de consulta · Glosario/);
 });

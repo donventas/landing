@@ -3,3 +3,4 @@ portafolio/source/
 # Generated QA screenshots and the uncompressed illustration master stay local.
 .qa-manual/
 .qa-logos/
+.qa-editorial/

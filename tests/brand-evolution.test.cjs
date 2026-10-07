@@ -24,7 +24,8 @@ test('four services, six situations and continuity use existing canonical routes
  assert.match(home,/No son etapas obligatorias/);assert.match(home,/No es atención ilimitada/);
  const data=JSON.parse(home.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1])['@graph'];
  assert.equal(data.find(x=>x['@type']==='Service').hasOfferCatalog.itemListElement.length,4);
- assert.equal((read('sitemap.xml').match(/<loc>/g)||[]).length,15);
+ assert.equal((read('sitemap.xml').match(/<loc>/g)||[]).length,16);
+ assert.ok(read('sitemap.xml').includes('https://www.donventas.mx/blog/diseno-editorial.html'));
  assert.ok(read('sitemap.xml').includes('https://www.donventas.mx/blog/logotipos-mitos.html'));
  assert.match(read('sitemap.xml'), /https:\/\/www.donventas.mx\/blog\/manual-de-marca.html/);
  const legal=JSON.parse(read('15_LEGAL/Terminos y Condiciones.html').match(/<script type="__bundler\/template">([\s\S]*?)<\/script>/)[1]);
