@@ -24,7 +24,7 @@ test('all four stories and the glossary have a single image-and-title destinatio
     assert.match(card, /<figure class="hub-story-media">/);
     assert.match(card, /<div class="hub-story-copy">/);
     const label = card.match(/aria-labelledby="([^"]+)"/)[1];
-    assert.ok(card.includes(`<h2 id="${label}">`));
+    assert.match(card,new RegExp(`<h2 id="${label}"(?:\\s[^>]*)?>`));
     assert.equal((card.match(/<a\b/g) || []).length, 1);
     assert.doesNotMatch(card, /<(?:button|input|select)\b/);
     assert.match(card, /class="hub-story-action"/);
