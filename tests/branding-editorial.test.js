@@ -77,8 +77,11 @@ test('branding is discoverable and click measurement is bounded to non-personal 
   assert.match(home, /href="branding.html">Marca<\/a>/);
   assert.match(fs.readFileSync(path.join(root,'blog','por-que-nacio-don-ventas.html'),'utf8'), /href="\/branding.html" data-blog-entry="sistema-de-marca"/);
   const experience = fs.readFileSync(path.join(root,'blog','contenido-que-atrae-clientes.html'),'utf8');
-  assert.match(experience, /href="\/#estrategia" data-blog-entry="estrategia"/);
-  assert.match(experience, /href="\/#contenido-servicio" data-blog-entry="contenido"/);
+  // Services remain available in navigation; the ending now has one contextual CTA.
+  assert.match(experience, /href="\/#servicios">Servicios<\/a>/);
+  assert.match(experience, /href="\/diagnostico.html\?momento=conectar&amp;servicio=contenido" data-blog-entry="cierre-diagnostico"/);
+  assert.doesNotMatch(experience, /href="\/#estrategia" data-blog-entry="estrategia"/);
+  assert.doesNotMatch(experience, /href="\/#contenido-servicio" data-blog-entry="contenido"/);
   const js = fs.readFileSync(path.join(root,'branding-editorial.js'),'utf8');
   assert.match(js, /allowed/);
   assert.doesNotMatch(js, /\.value|email|phone|localStorage|sessionStorage/);
