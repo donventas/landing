@@ -3,6 +3,24 @@
 Actualización: 2026-10-09. Rama `codex/private-article-comments`, PR #49 (borrador).
 No hay merge a main ni activación pública. No confundir código preparado con operación verificada.
 
+## Recuperación de acceso — 9 de octubre, 18:45 UTC
+
+- La pestaña recuperada por Arturo permite navegar internamente por Supabase. La
+  pestaña antigua sigue en error; no confundirla con un fallo global del proyecto.
+- Suite completa: **253 pruebas pasaron fuera del sandbox**. Verificador SQL aislado
+  también pasó. Commit 4641168 subido al PR #49; `site-tests` y Vercel Preview pasaron.
+- Worker `article-comment-worker` actualizado desde el archivo versionado; despliegue
+  confirmado por la interfaz. Continúa en modo test por defecto.
+- `article-delivery-events` desplegada. Su gateway JWT permanece ON, pendiente de
+  autorización específica para permitir transporte externo autenticado por firma Svix.
+  No se modificó el JWT de intake ni worker.
+- ARTICLE_RESEND_WEBHOOK_SECRET guardado en Supabase, confirmado por nombre/digest.
+  El webhook en Resend sigue deshabilitado. No hubo nuevos envíos ni pruebas end-to-end.
+- Preview de rama disponible; aún no validado funcionalmente con el formulario real.
+  Continúan pendientes cron/Vault, origen y modo de confirmación, aviso de privacidad,
+  QA de confirmación/baja y publicación. Los apartados anteriores de validación y
+  limitación abajo son evidencia histórica, no el estado más reciente de estos puntos.
+
 ## Confirmado en esta ejecución
 
 - 005 aplicada en Supabase tras autorización específica: dos tablas privadas, confirmación,
