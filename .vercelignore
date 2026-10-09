@@ -56,3 +56,5 @@ supabase/functions/
 scripts/private-comments-preview.cjs
 lib/article-comments/local-store.cjs
 PRIVATE-COMMENTS-REVIEW.md
+PRIVATE-COMMENTS-RELEASE.md
+supabase/migrations/
