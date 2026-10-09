@@ -8,7 +8,7 @@ const hub=read('blog/index.html');
 for(const [slug,family,old] of [
  ['por-que-nacio-don-ventas','fundador-el-don-v1','fundador-editorial'],
  ['contenido-que-atrae-clientes','barberia-el-don-v1','article-wrong-offer'],
- ['tu-marca-es-tu-ventaja','joyeria-el-don-v1','marca-confianza']
+ ['tu-marca-es-tu-ventaja','joyeria-el-don-v2','marca-confianza']
 ])test(`${slug}: HUB, article, preload and social metadata use the approved El Don cover`,()=>{
  const html=read(`blog/${slug}.html`);
  assert.ok(hub.includes(`${family}-480.webp`));
@@ -23,7 +23,7 @@ for(const [slug,family,old] of [
  for(const entry of attrs.srcset.split(','))assert.ok(fs.statSync(path.join(root,entry.trim().split(' ')[0])).size<160000);
  const og=html.match(/property="og:image" content="([^"]+)"/)[1];
  assert.equal(html.match(/name="twitter:image" content="([^"]+)"/)[1],og);
- assert.match(og,/el-don-v1/);
+ assert.match(og,slug==='tu-marca-es-tu-ventaja'?/og-marca-el-don-v2\.jpg$/:/el-don-v1/);
  const graph=JSON.parse(html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1])['@graph'];
  const article=graph.find(x=>x['@type']==='BlogPosting');
  assert.ok(article.image.includes(og));
@@ -45,7 +45,7 @@ test('content illustration is responsive, deferred and explicitly fictional',()=
  assert.match(figure,/escena y diálogo ficticios/);
  assert.match(figure,/aria-label="Ampliar ilustración/);
  for(const width of [480,960,1440]){
-  const file=`assets/editorial/oferta-entendida-el-don-v1-${width}.webp`;
+  const file=`assets/editorial/oferta-entendida-el-don-v2-${width}.webp`;
   assert.ok(figure.includes(file));
   assert.ok(fs.statSync(path.join(root,file)).size<110000);
  }
