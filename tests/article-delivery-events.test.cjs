@@ -16,13 +16,17 @@ const event=()=>({type:'email.delivered',created_at:new Date().toISOString(),dat
 
 test('webhook does not require a Node Buffer global in the Edge runtime',async()=>{
   const req=request(event());
+  // Node 22's Response.json itself needs the global Buffer. Construct the
+  // mocked transport response before removing it; only the Edge handler is
+  // under test, not Node's implementation of the Fetch API.
+  const persisted=Response.json(true);
   await fixture(async handler=>{
     const previous=globalThis.Buffer;
     try {
       globalThis.Buffer=undefined;
       assert.equal((await handler.fetch(req)).status,204);
     } finally {globalThis.Buffer=previous;}
-  },async()=>Response.json(true));
+  },async()=>persisted);
 });
 test('signed delivery events store only the minimal event and accept duplicate RPC outcomes',async()=>{
   let b;await fixture(async handler=>{assert.equal((await handler.fetch(request(event()))).status,204);},async(_url,options)=>{b=JSON.parse(options.body);return Response.json(false);});

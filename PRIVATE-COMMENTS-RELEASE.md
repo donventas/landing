@@ -119,3 +119,26 @@ la página no carga analítica ni recursos externos. Abrir el correo no activa n
 
 Las versiones anteriores de funciones permanecen internas para facilitar revisión,
 pero 005 no tiene rollback automático. No repetirla: ya está aplicada. 006 NO aplicada.
+
+## Cierre técnico — 2026-10-09, posterior a las notas anteriores
+
+- 006 aplicada con autorización explícita: `dv-article-delivery` cada minuto y
+  `dv-article-retention` diariamente a las 09:20 UTC. Ambas activas. No repetir 006.
+- Vault contiene exclusivamente el JWT público y la clave dedicada al worker;
+  no se exportó ninguna credencial general de Supabase.
+- Envío automático comprobado con fixture `is_test=true`: comentario Resend
+  `01a12222-fcf9-706f-b521-62c81924ad2c`, confirmación
+  `01a12223-e690-7c4a-89e0-f8c070a5068f`. Ambos delivered, un intento.
+  pg_net devolvió HTTP 200 para ambos, sin invocación manual del worker.
+- Abrir el enlace dejó estado pending; clic explícito produjo active; baja produjo
+  unsubscribed y withdrawn_at. El enlace de confirmación anterior fue rechazado.
+- Receptor firmado ya activo y probado: firma ausente 401, prueba firmada 204,
+  entrega real reconciliada. JWT desactivado solo para article-delivery-events;
+  intake/worker lo mantienen activado.
+- Aviso complementario actualizado y vinculado desde el aviso integral.
+- La limpieza automática afecta la base del canal, no el buzón. Arturo es responsable
+  de revisar y eliminar las copias de atención cuando dejen de ser necesarias,
+  atender solicitudes ARCO y revisar consentimientos/bajas; no se promete purga
+  simultánea del buzón ni de backups. Retención activa/baja/supresión no automática.
+- Queda pendiente coordinar modo live, variables Production, CI verde, merge,
+  despliegue público y verificaciones de solo lectura. No lanzar campañas.

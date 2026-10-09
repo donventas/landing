@@ -1,4 +1,5 @@
--- PREPARED, NOT APPLIED. Requires separately reviewed cron/pg_net enablement
+-- Automation and retention authorized by Arturo on 2026-10-09.
+-- Requires reviewed cron/pg_net enablement
 -- and two named Vault entries created through the dashboard, never in SQL text:
 -- article_comments_anon_jwt (public gateway JWT), article_comments_worker_key.
 -- No privileged Supabase API credential is required in Vault or Vercel.
@@ -24,6 +25,6 @@ begin
 end $$;
 revoke all on function dv_comments.dispatch_due() from public,anon,authenticated,service_role;
 select cron.schedule('dv-article-delivery','* * * * *','select dv_comments.dispatch_due();');
--- Enable retention only as part of the reviewed public release policy.
--- select cron.schedule('dv-article-retention','20 9 * * *','select public.dv_article_purge();');
+-- Daily 09:20 UTC; only the bounded retention rules from migrations 003-005.
+select cron.schedule('dv-article-retention','20 9 * * *','select public.dv_article_purge();');
 commit;

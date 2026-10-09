@@ -1,6 +1,11 @@
 /* No analytics, external resources, storage or automatic GET-side effects. */
 (function () {
   'use strict';
+  // A second email link may reuse this tab. Reinitialize for its new fragment;
+  // loading the page still never confirms or unsubscribes without a click.
+  window.addEventListener('hashchange', function () {
+    if (/^#(confirm|unsubscribe)=([a-f0-9]{64})$/.test(location.hash)) location.reload();
+  });
   var match = /^#(confirm|unsubscribe)=([a-f0-9]{64})$/.exec(location.hash);
   // Fragments never reach the server; remove the token from the visible URL/history.
   history.replaceState(null, '', location.pathname);

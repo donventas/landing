@@ -58,3 +58,4 @@ lib/article-comments/local-store.cjs
 PRIVATE-COMMENTS-REVIEW.md
 PRIVATE-COMMENTS-RELEASE.md
 supabase/migrations/
+scripts/update-comments-privacy.cjs
