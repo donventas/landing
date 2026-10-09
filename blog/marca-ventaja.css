@@ -21,6 +21,12 @@
 .advantage-page .memory-spread img{width:100%;height:auto;object-fit:contain}
 .advantage-page .memory-spread figcaption{font-size:14px;line-height:1.55;margin-top:12px;color:#AFB8C5}
 .advantage-page .memory-spread figcaption small{display:block;font-size:14px;margin-top:6px}
+.advantage-page .promise-care{margin-block:36px;border:1px solid #536072;background:#151B25;scroll-margin-top:170px}
+.advantage-page .promise-care>a,.advantage-page .promise-care img{display:block;width:100%;height:auto}
+.advantage-page .promise-care>a:focus-visible{outline:3px solid #A9C1FF;outline-offset:4px}
+.advantage-page .promise-care figcaption{padding:20px 22px;color:#CFD5DE;font-size:16px;line-height:1.6}
+.advantage-page .promise-care figcaption strong{display:block;color:#EEF1F6;font-weight:500}
+.advantage-page .promise-care figcaption span{display:block;margin-top:8px;font-size:14px;line-height:1.5}
 .advantage-page .editorial-pause{padding:32px 0}
 .advantage-page .editorial-pause blockquote{max-width:26ch}
 .advantage-page .article-cta{border-radius:0;margin-top:58px}

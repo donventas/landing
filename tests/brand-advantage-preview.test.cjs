@@ -21,12 +21,12 @@ test('all local src and href paths and same-page anchors exist', () => {
     }
   }
 });
-test('both scenes have truthful labels and dimensioned responsive images', () => {
+test('three scenes have truthful labels and dimensioned responsive images', () => {
   assert.match(html, /Ilustración con IA · escena ficticia/);
   assert.match(html, /Recreación con IA/);
   assert.match(html, /Inspirada en el restaurante donde tuve mi primer desayuno con el amor de mi vida/);
-  assert.equal((html.match(/width="1440" height="960"/g) || []).length, 2);
-  for (const family of ['joyeria-el-don-v1', 'marca-recuerdo']) {
+  assert.equal((html.match(/width="1440" height="960"/g) || []).length, 3);
+  for (const family of ['joyeria-el-don-v2', 'marca-recuerdo', 'joyeria-cuidado-el-don-v3']) {
     for (const width of [480, 960, 1440]) {
       const file = path.join(root, `assets/editorial/${family}-${width}.webp`);
       const data = fs.readFileSync(file);
@@ -34,6 +34,17 @@ test('both scenes have truthful labels and dimensioned responsive images', () =>
       assert.ok(data.length < 160000);
     }
   }
+});
+
+test('care illustration lives in promise section, is deferred and can be enlarged', () => {
+  const section=html.match(/<section[^>]+id="promesa"[\s\S]*?<\/section>/)[0];
+  const figure=section.match(/<figure class="promise-care"[\s\S]*?<\/figure>/)[0];
+  assert.match(figure,/loading="lazy"/);
+  assert.match(figure,/decoding="async"/);
+  assert.match(figure,/Ilustración con IA · escena ficticia/);
+  assert.match(figure,/aria-label="Ampliar ilustración/);
+  assert.match(figure,/srcset="[^"]*480w[^"]*960w[^"]*1440w/);
+  assert.match(html,/marca-ventaja\.css\?v=20261009-cuidado/);
 });
 test('reduced motion targets viewport and existing lead flow stays linked', () => {
   const css = fs.readFileSync(path.join(root, 'blog/marca-ventaja.css'), 'utf8');

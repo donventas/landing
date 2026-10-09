@@ -11,7 +11,7 @@ test('all seven stories and the glossary have a single image-and-title destinati
   const expected = [
     ['por-que-nacio-don-ventas.html', 'fundador-el-don-v1', 'carta-fundacional'],
     ['contenido-que-atrae-clientes.html', 'barberia-el-don-v1', 'guia-contenido'],
-    ['tu-marca-es-tu-ventaja.html', 'joyeria-el-don-v1', 'marca-ventaja'],
+    ['tu-marca-es-tu-ventaja.html', 'joyeria-el-don-v2', 'marca-ventaja'],
     ['manual-de-marca.html', 'manual-busqueda-v3', 'manual-marca'],
     ['logotipos-mitos.html', 'logo-vitrina-v5', 'logos-mitos'],
     ['diseno-editorial.html', 'editorial-reporte-v1', 'diseno-editorial'],
