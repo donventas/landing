@@ -5,10 +5,27 @@ const path=require('node:path');
 const root=path.resolve(__dirname,'..');
 const read=f=>fs.readFileSync(path.join(root,f),'utf8');
 const hub=read('blog/index.html');
+test('blog index shares the approved El Don cover instead of the retired editorial photo',()=>{
+ assert.ok(hub.includes('hub-el-don-v1-720.webp'));
+ assert.ok(!hub.includes('og-blog-editorial.jpg'));
+ const image='https://www.donventas.mx/og-blog-el-don-v1.jpg';
+ assert.ok(hub.includes(`property="og:image" content="${image}"`));
+ assert.ok(hub.includes(`name="twitter:image" content="${image}"`));
+ assert.ok(fs.statSync(path.join(root,'og-blog-el-don-v1.jpg')).size<200000);
+});
+test('every blog page has matching Open Graph and Twitter images backed by local assets',()=>{
+ for(const file of fs.readdirSync(path.join(root,'blog')).filter(f=>f.endsWith('.html'))){
+  const html=read('blog/'+file);
+  const og=html.match(/property="og:image" content="([^"]+)"/);
+  const twitter=html.match(/name="twitter:image" content="([^"]+)"/);
+  assert.ok(og,file); assert.ok(twitter,file); assert.equal(og[1],twitter[1],file);
+  assert.ok(fs.statSync(path.join(root,new URL(og[1]).pathname)).size>0,file);
+ }
+});
 for(const [slug,family,old] of [
  ['por-que-nacio-don-ventas','fundador-el-don-v1','fundador-editorial'],
  ['contenido-que-atrae-clientes','barberia-el-don-v1','article-wrong-offer'],
- ['tu-marca-es-tu-ventaja','joyeria-el-don-v2','marca-confianza']
+ ['tu-marca-es-tu-ventaja','joyeria-el-don-v3','marca-confianza']
 ])test(`${slug}: HUB, article, preload and social metadata use the approved El Don cover`,()=>{
  const html=read(`blog/${slug}.html`);
  assert.ok(hub.includes(`${family}-480.webp`));
@@ -23,7 +40,7 @@ for(const [slug,family,old] of [
  for(const entry of attrs.srcset.split(','))assert.ok(fs.statSync(path.join(root,entry.trim().split(' ')[0])).size<160000);
  const og=html.match(/property="og:image" content="([^"]+)"/)[1];
  assert.equal(html.match(/name="twitter:image" content="([^"]+)"/)[1],og);
- assert.match(og,slug==='tu-marca-es-tu-ventaja'?/og-marca-el-don-v2\.jpg$/:/el-don-v1/);
+ assert.match(og,slug==='tu-marca-es-tu-ventaja'?/og-marca-el-don-v3\.jpg$/:/el-don-v1/);
  const graph=JSON.parse(html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1])['@graph'];
  const article=graph.find(x=>x['@type']==='BlogPosting');
  assert.ok(article.image.includes(og));
@@ -45,7 +62,7 @@ test('content illustration is responsive, deferred and explicitly fictional',()=
  assert.match(figure,/escena y diálogo ficticios/);
  assert.match(figure,/aria-label="Ampliar ilustración/);
  for(const width of [480,960,1440]){
-  const file=`assets/editorial/oferta-entendida-el-don-v2-${width}.webp`;
+  const file=`assets/editorial/oferta-entendida-el-don-v3-${width}.webp`;
   assert.ok(figure.includes(file));
   assert.ok(fs.statSync(path.join(root,file)).size<110000);
  }
