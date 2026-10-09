@@ -4,6 +4,18 @@ const {SupabaseIntakeStore}=require('../lib/article-comments/supabase-store.cjs'
 const secret='test-only-intake-'.repeat(3),env={ARTICLE_COMMENTS_INTAKE_KEY:secret,ARTICLE_COMMENTS_INTAKE_MODE:'test',SUPABASE_URL:'https://isolated.supabase.co',SUPABASE_SERVICE_ROLE_KEY:'private-runtime-only'};
 function request(body,key=secret){return new Request('https://example.test',{method:'POST',headers:{'x-dv-intake-key':key},body:JSON.stringify(body)});}
 async function fixture(run,fetchImpl){const oldDeno=globalThis.Deno,oldFetch=globalThis.fetch;globalThis.Deno={env:{get:k=>env[k]}};globalThis.fetch=fetchImpl;try{await run((await import('../supabase/functions/article-comments-intake/index.ts')).default);}finally{globalThis.Deno=oldDeno;globalThis.fetch=oldFetch;}}
+test('intake works without a Node Buffer global in the Edge runtime',async()=>{
+  const req=request({operation:'subscription',params:{p_action:'confirm',p_hash:'a'.repeat(64)}});
+  await fixture(async api=>{
+    const previous=globalThis.Buffer,NativeResponse=globalThis.Response;
+    // Node's Response.json itself needs Buffer; Deno's native Response does not.
+    try {
+      globalThis.Response=class {constructor(body,options){this.status=options.status;this.body=body;}};
+      globalThis.Buffer=undefined;assert.equal((await api.fetch(req)).status,200);
+    } finally {globalThis.Buffer=previous;globalThis.Response=NativeResponse;}
+  },async()=>({ok:true,json:async()=>false}));
+});
+
 test('intake private key cannot execute arbitrary RPCs or read project data',async()=>{
   let calls=0;await fixture(async api=>{
     for(const operation of ['query','dv_article_purge','dv_article_claim','public.lead','__proto__'])assert.equal((await api.fetch(request({operation,params:{}}))).status,422);

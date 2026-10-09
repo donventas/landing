@@ -1,5 +1,6 @@
 // Public transport, signed Resend payload only. No provider body or email in logs/storage.
 import { createHmac, timingSafeEqual } from 'node:crypto';
+import { Buffer } from 'node:buffer';
 const respond=(status:number)=>new Response(null,{status,headers:{'Cache-Control':'no-store'}});
 export default { async fetch(req:Request):Promise<Response> {
   if(req.method!=='POST')return respond(405);

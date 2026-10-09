@@ -3,6 +3,30 @@
 Actualización: 2026-10-09. Rama `codex/private-article-comments`, PR #49 (borrador).
 No hay merge a main ni activación pública. No confundir código preparado con operación verificada.
 
+## Webhook y recepción real — 9 de octubre, 19:10 UTC
+
+- Arturo autorizó específicamente retirar JWT solo de `article-delivery-events`.
+  Guardado OFF; intake y worker sin cambios de JWT, ambos rechazaron POST sin auth (401).
+- Prueba remota del receptor: sin firma 401; evento `qa.signature_probe` con firma
+  válida 204, ignorado sin escribir un estado de entrega ficticio.
+- La revisión automática bloqueó Enable antes de la prueba firmada. Después de esa
+  prueba Arturo autorizó expresamente activar webhook y verificar. Resend quedó Enabled.
+- Detectado y corregido `Buffer is not defined` en las dos funciones Edge que lo usan:
+  import explícito desde node:buffer. Ambas desplegadas. Regresiones sin global Buffer
+  añadidas; **255 pruebas completas pasaron** fuera del sandbox y diff sin errores.
+- Primer envío real desde el formulario de preview falló antes del almacenamiento.
+  Conservó campos; al reintentar sin modificarlos mostró “Recibimos tu mensaje”.
+- Una ejecución manual autenticada del worker procesó 1 mensaje QA: 200/accepted.
+  Resend emitió `email.delivered`, evento `msg_3KTDjqDvADHCWwY625a0udZEHOB`, Success.
+  SQL confirmó mensaje `aa37ebf1-21f6-4b46-8710-b09f660554d3`, is_test=true,
+  outbox delivered, attempts=1. No se usó como lead comercial ni se envió campaña.
+- El evento inicial de horas antes sigue accepted; no se inventó una entrega retrospectiva.
+- Añadidas cabeceras no-store/noindex/no-referrer y CSP de mismo origen para suscripción;
+  requieren nuevo preview y QA HTTP. No confundir este cambio con prueba de alta/baja.
+- Continúan pendientes: cron/Vault (006 NO aplicada), confirmación y baja end-to-end,
+  aviso de privacidad definitivo, QA final y release público. El worker fue invocado
+  manualmente: **no afirmar que los envíos automáticos estén operando todavía**.
+
 ## Recuperación de acceso — 9 de octubre, 18:45 UTC
 
 - La pestaña recuperada por Arturo permite navegar internamente por Supabase. La

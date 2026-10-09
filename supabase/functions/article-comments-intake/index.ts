@@ -1,6 +1,7 @@
 // Narrow server-to-server facade. Its caller cannot read tables or choose an RPC.
 // Keep gateway JWT verification enabled; additionally require this dedicated secret.
 import { timingSafeEqual } from 'node:crypto';
+import { Buffer } from 'node:buffer';
 const reply=(status:number,body:object)=>new Response(JSON.stringify(body),{status,headers:{'Content-Type':'application/json','Cache-Control':'no-store'}});
 export default {async fetch(req:Request):Promise<Response>{
   if(req.method!=='POST')return reply(405,{code:'method'});
