@@ -30,6 +30,7 @@ test('hub metadata keeps all published articles, their order and visible links',
     ['manual-de-marca.html', 'Manual de marca: el manual que más vale no perder'],
     ['logotipos-mitos.html', 'Logotipos: mitos que no dejan brillar a tu marca'],
     ['diseno-editorial.html', 'Diseño editorial: dale identidad a lo que entregas'],
+    ['como-aparecer-en-google.html', '¿Cómo te encuentra quien aún no sabe que existes?'],
   ];
   assert.equal(list.numberOfItems, articles.length);
   assert.deepEqual(list.itemListElement, articles.map(([file, name], index) => ({
