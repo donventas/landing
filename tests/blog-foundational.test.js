@@ -52,18 +52,18 @@ test('provides article metadata, structured data and an accessible portrait', ()
   assert.equal(author.url, 'https://www.donventas.mx/arturo-villagomez.html');
   assert.deepEqual(author.sameAs, ['https://www.arturovillagomez.com/']);
   assert.deepEqual(posting.image.map(value => new URL(value).pathname), [
-    '/og-fundacional-1200x1200.jpg',
-    '/og-fundacional-1200x900.jpg',
-    '/og-fundacional-1200x630.jpg'
+    '/og-fundacional-el-don-v1-1200x1200.jpg',
+    '/og-fundacional-el-don-v1-1200x900.jpg',
+    '/og-fundacional-el-don-v1-1200x630.jpg'
   ]);
-  assert.match(article, /<img[^>]+src="\/assets\/editorial\/fundador-editorial-768\.webp"[^>]+alt="Retrato de Arturo Villagomez, fundador de Don Ventas"/);
+  assert.match(article, /<img[^>]+src="\/assets\/editorial\/fundador-el-don-v1-768\.webp"[^>]+alt="Arturo Villagomez con El Don saludando desde su hombro; retrato intervenido con IA"/);
 });
 
 test('ships native social compositions for the three article image ratios', () => {
-  assert.deepEqual(jpegDimensions('og-fundacional-1200x630.jpg'), { width: 1200, height: 630 });
-  assert.deepEqual(jpegDimensions('og-fundacional-1200x900.jpg'), { width: 1200, height: 900 });
-  assert.deepEqual(jpegDimensions('og-fundacional-1200x1200.jpg'), { width: 1200, height: 1200 });
-  assert.match(article, /og:image" content="https:\/\/www\.donventas\.mx\/og-fundacional-1200x630\.jpg/);
+  assert.deepEqual(jpegDimensions('og-fundacional-el-don-v1-1200x630.jpg'), { width: 1200, height: 630 });
+  assert.deepEqual(jpegDimensions('og-fundacional-el-don-v1-1200x900.jpg'), { width: 1200, height: 900 });
+  assert.deepEqual(jpegDimensions('og-fundacional-el-don-v1-1200x1200.jpg'), { width: 1200, height: 1200 });
+  assert.match(article, /og:image" content="https:\/\/www\.donventas\.mx\/og-fundacional-el-don-v1-1200x630\.jpg/);
 });
 
 test('integrates the article into the homepage and broadens the public audience', () => {
@@ -104,7 +104,7 @@ test('all local references in the article resolve', () => {
 test('presents the hub as an editorial cover and keeps routes situation-first', () => {
   assert.match(hub, /class="blog-masthead publication-cover"/);
   assert.match(hub, /class="publication-visual/);
-  assert.match(hub, /blog-hub-cover-portrait-480\.webp 480w, \/assets\/editorial\/blog-hub-cover-portrait-720\.webp 720w/);
+  assert.match(hub, /hub-el-don-v1-480\.webp 480w, \/assets\/editorial\/hub-el-don-v1-720\.webp 720w/);
   assert.doesNotMatch(hub, /blog-hub-cover-960\.webp/);
   assert.match(hub, /Desde el escritorio de Arturo/);
   assert.match(hub, /class="situation-ledger\b/);
@@ -114,9 +114,9 @@ test('presents the hub as an editorial cover and keeps routes situation-first', 
 });
 
 test('ships responsive editorial covers without loading oversized source images', () => {
-  assert.match(article, /fundador-editorial-480\.webp 480w/);
+  assert.match(article, /fundador-el-don-v1-480\.webp 480w/);
   assert.match(guide, /class="article-cover-figure/);
-  assert.match(guide, /article-wrong-offer-480\.webp 480w/);
+  assert.match(guide, /barberia-el-don-v1-480\.webp 480w/);
   assert.match(guide, /width="1440" height="960"/);
 
   const blogCss = fs.readFileSync(path.join(root, 'blog', 'blog.css'), 'utf8');

@@ -26,7 +26,7 @@ test('both scenes have truthful labels and dimensioned responsive images', () =>
   assert.match(html, /Recreación con IA/);
   assert.match(html, /Inspirada en el restaurante donde tuve mi primer desayuno con el amor de mi vida/);
   assert.equal((html.match(/width="1440" height="960"/g) || []).length, 2);
-  for (const family of ['marca-confianza', 'marca-recuerdo']) {
+  for (const family of ['joyeria-el-don-v1', 'marca-recuerdo']) {
     for (const width of [480, 960, 1440]) {
       const file = path.join(root, `assets/editorial/${family}-${width}.webp`);
       const data = fs.readFileSync(file);

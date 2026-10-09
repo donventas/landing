@@ -3,7 +3,7 @@ const root=path.resolve(__dirname,'..');
 const read=file=>fs.readFileSync(path.join(root,file),'utf8');
 const articles=['tu-marca-es-tu-ventaja','contenido-que-atrae-clientes','por-que-nacio-don-ventas','manual-de-marca'];
 test('rhythm adaptation is limited to the four approved articles',()=>{
- for(const name of articles){const html=read('blog/'+name+'.html');assert.match(html,/body class="[^"]*reading-rhythm/);assert.match(html,/article-rhythm\.css\?v=20261007-1/);}
+ for(const name of articles){const html=read('blog/'+name+'.html');assert.match(html,/body class="[^"]*reading-rhythm/);assert.match(html,/article-rhythm\.css\?v=(?:20261007-1|20261009-el-don)/);}
  for(const file of ['index.html','branding.html','blog/index.html','blog/glosario.html'])assert.doesNotMatch(read(file),/article-rhythm\.css|class="[^"]*reading-rhythm/);
 });
 test('promise resources are native text and both reading links stay grouped',()=>{
