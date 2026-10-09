@@ -5,6 +5,23 @@ const path=require('node:path');
 const root=path.resolve(__dirname,'..');
 const read=f=>fs.readFileSync(path.join(root,f),'utf8');
 const hub=read('blog/index.html');
+test('blog index shares the approved El Don cover instead of the retired editorial photo',()=>{
+ assert.ok(hub.includes('hub-el-don-v1-720.webp'));
+ assert.ok(!hub.includes('og-blog-editorial.jpg'));
+ const image='https://www.donventas.mx/og-blog-el-don-v1.jpg';
+ assert.ok(hub.includes(`property="og:image" content="${image}"`));
+ assert.ok(hub.includes(`name="twitter:image" content="${image}"`));
+ assert.ok(fs.statSync(path.join(root,'og-blog-el-don-v1.jpg')).size<200000);
+});
+test('every blog page has matching Open Graph and Twitter images backed by local assets',()=>{
+ for(const file of fs.readdirSync(path.join(root,'blog')).filter(f=>f.endsWith('.html'))){
+  const html=read('blog/'+file);
+  const og=html.match(/property="og:image" content="([^"]+)"/);
+  const twitter=html.match(/name="twitter:image" content="([^"]+)"/);
+  assert.ok(og,file); assert.ok(twitter,file); assert.equal(og[1],twitter[1],file);
+  assert.ok(fs.statSync(path.join(root,new URL(og[1]).pathname)).size>0,file);
+ }
+});
 for(const [slug,family,old] of [
  ['por-que-nacio-don-ventas','fundador-el-don-v1','fundador-editorial'],
  ['contenido-que-atrae-clientes','barberia-el-don-v1','article-wrong-offer'],
