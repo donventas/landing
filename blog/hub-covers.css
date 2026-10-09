@@ -30,3 +30,5 @@
   .hub-story-meta{margin-top:22px}
 }
 @media(prefers-reduced-motion:reduce){.hub-story{transition:none}}
+.publication-visual img{object-position:right center}
+@media(max-width:1120px){.publication-visual img{object-position:center top}}

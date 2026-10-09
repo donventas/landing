@@ -41,6 +41,8 @@ scripts/build-editorial-assets.cjs
 scripts/editorial-preview-check.cjs
 assets/editorial/editorial-reporte-v1-PROMPT.md
 .qa-discovery/
+.qa-el-don/
+scripts/build-el-don-covers.cjs
 docs/discovery-ia-preview-qa.md
 previews/
 scripts/build-discovery-assets.cjs

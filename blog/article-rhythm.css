@@ -38,6 +38,12 @@
 .advantage-page.reading-rhythm #historia>.opening-line{margin-top:36px;padding-top:28px;border-top:1px solid #536072}
 
 /* Content guide: questions on paper, native comparison, final checklist. */
+.content-page.reading-rhythm .offer-confusion{margin-block:36px;border:1px solid #536072;background:#151B25}
+.offer-confusion>a,.offer-confusion img{display:block;width:100%;height:auto}
+.offer-confusion>a:focus-visible{outline:3px solid #A9C1FF;outline-offset:4px}
+.offer-confusion figcaption{padding:20px 22px;color:#CFD5DE;font-size:16px;line-height:1.6}
+.offer-confusion figcaption strong{display:block;color:#EEF1F6;font-weight:500}
+.offer-confusion figcaption span{display:block;margin-top:8px;font-size:14px;line-height:1.5}
 .content-page.reading-rhythm #problema{padding-top:0}
 .content-page.reading-rhythm .framework{margin-block:32px}
 .content-page.reading-rhythm .framework li{padding-block:22px;border-color:#BCC4D0}
@@ -54,6 +60,8 @@
 .content-page.reading-rhythm .checklist li{font-size:18px;line-height:1.65;padding-block:20px}
 
 /* Foundational letter retains its expressive color fields and asymmetry. */
+.manifesto-page .founder-figure>.cover-source{position:relative;z-index:1;font-size:14px;line-height:1.5;color:#CFD5DE;padding:14px 22px;margin:0}
+.manifesto-page .manifesto-heading{margin-top:0}
 .manifesto-page.reading-rhythm .origin-grid{grid-template-columns:56px minmax(0,1fr) minmax(0,1.2fr)}
 .manifesto-page.reading-rhythm .origin-panel h2{font-size:clamp(36px,4.1vw,60px);max-width:16ch;line-height:1.06}
 .manifesto-page.reading-rhythm .revelation-section{display:block;max-width:1080px}
