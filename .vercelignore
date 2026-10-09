@@ -40,3 +40,9 @@ BLOG-DISENO-EDITORIAL-REVIEW.md
 scripts/build-editorial-assets.cjs
 scripts/editorial-preview-check.cjs
 assets/editorial/editorial-reporte-v1-PROMPT.md
+.qa-discovery/
+docs/discovery-ia-preview-qa.md
+previews/
+scripts/build-discovery-assets.cjs
+assets/editorial/se-busca-v1-PROMPT.md
+assets/editorial/escritorio-discovery-v1-PROMPT.md

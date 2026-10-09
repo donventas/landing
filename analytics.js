@@ -15,7 +15,7 @@
     '/blog/contenido-que-atrae-clientes.html': 'entender',
     '/blog/tu-marca-es-tu-ventaja.html': 'ventaja', '/blog/glosario.html': 'glosario',
     '/blog/manual-de-marca.html': 'manual', '/blog/logotipos-mitos.html': 'logos',
-    '/blog/diseno-editorial.html': 'editorial'
+    '/blog/diseno-editorial.html': 'editorial', '/blog/como-aparecer-en-google.html': 'descubrimiento'
   };
   var terms = 'contenido-de-marca campana marca marketing promesa-de-marca branding experiencia-de-usuario pagina-de-destino conversion copy identidad-visual posicionamiento propuesta-de-valor seo manual-de-marca sistema-de-marca logo'.split(' ');
   var steps = 'moment serviceNeeded workingMode currentNeed existingAssets budgetNote outcome salesProblem consistencyProblem searchProblem otherProblem nextAction attempted proof businessAudience timing budgetBand desired clarityProblem systemProblem launchProblem repositionProblem brandOtherProblem applications users autonomy difference contact'.split(' ');
