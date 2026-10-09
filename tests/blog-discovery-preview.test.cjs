@@ -6,7 +6,8 @@ test('discovery release preserves the approved question, bounded length and disc
  assert.doesNotMatch(html,/Previo · no publicado|noindex/);
  assert.equal((html.match(/<h1[ >]/g)||[]).length,1);
  assert.match(html,/<h1>¿Cómo te encuentra quien <em>aún no sabe que existes\?<\/em><\/h1>/);
- const words=html.split('<main ')[1].split('</main>')[0].replace(/^[^>]*>/,'').replace(/<[^>]*>/g,' ').replace(/&[^;]+;/g,' ').trim().split(/\s+/).length;
+ const editorialHtml=html.replace(/<div id="comenta-conmigo"[\s\S]*?<\/div>/,'');
+ const words=editorialHtml.split('<main ')[1].split('</main>')[0].replace(/^[^>]*>/,'').replace(/<[^>]*>/g,' ').replace(/&[^;]+;/g,' ').trim().split(/\s+/).length;
  assert.ok(words<=1400,`${words} words`);assert.ok(words>900);
  assert.match(html,/"datePublished":"2026-10-09"/);
  assert.doesNotMatch(html,/<form|comprar el kit/i);

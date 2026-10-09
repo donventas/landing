@@ -10,10 +10,12 @@ test('editorial release is discoverable and within the approved word cap',()=>{
   assert.match(html,/application\/ld\+json/);
   assert.match(html,/analytics\.js/);
   assert.doesNotMatch(html,/Previo · no publicado/);
-  const article=html.split('data-editorial-body>')[1].split('</article>')[0];
+  // The approved prose cap excludes the new independent conversation UI.
+  const editorialHtml=html.replace(/<div id="comenta-conmigo"[\s\S]*?<\/div>/,'');
+  const article=editorialHtml.split('data-editorial-body>')[1].split('</article>')[0];
   const words=article.replace(/<[^>]*>/g,' ').replace(/&[^;]+;/g,' ').trim().split(/\s+/).length;
   assert.ok(words<=1400,`${words} words exceeds 1400`);
-  const mainWords=html.split('<main ')[1].split('</main>')[0].replace(/^[^>]*>/,'').replace(/<[^>]*>/g,' ').replace(/&[^;]+;/g,' ').trim().split(/\s+/).length;
+  const mainWords=editorialHtml.split('<main ')[1].split('</main>')[0].replace(/^[^>]*>/,'').replace(/<[^>]*>/g,' ').replace(/&[^;]+;/g,' ').trim().split(/\s+/).length;
   assert.ok(mainWords<=1400,`${mainWords} main-content words exceeds 1400`);
   assert.equal((html.match(/<h1[ >]/g)||[]).length,1);
   assert.match(html,/rel="author"/);

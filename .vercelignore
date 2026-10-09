@@ -48,3 +48,11 @@ previews/
 scripts/build-discovery-assets.cjs
 assets/editorial/se-busca-v1-PROMPT.md
 assets/editorial/escritorio-discovery-v1-PROMPT.md
+.private-comments/
+.qa-comments/
+.qa-comments/**
+scripts/verify-comments-sql.cjs
+supabase/functions/
+scripts/private-comments-preview.cjs
+lib/article-comments/local-store.cjs
+PRIVATE-COMMENTS-REVIEW.md
