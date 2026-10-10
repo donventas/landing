@@ -9,7 +9,7 @@ const cards = [...html.matchAll(/<a class="hub-story\b[^>]*>[\s\S]*?<\/a>/g)].ma
 
 test('all seven stories and the glossary have a single image-and-title destination', () => {
   const expected = [
-    ['por-que-nacio-don-ventas.html', 'fundador-el-don-v1', 'carta-fundacional'],
+    ['por-que-nacio-don-ventas.html', 'fundador-editorial', 'carta-fundacional'],
     ['contenido-que-atrae-clientes.html', 'barberia-el-don-v1', 'guia-contenido'],
     ['tu-marca-es-tu-ventaja.html', 'joyeria-el-don-v3', 'marca-ventaja'],
     ['manual-de-marca.html', 'manual-busqueda-v3', 'manual-marca'],
@@ -33,7 +33,7 @@ test('all seven stories and the glossary have a single image-and-title destinati
     assert.match(card, /class="hub-story-action"/);
   });
   assert.match(cards[1], /Ilustración con IA · escena ficticia/);
-  assert.match(cards[0], /Retrato intervenido con IA/);
+  assert.doesNotMatch(cards[0], /Retrato intervenido con IA/);
   assert.match(cards[2], /Ilustración con IA · escena ficticia/);
   assert.match(cards[3], /Ilustración con IA · escena ficticia/);
   assert.match(cards[4], /Ilustración con IA · escena ficticia/);
