@@ -297,3 +297,50 @@ EXTENSIÓN DE FAMILIA / ERRORES INLINE — 2026-10-10 / regalos-familia-v1
   campañas, correo real, migraciones, commit, merge ni publicación en esta ronda.
 - QA independiente /root/qa_editorial_gifts: 13/13 pruebas específicas y revisión
   de seis ofertas/introducciones a 320/1440, error inline y navegación: PASS, sin pendientes.
+
+PILOTO COMPARTIR / INVITACIONES CONTEXTUALES — 2026-10-10
+- Arturo aprueba la dirección editorial de compartir sin apariencia publicitaria.
+  Se conserva la imagen original; el hook y la mención del recurso están en OG/Twitter.
+  Relato, H1, title SEO, canonical y schema del artículo permanecen sin cambio.
+- Invitación inicial personalizada en los siete formularios: ejemplos reales para
+  orientar futuros artículos/recursos y ayudar a otros lectores. Las tres preguntas
+  existentes, obligatoriedad, consentimiento y entrega inmediata no cambian.
+- En el piloto contenido-que-atrae-clientes: compartir antes de responder sigue
+  disponible. Al recibir el regalo, Descargar PDF es primario y Compartir artículo
+  es secundario en la misma fila (apilados bajo 600 px). Este último despliega
+  WhatsApp/copiar enlace; Escape cierra las opciones y devuelve el foco al botón.
+  No añade un segundo encabezado ni condiciona descarga o suscripción a compartir.
+- Compartir usa URL pública fija y atribución acotada, nunca correo/respuestas.
+  Métricas solo con consentimiento; compartir no se cuenta como contacto comercial
+  ni se afirma que un enlace abierto en WhatsApp fue efectivamente enviado.
+- PDF piloto v4: misma hoja/casillas, pie enlazado al artículo. Vista previa derivada
+  del PDF, hash en catálogo; se conservan v2/v3 y recuperación de enlaces anteriores.
+- Padding corregido: margen de lectura de 24 px y máximo 740 px antes del formulario.
+- Verificado en navegador local: invitación contextual en piloto y diseño editorial;
+  tres respuestas ficticias, sin opt-in; recibo simulado y enlace al PDF v4; botón
+  secundario, expansión/cierre por teclado y copia del enlace sin datos personales.
+  Revisión visual actual a 535 px sin overflow. La herramienta no aplicó los nuevos
+  overrides 320/390/768/1440 en esta ronda: no se registra un pase visual de esos
+  anchos para la nueva fila. La regla responsive está cubierta por revisión CSS.
+- Suite 280/280 fuera del sandbox (tres fallos iniciales por temporales/loopback
+  restringidos). Auto-revisión, no QA independiente nuevo ni auditoría de campo.
+  No nueva medición controlada de rendimiento; no nuevos assets en este incremento
+  de botones/copy. La tarjeta real de WhatsApp requiere publicación y su caché.
+- Estado: desarrollo local; compartir sigue limitado al artículo piloto. Sin commit,
+  merge, publicación, correos reales, cambio cloud ni solicitud de indexación.
+
+PREPARACIÓN DE RELEASE AUTORIZADO — 2026-10-10
+- Arturo autoriza commit y merge después de retirar copy de pruebas para el público.
+- Recibo definitivo: «Gracias por compartir tu experiencia. Tu PDF está listo.».
+  Se mantienen avisos explícitos exclusivamente en modo simulation/test para no
+  presentar recibos locales como entregas reales. El endpoint público informa live
+  y siete regalos activos; no se cambian flags ni se envían formularios reales.
+- Auditoría de texto visible de siete artículos/ofertas e inspección del PDF v4:
+  sin etiquetas de prueba/piloto. Se conserva «Criterio, no piloto automático» del
+  relato aprobado y «prueba» cuando significa evidencia o comprobación de marca.
+- Prueba automatizada de copy de release añadida. Suite final 281/281; diff sin
+  errores. .vercelignore excluye servidores locales, almacén QA, scripts de regalos,
+  renders y este expediente. La imagen social sigue siendo la escena original.
+- Alcance de release: invitaciones contextuales en siete artículos; compartir antes
+  y después del regalo solo en contenido-que-atrae-clientes. Sin cambios adicionales
+  en artículos, servicios, consentimiento, diagnóstico o configuración de producción.

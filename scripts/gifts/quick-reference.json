@@ -1,6 +1,8 @@
 [
   {
-    "id":"antes-de-publicar", "revision":"v3", "article":"contenido-que-atrae-clientes", "type":"checklist", "title":"Antes de\npublicar.",
+    "id":"antes-de-publicar", "revision":"v4", "article":"contenido-que-atrae-clientes", "type":"checklist", "title":"Antes de\npublicar.",
+    "shareLabel":"Comparte el artículo y su recurso",
+    "shareUrl":"https://www.donventas.mx/blog/contenido-que-atrae-clientes.html?utm_source=reader&utm_medium=referral&utm_campaign=entender-antes-de-comunicar&utm_content=pdf-share#compartir-articulo",
     "image":"scripts/gifts/assets/antes-de-publicar-v2.png", "hook":"Dale a alguien una razón para prestarte atención.",
     "instruction":"Abre tu publicación y marca solo lo que ya puedes comprobar.",
     "items":[
