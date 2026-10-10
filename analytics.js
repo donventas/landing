@@ -6,8 +6,8 @@
   var CAMPAIGN_KEY = 'dv-analytics-campaign-v1', CAMPAIGN_TTL = 30 * 60000;
   // A closed vocabulary, not a regex accepting arbitrary campaign/customer text.
   var campaignNames = ['tu-marca-es-tu-ventaja', 'entender-antes-de-comunicar', 'origen-don-ventas', 'diagnostico-contenido', 'diagnostico-marca'];
-  var campaignChannels = { instagram: 'social', facebook: 'social', linkedin: 'social', newsletter: 'email', whatsapp: 'messaging' };
-  var campaignPieces = ['bio', 'publicacion', 'historia', 'video', 'correo', 'enlace'];
+  var campaignChannels = { instagram: 'social', facebook: 'social', linkedin: 'social', newsletter: 'email', whatsapp: 'messaging', reader: 'referral' };
+  var campaignPieces = ['bio', 'publicacion', 'historia', 'video', 'correo', 'enlace', 'article-share', 'gift-share', 'pdf-share'];
   var pages = {
     '/': 'inicio', '/index.html': 'inicio', '/branding.html': 'marca',
     '/diagnostico.html': 'diagnostico', '/arturo-villagomez.html': 'fundador', '/blog/': 'ideas', '/blog/index.html': 'ideas',
@@ -70,6 +70,12 @@
     } else if (['article_message_opened', 'article_message_sent', 'article_message_failed'].indexOf(name) >= 0) {
       // Article source is assigned by the page map, never by visitor input.
       if (name === 'article_message_failed') output.reason = member(data.reason, ['rate_limited', 'validation', 'unavailable']) || 'unavailable';
+    } else if (['article_share_clicked', 'article_share_copied'].indexOf(name) >= 0) {
+      if (!member(data.method, ['whatsapp','copy']) || !member(data.placement, ['article','gift'])) return null;
+      if (name === 'article_share_copied' && data.method !== 'copy') return null;
+      output.method = data.method; output.placement = data.placement;
+    } else if (['article_gift_received','article_gift_download_clicked'].indexOf(name) >= 0) {
+      // No receipt ID, email, answers, file URL or free text.
     } else if (name === 'section_viewed') {
       if (!member(data.section, ['hero', 'problema', 'metodo', 'servicios', 'casos', 'ideas', 'quien', 'inversion', 'preguntas', 'contacto'])) return null;
       output.section = data.section;
@@ -297,6 +303,7 @@
         }
         track(name, data);
       }
+      if (link.hasAttribute('data-article-share')) return; // Sharing is not a commercial contact.
       if (url.protocol === 'https:' && ['wa.me', 'api.whatsapp.com'].indexOf(url.hostname) >= 0) { clickTrack('whatsapp_click'); return; }
       if (url.origin !== root.location.origin) return;
       var target = page(url.pathname);

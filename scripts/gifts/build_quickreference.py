@@ -49,8 +49,8 @@ def page(c,p):
     para(c,b.NOTICE,M,661,CW,9.3,'Body',GRAY,leading=11.5,max_h=58)
     rule(c,733)
     c.setFont('Medium',9);c.setFillColor(BLUE)
-    c.drawString(M,39,'Volver al artículo en donventas.mx')
-    c.linkURL('https://www.donventas.mx/blog/'+p['article']+'.html',(M,34,M+210,49),relative=0)
+    c.drawString(M,39,p.get('shareLabel','Volver al artículo en donventas.mx'))
+    c.linkURL(p.get('shareUrl','https://www.donventas.mx/blog/'+p['article']+'.html'),(M,34,M+240,49),relative=0)
     c.setFont('Mono',8);c.setFillColor(GRAY)
     c.drawRightString(W-M,39,p['revision'].upper()+' / OCT 2026 / 01')
     c.showPage()
@@ -75,7 +75,7 @@ def verify(path,p):
     txt=r.pages[0].extract_text()
     assert 'No se autoriza revender' in txt
     assert not any(a.get_object().get('/Subtype')=='/Widget' and a.get_object().get('/FT')=='/Tx' for a in r.pages[0].get('/Annots',[]))
-    assert any(a.get_object().get('/A',{}).get('/URI')=='https://www.donventas.mx/blog/'+p['article']+'.html' for a in r.pages[0].get('/Annots',[]))
+    assert any(a.get_object().get('/A',{}).get('/URI')==p.get('shareUrl','https://www.donventas.mx/blog/'+p['article']+'.html') for a in r.pages[0].get('/Annots',[]))
     return {'file':path.name,'article':p['article'],'type':p['type'],'pages':1,'checkboxes':expected,
         'words':len(txt.split()),'bytes':path.stat().st_size,'sha256':hashlib.sha256(path.read_bytes()).hexdigest()}
 

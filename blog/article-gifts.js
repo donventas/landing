@@ -15,7 +15,7 @@
   section.setAttribute('aria-labelledby','gift-title');
   section.innerHTML = '<span class="comment-kicker">Del artículo a la práctica · recurso gratuito</span><h2 id="gift-title"></h2><p data-gift-description></p>' +
     '<details class="comment-details"><summary>Responder y obtener mi regalo <span aria-hidden="true">＋</span></summary><div class="comment-content">' +
-    '<div class="gift-form-intro"><span>3 preguntas · PDF al terminar</span><p>Respuestas breves, no un examen. Si no te ha pasado, también nos sirve.</p></div>' +
+    '<div class="gift-form-intro"><span>3 preguntas · PDF al terminar</span><p><strong>Tu experiencia puede ayudar a alguien más.</strong></p><p data-response-invitation></p></div>' +
     '<p class="comment-environment"></p><form class="gift-form"><fieldset class="gift-experience"><legend>Cuéntanos tu experiencia</legend><div data-gift-questions></div></fieldset>' +
     '<fieldset class="gift-contact"><legend>Tu contacto</legend><p class="comment-fine">Solo para aclarar tu experiencia si hace falta. No te suscribe.</p><div class="comment-fields"><div class="comment-field"><label for="gift-email">Correo electrónico</label><input id="gift-email" name="email" type="email" autocomplete="email" maxlength="254" required></div><div class="comment-field"><label for="gift-name">Nombre <span>(opcional)</span></label><input id="gift-name" name="name" autocomplete="name" maxlength="100"></div></div></fieldset>' +
     '<div class="comment-trap" aria-hidden="true"><label for="gift-website">Deja vacío</label><input id="gift-website" name="website" tabindex="-1" autocomplete="off"></div>' +
@@ -27,6 +27,7 @@
     '<p class="comment-fine">Úsalo como referencia o marca sus casillas, si las tiene. Los cambios que guardes en el PDF no se envían a Don Ventas.</p><button type="button" class="gift-remember">Recordar este regalo en este navegador</button><p class="comment-fine" data-gift-remember-note></p></div>';
   section.querySelector('h2').textContent = gift.title;
   section.querySelector('[data-gift-description]').textContent = gift.description;
+  section.querySelector('[data-response-invitation]').textContent = gift.responseInvitation || 'Cuéntanos qué te pasó, con un ejemplo si puedes. Así podemos crear artículos y recursos más útiles para ti y para quienes leen este blog.';
   function consentCopy(){
     section.querySelector('[data-newsletter-label]').textContent = data.newsletter.label;
     section.querySelector('#gift-newsletter-promise').textContent = data.newsletter.promise;
@@ -71,7 +72,7 @@
     }catch(_){status.textContent='No pudimos actualizar. Tus respuestas siguen aquí. Vuelve a intentar actualizar la invitación.';}
     finally{busy=false;refresh.disabled=false;}
   });
-  function reveal(focus){delivery.hidden=false;section.querySelector('details').open=false;section.querySelector('summary').firstChild.textContent='Volver a compartir mi experiencia ';if(focus)delivery.focus({preventScroll:true});}
+  function reveal(focus){delivery.hidden=false;section.querySelector('details').open=false;section.querySelector('summary').firstChild.textContent='Volver a compartir mi experiencia ';if(focus)delivery.focus({preventScroll:true});document.dispatchEvent(new CustomEvent('dv:gift-ready',{detail:{article:article,reason:focus?'receipt':'remembered'}}));}
   try {var remembered=localStorage.getItem(storageKey);if(remembered===gift.file || (Array.isArray(gift.previousFiles) && gift.previousFiles.includes(remembered)))reveal(false);}catch(_){}
   section.querySelector('.gift-remember').addEventListener('click',function(){
     var note=section.querySelector('[data-gift-remember-note]');
@@ -94,7 +95,7 @@
       var result=await response.json();
       if(!response.ok || result.ok!==true || !result.gift || result.gift.id!==gift.id || result.gift.url!==gift.file){var err=new Error();err.status=response.status;err.code=result.code;throw err;}
       dirty=false;form.reset();fingerprint='';key='';
-      delivery.querySelector('h3').textContent=availability.mode==='simulation'?'Prueba completada. Tu PDF está listo.':'Recibimos tus respuestas. Tu PDF está listo.';
+      delivery.querySelector('h3').textContent='Gracias por compartir tu experiencia. Tu PDF está listo.';
       reveal(true);
     }catch(err){refresh.hidden=err.code!=='survey_updated';status.textContent=err.code==='survey_updated'?'Actualizamos el formulario. Usa «Actualizar invitación» para revisarlo sin perder tus respuestas.':err.status===429?'Espera 15 minutos antes de reintentar. Tus respuestas siguen aquí.':'No pudimos confirmar el envío. Tus respuestas siguen aquí; reintenta sin duplicarlas.';status.classList.add('is-error');status.focus({preventScroll:true});}
     finally{clearTimeout(timer);busy=false;form.removeAttribute('aria-busy');Array.from(form.elements).forEach(function(el){el.disabled=false;});button.textContent='Enviar y obtener mi PDF';}

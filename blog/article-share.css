@@ -1,0 +1,20 @@
+/* Sharing is secondary to reading and receiving the resource; no campaign banner. */
+.article-share{margin:28px 0;color:var(--muted,#B8C4D8);scroll-margin-top:180px}
+.article-share-quiet{width:calc(100% - 48px);max-width:740px;margin:28px auto;box-sizing:border-box}
+.article-share p{margin:0 0 8px;font-size:15px;line-height:1.55}
+.article-share-actions{display:flex;gap:4px 20px;align-items:center;flex-wrap:wrap}
+.article-share-actions>a,.article-share-actions>button{display:inline-flex;align-items:center;min-height:44px;padding:8px 0;font:inherit;font-size:14px;font-weight:600;color:#A7C0FF;background:transparent;border:0;border-radius:2px;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:5px;cursor:pointer}
+.article-share-actions>a:hover,.article-share-actions>button:hover{color:#EEF1F6}
+.article-share :focus-visible{outline:2px solid #A7C0FF;outline-offset:5px}
+.article-share .article-share-status{flex-basis:100%;margin:0;font-size:14px;color:#B8C4D8}
+.article-share-status:empty{display:none}
+.article-share-manual{flex-basis:100%;min-width:0}
+.article-share-manual label{display:block;font-size:14px;margin-bottom:8px}
+.article-share-manual input{width:100%;min-width:0;box-sizing:border-box;background:#18212E;color:#EEF1F6;border:1px solid #78869C;border-radius:4px;padding:12px;font:inherit;font-size:14px}
+.gift-delivery-actions{display:flex;align-items:stretch;flex-wrap:wrap;gap:12px;margin:16px 0}
+.gift-share-toggle{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:12px 18px;border:1px solid #9ab8ff;border-radius:4px;background:transparent;color:#e3ebfc;font:inherit;font-size:16px;font-weight:600;line-height:1.4;cursor:pointer;box-sizing:border-box}
+.gift-share-toggle:hover{background:#263954}
+.gift-share-toggle:focus-visible{outline:2px solid #A7C0FF;outline-offset:4px}
+.article-share-after{margin:0 0 16px;padding:12px 0;border-block:1px solid #53657f}
+.article-share[hidden],.article-share-manual[hidden]{display:none!important}
+@media(max-width:600px){.gift-delivery-actions>*{width:100%;justify-content:center;box-sizing:border-box}}

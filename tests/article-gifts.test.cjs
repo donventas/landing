@@ -3,6 +3,29 @@ const test=require('node:test'),assert=require('node:assert/strict'),crypto=requ
 const {createHandler}=require('../lib/article-comments/service.cjs');
 const {LocalStore}=require('../lib/article-comments/local-store.cjs');
 const catalog=require('../blog/article-gifts.json');
+test('release copy has a final receipt and QA labels remain restricted to non-live environments',()=>{
+ const source=fs.readFileSync(__dirname+'/../blog/article-gifts.js','utf8');
+ assert.ok(source.includes("delivery.querySelector('h3').textContent='Gracias por compartir tu experiencia. Tu PDF está listo.'"));
+ assert.ok(!source.includes('Prueba completada'));
+ assert.match(source,/availability\.mode === 'simulation' \? 'Prueba local/);
+ assert.match(source,/availability\.mode === 'test' \? 'Prueba privada[^\n]+: 'Respuestas privadas · no se publican en el blog\.'/);
+ const forbidden=/prueba local|prueba privada|prueba completada|datos ficticios|versión piloto|modo de prueba|simulación|experimental/i;
+ for(const [slug,gift] of Object.entries(catalog.articles)){
+  for(const key of ['title','offerTitle','cta','intro','description','responseInvitation'])assert.doesNotMatch(gift[key]||'',forbidden,slug+': '+key);
+  const html=fs.readFileSync(__dirname+'/../blog/'+slug+'.html','utf8');
+  const visibleCopy=html.replace(/<!--[\s\S]*?-->/g,'').replace(/<(script|style)\b[^>]*>[\s\S]*?<\/\1>/gi,'').replace(/<[^>]+>/g,' ');
+  assert.doesNotMatch(visibleCopy,forbidden,slug);
+ }
+});
+test('each article explains the community value with its own invitation, without changing the three research questions',()=>{
+ const invitations=Object.values(catalog.articles).map(gift=>gift.responseInvitation);
+ assert.equal(new Set(invitations).size,7);
+ for(const gift of Object.values(catalog.articles)){
+  assert.ok(gift.responseInvitation.length>60 && gift.responseInvitation.length<300);
+  assert.match(gift.responseInvitation,/artículos y recursos/);
+  assert.equal(gift.questions.length,3);
+ }
+});
 test('all seven articles use shared discovery with contextual copy and verified PDF thumbnails',()=>{
  for(const [slug,gift] of Object.entries(catalog.articles)){
   const html=fs.readFileSync(require('node:path').join(__dirname,'../blog',slug+'.html'),'utf8');

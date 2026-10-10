@@ -9,12 +9,13 @@
   },
   "articles": {
     "contenido-que-atrae-clientes": {
-      "id": "antes-de-publicar", "title": "Antes de publicar", "file": "/assets/gifts/antes-de-publicar-v3.pdf",
-      "preview": "/assets/gifts/antes-de-publicar-v3-preview.webp",
-      "previewSourceSha256": "1cd289210580dbe81041b3d7d2b6faf52a06cefcd7fc1d8c02bfe3501fdd4ebe",
+      "id": "antes-de-publicar", "title": "Antes de publicar", "file": "/assets/gifts/antes-de-publicar-v4.pdf",
+      "preview": "/assets/gifts/antes-de-publicar-v4-preview.webp",
+      "previewSourceSha256": "1e57ae94ec783541952c788f0d03aa17283c76263b13dbe3f17b4b0529e98d97",
       "offerTitle": "Antes de publicar: revisa estas 5 cosas", "cta": "Quiero mi checklist",
+      "responseInvitation": "Cuéntanos qué pasó con una publicación de tu negocio, con un ejemplo si puedes. Tu experiencia nos ayuda a crear artículos y recursos más útiles sobre cómo comunicar lo que ofreces, para ti y para quienes leen este blog.",
       "intro": "una checklist gratuita para revisar tu próximo contenido.",
-      "previousFiles": ["/assets/gifts/antes-de-publicar-v2.pdf"],
+      "previousFiles": ["/assets/gifts/antes-de-publicar-v2.pdf", "/assets/gifts/antes-de-publicar-v3.pdf"],
       "description": "Un checklist de una hoja, con cinco revisiones concretas y casillas para marcar antes de publicar.",
       "questions": ["Piensa en la última publicación de tu negocio: ¿qué querías que entendieran o hicieran? Si todavía no publicas, cuéntanos en qué punto estás.", "¿Qué ocurrió después? ¿Cómo te diste cuenta? También sirve que no haya pasado nada o que no lo hayas medido.", "¿Qué hiciste para preparar o ajustar esa publicación y qué esfuerzo te tomó? Si no necesitaste cambiarla, cuéntanos eso."]
     },
@@ -23,6 +24,7 @@
       "preview": "/assets/gifts/antes-de-enviar-ese-pdf-v3-preview.webp",
       "previewSourceSha256": "ed3bd53081869ba430a71400da5b2332e1bdcd908ad8fc50b781dfe66250fd2f",
       "cta": "Quiero mi checklist", "intro": "una checklist gratuita para revisar tu próximo reporte o propuesta.",
+      "responseInvitation": "Cuéntanos qué pasó al entregar un reporte o propuesta, con un ejemplo si puedes. Tu experiencia nos ayuda a crear artículos y recursos más útiles para que tus entregas se entiendan mejor y ayudar a otros lectores con el mismo reto.",
       "previousFiles": ["/assets/gifts/antes-de-enviar-ese-pdf-v2.pdf"],
       "description": "Un checklist de una hoja para revisar conclusión, lenguaje, cifras, jerarquía y siguiente paso antes de enviar.",
       "questions": ["Recuerda el último reporte o propuesta que entregaste: ¿quién lo recibió y para qué lo necesitaba? Si no has entregado uno, puedes decirlo.", "¿Qué preguntas o comentarios recibiste? Si se entendió a la primera o no hubo respuesta, también nos sirve saberlo.", "¿Cómo lo preparaste y qué tuviste que explicar o ajustar después? Cuéntanos el tiempo o esfuerzo, si lo recuerdas."]
@@ -32,6 +34,7 @@
       "preview": "/assets/gifts/tu-valor-en-tres-frases-v2-preview.webp",
       "previewSourceSha256": "bc696c68923ba68ff99687b221e7add82e5020180713af7c1c964e84b621a0b2",
       "cta": "Quiero mi guía", "intro": "una guía gratuita para explicar tu servicio sin dar tantas vueltas.",
+      "responseInvitation": "Cuéntanos cómo te fue al explicar a qué se dedica tu negocio, con un ejemplo si puedes. Tu experiencia nos ayuda a crear artículos y recursos más útiles para comunicar tu valor y ayudar a otros lectores a hacer lo mismo.",
       "previousFiles": ["/assets/gifts/tu-valor-en-tres-frases-v1.pdf"],
       "description": "Una guía rápida de una hoja, con fórmulas y ejemplos para explicar tu servicio sin dar tantas vueltas.",
       "questions": ["La última vez que alguien te preguntó a qué se dedica tu negocio, ¿qué le contestaste? Si aún no te ha pasado, cuéntanos tu situación.", "¿Qué entendió o preguntó esa persona después? También puede haber entendido exactamente lo que querías.", "¿Has cambiado esa explicación o buscado ayuda para hacerla? Cuéntanos qué hiciste; si no lo has necesitado, dilo."]
@@ -41,6 +44,7 @@
       "preview": "/assets/gifts/de-la-promesa-a-la-prueba-v2-preview.webp",
       "previewSourceSha256": "79abff660f1e4341cf345aa41a31f49e4ed0f2d446bf4d639e350f1d6743258e",
       "cta": "Quiero mi guía", "intro": "una guía gratuita para convertir promesas de marca en acciones concretas.",
+      "responseInvitation": "Cuéntanos una experiencia real con tus clientes, con un ejemplo si puedes. Nos ayudará a crear artículos y recursos más útiles sobre cómo cumplir lo que tu marca promete, para ti y para otros lectores.",
       "previousFiles": ["/assets/gifts/de-la-promesa-a-la-prueba-v1.pdf"],
       "description": "Una guía rápida de una hoja para traducir promesas de marca en conductas y evidencias concretas.",
       "questions": ["Piensa en la última vez que un cliente te eligió o volvió: ¿qué razón te dio? Si no te la dijo, no hace falta adivinarla.", "¿Qué ocurrió durante el servicio o la compra que puedas describir con un ejemplo? Puede ser positivo, negativo o cotidiano.", "¿Qué haces hoy para repetir esa experiencia o corregirla? Si aún no tienes una forma de hacerlo, cuéntanos."]
@@ -50,6 +54,7 @@
       "preview": "/assets/gifts/tu-marca-lista-para-compartir-v2-preview.webp",
       "previewSourceSha256": "bae5f8c10b79094c4398b1d3a0029e56f562e5245cd7ab6899e685e7b047401a",
       "cta": "Quiero mi checklist", "intro": "una checklist gratuita para compartir tu marca con menos dudas y correcciones.",
+      "responseInvitation": "Cuéntanos qué pasó cuando alguien más necesitó usar tu marca, con un ejemplo si puedes. Tu experiencia nos ayuda a crear artículos y recursos más útiles para trabajar en equipo con menos dudas, para ti y para otros lectores.",
       "previousFiles": ["/assets/gifts/tu-marca-lista-para-compartir-v1.pdf"],
       "description": "Un checklist de una hoja para entregar archivos, variantes e instrucciones que tu equipo sí pueda usar.",
       "questions": ["La última vez que otra persona necesitó usar tu marca, ¿qué iba a hacer y qué le compartiste? Si no ha ocurrido, dilo.", "¿Qué pudo resolver por su cuenta y qué tuvo que preguntarte? Si no hubo dudas, también nos interesa.", "¿Cómo resolvieron esas preguntas y cuánto trabajo adicional hubo? Si no hizo falta corregir nada, cuéntanos."]
@@ -59,6 +64,7 @@
       "preview": "/assets/gifts/tu-logo-fuera-del-archivo-v2-preview.webp",
       "previewSourceSha256": "f17b94de055d4cf6583cb3ef304661e517ad0f9ee334da3de6d3777431d5bf50",
       "cta": "Quiero mi checklist", "intro": "una checklist gratuita para probar tu logo en usos reales.",
+      "responseInvitation": "Cuéntanos cómo funcionó tu logo fuera del archivo, con un ejemplo si puedes. Tu experiencia nos ayuda a crear artículos y recursos más útiles sobre sus usos reales, para ti y para quienes enfrentan situaciones parecidas.",
       "previousFiles": ["/assets/gifts/tu-logo-fuera-del-archivo-v1.pdf"],
       "description": "Un checklist de una hoja para probar tamaño, fondo, proporciones y reproducción de tu logo en usos reales.",
       "questions": ["¿Dónde usaste tu logo por última vez y en qué tamaño o material? Si aún no tienes uno, cuéntanos para qué lo necesitas.", "¿Cómo funcionó en ese lugar: se leyó bien, hubo que adaptarlo o no hizo falta cambiar nada? Describe lo que viste.", "¿Qué archivo o ayuda utilizaste para resolverlo y qué esfuerzo implicó? También sirve que ya tuvieras todo listo."]
@@ -68,6 +74,7 @@
       "preview": "/assets/gifts/encuentrate-sin-tu-nombre-v2-preview.webp",
       "previewSourceSha256": "6669da8cd87a846dffa51a52f47d73d57989f40b138038e7483e338fa6380f48",
       "cta": "Quiero mi guía", "intro": "una guía gratuita para explorar cómo podrían encontrar tu negocio sin conocer su nombre.",
+      "responseInvitation": "Cuéntanos cómo encuentran tu negocio y qué has observado al buscarlo, con un ejemplo si puedes. Tu experiencia nos ayuda a crear artículos y recursos más útiles sobre cómo hacerte visible, para ti y para otros lectores.",
       "previousFiles": ["/assets/gifts/encuentrate-sin-tu-nombre-v1.pdf"],
       "description": "Una guía rápida de una hoja con búsquedas de ejemplo, qué observar y qué información revisar en tu sitio.",
       "questions": ["¿Cómo llegó el último cliente que te contó dónde te encontró? Si no lo sabes o todavía no tienes clientes, puedes decirlo.", "La última vez que buscaste en Google un servicio como el tuyo sin escribir tu marca, ¿qué escribiste y qué encontraste? Si no lo has probado, dilo.", "¿Qué has hecho para facilitar que te encuentren y cómo comprobaste si ayudó? No es necesario haber invertido ni medido resultados."]

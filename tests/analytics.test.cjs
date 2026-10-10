@@ -7,6 +7,21 @@ const root = path.resolve(__dirname, '..');
 const source = fs.readFileSync(path.join(root, 'analytics.js'), 'utf8');
 const api = require('../analytics.js');
 
+test('share clicks are separate from contacting sales, consent-bound and never backfilled',()=>{
+ const f=fixture('preview.test',null,false,'/blog/contenido-que-atrae-clientes.html');
+ assert.equal(f.win.DVAnalytics.track('article_share_clicked',{method:'whatsapp',placement:'article'}),false);
+ f.accept.onclick();
+ assert.ok(!f.win.DVAnalytics.records.some(x=>x.event==='article_share_clicked'));
+ f.win.DVAnalytics.track('article_share_clicked',{method:'whatsapp',placement:'article',email:'secret'});
+ assert.equal(f.win.DVAnalytics.records.filter(x=>x.event==='article_share_clicked').length,1);
+ const link={href:'https://wa.me/?text=example',hasAttribute:name=>name==='data-article-share'};
+ f.listeners.click({target:{closest:()=>link}});
+ assert.ok(!f.win.DVAnalytics.records.some(x=>x.event==='whatsapp_click'));
+ f.reject.onclick();
+ assert.equal(f.win.DVAnalytics.track('article_gift_received',{}),false);
+ assert.doesNotMatch(JSON.stringify(f.win.DVAnalytics.records),/secret/);
+});
+
 function fixture(host = 'www.donventas.mx', saved = null, deniedStorage = false, pathname = '/', options = {}) {
   const values = new Map(saved ? [[api.key, JSON.stringify(saved)]] : []);
   const sessionValues = options.sessionValues || new Map(), timers = new Map();
