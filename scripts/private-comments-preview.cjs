@@ -10,7 +10,7 @@ function unpackLegal(html) {
   // Render the existing document in this strict-CSP fixture without executing its unpacker.
   return match ? JSON.parse(match[1]).replace(/<script(?![^>]*\bsrc=)[^>]*>[\s\S]*?<\/script>/g, '') : html;
 }
-function createPreview({ store = new LocalStore(), failFirst = false, secret = crypto.randomBytes(32).toString('hex') } = {}) {
+function createPreview({ store = new LocalStore(), failFirst = false, giftArticles = ['contenido-que-atrae-clientes'], secret = crypto.randomBytes(32).toString('hex') } = {}) {
   let failed = false;
   const mailer = simulatedMailer();
   const server = http.createServer(async (req, res) => {
@@ -22,7 +22,7 @@ function createPreview({ store = new LocalStore(), failFirst = false, secret = c
     const url = new URL(req.url, origin);
     if (url.pathname === '/api/article-message') {
       if (failFirst && !failed && req.method === 'POST') { failed = true; req.resume(); res.writeHead(503, { 'Content-Type': 'application/json' }); return res.end('{"ok":false,"code":"unavailable"}'); }
-      return createHandler({ store, origin, secret, mode: 'simulation' })(req, res);
+      return createHandler({ store, origin, secret, mode: 'simulation', giftArticles })(req, res);
     }
     // No accidental diagnostic or commercial traffic from the isolated preview.
     if (url.pathname.startsWith('/api/')) { req.resume(); res.writeHead(503); return res.end('Disabled in private comment QA'); }
@@ -35,7 +35,7 @@ function createPreview({ store = new LocalStore(), failFirst = false, secret = c
       if (/^(lib|api|scripts|supabase|tests)(\/|$)/.test(rel)) throw Error();
       const file = path.resolve(root, rel.endsWith('/') ? rel + 'index.html' : rel);
       if (!file.startsWith(root + path.sep)) throw Error();
-      const mime = { '.html':'text/html; charset=utf-8', '.js':'application/javascript', '.css':'text/css', '.svg':'image/svg+xml', '.webp':'image/webp', '.jpg':'image/jpeg', '.png':'image/png', '.woff2':'font/woff2' }[path.extname(file)];
+      const mime = { '.html':'text/html; charset=utf-8', '.js':'application/javascript', '.json':'application/json', '.pdf':'application/pdf', '.css':'text/css', '.svg':'image/svg+xml', '.webp':'image/webp', '.jpg':'image/jpeg', '.png':'image/png', '.woff2':'font/woff2' }[path.extname(file)];
       if (!mime || !fs.statSync(file).isFile()) throw Error();
       res.setHeader('Content-Type', mime); let bytes = fs.readFileSync(file);
       if (rel.startsWith('15_LEGAL/') && path.extname(file) === '.html') bytes = Buffer.from(unpackLegal(bytes.toString('utf8')));
@@ -52,10 +52,12 @@ module.exports = { createPreview, unpackLegal };
 if (require.main === module) {
   const data = path.join(root, '.private-comments', 'simulation.json');
   const failureTest = process.argv.includes('--fail-first');
-  const port = failureTest ? 8796 : 8795;
+  const portArg = process.argv.find(s => /^--port=\d+$/.test(s));
+  const port = portArg ? Number(portArg.slice(7)) : failureTest ? 8796 : 8795;
   fs.mkdirSync(path.dirname(data), { recursive: true });
   const secretFile = path.join(root, '.private-comments', 'simulation.secret');
   if (!fs.existsSync(secretFile)) fs.writeFileSync(secretFile, crypto.randomBytes(32).toString('hex'), { flag: 'wx', mode: 0o600 });
-  const server = createPreview({ store: new LocalStore(failureTest ? null : data), failFirst: failureTest, secret: fs.readFileSync(secretFile, 'utf8') });
+  const giftArticles = process.argv.includes('--all-gifts') ? Object.keys(require('../blog/article-gifts.json').articles) : ['contenido-que-atrae-clientes'];
+  const server = createPreview({ store: new LocalStore(failureTest ? null : data), failFirst: failureTest, giftArticles, secret: fs.readFileSync(secretFile, 'utf8') });
   server.listen(port, '127.0.0.1', () => console.log('SIMULATION ONLY http://127.0.0.1:'+port+'/blog/contenido-que-atrae-clientes.html#comenta-conmigo'));
 }

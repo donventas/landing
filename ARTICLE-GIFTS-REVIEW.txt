@@ -1,0 +1,299 @@
+DON VENTAS / REGALOS POR ARTÍCULO / DESARROLLO LOCAL
+
+ESTADO ACTUAL / RELEASE AUTORIZADO / 10 OCT 2026
+Arturo aprobó la familia completa y autorizó commit, merge y publicación.
+Los apartados siguientes son historia de iteraciones; este estado los actualiza.
+Siete regalos, miniaturas fieles y formularios contextuales por pasos aprobados;
+errores inline accesibles, comentario opcional integrado y diagnóstico secundario.
+Configuración Production ARTICLE_GIFTS_ARTICLES preparada con los siete ids; requiere
+el despliegue del commit. No se tocan claves, modos del intake, migraciones ni diagnóstico.
+Privacidad ampliada para investigación/respuestas y descarga inmediata; no dictamen legal.
+La leyenda de uso del PDF es un aviso, no DRM ni garantía de impedir redistribución.
+SEO: contenido principal, URLs, canonical, títulos y schema conservados. El cambio está
+en la envoltura/formulario, no en el relato; no simular una nueva fecha editorial.
+Sitemap conserva fechas del contenido principal. PDF noindex fuera del sitemap.
+AEO no requiere schema especial: Google Search Central /appearance/ai-features,
+/crawling-indexing/ask-google-to-recrawl y /sitemaps/build-sitemap consultados 10 oct.
+No solicitar recrawl masivo de páginas existentes por este cambio de interfaz.
+Pruebas locales 272/272 y QA de siete descargas/fallback/visual/teclado PASS.
+Verificación posterior del release será de solo lectura: HTTP/headers, API disponible,
+recursos correctos, interfaz y privacidad. No fabricar envíos live ni suscripciones.
+Rollback: vaciar ARTICLE_GIFTS_ARTICLES y redesplegar; conserva canal anterior y datos.
+En este punto commit/merge/despliegue aún pendientes, a registrar en la PR del release.
+
+CIERRE UNIFICADO / PILOTO EN REVISIÓN / 10 OCT 2026
+Dirección aprobada: beneficio antes del marco; summary nativo con apariencia de botón
+«Quiero mi checklist», h2 «Antes de publicar: revisa estas 5 cosas», borde atenuado.
+Requisitos de descarga visibles debajo aun con details cerrado. Suscripción opcional.
+Comentarios independientes ocultos SOLO en piloto con regalo activo y sin borrador
+abierto/iniciado; cualquier fallo/deshabilitación conserva canal previo. No se borra.
+Comentario libre opcional de 900 caracteres integrado en encuesta, validado servidor
+y añadido con etiqueta propia al mensaje privado existente; no es una cuarta respuesta
+obligatoria ni señal comercial. Tamaño final <=5000. No migración ni envío real.
+API acepta el campo opcional de forma compatible con clientes anteriores que lo omiten.
+Enlace «¿Prefieres que lo trabajemos contigo? Hablemos →» conserva URL y tracking del
+diagnóstico existente, sin caja ni desplegable. Otros seis artículos sin cambios de UI.
+Módulo article-gift-pilot.js cargado solo por HTML piloto; núcleo mantiene presupuesto
+de peso previo. Fuente PDF/miniatura y consentimiento no cambiaron.
+272 pruebas unitarias PASS, incluidos persistencia privada, límites, reintento y no opt-in.
+QA Chrome aislado PASS: piloto a cinco anchos, teclado y requisitos visibles cerrado;
+comentario opcional persistido junto a respuestas, sin intención de suscripción;
+borrador anterior preservado ante respuesta tardía de disponibilidad; 7/7 descargas
+y 7/7 formularios independientes (piloto con regalo desactivado) sin regresión.
+Núcleo JS 12,048 bytes y módulo piloto 4,373 bytes sin comprimir. No métricas de campo.
+
+DESCUBRIMIENTO DEL REGALO / PILOTO APROBADO PARA DESARROLLO / 10 OCT 2026
+Solo contenido-que-atrae-clientes, marcado data-gift-discovery=pilot. Extensión
+a los otros seis requiere aceptación de Arturo. No publicación ni merge.
+Adaptación de envoltura, no relato: nota debajo de introducción/metadatos,
+enlace secundario en índice (conserva cinco secciones) y vista previa al cierre.
+Anclas/jerarquía: artículo protagonista; nota secundaria azul sin botón comercial,
+icono de documento, título real del recurso, requisito tres preguntas explícito.
+Al cierre, miniatura Carta sin recorte junto a título/descripción; apilada en móvil.
+La suscripción no es requisito; no ventanas, cuenta regresiva ni bloqueo por scroll.
+API habilitada antes de anunciar regalo; fallo/deshabilitado no crea enlaces rotos.
+Fuente exacta PDF v3, SHA vinculado en catálogo; miniatura 612x792, WebP 47,892 bytes,
+renderizada con Poppler por scripts/gifts/render_pilot_thumbnail.py sin editar PDF.
+QA Chrome local: 320/390/600/768/1440, enlace/Enter/foco/índice, sin overflow;
+API deshabilitada y JS desactivado no anuncian regalo, otros seis sin nueva UI.
+Nota/miniatura cargadas solo en piloto autorizado. Sin nuevos scripts externos.
+No se afirma mejora de conversión ni certificación de métricas de campo.
+
+COMENTARIOS / ADAPTACIÓN DEL FORMULARIO APROBADO / 10 OCT 2026
+Mandato: reproducir el lenguaje visual de la encuesta en comentarios privados.
+Assembly-led / PRESENTATION_REFINEMENT. Fuente: formulario-v3 aprobado por Arturo.
+Composición: mensaje protagonista, contacto agrupado, consentimiento en panel claro,
+acción azul y ayuda secundaria. Mismos tokens, escala y componentes compartidos.
+Adaptación funcional: un mensaje libre, no encuesta; no descarga ni regalo implícito.
+Se conserva el texto/versionado de consentimiento previo de comentarios y su API.
+Consumidores: los siete artículos del catálogo; escritorio y móvil 320-1440px.
+Aceptación: sin overflow, etiqueta/Space accesibles, casilla opcional desmarcada,
+envío privado correcto sin suscripción; regresión del regalo sin cambios.
+No cambia relatos, PDF, emails, datos, diagnóstico, servicios ni producción.
+Visibilidad del regalo al inicio/índice: propuesta pendiente, no implementada.
+QA local: 269/269 unitarias; 7/7 comentarios en Chrome simulado, cuatro anchos,
+casilla/Space, validación y recepción sin opt-in. Regresión 7/7 regalos PASS.
+Revisión independiente de 14 capturas: legibilidad PASS; borde de email inválido
+detectado y corregido con regla final y comprobación de color computado.
+Capturas de composición ocultan temporalmente navegación fija; no modifican el sitio.
+
+FORMULARIO / REVISIÓN 10 OCT 2026
+Nuevo bloque opcional de suscripción con contraste claro, checkbox nativo sin
+marcar, etiqueta clicable y acceso por teclado. Preguntas numeradas con espacios
+de respuesta compactos, fieldsets de experiencia/contacto y acción final clara.
+Descarga inmediata preservada; NO se implementó envío del regalo por email.
+Consentimiento exacto: objeto newsletter de article-gifts.json, usado por UI y
+GIFT_OPT_IN en servidor. Versión newsletter-gifts-2026-10-v2; encuesta v2 para
+rechazar formularios anteriores con copy distinto. El canal de comentarios
+conserva su texto y versión previos. No migración ni consentimiento retroactivo.
+Compromiso «No diario»: regla para futuros correos editoriales y promociones,
+con separación mínima de 48 horas por destinatario entre esos envíos, sumando
+campañas/automatizaciones; no obliga a una frecuencia fija. Excluye confirmaciones
+solicitadas, bajas y respuestas personales. No hay aquí motor de campañas ni
+limitador de frecuencia nuevo: antes de activar campañas, implementar/verificar
+ese control o aplicar una revisión manual documentada. No enviar sin confirmación.
+QA: 269/269 tests; Chrome local: siete descargas sin opt-in, recuperación previa,
+320/390/768/1440px sin overflow, etiqueta y Space alternan sin enviar respuestas.
+Copy visible coincide con consentimiento registrado. Esto no prueba mayor conversión.
+Recuperación del formulario: survey_updated conserva respuestas y ofrece actualizar
+la invitación sin envío automático; desmarca newsletter al cambiar consentimiento.
+Solo conserva asociación de respuestas si identidad y preguntas siguen iguales.
+Si cambian preguntas, pide copiar antes de recargar. Error de red no borra respuestas.
+Prueba Chrome de respuesta obsoleta y posterior actualización/envío aprobada.
+Pestañas que aún ejecutan el JS histórico previo a esta corrección necesitan recarga
+para obtener el manejador nuevo; no se afirma una reparación remota de código viejo.
+Fotos/PDF, encuestas contextuales, contactos/diagnóstico y producción no modificados.
+
+ACTUALIZACIÓN VIGENTE / 10 OCT 2026 / CHECKLISTS Y CHEATSHEETS
+Arturo aprobó reemplazar el enfoque de fichas largas por herramientas de consulta.
+Esta sección sustituye para los activos actuales las menciones posteriores a tres
+páginas, cinco campos escritos y fichas. El resto se conserva como evidencia histórica.
+Fuentes: scripts/gifts/quick-reference.json + build_quickreference.py; dirección
+de composición previa: scripts/gifts/QUICK-REFERENCE-DIRECTION.txt.
+Adaptación de familia aprobada, con las mismas ilustraciones, tokens y logo exacto.
+Cuatro checklists: publicar, enviar PDF, compartir marca, probar logo.
+Tres cheatsheets: explicar valor, promesa/prueba, búsquedas sin marca.
+Cada recurso ocupa una hoja Carta y resuelve una tarea delimitada; no incluye
+campos largos ni exige usar IA. Checklists: cinco casillas interactivas cada uno.
+Versiones activas: primeros dos v3; cinco restantes v2. Anteriores preservados.
+Las encuestas y su consentimiento no cambian: solo el recurso, descripción y edición.
+previousFiles mantiene la recuperación de una edición anterior sin nueva encuesta;
+se reconocen únicamente rutas históricas declaradas para ese recurso.
+
+QA DE ESTA REVISIÓN
+- Muestra real antes-de-publicar-v3 exportada/renderizada antes de producir el lote.
+- Siete hojas y cuatro copias con casillas marcadas: revisión individual y de familia,
+  sin cortes ni superposiciones. Tipos, valores /V, estados /AS, apariencias /AP,
+  guardado/reapertura y enlace al artículo comprobados con pypdf.
+- Revisión independiente /root/qa_editorial_gifts: PASS visual/editorial; 8/8 tests
+  focalizados. Observación P3 sobre medidas tipográficas reconciliada con la fuente
+  (10.2-12 pt cuerpo; 9.3 pt aviso), sin alterar el arte después de revisarlo.
+- Autor: Chrome aislado descargó los siete PDF nuevos tras recepción local, bytes
+  iguales a assets/gifts; mismo email, sin suscripción, recuperación de edición
+  anterior sin reenvío, error inicial/reintento, 320/390/768/1440 px. Cero errores JS.
+- Suite completa: 267/267. git diff --check sin errores.
+- Evidencia: .qa-gifts/all.json; output/pdf/recursos-blog/qa-quick-reference.json;
+  renders y pruebas: tmp/pdfs/gifts/*-v2.png, *-v3.png, *-checked.png.
+- PDF de consulta 1.63-4.35 MB bajo demanda; no se carga antes del clic de descarga.
+No certificación PDF/UA, prueba física de impresión ni uso real de Acrobat/móvil.
+Aviso jurídico y piloto controlado de producción siguen pendientes. Sin publicar,
+commit, merge, correos, migraciones ni cambios de variables de producción.
+La guía general de Runtime queda pendiente de propagación tras aceptación de estas
+piezas, para respetar la frontera entre repositorios; no hay cambio transversal BSB.
+
+REGISTRO DE LA RONDA ANTERIOR
+Revisión: 9-10 octubre 2026. Rama codex/article-gifts, base origin/main 6e7765e.
+Mandato: desarrollar los restantes e integrar, probando primero uno y verificando
+que el regalo aparezca al terminar la encuesta. No incluye autorización de release.
+
+RESULTADO Y SECUENCIA
+1. Piloto contenido-que-atrae-clientes: tests de recepción + navegador Chrome real,
+   servidor HTTP local, respuestas ficticias, sin conectores externos ni correos.
+   Descarga antes-de-publicar-v2.pdf byte-exact aprobada, después del guardado.
+2. Después del piloto, cinco nuevos PDF ilustrados y rellenables, tres páginas,
+   cinco campos por pieza. Se preservaron los dos pilotos aprobados sin regenerar.
+3. Integración de los siete artículos con preguntas específicas y un flujo común.
+   Misma dirección: entrar con ilustración, entender con demostración, hacer con ficha.
+4. Prueba de descarga real desde el navegador para cada artículo, comparación de
+   bytes con el archivo servido, recuperación sin nueva encuesta y vista móvil.
+
+FUENTES Y FRONTERAS
+Guía de producción aprobada: Runtime / 08_OPERACION /
+Regalos editoriales - Guia de produccion.txt, versión 1.0.
+Pilotos: Runtime / 04_PLANTILLAS/recursos-blog/pilotos-2026-10/.
+Adaptación del generador v2, no cambio al canon de BSB/AVOS. AVOS Delivery Learning
+Controls G2/G3/G4, PDF skill y workflow editorial del sitio. Sin experimento AVOS activo.
+Runtime permanece de solo lectura en esta ronda; no se alteraron sus cambios previos.
+Transferencias acotadas: dos PDF aprobados y PNG B6 canónico; no sincronización de repos.
+Se reutilizaron cinco ilustraciones aprobadas del sitio, sin recortar ni regenerar
+personajes. No hubo generación nueva de imágenes ni un prompt nuevo para las portadas.
+Las escenas son conceptuales; ejemplos ficticios, no casos, testimonios ni resultados.
+No se usó información del reporte privado de seguridad ni datos de clientes.
+No se reescribieron relatos, títulos, canonicals ni claims de los artículos.
+
+PIEZAS Y SU ALCANCE
+contenido-que-atrae-clientes -> Antes de publicar (piloto v2 aprobado).
+diseno-editorial -> Antes de enviar ese PDF (piloto v2 aprobado).
+por-que-nacio-don-ventas -> Tu valor en tres frases: explicar oferta acotada.
+tu-marca-es-tu-ventaja -> De la promesa a la prueba: una conducta observable.
+manual-de-marca -> Tu marca lista para compartir: una entrega de archivos y reglas.
+logotipos-mitos -> Tu logo fuera del archivo: una prueba de uso real.
+como-aparecer-en-google -> Encuéntrate sin tu nombre: una observación de búsqueda.
+Fronteras e hipótesis de mini-kit: scripts/gifts/content.json. No se anuncian productos
+inexistentes ni se convierte una respuesta incentivada en intención de compra.
+
+CONTRATO TÉCNICO
+- Catálogo compartido de preguntas, versión y archivo: blog/article-gifts.json.
+- El servidor construye las etiquetas de preguntas; visitante envía solo respuestas.
+- Se guardan como mensaje privado versionado con notice_version article-gifts-2026-10-v1,
+  y encabezado de encuesta. Source conserva el canal blog_private_comment por contrato
+  SQL vigente. Para análisis distinguir notice_version + article_id, no solo texto.
+- No nuevas tablas, migraciones, secretos, proveedores ni cambio al diagnóstico.
+- Se reutilizan recepción atómica, idempotencia, límites antispam y retención 180 días.
+  La notificación al buzón de Arturo sigue el flujo existente al activarse en producción.
+- Solo después de await store.receive se responde con la URL de regalo del servidor.
+  No se declara entrega de correo; el regalo se ofrece como descarga en la misma página.
+- Fallos: no aparece un éxito falso, las respuestas quedan para reintentar con la misma
+  clave. La prueba cubre fallo de recepción y reintento, no un corte real de Supabase.
+- Una dirección puede recibir recursos distintos. Límites antispam siguen vigentes:
+  cinco envíos por IP/15 minutos, diez por correo/día. El QA de los siete artículos
+  reinicia SOLO los contadores aislados del fixture entre artículos, no la producción.
+- Suscripción opcional y desmarcada. Invitación visible coincide con OPT_IN guardado;
+  newsletter:true sigue pendiente de confirmación y no retrasa el regalo.
+- Recuperación: descargar/guardar enlace o elegir recordar recurso en este navegador.
+  Solo se guardan id y ruta localmente, nunca correo/respuestas; no hay cuenta ni
+  recuperación por correo entre dispositivos implementada. Borrar datos borra esa opción.
+- Los PDF son recursos estáticos compartibles, no DRM ni un control de autorización.
+  La encuesta habilita el camino de entrega; conocer una URL permite abrir el archivo.
+  X-Robots-Tag noindex es una petición de indexación, no confidencialidad.
+- Respuestas no se envían a analítica. Los PDF no se cargan antes de pulsar descarga.
+- Un siguiente paso principal (regalo); diagnóstico accesible en desplegable y comentario
+  privado independiente. Si el recurso está deshabilitado, se conserva el cierre anterior.
+
+ACTIVACIÓN / RELEASE PENDIENTE
+ARTICLE_GIFTS_ARTICLES está vacío por defecto. Permite habilitar por id de artículo;
+GET informa solo los habilitados y POST rechaza encuestas de otros. No se modificó
+ninguna variable de Vercel. No se hizo commit, push, merge ni publicación en esta ronda.
+Previo local: node scripts/private-comments-preview.cjs --all-gifts --port=8797.
+No usar el previo local para demostrar funcionamiento de Supabase/Resend de producción.
+Antes de publicar: aceptación de los cinco regalos nuevos y preguntas, resolver revisión
+de la leyenda de uso y aviso, aprobar release, desplegar y habilitar solo el piloto.
+Entonces una prueba QA autorizada con ARTICLE_COMMENTS_MODE=test/correo autorizado o
+un circuito de QA acordado; comprobar registro is_test, descarga pública sin autenticación,
+consentimiento y notificación real por separado. No convertir una prueba en tráfico comercial.
+Ampliar ARTICLE_GIFTS_ARTICLES a los demás solo después del piloto en ese entorno.
+Rollback: vaciar la lista deshabilita encuestas sin retirar el canal de comentarios;
+revertir la rama restaura HTML/JS anteriores. No borra mensajes ni suscripciones.
+
+EVIDENCIA LOCAL
+- Tests de regalos: 7/7; suite completa del sitio pasa tras ampliar la lista explícita
+  de scripts permitidos del manual con el módulo nuevo. Sin desactivar aserciones.
+- Chrome headless, perfil aislado; tráfico externo bloqueado; .qa-gifts/pilot.json y
+  .qa-gifts/all.json. Descargas idénticas a los siete originales, PDF real, no login HTML.
+- 320/390/768/1440 px simulados; sin desbordamiento del componente. Toggle con Enter,
+  foco en confirmación, recuperación sin reenvío. No certificación de accesibilidad.
+- Peso nuevo: JS 8.7 KB aprox., catálogo 4.9 KB. PDF solo bajo demanda (1.64-4.35 MB).
+  Observador inicial de laboratorio sin throttling: datos en all.json; LCP=0 significa
+  no observado antes de interacción, no carga instantánea. No es una medición comparable
+  antes/después ni certificación Core Web Vitals; falta rendimiento en producción.
+- 15 páginas nuevas y 5 pruebas rellenadas renderizadas con Poppler y revisadas por autor
+  e intérprete independiente /root/qa_editorial_gifts. Sin cortes ni solapamientos observados.
+- Árbol de campos, widgets, valores, AP, guardado/reapertura comprobados con pypdf.
+  Apariencias con ajuste de líneas medido; no demuestra autoajuste de Acrobat/móvil.
+- QA independiente cerró hallazgo P2 de copy de opt-in; 7/7 y sin nuevos defectos reportados.
+- Sin certificación PDF/UA, pruebas físicas de impresión ni dictamen jurídico.
+- Aprendizajes comerciales, demanda y conversión: pendientes de datos reales; no inferidos.
+
+INTEGRIDAD / FUENTE EDITABLE
+Dos pilotos aprobados copiados sin alteración:
+antes-de-publicar-v2.pdf SHA256 b2be4eecb2b1649ad04cda3e8d647851cc7a96d86abfca977befd3dbd7ee2380
+antes-de-enviar-ese-pdf-v2.pdf SHA256 1e1498341e6178ad92fbaa7153bf098a3284a1042d12739e86fdbec9b4bd77fc
+Cinco nuevas fuentes: scripts/gifts/build.py + content.json, tipografías y assets del sitio.
+Exportados a output/pdf/recursos-blog y assets/gifts con bytes iguales. Hashes de fuente,
+ilustraciones, campos y exportados: output/pdf/recursos-blog/qa.json (evidencia local).
+Descargas y evidencia visual: .qa-gifts/; renders: tmp/pdfs/gifts/render/.
+Estos archivos de QA, el generador y este registro se excluyen del despliegue.
+
+PILOTO POR PASOS — 2026-10-10 / formulario-pasos-v1
+- Solo contenido-que-atrae-clientes: tres preguntas secuenciales y contacto final;
+  respuestas anteriores resumidas/editables, Atrás/Continuar, comentario plegado.
+- Valida texto no vacío antes de avanzar. El envío comprueba también respuestas
+  ocultas y revela la primera inválida. Borrador solo en memoria de la página;
+  no hay persistencia de respuestas/email ni promesa de recuperación al recargar.
+- Diagnóstico en franja secundaria con botón de contorno y destino/tracking original.
+  Regalo mantiene acción azul principal; suscripción opcional y desmarcada.
+- Nota de voz diferida: no captura, permisos de micrófono ni recepción de archivos.
+- Suite 272/272; QA local real HTTP con fixtures: siete recibos y descargas idénticas,
+  fallo/reintento, actualización de consentimiento, recuperación del recurso guardado.
+- QA visual/teclado 320/390/600/768/1440; se corrigió la rotación heredada de «opcional».
+  Sin nuevos assets ni dependencias. Laboratorio local sin throttling registrado en
+  .qa-gifts/all.json; no comparación controlada ni certificación de rendimiento de campo.
+- Relato, preguntas, metadatos y PDFs no cambiaron en este incremento. Otros seis
+  artículos conservan su presentación anterior. Sin publicación ni merge en esta ronda.
+- QA independiente /root/qa_editorial_gifts: 13/13 específicas; revisión funcional y
+  visual PASS. Hallazgo de rotación cerrado con capturas regeneradas 320/390/1440.
+  Pruebas de navegador adicionales: espacios vacíos, envío con pregunta oculta inválida,
+  correo inválido, editar/volver, reset y formularios de comentarios de los siete blogs.
+
+EXTENSIÓN DE FAMILIA / ERRORES INLINE — 2026-10-10 / regalos-familia-v1
+- Aprobación de Arturo: sustituir globos nativos y extender el diseño aprobado a los
+  siete artículos con sus preguntas/regalos particulares. Solo desarrollo, sin release.
+- Validación inline junto a respuesta/correo: role=alert, aria-describedby, aria-invalid,
+  borde y texto de error; foco en primer campo pendiente, limpieza al corregir y reset.
+  Prueba instrumentada confirma cero llamadas reportValidity en el flujo de regalo.
+- Misma experiencia por pasos, comentario opcional final, diagnóstico secundario,
+  aviso inicial e índice en siete artículos. Textos CTA distinguen checklist/guía.
+- Miniaturas derivadas con Poppler de cada PDF existente; hashes de fuente en catálogo.
+  PDFs y preguntas no cambiaron. Miniaturas de 46–53 KB; carga lazy, PDF bajo demanda.
+- Suite 272/272; siete recibos/descargas de PDF iguales al original, reintento y
+  consentimiento; siete formularios independientes de fallback con regalos deshabilitados.
+- Discovery QA: cinco anchos para piloto, cuatro por cada otro artículo; teclado,
+  error vacío/espacios/email, edición, reset, textos contextuales, imágenes y sin overflow.
+  Se corrigió cancelación intermitente del salto nativo por foco; el scroll explícito
+  posterior respeta prefers-reduced-motion y conserva la navegación por fragmento.
+- Observaciones locales de carga en .qa-gifts/all.json. No son mediciones de producción
+  ni garantizan mejora de conversión. No cambios de voz, SEO, fuentes o relato del blog.
+- El flag del servidor sigue gobernando activación. No cambios de variables cloud,
+  campañas, correo real, migraciones, commit, merge ni publicación en esta ronda.
+- QA independiente /root/qa_editorial_gifts: 13/13 pruebas específicas y revisión
+  de seis ofertas/introducciones a 320/1440, error inline y navegación: PASS, sin pendientes.

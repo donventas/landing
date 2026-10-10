@@ -22,7 +22,8 @@ test('manual illustrations are bounded and uncropped, with selectable HTML diagr
  assert.ok(fs.statSync(path.join(root,'assets/editorial/manual-busqueda-v3-social.jpg')).size<100000);
  assert.doesNotMatch(html,/<iframe|<canvas|<video/);
  const scripts=[...html.matchAll(/<script[^>]*src="([^"]+)"/g)].map(x=>x[1]);
- assert.deepEqual(scripts,['/analytics.js','/app.js','/blog/blog.js','/blog/article-comments.js','/section-index.js?v=20261007-1','/_vercel/insights/script.js']);
+  assert.deepEqual(scripts,['/analytics.js','/app.js','/blog/blog.js','/blog/article-comments.js','/blog/article-gift-pilot.js','/blog/article-gifts.js','/section-index.js?v=20261007-1','/_vercel/insights/script.js']);
+ assert.ok(Buffer.byteLength(read('blog/article-gifts.js'))<15000);
  assert.ok(Buffer.byteLength(read('section-index.js'))<4000);
  assert.match(html,/<details data-section-index data-manual-index>/);
  assert.equal((html.match(/class="manual-page-proof /g)||[]).length,2);

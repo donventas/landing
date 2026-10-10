@@ -1,0 +1,42 @@
+DON VENTAS / REFINAMIENTO APROBADO / 10 OCT 2026
+Mandato: ejecutar la propuesta aprobada de cuatro checklists y tres cheatsheets.
+Adaptación de la familia editorial, no reproducción ni nueva estrategia comercial.
+Se reutilizan audiencia, relación con artículos, voz, ilustraciones, marca B6,
+tipografías y paleta de los pilotos; no se cambia el contenido de los artículos.
+Fuente anterior: build.py/content.json y pilotos Runtime v2. No se sobrescriben.
+Fuente activa de esta revisión: build_quickreference.py + quick-reference.json.
+
+COMPOSICIÓN PREVIA
+Siete hojas Carta vertical 612x792 pt. Margen 44 pt. Header logo y formato;
+zona 110-265: título, promesa e ilustración completa proporcional, sin recorte;
+zona 290-558: cinco acciones con criterio verificable o tres pares regla/ejemplo;
+zona 575-637: siguiente acción / ejemplo breve; pie 650-724: uso y enlace.
+Cuerpo 10.2-12 pt, según función; aviso 9.3 pt y metadatos 7.5-8.6 pt.
+Legibilidad revisada en cada exportado; no reducción automática para forzar ajuste.
+Texto nativo, no texto en imagen.
+La ilustración entra a escala de consulta, no como portada separada que retrase uso.
+Checklists: cinco casillas interactivas, estados locales; sin campos largos.
+Cheatsheets: tres situaciones, traducciones y ejemplos listos para adaptar;
+no formulario. Cada hoja termina una tarea pequeña, no un kit incompleto.
+No comprimir la letra para resolver desbordamientos: editar o redistribuir.
+
+CONSUMIDORES Y PROTECCIONES
+PDF output y assets/gifts son reproducciones byte-exact. Catálogo y descarga web
+referencian la revisión nueva; versiones anteriores conservadas como historia.
+Recuperación desde navegador reconoce rutas históricas explícitas para no exigir
+una nueva encuesta cuando cambia el PDF. Nada de email/respuestas en localStorage.
+La encuesta de investigación permanece sin cambios; recibir un regalo no demuestra
+lectura, demanda ni intención de compra. Sin obligación de suscripción.
+Revisión de muestra exportada antes del lote; siete hojas y cuatro pruebas de
+casillas guardadas/renderizadas; QA independiente; prueba de descarga de siete.
+
+GOBIERNO / ESTADO
+AVOS Status artifact_construction: NO_ACTIVE_EXPERIMENT. BSB assembly-led,
+PRESENTATION_REFINEMENT, alcance local Don Ventas. Reutilización del baseline y
+contratos estables de la ronda anterior; router/Manifest/CGC/composición/delivery
+revisados. No nueva identidad, nuevos claims ni investigación de mercado.
+Esta aprobación modifica la regla de tres páginas/fichas solo para esta familia.
+La guía Runtime queda pendiente de propagación después de aceptar esta revisión;
+no se modifica otro repositorio como efecto secundario de Landing.
+Aviso heredado sin dictamen jurídico. No PDF/UA, Acrobat, móvil físico ni impresión
+certificados. No publicación, merge, migración, correo o cambio en producción.

@@ -1,0 +1,94 @@
+[
+  {
+    "id":"antes-de-publicar", "revision":"v3", "article":"contenido-que-atrae-clientes", "type":"checklist", "title":"Antes de\npublicar.",
+    "image":"scripts/gifts/assets/antes-de-publicar-v2.png", "hook":"Dale a alguien una razón para prestarte atención.",
+    "instruction":"Abre tu publicación y marca solo lo que ya puedes comprobar.",
+    "items":[
+      ["Nombra una situación reconocible.","El inicio dice para quién es y qué necesita: «¿Tu escritorio no cabe?»."],
+      ["Deja una sola idea al frente.","El título se entiende por sí solo y el resto desarrolla esa misma idea."],
+      ["Enseña algo que respalde lo que dices.","Incluye un ejemplo, proceso o detalle real. Una promesa no cuenta como prueba."],
+      ["Pruébala donde se va a ver.","En el teléfono se lee sin ampliar; la imagen ayuda a entender la oferta."],
+      ["Deja un siguiente paso claro.","Hay una acción principal y funciona: abrir, guardar, responder o contactar."]
+    ],
+    "closingTitle":"UNA MEJORA PARA HOY",
+    "closing":"Cambia «Calidad y compromiso» por algo útil: «Antes de elegir escritorio, mide ancho, fondo y espacio para la silla». Ejemplo ilustrativo."
+  },
+  {
+    "id":"antes-de-enviar-ese-pdf", "revision":"v3", "article":"diseno-editorial", "type":"checklist", "title":"Antes de enviar\nese PDF.",
+    "image":"scripts/gifts/assets/antes-de-enviar-ese-pdf-v2.png", "hook":"Tu cliente pidió un reporte. No una tarea de descifrado.",
+    "instruction":"Abre el PDF exportado, no solo el archivo donde lo diseñaste.",
+    "items":[
+      ["Pon la conclusión al principio.","La primera página explica qué pasó, por qué importa y qué sigue."],
+      ["Convierte títulos en pistas.","«Los cobros llegaron después de los pagos» orienta más que «Análisis»."],
+      ["Traduce la jerga que sí necesitas.","Cada término técnico importante tiene una explicación simple junto a él."],
+      ["Da contexto a cada cifra.","Indica periodo, unidad, fuente y comparación cuando correspondan."],
+      ["Revisa jerarquía y salida.","El texto se lee, nada se corta, los enlaces abren y la acción final tiene responsable."]
+    ],
+    "closingTitle":"LA PRUEBA SIN NARRADOR",
+    "closing":"Muéstrale el PDF a alguien del público previsto sin explicarlo. Pídele que señale la conclusión y la siguiente acción; ajusta donde se detenga."
+  },
+  {
+    "id":"tu-valor-en-tres-frases", "revision":"v2", "article":"por-que-nacio-don-ventas", "type":"cheatsheet", "title":"Tu valor en\ntres frases.",
+    "image":"assets/editorial/oferta-entendida-el-don-v3-1440.webp", "hook":"Explica qué haces sin dar tantas vueltas.",
+    "instruction":"Usa la estructura, no copies la promesa. Ejemplo ilustrativo: finanzas.",
+    "items":[
+      ["01 / A QUIÉN AYUDAS","Ayudo a [persona] cuando [situación].","Ayudo a negocios que venden, pero no saben cuánto pueden gastar."],
+      ["02 / QUÉ RESUELVES","Hacemos [acción concreta] para [utilidad].","Ordenamos sus cobros y pagos para ver qué compromisos pueden asumir."],
+      ["03 / CÓMO TRABAJAS","Lo hacemos con [método o evidencia real].","Lo revisamos con un calendario de caja; no gestionamos préstamos."]
+    ],
+    "closingTitle":"QUITA EL HUMO, NO TU PERSONALIDAD",
+    "closing":"Cambia adjetivos por acciones que sí haces. Lee las tres frases a alguien: si puede explicar tu servicio y sus límites, tienes una base más clara."
+  },
+  {
+    "id":"de-la-promesa-a-la-prueba", "revision":"v2", "article":"tu-marca-es-tu-ventaja", "type":"cheatsheet", "title":"De la promesa\na la prueba.",
+    "image":"assets/editorial/joyeria-cuidado-el-don-v4-1440.webp", "hook":"La confianza no cabe en un adjetivo. Se nota en lo que haces.",
+    "instruction":"Elige una promesa y hazla observable. Ejemplos ilustrativos, no resultados.",
+    "items":[
+      ["«SOMOS EXPERTOS»","Muestra una decisión y su razón.","Explica por qué recomiendas un material para ese uso y qué límite tiene."],
+      ["«CUIDAMOS LOS DETALLES»","Nombra el control que haces al entregar.","Revisa el cierre de la pieza y acompáñala con instrucciones de cuidado."],
+      ["«TE ACOMPAÑAMOS»","Aclara canal, responsable y alcance.","Indica con quién resolver dudas, por dónde y en qué horario atiende."]
+    ],
+    "closingTitle":"DE LA FRASE A LA OPERACIÓN",
+    "closing":"Elige una conducta que puedas repetir y asigna quién la cuida. Si todavía no la cumples, trátala como mejora pendiente, no como promesa pública."
+  },
+  {
+    "id":"tu-marca-lista-para-compartir", "revision":"v2", "article":"manual-de-marca", "type":"checklist", "title":"Tu marca lista\npara compartir.",
+    "image":"assets/editorial/manual-busqueda-v3-1536.webp", "hook":"Que compartir tu marca no sea una búsqueda del tesoro.",
+    "instruction":"Revisa la carpeta que vas a entregar a quien prepara la próxima pieza.",
+    "items":[
+      ["Separa lo vigente de lo anterior.","Hay una carpeta activa y una versión identificable; no tres «final_final»."],
+      ["Entrega el archivo que necesita ese uso.","La persona sabe cuál abrir y tiene el formato solicitado para pantalla o impresión."],
+      ["Incluye las variantes aprobadas.","Hay ejemplos para los fondos previstos; no se improvisan colores ni se deforma el logo."],
+      ["Deja reglas breves y un ejemplo.","Se encuentran tipografía, colores y espacio de protección definidos por tu marca."],
+      ["Comprueba acceso y responsable.","La persona abre los archivos y sabe a quién consultar o quién aprueba la pieza."]
+    ],
+    "closingTitle":"UNA CARPETA QUE SE EXPLICA SOLA",
+    "closing":"Organiza: 01 Empieza aquí / 02 Archivos vigentes / 03 Ejemplos. Pide que armen una pieza sin tu ayuda y corrige el primer punto donde se detengan."
+  },
+  {
+    "id":"tu-logo-fuera-del-archivo", "revision":"v2", "article":"logotipos-mitos", "type":"checklist", "title":"Tu logo fuera\ndel archivo.",
+    "image":"assets/editorial/logo-vitrina-v5-1536.webp", "hook":"La vitrina le queda bien. La vida real también debería.",
+    "instruction":"Prueba una aplicación real. Marca solo lo comprobado; deja pendientes visibles.",
+    "items":[
+      ["Míralo al tamaño de uso.","Sin hacer zoom, se reconoce y se lee lo que esa versión necesita comunicar."],
+      ["Pruébalo sobre el fondo previsto.","Los contornos no se pierden y usas una variante aprobada con contraste suficiente."],
+      ["Respeta su forma y su espacio.","No está estirado, recortado ni invadido por otros elementos."],
+      ["Ensáyalo en el soporte real.","Para bordado, impresión o grabado, revisa una muestra con el proveedor; no solo el mockup."],
+      ["Comprueba el archivo de entrega.","Abre bien, corresponde a esa variante y cumple lo solicitado por quien lo producirá."]
+    ],
+    "closingTitle":"SI FALLA, NO LO FUERCES",
+    "closing":"Registra soporte, tamaño y problema. Revisa otra variante aprobada con tu diseñador; no inventes un tamaño mínimo universal ni detalles nuevos."
+  },
+  {
+    "id":"encuentrate-sin-tu-nombre", "revision":"v2", "article":"como-aparecer-en-google", "type":"cheatsheet", "title":"Encuéntrate\nsin tu nombre.",
+    "image":"assets/editorial/se-busca-v1-1536.webp", "hook":"Tu próximo cliente conoce su problema. Quizá no tu marca.",
+    "instruction":"Prueba estas rutas sin tu marca. Son hipótesis, no keywords con demanda validada.",
+    "items":[
+      ["NECESIDAD + SOLUCIÓN","Busca: «escritorio para espacio pequeño».","Observa cómo describen medidas y usos. Revisa si tu página permite saber si cabe."],
+      ["SERVICIO + LUGAR","Busca: «escritorios a medida en Mérida».","Observa cómo explican cobertura y contacto. Menciona lugares solo si realmente atiendes ahí."],
+      ["DUDA ANTES DE COMPRAR","Busca: «qué medir antes de comprar escritorio».","Observa qué explicación resulta útil. Añade la respuesta que falta en tu página."]
+    ],
+    "closingTitle":"OBSERVA SIN SACAR CONCLUSIONES DE MÁS",
+    "closing":"Anota consulta, fecha, ubicación y dispositivo. Una búsqueda aislada no prueba demanda ni posición habitual. Elige un dato útil que puedas aclarar hoy."
+  }
+]
