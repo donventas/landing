@@ -3,6 +3,35 @@ const test=require('node:test'),assert=require('node:assert/strict'),crypto=requ
 const {createHandler}=require('../lib/article-comments/service.cjs');
 const {LocalStore}=require('../lib/article-comments/local-store.cjs');
 const catalog=require('../blog/article-gifts.json');
+test('gift access copy separates resource contents from questions and email across all articles',()=>{
+ const gift=catalog.articles['contenido-que-atrae-clientes'];
+ assert.equal(gift.offerTitle,'Tu checklist «Antes de publicar»');
+ assert.equal(gift.offerKicker,'Un regalo para tu próxima publicación');
+ assert.equal(gift.description,'Una hoja con cinco puntos para revisar tu contenido cuando lo necesites.');
+ assert.equal(gift.accessTerms,'Responde 3 preguntas y deja tu correo. Descarga el PDF al terminar, sin suscribirte.');
+ assert.match(gift.readingConditions,/tu correo/);
+ for(const other of Object.values(catalog.articles)){
+  assert.equal(other.accessTerms,gift.accessTerms);assert.match(other.offerKicker,/^Un regalo para /);assert.equal(other.readingConditions,gift.readingConditions);
+  assert.match(other.offerTitle,/^Tu (checklist|guía) «.+»$/);
+ }
+ const src=fs.readFileSync(__dirname+'/../blog/article-gift-pilot.js','utf8');
+ assert.match(src,/\.before\(terms\);opener\.setAttribute\('aria-describedby',terms\.id\)/);
+});
+test('every gift article has a distinct editorial share hook and matching OG/Twitter resource description',()=>{
+ const titles=new Set(),descriptions=new Set();
+ for(const [slug,gift] of Object.entries(catalog.articles)){
+  const html=fs.readFileSync(__dirname+'/../blog/'+slug+'.html','utf8');
+  const meta=name=>{const matches=[...html.matchAll(new RegExp('<meta (?:property|name)="'+name+'" content="([^"]+)"','g'))];assert.equal(matches.length,1,slug+': '+name);return matches[0][1];};
+  const title=meta('og:title'),desc=meta('og:description');
+  assert.equal(title,meta('twitter:title'));assert.equal(desc,meta('twitter:description'));
+  assert.match(desc,gift.cta.includes('checklist')?/checklist gratuito/:/guía gratuita/);
+  assert.ok(title.length<=85 && desc.length<=180,slug);
+  assert.doesNotMatch(title,/gratis|descarga|regalo/i);
+  assert.doesNotMatch(desc,/garantiz|compra ahora|última oportunidad|sin responder/i);
+  titles.add(title);descriptions.add(desc);
+ }
+ assert.equal(titles.size,7);assert.equal(descriptions.size,7);
+});
 test('release copy has a final receipt and QA labels remain restricted to non-live environments',()=>{
  const source=fs.readFileSync(__dirname+'/../blog/article-gifts.js','utf8');
  assert.ok(source.includes("delivery.querySelector('h3').textContent='Gracias por compartir tu experiencia. Tu PDF está listo.'"));

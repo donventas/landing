@@ -1,7 +1,8 @@
 # Workflow editorial de Don Ventas
 
-Versión 1.2 · Dirección del 3 de octubre de 2026; jerarquía de notas y glosario
-progresivo aprobados por Arturo el 4 de octubre de 2026.
+Versión 1.3 · Dirección del 3 de octubre de 2026; jerarquía de notas y glosario
+progresivo aprobados por Arturo el 4 de octubre de 2026. Copy de regalos y tarjetas
+sociales aprobado el 10 de octubre de 2026.
 Ámbito: este sitio; no modifica el método universal de BSB/AVOS.
 
 ## Activación y resultado
@@ -176,6 +177,53 @@ abiertos. Cerrados: historia comprensible y no engañosa. Abiertos: evidencia
 consultable y enlaces operativos. No añadir notas a la carta fundacional
 por simetría cuando su relato no las necesita. Aceptación estética, rigor
 de la evidencia y eficacia comercial siguen siendo verificaciones distintas.
+
+### Regla de regalos: distinguir contenido, acceso y uso
+
+Antes de entregar el regalo, describir lo que recibirá la persona. Después de
+entregarlo, explicar cómo puede usarlo. Nunca presentar el contenido del recurso
+como un requisito para obtenerlo.
+
+- Personalizar `offerKicker`, `offerTitle` y `description` en `article-gifts.json`.
+  Preferir «Un regalo para…» y «Tu checklist/guía «Nombre»». Una cantidad de puntos,
+  ejercicios o ejemplos describe el PDF, no tareas que haya que completar antes.
+- Evitar encabezados de acceso como «Ahora te toca ponerlo en práctica» o «Revisa
+  estas cinco cosas». Reservar esos imperativos para las instrucciones del recurso.
+- Mostrar antes de abrir el formulario `accessTerms`: tres preguntas y correo,
+  descarga al terminar, sin suscripción obligatoria. Si el flujo cambia, actualizar
+  todos los avisos y pruebas juntos. El aviso inicial `readingConditions` debe
+  declarar también el correo; no confundir facilitarlo con aceptar marketing.
+- Conservar una invitación contextual para aportar experiencias y ejemplos reales
+  que ayuden a futuros lectores; no pedir respuestas «correctas» ni más largas.
+- Comprobar: ¿qué recibo?, ¿qué tengo que hacer para recibirlo?, ¿qué puedo hacer
+  después con él? Compartir y suscribirse nunca son requisitos de la descarga.
+
+### Regla de vistas previas al compartir: editorial, no anuncio
+
+Aplicar a cada nuevo artículo con regalo y a sus revisiones:
+
+1. El título OG/Twitter invita a leer mediante una situación, pregunta o tensión
+   propia del artículo. No convertirlo en anuncio del regalo ni usar clickbait
+   ajeno al relato. Puede conservar el titular existente si ya cumple esa función.
+2. La descripción explica brevemente el contenido y menciona como beneficio
+   secundario el recurso gratuito específico: checklist o guía y para qué sirve.
+   No prometer una descarga sin requisitos: el artículo explica preguntas y correo
+   antes del clic. Solo anunciar recursos existentes y efectivamente habilitados.
+3. Conservar la imagen editorial aprobada: sin banners, sellos «GRATIS», precios,
+   botones falsos ni mensajes de regalo sobre la escena. El texto complementa la
+   imagen, no la convierte en un anuncio. No regenerarla por cambiar metadatos.
+4. Sincronizar `og:title`/`twitter:title` y `og:description`/`twitter:description`.
+   Usar un hook y descripción propios por artículo, no una frase genérica repetida.
+   No cambiar H1, título SEO, canonical, relato, fechas ni schema por ese motivo.
+5. Verificar HTML servido, imagen y recurso públicos después del despliegue. La
+   vista previa real depende del cliente y de su caché: no asegurar que una tarjeta
+   antigua se actualizó ni que mostrará la descripción sin comprobarlo allí.
+6. Ejecutar las pruebas de catálogo/metadatos: recurso disponible, tipo correcto,
+   títulos únicos, OG/Twitter coherentes y requisitos explícitos. Es una compuerta
+   técnica, no reemplaza la revisión editorial del hook y su fidelidad al texto.
+
+No extender por esta regla los botones interactivos de compartir: su despliegue
+es una decisión independiente. No contar un clic como mensaje enviado o lead.
 
 ## 5. Portada y publicación técnica
 
