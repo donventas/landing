@@ -34,6 +34,7 @@
 <link rel="stylesheet" href="/assets/fonts/fonts.css">
 <link rel="stylesheet" href="/styles.css?v=20261006-fonts">
 <link rel="stylesheet" href="/blog/blog.css?v=20261007-reading-progress">
+<link rel="stylesheet" href="/blog/article-comments.css">
 <link rel="stylesheet" href="/blog/glosario.css?v=return-1">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@graph":[{"@type":"Person","@id":"https://www.donventas.mx/#quien","name":"Arturo Villagomez","url":"https://www.donventas.mx/arturo-villagomez.html","jobTitle":"Fundador de Don Ventas","worksFor":{"@id":"https://www.donventas.mx/#org"},"alternateName":"Arturo Villagomez Gomez","sameAs":["https://www.arturovillagomez.com/"]},{"@type":"BlogPosting","@id":"https://www.donventas.mx/blog/por-que-nacio-don-ventas.html#article","mainEntityOfPage":"https://www.donventas.mx/blog/por-que-nacio-don-ventas.html","headline":"El valor no siempre habla por sí solo","alternativeHeadline":"Por qué nació Don Ventas","description":"La historia de Don Ventas y de por qué un negocio valioso necesita claridad, confianza y una forma de ser entendido, encontrado y elegido.","image":["https://www.donventas.mx/og-fundacional-1200x1200.jpg","https://www.donventas.mx/og-fundacional-1200x900.jpg","https://www.donventas.mx/og-fundacional-1200x630.jpg"],"datePublished":"2026-10-02T12:00:00-06:00","dateModified":"2026-10-09","author":{"@id":"https://www.donventas.mx/#quien"},"publisher":{"@id":"https://www.donventas.mx/#org"},"isPartOf":{"@id":"https://www.donventas.mx/#website"},"isAccessibleForFree":true,"inLanguage":"es-MX","articleSection":"Carta fundacional","keywords":["por qué nació Don Ventas","cómo hacer visible un negocio","cómo comunicar el valor de un negocio","marca y contenido para negocios"]},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Inicio","item":"https://www.donventas.mx/"},{"@type":"ListItem","position":2,"name":"Ideas","item":"https://www.donventas.mx/blog/"},{"@type":"ListItem","position":3,"name":"Por qué nació Don Ventas","item":"https://www.donventas.mx/blog/por-que-nacio-don-ventas.html"}]}]}
@@ -49,8 +50,8 @@
 <div class="nav">
   <div class="in">
     <a class="brand" href="/" aria-label="Don Ventas, inicio"><img class="brand-wordmark" src="/assets/brand/donventas-wordmark-b6-reverse.svg" width="210" height="130" alt="Don Ventas"></a>
-    <nav class="links" aria-label="Navegación principal"><a href="/#servicios">Servicios</a><a href="/branding.html">Sistema de marca</a><a href="/blog/" aria-current="page">Ideas</a><a href="/#trabajo">Casos</a></nav>
-    <div class="nav-cta"><a class="btn" href="https://app.donventas.mx">Portal · próximamente <span class="ar">↗</span></a><a class="btn solid" href="/#contacto" data-blog-entry="nav-diagnostico">Diagnóstico</a></div>
+    <nav class="links" aria-label="Navegación principal"><a href="/#servicios">Servicios</a><a href="/branding.html" data-blog-entry="sistema-de-marca">Sistema de marca</a><a href="/blog/" aria-current="page">Ideas</a><a href="/#trabajo">Casos</a></nav>
+    <div class="nav-cta"><a class="btn" href="https://app.donventas.mx">Portal · próximamente <span class="ar">↗</span></a><a class="btn" href="/#contacto" data-blog-entry="nav-diagnostico">Diagnóstico</a></div>
   </div>
 </div>
 <div class="reading-progress" aria-hidden="true"><span data-reading-progress></span></div>
@@ -170,14 +171,9 @@
       <div class="promise-yes reveal d2"><span>Sí podemos comprometernos a</span><p>buscar la esencia de tu negocio, convertirla en una idea clara y construir una presencia que ayude a las personas adecuadas a entender por qué podrían elegirte.</p></div>
     </section>
 
-    <aside class="related-reading wrap reveal" aria-labelledby="related-foundational-title">
-      <span class="chapter-kicker">Siguiente lectura</span>
-      <h2 id="related-foundational-title">Nos buscaban para pedir créditos. No ofrecíamos créditos.</h2>
-      <p>La experiencia que me hizo cuestionar qué estábamos comunicando y las preguntas que ahora hago antes de proponer contenido para un negocio.</p>
-      <a href="/blog/contenido-que-atrae-clientes.html" data-blog-entry="relacionado-guia-contenido">Leer la experiencia y el criterio <span aria-hidden="true">→</span></a>
-    </aside>
 
-    <section class="founder-close wrap" id="compartir" data-section-target>
+
+    <section class="founder-close founder-close-single wrap" id="compartir" data-section-target>
       <div class="founder-signature reveal">
         <span class="chapter-kicker">Una invitación</span>
         <h2>Quiero compartirte lo que me hubiera gustado entender antes.</h2>
@@ -185,15 +181,23 @@
         <p>No puedo evitarte todos los tropiezos. Pero sí puedo ayudarte a que tu negocio sea más fácil de entender, encontrar y elegir antes de que inviertas más tiempo en hablarle a una audiencia que todavía no comprende lo que tienes para ofrecer.</p>
         <p class="signature-name">Arturo Villagomez <span>Fundador de Don Ventas</span></p>
       </div>
-      <aside class="article-cta manifesto-cta" aria-labelledby="cta-fundacional-title">
+
+    </section>
+<div class="article-ending" id="siguiente-paso">
+<aside data-next-step="diagnosis" class="article-cta manifesto-cta" aria-labelledby="cta-fundacional-title">
         <span class="eyebrow">Empecemos por entender tu situación</span>
         <h2 id="cta-fundacional-title">¿Qué quieres construir a partir de lo que hace valioso a tu negocio?</h2>
         <p>Cuéntame qué está pasando y qué te gustaría cambiar. Revisaré personalmente tu punto de partida y te propondré el siguiente paso.</p>
-        <a class="btn solid lg" href="/#contacto" data-blog-entry="cierre-diagnostico">Solicita tu diagnóstico <span class="ar">→</span></a>
-        <p>Para llevar lo que hace valioso a tu negocio a palabras, identidad y herramientas, <a href="/branding.html" data-blog-entry="sistema-de-marca">explora la ruta de sistemas de marca</a>.</p>
-      </aside>
-    </section>
-  </article>
+        <a class="btn solid lg" href="/diagnostico.html" data-blog-entry="cierre-diagnostico">Solicita tu diagnóstico <span class="ar">→</span></a></aside>
+<div id="comenta-conmigo" data-article-comments="por-que-nacio-don-ventas"><noscript><p>Para comentar en privado, activa JavaScript o utiliza el correo de contacto de Don Ventas. No se publicará tu mensaje en el blog.</p></noscript></div>
+</div>
+<aside class="related-reading wrap reveal" aria-labelledby="related-foundational-title">
+      <span class="chapter-kicker">Siguiente lectura</span>
+      <h2 id="related-foundational-title">Nos buscaban para pedir créditos. No ofrecíamos créditos.</h2>
+      <p>La experiencia que me hizo cuestionar qué estábamos comunicando y las preguntas que ahora hago antes de proponer contenido para un negocio.</p>
+      <a href="/blog/contenido-que-atrae-clientes.html" data-blog-entry="relacionado-guia-contenido">Leer la experiencia y el criterio <span aria-hidden="true">→</span></a>
+    </aside>
+</article>
 </main>
 
 <footer class="foot"><div class="in wrap"><div class="l"><svg class="eldon" viewBox="0 0 120 120" aria-hidden="true"><rect x="44" y="44" width="32" height="4.4" rx="2.2" fill="#EEF1F6"></rect><circle cx="53" cy="63" r="3.6" fill="#EEF1F6"></circle><circle cx="70" cy="63" r="9" fill="none" stroke="#3B74F2" stroke-width="3.4"></circle><path d="M79 67 Q83 77 78 84" fill="none" stroke="#3B74F2" stroke-width="2" stroke-linecap="round"></path></svg><span>Don Ventas · entender, encontrar, elegir</span></div><div class="coord"><a href="/#servicios">Servicios</a><a href="/branding.html">Sistema de marca</a><a href="/blog/">Ideas</a><a href="https://app.donventas.mx">Portal · próximamente ↗</a><a href="/15_LEGAL/Aviso%20de%20Privacidad.html">Privacidad</a><a href="mailto:arturo.villagomez@donventas.mx">arturo.villagomez@donventas.mx</a><span class="heart">♥</span></div></div></footer>
@@ -201,6 +205,7 @@
 <script defer src="/analytics.js"></script>
 <script defer src="/app.js"></script>
 <script defer src="/blog/blog.js"></script>
+<script defer src="/blog/article-comments.js"></script>
 <script defer src="/_vercel/insights/script.js"></script>
 <script defer src="/section-index.js?v=20261007-1"></script>
 </body>

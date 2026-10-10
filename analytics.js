@@ -67,6 +67,9 @@
     } else if (['content_selected', 'reading_return', 'service_selected', 'diagnostic_entry'].indexOf(name) >= 0) {
       if (!member(data.destination, Object.keys(pages).map(function (p) { return pages[p]; }).concat(['servicios']))) return null;
       output.destination = data.destination;
+    } else if (['article_message_opened', 'article_message_sent', 'article_message_failed'].indexOf(name) >= 0) {
+      // Article source is assigned by the page map, never by visitor input.
+      if (name === 'article_message_failed') output.reason = member(data.reason, ['rate_limited', 'validation', 'unavailable']) || 'unavailable';
     } else if (name === 'section_viewed') {
       if (!member(data.section, ['hero', 'problema', 'metodo', 'servicios', 'casos', 'ideas', 'quien', 'inversion', 'preguntas', 'contacto'])) return null;
       output.section = data.section;
