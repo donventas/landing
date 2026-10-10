@@ -344,3 +344,38 @@ PREPARACIÓN DE RELEASE AUTORIZADO — 2026-10-10
 - Alcance de release: invitaciones contextuales en siete artículos; compartir antes
   y después del regalo solo en contenido-que-atrae-clientes. Sin cambios adicionales
   en artículos, servicios, consentimiento, diagnóstico o configuración de producción.
+
+PRUEBA DE COPY: CONTENIDO DEL REGALO VS. ACCESO — 2026-10-10
+- Solo contenido-que-atrae-clientes; pendiente de aprobación visual. No es todavía
+  regla extendida al resto de artículos ni cambio publicado.
+- Etiqueta «Un regalo para tu próxima publicación»; título «Tu checklist
+  «Antes de publicar»»; descripción de cinco puntos como contenido del PDF, no tarea.
+- Acceso visible antes de abrir: tres preguntas + correo, PDF al terminar sin
+  suscripción. El aviso al inicio del artículo también explicita el correo.
+- Configuración por artículo con valores anteriores como fallback para los otros
+  seis. Sin cambios a preguntas, PDF, consentimiento, metadatos ni entrega.
+- 282/282 pruebas; revisión en navegador a 535 px: requisitos visibles antes y
+  después de abrir, descripción accesible asociada al botón. Sin envío de formulario.
+  No se repite medición de rendimiento para este ajuste de texto y posición.
+- Estado: previo local regalo-acceso-v1; sin commit, merge ni publicación.
+
+EXTENSIÓN APROBADA / TARJETAS SOCIALES — 2026-10-10
+- Arturo aprueba el resultado, commit y merge; solicita dirección social en todos
+  los artículos y documentación reutilizable. Regla integrada en workflow v1.3.
+- Siete regalos distinguen contenido y acceso; los requisitos aparecen antes de
+  abrir el formulario y en el aviso inicial, incluido el correo sin opt-in forzado.
+- OG/Twitter sincronizados en siete artículos: hook editorial propio y mención
+  secundaria del checklist/guía gratuito correspondiente. Se conservan hooks ya
+  adecuados (origen, manual y Google) y todas las imágenes originales aprobadas.
+- Títulos SEO, H1, schema, canonical, cuerpo, fechas, PDFs y preguntas sin cambios.
+  No términos nuevos en el cuerpo: glosario/frecuencias se preservan y sus pruebas
+  pasan. No claims de posicionamiento, resultados comerciales o descarga sin requisitos.
+- Suite 283/283; revisión DOM de siete páginas a 535 px: textos correctos, sin
+  overflow; vista del bloque Google revisada. No nueva matriz de viewports ni
+  medición de rendimiento para este ajuste de copy/metadatos, sin assets nuevos.
+- Una prueba antigua del manual contaba su frase también en OG; ahora protege
+  expresamente su ubicación en bajada y cierre, permitiendo el social copy aprobado.
+- Auto-revisión y preview local; no nuevo QA independiente, envío de formularios
+  ni confirmación de render/caché real en WhatsApp. Verificar HTML público tras merge.
+- Botones interactivos de compartir siguen en el artículo 2; esta extensión cubre
+  metadatos de tarjetas y presentación de regalos, no un rollout de esos botones.

@@ -4,7 +4,9 @@ const html=read('blog/manual-de-marca.html');
 test('manual keeps approved editorial direction, book attribution and bounded promises',()=>{
  for(const text of ['Perder el archivo tiene solución. Perder esos acuerdos es más complicado.','con John Zeratsky','con Amy Wallace','no una recomendación de los autores','¿cómo convertir una intención de marca en algo que otra persona pueda aplicar?','ningún manual puede sustituir eso','El de tu marca merece estar donde sucede la acción.'])assert.ok(html.toLowerCase().includes(text.toLowerCase()),text);
  assert.doesNotMatch(html,/donde pasan las cosas/i);
- assert.equal(html.split('El de tu marca merece estar donde sucede la acción.').length-1,3);
+ // The approved sentence stays in the dek and closing, while social copy can mention the gift.
+ assert.match(html,/<p class="article-dek">El del televisor puede seguir en el cajón\. El de tu marca merece estar donde sucede la acción\.<\/p>/);
+ assert.match(html,/<p class="opening-line"><strong>El de tu marca merece estar donde sucede la acción\.<\/strong><\/p>/);
  for(const url of ['https://www.simonandschuster.com/books/Click/Jake-Knapp/9781668072110','https://www.amy-wallace.com/creativity-inc'])assert.equal(html.split('href="'+url+'"').length-1,2);
  assert.doesNotMatch(html,/readwise\.io|OneDrive|07_FUNDACION|1048473431/);
  assert.match(html,/momento=integrar&amp;servicio=identidad/);

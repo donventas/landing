@@ -9,11 +9,13 @@ window.DVGiftPilot = function(host, section, gift) {
     image.alt='Vista previa del recurso de una hoja: '+gift.title+'.';
     preview.append(image);
     var offerCopy=document.createElement('div');offerCopy.className='gift-offer-copy';
-    var kicker=section.querySelector('.comment-kicker');kicker.textContent='Ahora te toca ponerlo en práctica';
+    var kicker=section.querySelector('.comment-kicker');kicker.textContent=gift.offerKicker || 'Ahora te toca ponerlo en práctica';
     offerCopy.append(kicker,section.querySelector('h2'),section.querySelector('[data-gift-description]'));
     offer.append(preview,offerCopy);section.prepend(offer);
-    var terms=document.createElement('p');terms.className='gift-offer-terms';terms.textContent='Responde tres preguntas. Descarga gratis, sin suscribirte.';
-    section.querySelector('.comment-details').after(terms);
+    var terms=document.createElement('p');terms.className='gift-offer-terms';terms.textContent=gift.accessTerms || 'Responde tres preguntas. Descarga gratis, sin suscribirte.';
+    if(gift.accessTerms){
+      terms.id='gift-access-terms';section.querySelector('.comment-details').before(terms);opener.setAttribute('aria-describedby',terms.id);
+    }else section.querySelector('.comment-details').after(terms);
     var extra=document.createElement('details');extra.className='gift-extra-comment';
     extra.innerHTML='<summary>¿Quieres contarme algo más? <span>(opcional)</span></summary><div class="comment-field"><label for="gift-comment">Tu comentario o pregunta</label><textarea id="gift-comment" name="comment" rows="2" maxlength="900" aria-describedby="gift-comment-hint"></textarea><small id="gift-comment-hint">Te leo en privado. Hasta 900 caracteres; no incluyas información sensible.</small></div>';
     section.querySelector('.gift-contact').after(extra);
@@ -94,6 +96,7 @@ window.DVGiftPilot = function(host, section, gift) {
       var intro=document.createElement('aside');intro.className='gift-reading-note';intro.setAttribute('aria-label','Regalo de este artículo');
       intro.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 3h8l4 4v14H6zM14 3v5h4M9 12h6M9 16h6"/></svg><div><p class="gift-note-title">Que esto no se quede en lectura.</p><p>Al final te espera <strong data-gift-note-title></strong>: <span data-gift-note-description></span></p><p class="gift-note-conditions">Tres preguntas · descarga inmediata · sin suscripción obligatoria.</p><a href="#regalo-del-articulo">Ver el regalo <span aria-hidden="true">↓</span></a></div>';
       intro.querySelector('[data-gift-note-description]').textContent=gift.intro || gift.description;
+      if(gift.readingConditions)intro.querySelector('.gift-note-conditions').textContent=gift.readingConditions;
       intro.querySelector('[data-gift-note-title]').textContent='«'+gift.title+'»';intro.querySelector('a').addEventListener('click',giftJump);introSlot.append(intro);
     }
     var indexNav=document.querySelector('[data-section-index] nav');
