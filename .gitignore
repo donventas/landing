@@ -8,3 +8,8 @@ portafolio/source/
 .qa-el-don/
 .qa-comments/
 .private-comments/
+.qa-gifts/
+tmp/pdfs/
+output/pdf/
+__pycache__/
+*.pyc

@@ -59,3 +59,11 @@ PRIVATE-COMMENTS-REVIEW.md
 PRIVATE-COMMENTS-RELEASE.md
 supabase/migrations/
 scripts/update-comments-privacy.cjs
+.qa-gifts/
+tmp/pdfs/
+output/pdf/
+scripts/gifts/
+scripts/qa-article-gifts.cjs
+scripts/qa-comment-form.cjs
+scripts/qa-gift-discovery.cjs
+ARTICLE-GIFTS-REVIEW.txt

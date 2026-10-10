@@ -1,0 +1,42 @@
+[
+  {
+    "id":"tu-valor-en-tres-frases", "article":"por-que-nacio-don-ventas", "no":"03", "topic":"EXPLICAR TU VALOR", "title":"Tu valor en\ntres frases.",
+    "image":"oferta-entendida-el-don-v3-1440.webp", "hook":"No hace falta decirlo todo.\nHace falta dar una primera pista útil.",
+    "demoTitle":"De la frase que suena bien\na la que alguien entiende.", "demo":"phrases",
+    "fields":["¿A quién ayudas y qué situación está viviendo?","¿Qué resuelves, dicho sin palabras de catálogo?","¿Qué ejemplo real demuestra cómo trabajas?","Une esas ideas en tres frases breves.","¿Qué entendió otra persona al leerlas sin tu explicación?"],
+    "prompt":"Revisa estas tres frases para [persona]. Señala lo que no se entiende. Conserva mi tono y no inventes beneficios ni pruebas.",
+    "miniKit":"Claridad de oferta: mensajes por situación, pruebas y variantes. Hipótesis, no disponible."
+  },
+  {
+    "id":"de-la-promesa-a-la-prueba", "article":"tu-marca-es-tu-ventaja", "no":"04", "topic":"MARCA Y EXPERIENCIA", "title":"De la promesa\na la prueba.",
+    "image":"joyeria-cuidado-el-don-v4-1440.webp", "hook":"La confianza no cabe en un adjetivo.\nSe nota en lo que haces.",
+    "demoTitle":"«Cuidamos los detalles».\n¿Dónde se puede notar?", "demo":"promise",
+    "fields":["¿Qué promesa haces hoy a tus clientes? Elige una.","¿En qué momento de la experiencia debe notarse?","¿Qué conducta o detalle concreto la demuestra?","¿Quién lo cuida y cómo comprueba que ocurrió?","¿Qué dijo o hizo un cliente? Si no lo sabes, anótalo."],
+    "prompt":"Conecta [promesa] con una conducta observable en [momento]. Separa lo que ya hacemos de lo que falta implementar. No inventes testimonios.",
+    "miniKit":"Experiencia de marca: recorrido, estándares de atención y registro de evidencias. Hipótesis, no disponible."
+  },
+  {
+    "id":"tu-marca-lista-para-compartir", "article":"manual-de-marca", "no":"05", "topic":"MARCA EN EQUIPO", "title":"Tu marca lista\npara compartir.",
+    "image":"manual-busqueda-v3-1536.webp", "hook":"Que compartir tu marca no termine\nen una búsqueda del tesoro.",
+    "demoTitle":"Una carpeta necesita\nalgo más que archivos.", "demo":"handoff",
+    "fields":["¿Quién usará la marca y para qué pieza concreta?","¿Dónde están los archivos vigentes y cuál debe usar?","¿Qué regla o ejemplo necesita ver primero?","¿Qué duda sigue abierta y quién puede resolverla?","Pídele una prueba: ¿qué pudo hacer sin preguntarte?"],
+    "prompt":"Revisa esta lista de entrega para [persona y pieza]. Detecta instrucciones ambiguas y archivos que faltan. No inventes reglas de marca.",
+    "miniKit":"Marca lista para compartir: estructura, guía de uso y control de versiones. Hipótesis, no disponible."
+  },
+  {
+    "id":"tu-logo-fuera-del-archivo", "article":"logotipos-mitos", "no":"06", "topic":"IDENTIDAD EN USO", "title":"Tu logo fuera\ndel archivo.",
+    "image":"logo-vitrina-v5-1536.webp", "hook":"La vitrina le queda bien.\nLa vida real también debería.",
+    "demoTitle":"Prueba el lugar.\nNo solo el archivo.", "demo":"logo",
+    "fields":["¿Dónde se usará el logo y quién prepara esa pieza?","¿Cuál será su tamaño real, fondo y material?","¿Qué versión aprobada corresponde a ese uso?","¿Qué viste al probarla? Lectura, contraste o detalle.","¿Qué falta resolver y con quién lo vas a revisar?"],
+    "prompt":"Organiza estas observaciones de uso en funciona, duda y ajuste por revisar. No rediseñes ni inventes tamaños mínimos: pide pruebas reales.",
+    "miniKit":"Matriz de usos y pruebas de identidad; posible módulo del kit de marca. Hipótesis, no disponible."
+  },
+  {
+    "id":"encuentrate-sin-tu-nombre", "article":"como-aparecer-en-google", "no":"07", "topic":"SER ENCONTRABLE", "title":"Encuéntrate\nsin tu nombre.",
+    "image":"se-busca-v1-1536.webp", "hook":"Tu próximo cliente quizá conozca\nsu problema, pero todavía no tu marca.",
+    "demoTitle":"Empieza por una necesidad.\nAnota lo que sí observas.", "demo":"search",
+    "fields":["¿Qué necesidad concreta podría buscar alguien?","¿Qué frase probaste sin incluir tu marca?","¿Cuándo y desde dónde buscaste? Dispositivo y sesión.","¿Qué encontraste y qué información ayudaba a elegir?","¿Qué dato útil falta en tu sitio y qué revisarás primero?"],
+    "prompt":"Con [necesidad y oferta real], sugiere tres consultas sin mi marca. Márcalas como hipótesis, no como búsquedas con demanda demostrada.",
+    "miniKit":"Presencia básica: consultas, información útil y plan de mejoras comprobables. Hipótesis, no disponible."
+  }
+]

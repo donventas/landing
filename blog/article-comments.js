@@ -5,7 +5,7 @@
   if (!host) return;
   var articleId = host.getAttribute('data-article-comments');
   var articleTitle = document.querySelector('h1').textContent.trim();
-  host.innerHTML = '<section class="private-comment" aria-labelledby="comment-title">' +
+  host.innerHTML = '<section class="private-comment comment-compose" aria-labelledby="comment-title">' +
     '<h2 id="comment-title">¿Te pasó algo parecido o te quedó una pregunta?</h2>' +
     '<p class="comment-private">Te leo. Tu mensaje es privado y no se publicará en el blog.</p>' +
     '<details class="comment-details"><summary>Comentar con Arturo <span aria-hidden="true">＋</span></summary>' +
@@ -16,15 +16,15 @@
     '<textarea id="comment-message" name="message" rows="5" maxlength="5000" required aria-describedby="comment-message-hint comment-message-error" placeholder="¿Qué te gustaría comentar?"></textarea>' +
     '<small id="comment-message-hint">Hasta 5,000 caracteres. No compartas contraseñas ni información sensible.</small>' +
     '<small id="comment-message-error" class="comment-error"></small></div>' +
-    '<div class="comment-fields"><div class="comment-field"><label for="comment-email">Correo para responderte <span>(obligatorio)</span></label>' +
+    '<fieldset class="comment-contact"><legend>Datos para responderte</legend><div class="comment-fields"><div class="comment-field"><label for="comment-email">Correo <span>(obligatorio)</span></label>' +
     '<input id="comment-email" name="email" type="email" autocomplete="email" maxlength="254" required aria-describedby="comment-email-error"><small id="comment-email-error" class="comment-error"></small></div>' +
     '<div class="comment-field"><label for="comment-name">Tu nombre <span>(opcional)</span></label>' +
-    '<input id="comment-name" name="name" autocomplete="name" maxlength="100" aria-describedby="comment-name-error"><small id="comment-name-error" class="comment-error"></small></div></div>' +
+    '<input id="comment-name" name="name" autocomplete="name" maxlength="100" aria-describedby="comment-name-error"><small id="comment-name-error" class="comment-error"></small></div></div></fieldset>' +
     '<div class="comment-trap" aria-hidden="true"><label for="comment-website">Deja este campo vacío</label><input id="comment-website" name="website" tabindex="-1" autocomplete="off"></div>' +
-    '<label class="comment-opt-in" for="comment-newsletter"><input id="comment-newsletter" name="newsletter" type="checkbox" aria-describedby="comment-opt-note"><span>Ideas para hacer más visible tu negocio.<strong>Recíbelas por correo.</strong></span></label>' +
-    '<p id="comment-opt-note" class="comment-fine">Opcional · artículos y novedades de Don Ventas. Puedes darte de baja cuando quieras. Enviar un comentario no te suscribe.</p>' +
     '<p class="comment-fine">Usaremos tus datos para atender este mensaje. <a href="/15_LEGAL/Comentarios%20Privados.html">Consulta cómo los cuidamos</a>.</p>' +
-    '<div class="comment-actions"><button class="btn solid" type="submit" disabled>Enviar mensaje privado</button><span>Sin cuenta. Sin descargar nada.</span></div>' +
+    '<div class="gift-subscribe"><label class="gift-subscribe-label" for="comment-newsletter"><input id="comment-newsletter" name="newsletter" type="checkbox" aria-describedby="comment-opt-note"><span><span class="gift-optional">SIGAMOS EN CONTACTO · OPCIONAL</span><strong>Ideas para hacer más visible tu negocio. Recíbelas por correo.</strong></span></label>' +
+    '<p id="comment-opt-note">Opcional · artículos y novedades de Don Ventas. Puedes darte de baja cuando quieras. Enviar un comentario no te suscribe.</p></div>' +
+    '<div class="comment-actions gift-submit"><button class="btn solid" type="submit" disabled>Enviar mensaje privado</button><span>Solo para Don Ventas.<br> No se publica en el blog.</span></div>' +
     '<p class="comment-status" role="status" aria-live="polite" aria-atomic="true" tabindex="-1"></p>' +
     '</form></div></details></section>';
   host.querySelector('[data-comment-title]').textContent = articleTitle;
