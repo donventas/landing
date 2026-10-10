@@ -23,10 +23,10 @@ test('every blog page has matching Open Graph and Twitter images backed by local
  }
 });
 for(const [slug,family,old] of [
- ['por-que-nacio-don-ventas','fundador-el-don-v1','fundador-editorial'],
+ ['por-que-nacio-don-ventas','fundador-editorial','fundador-el-don-v1'],
  ['contenido-que-atrae-clientes','barberia-el-don-v1','article-wrong-offer'],
  ['tu-marca-es-tu-ventaja','joyeria-el-don-v3','marca-confianza']
-])test(`${slug}: HUB, article, preload and social metadata use the approved El Don cover`,()=>{
+])test(`${slug}: HUB, article, preload and social metadata use the approved cover`,()=>{
  const html=read(`blog/${slug}.html`);
  assert.ok(hub.includes(`${family}-480.webp`));
  assert.ok(!html.includes(old));
@@ -40,7 +40,7 @@ for(const [slug,family,old] of [
  for(const entry of attrs.srcset.split(','))assert.ok(fs.statSync(path.join(root,entry.trim().split(' ')[0])).size<160000);
  const og=html.match(/property="og:image" content="([^"]+)"/)[1];
  assert.equal(html.match(/name="twitter:image" content="([^"]+)"/)[1],og);
- assert.match(og,slug==='tu-marca-es-tu-ventaja'?/og-marca-el-don-v3\.jpg$/:/el-don-v1/);
+ assert.match(og,slug==='por-que-nacio-don-ventas'?/og-fundacional-1200x630\.jpg$/:slug==='tu-marca-es-tu-ventaja'?/og-marca-el-don-v3\.jpg$/:/el-don-v1/);
  const graph=JSON.parse(html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1])['@graph'];
  const article=graph.find(x=>x['@type']==='BlogPosting');
  assert.ok(article.image.includes(og));
@@ -51,7 +51,8 @@ for(const [slug,family,old] of [
 });
 test('professional author portrait is not replaced by the editorial intervention',()=>{
  assert.ok(!read('arturo-villagomez.html').includes('fundador-el-don-v1'));
- assert.match(read('blog/por-que-nacio-don-ventas.html'),/Retrato de Arturo intervenido con IA/);
+ assert.doesNotMatch(read('blog/por-que-nacio-don-ventas.html'),/fundador-el-don|og-fundacional-el-don|Retrato de Arturo intervenido con IA/);
+ assert.match(read('blog/por-que-nacio-don-ventas.html'),/Arturo Villagomez · Fundador de Don Ventas/);
  assert.match(read('blog/article-rhythm.css'),/\.manifesto-page \.manifesto-heading\{margin-top:0\}/);
 });
 test('content illustration is responsive, deferred and explicitly fictional',()=>{
