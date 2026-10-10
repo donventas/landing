@@ -33,7 +33,7 @@ test('all seven stories and the glossary have a single image-and-title destinati
     assert.match(card, /class="hub-story-action"/);
   });
   assert.match(cards[1], /Ilustración con IA · escena ficticia/);
-  assert.match(cards[0], /Retrato intervenido con IA/);
+  assert.doesNotMatch(cards[0], /Retrato intervenido con IA/);
   assert.match(cards[2], /Ilustración con IA · escena ficticia/);
   assert.match(cards[3], /Ilustración con IA · escena ficticia/);
   assert.match(cards[4], /Ilustración con IA · escena ficticia/);
