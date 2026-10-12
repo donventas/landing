@@ -1,0 +1,33 @@
+/* Proyección de tokens.json M67. */
+:root{
+--cr-color-violeta:#4E2F7C;
+--cr-color-lima:#A8D81B;
+--cr-color-blanco:#FFFFFF;
+--cr-color-negro:#000000;
+--cr-color-tinta:#241A31;
+--cr-color-superficie:#F5F2F8;
+--cr-color-textoSecundario:#655B70;
+--cr-color-linea:#DCD5E6;
+--cr-font-family:Manrope;
+--cr-font-title-weight:700;
+--cr-font-body-weight:400;
+--cr-font-label-weight:500;
+--cr-font-action-weight:600;
+--cr-title-size:clamp(32px, 4vw, 56px);
+--cr-title-leading:1.12;
+--cr-title-tracking:-0.025em;
+--cr-body-size:clamp(16px, 1.4vw, 18px);
+--cr-body-leading:1.6;
+--cr-body-measure:65ch;
+--cr-label-size:14px;
+--cr-content-max:1280px;
+--cr-media-max:1440px;
+--cr-page-gutter:clamp(20px, 4vw, 64px);
+--cr-section-gap:clamp(64px, 8vw, 120px);
+--cr-grid-gap:24px;
+--cr-space-copy:16px;
+--cr-image-radius:0px;
+--cr-control-radius:999px;
+--cr-control-min-height:48px;
+--cr-hero-aspect:960 / 423;
+}

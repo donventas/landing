@@ -7,7 +7,44 @@
       "permanent": true
     }
   ],
+  "rewrites": [
+    {
+      "source": "/alianzas/creactiva",
+      "destination": "/alianzas/creactiva/index.html"
+    },
+    {
+      "source": "/alianzas/creactiva/",
+      "destination": "/alianzas/creactiva/index.html"
+    }
+  ],
   "headers": [
+    {
+      "source": "/alianzas/creactiva",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate"
+        }
+      ]
+    },
+    {
+      "source": "/alianzas/creactiva/(.*)",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate"
+        }
+      ]
+    },
+
     {
       "source": "/assets/gifts/(.*)",
       "headers": [{"key": "X-Robots-Tag", "value": "noindex"}]
