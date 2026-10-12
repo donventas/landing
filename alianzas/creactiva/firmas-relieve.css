@@ -1,0 +1,53 @@
+/* Web-only material rendering. Canonical SVG geometry and face colors stay intact. */
+.logo-relief{--logo-width:160px;--depth:1px;position:relative;display:block;width:var(--logo-width);max-width:100%;isolation:isolate;flex:none;line-height:0;filter:drop-shadow(1px 5px 4px rgba(16,8,30,.28))}
+.logo-relief--donventas{--logo-width:110px}
+.logo-relief img.logo-face,.logo-relief img.logo-layer{display:block;width:100%;height:auto;max-width:none;margin:0;object-fit:contain}
+.logo-relief img.logo-layer{position:absolute;inset:0;pointer-events:none;user-select:none}
+.logo-layer--3{transform:translate(calc(var(--depth)*1.5),calc(var(--depth)*3));filter:brightness(.34)}
+.logo-layer--2{transform:translate(var(--depth),calc(var(--depth)*2));filter:brightness(.52)}
+.logo-layer--1{transform:translate(calc(var(--depth)*.5),var(--depth));filter:brightness(.77)}
+.logo-relief img.logo-face{position:relative}
+.partner-brand>.logo-relief{position:relative;bottom:auto;font-size:inherit;letter-spacing:normal;white-space:normal}
+.header-inner .brand .logo-relief{--logo-width:160px;--depth:.7px}
+.header-inner .partner-brand .logo-relief{--logo-width:110px;--depth:.7px}
+.header-inner .logo-relief{filter:drop-shadow(1px 3px 2px rgba(16,8,30,.25))}
+.brand-pair{display:flex;align-items:center;gap:16px;width:max-content;max-width:100%;line-height:1}
+.brand-pair .logo-relief--donventas{--logo-width:90px}
+.brand-pair .logo-relief{--depth:.8px}
+.pair-divider{display:block;width:1px;height:32px;flex:none;background:rgba(255,255,255,.35)}
+.brand-pair-line{margin:0 0 24px}
+.opening .brand-pair-line{position:relative;z-index:2}
+.collaboration-grid .role-logo{height:132px;margin:0 0 26px;display:flex;align-items:center;padding:20px 0}
+.collaboration-grid .role-logo .logo-relief--creactiva{--logo-width:270px;--depth:2px}
+.collaboration-grid .role-logo .logo-relief--donventas{--logo-width:185px;--depth:2px}
+.collaboration-grid article:last-child .eyebrow{margin-bottom:16px}
+.collaboration-grid article>p:not(.eyebrow){max-width:42ch}
+.collaboration-grid article{position:relative}
+.collaboration-grid .join-mark{align-self:start;margin-top:112px;line-height:1}
+.collaboration-grid article:after{content:"";position:absolute;inset:20px 0 auto;width:300px;height:190px;max-width:100%;background:radial-gradient(ellipse,rgba(255,255,255,.055),transparent 70%);pointer-events:none}
+.footer-partner{display:flex;flex-direction:column;gap:8px;align-items:flex-start}
+.footer-main .footer-partner p{font-size:13px;margin:0}
+.footer-partner .logo-relief{--logo-width:108px;--depth:1px;margin:2px 0 8px}
+.quote-header .brand-pair-line{margin:0}
+.quote-header .brand-pair{gap:12px}
+.quote-header .brand-pair .logo-relief--donventas{--logo-width:80px}
+.quote-header{gap:16px;align-items:center;background:var(--purple);color:white}
+.quote-header .icon-button{color:white;background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.35)}
+.quote-header .logo-relief{filter:drop-shadow(1px 3px 2px rgba(16,8,30,.2))}
+@media(max-width:640px){
+ .header-inner .partner-brand .logo-relief{--logo-width:106px}
+ .brand-pair{gap:12px}.brand-pair .logo-relief--donventas{--logo-width:84px}
+ .brand-pair-line{margin-bottom:22px}
+ .collaboration-grid .role-logo{height:122px;margin-bottom:20px}
+ .collaboration-grid .role-logo .logo-relief--creactiva{--logo-width:250px;--depth:1.5px}
+ .collaboration-grid .role-logo .logo-relief--donventas{--logo-width:170px;--depth:1.5px}
+ .footer-partner{flex-basis:100%}
+ .quote-header{padding:14px 16px;position:relative}
+ .quote-header .brand-pair{gap:10px}
+ .quote-header .brand-pair .logo-relief--donventas{--logo-width:90px}
+ .quote-header .pair-divider{display:none}
+ .quote-header .icon-button{flex:none}
+ .collaboration-grid .join-mark{margin-top:0}
+}
+@media(max-width:360px){.brand-pair{gap:10px}.brand-pair .logo-relief--donventas{--logo-width:80px}.quote-header .brand-pair{flex-wrap:nowrap;gap:10px}.quote-header .brand-pair .logo-relief--donventas{--logo-width:66px}.quote-header{gap:8px}.quote-header .icon-button{margin-left:auto;width:32px;height:44px}.collaboration-grid .role-logo .logo-relief--creactiva{--logo-width:240px}}
+@media(prefers-reduced-motion:reduce){.logo-relief,.logo-relief img{animation:none;transition:none}}
