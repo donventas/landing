@@ -41,7 +41,10 @@
     var label=document.createElement('label'); label.htmlFor='gift-answer-'+i;
     var number=document.createElement('span');number.className='gift-question-number';number.textContent='0'+(i+1);number.setAttribute('aria-hidden','true');
     var question=document.createElement('span');question.className='gift-question-text';question.textContent=q;label.append(number,question);
-    var input=document.createElement('textarea'); input.id=label.htmlFor; input.name='answer'+i; input.rows=2; input.maxLength=900; input.required=true;
+    var options=gift.questionOptions && gift.questionOptions[i];
+    var input=document.createElement(options?'select':'textarea'); input.id=label.htmlFor; input.name='answer'+i; input.required=true;
+    if(options){var placeholder=document.createElement('option');placeholder.value='';placeholder.textContent='Elige una opción';input.append(placeholder);options.forEach(function(value){var option=document.createElement('option');option.value=value;option.textContent=value;input.append(option);});}
+    else{input.rows=2;input.maxLength=900;}
     field.append(label,input); section.querySelector('[data-gift-questions]').append(field);
   });
   host.before(section);
@@ -61,7 +64,7 @@
     try{
       var updated=await fetch('/blog/article-gifts.json',{cache:'no-store'});if(!updated.ok)throw Error();
       var nextData=await updated.json(),nextGift=nextData.articles[article];
-      if(!nextGift || nextGift.id!==gift.id || JSON.stringify(nextGift.questions)!==JSON.stringify(gift.questions)){
+      if(!nextGift || nextGift.id!==gift.id || JSON.stringify(nextGift.questions)!==JSON.stringify(gift.questions) || JSON.stringify(nextGift.questionOptions)!==JSON.stringify(gift.questionOptions)){
         status.textContent='También cambiaron las preguntas. Copia tus respuestas antes de recargar esta página para revisar la nueva versión.';return;
       }
       data=nextData;gift=nextGift;consentCopy();link.href=gift.file;

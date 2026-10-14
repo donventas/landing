@@ -1,0 +1,51 @@
+.create-brand-page{--paper:#f1ede4;--blue:#3b74f2;--ink:#10151d}
+.create-brand-page .editorial-nav{position:sticky;top:0;height:80px}
+.create-brand-page .hero{padding:0;overflow:visible;background:#10151d}
+.create-brand-page .hero::before,.create-brand-page .hero::after{display:none}
+.create-brand-page #indice ol{list-style:none;padding-left:0}
+.create-brand-page h1{max-width:1050px;font-size:clamp(38px,5.2vw,66px);line-height:1.07}
+.create-brand-page h1 em,.create-brand-page .editorial-pause em,.create-brand-page .draft-gift em{color:#75a0ff;font-style:normal}
+.create-brand-page .cover-link{display:block}
+.create-brand-page .cover{max-height:none;aspect-ratio:3/2;object-fit:contain}
+.create-brand-page .hero-copy{pointer-events:none}
+.create-brand-page .hero-copy a{pointer-events:auto}
+.create-brand-page .small-task{border:0;border-left:3px solid currentColor;background:transparent;padding:4px 0 4px 22px;margin:28px 0 32px;border-radius:0}
+.create-brand-page .small-task strong{display:block;font:12px/1.6 Mono,monospace;letter-spacing:.04em;text-transform:uppercase;margin-bottom:9px}
+.create-brand-page .small-task p{font-size:18px;line-height:1.65;margin:0}
+.create-brand-page .tone-1 .small-task{border-color:#75a0ff}
+.create-brand-page .editorial-pause{max-width:920px;border:0;padding:36px 24px 0;margin:20px auto 0;font-size:clamp(27px,3.5vw,44px);font-weight:600;line-height:1.2;letter-spacing:-.035em;background:none}
+.create-brand-page .editorial-pause em{color:#2858a7}
+.create-brand-page .brand-journey{border:1px solid #a7b4c8;background:#f9fafc;padding:40px;color:#171d25}
+.create-brand-page .figure-head{max-width:none}
+.create-brand-page .journey-origin{display:grid;grid-template-columns:1fr 2fr 40px 1fr 2fr;align-items:center;gap:16px;border-block:1px solid #b7c0ce;padding:24px 0;margin:26px 0 36px}
+.create-brand-page .journey-origin>span{font:11px/1.6 Mono,monospace;text-transform:uppercase;letter-spacing:.08em}
+.create-brand-page .journey-origin p{font-size:18px;line-height:1.4;margin:0}
+.create-brand-page .journey-origin b{transform:rotate(-90deg);font-size:26px;color:#2858a7}
+.create-brand-page .application-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px}
+.create-brand-page .application-stage{height:325px;background:#e7e1d5;display:flex;align-items:center;justify-content:center;padding:18px;overflow:hidden}
+.create-brand-page .application h4{font-size:19px;margin:20px 0 8px}
+.create-brand-page .application>p{font-size:16px;line-height:1.6;margin:0}
+.create-brand-page .cafe-sign{background:#24493e;color:#fff8e9;padding:24px 18px;box-shadow:6px 8px 0 #bcb29d;width:100%;border:6px solid #d3b895}
+.create-brand-page .cafe-sign>span{font:9px/1.5 Mono,monospace;letter-spacing:.07em}
+.create-brand-page .cafe-sign strong{display:block;font-size:24px;line-height:1.15;margin:18px 0}
+.create-brand-page .cafe-sign small{color:#fff8e9;font-size:11px}
+.create-brand-page .order-screen{width:210px;border:6px solid #252b2b;border-radius:18px;background:#fffcf4;min-height:285px;padding:15px 11px;color:#24493e;box-shadow:5px 6px 0 #c1b8a7}
+.create-brand-page .screen-top{display:flex;justify-content:space-between;font:8px/1.4 Mono,monospace;margin-bottom:24px}
+.create-brand-page .order-screen>strong{font-size:20px;line-height:1.15;display:block}
+.create-brand-page .drink-choice,.create-brand-page .pickup-choice{font-size:12px;margin-top:14px;border-bottom:1px solid #c5d2c8;padding-bottom:9px}
+.create-brand-page .drink-choice span,.create-brand-page .pickup-choice span{display:block;font-size:10px;margin-top:4px}
+.create-brand-page .example-action{background:#24493e;color:#fff8e9;border-radius:5px;font-size:10px;text-align:center;padding:11px 5px;margin-top:16px}
+.create-brand-page .pickup-ticket{background:#fffaf0;color:#24493e;padding:25px 20px;width:210px;box-shadow:5px 7px 0 #c1b8a7;transform:rotate(-3deg)}
+.create-brand-page .pickup-ticket>span{font:10px/1.6 Mono,monospace;letter-spacing:.12em}
+.create-brand-page .pickup-ticket strong{font-size:29px;line-height:1.15;display:block;margin:20px 0}
+.create-brand-page .ticket-line{height:4px;background:#24493e;width:40px;margin-bottom:20px}
+.create-brand-page .pickup-ticket p{font-size:14px;line-height:1.5}
+.create-brand-page .pickup-ticket small{font-size:10px;line-height:1.5;color:#24493e;display:block}
+.create-brand-page button{font:inherit;cursor:pointer;border:0}
+.create-brand-page button:focus-visible,.create-brand-page input:focus-visible{outline:3px solid #91b2ff;outline-offset:4px}
+@media(max-width:900px){.create-brand-page .application-grid{grid-template-columns:1fr;max-width:410px;margin:auto;gap:36px}.create-brand-page .application-stage{height:345px}.create-brand-page .cafe-sign{max-width:300px}.create-brand-page .journey-origin{grid-template-columns:1fr;text-align:center}.create-brand-page .journey-origin b{transform:none}.create-brand-page .journey-origin p{font-size:20px}.create-brand-page .draft-gift{gap:36px}.create-brand-page .map-preview{padding:22px}.create-brand-page .map-preview h3{font-size:48px}}
+@media(max-width:650px){.create-brand-page .editorial-nav{height:70px}.create-brand-page .hero-copy{padding-top:65px}.create-brand-page .brand-journey{padding:24px 18px;margin-inline:16px}.create-brand-page .application-stage{padding:20px;height:325px}.create-brand-page .draft-gift{grid-template-columns:1fr;padding:50px 24px;gap:20px}.create-brand-page .map-preview{max-width:300px;padding:26px}.create-brand-page .small-task p{font-size:17px}.create-brand-page .editorial-pause{padding-top:24px}.create-brand-page h1{font-size:clamp(35px,9.5vw,44px)}.create-brand-page .reading-poll{margin-inline:24px;padding-inline:0}.create-brand-page .reading-poll label{font-size:16px}}
+@media(prefers-reduced-motion:reduce){.create-brand-page *{scroll-behavior:auto!important;transition:none!important}}
+
+.create-brand-page .gift-question select{width:100%;min-height:52px;background:#fff;color:#172131;border:1px solid #7d8ca4;border-radius:6px;padding:12px;font:inherit;font-size:16px;}
+.create-brand-page .gift-question select:focus-visible{outline:3px solid #91b2ff;outline-offset:3px}
