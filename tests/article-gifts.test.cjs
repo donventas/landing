@@ -30,7 +30,7 @@ test('every gift article has a distinct editorial share hook and matching OG/Twi
   assert.doesNotMatch(desc,/garantiz|compra ahora|última oportunidad|sin responder/i);
   titles.add(title);descriptions.add(desc);
  }
- assert.equal(titles.size,7);assert.equal(descriptions.size,7);
+ assert.equal(titles.size,Object.keys(catalog.articles).length);assert.equal(descriptions.size,Object.keys(catalog.articles).length);
 });
 test('release copy has a final receipt and QA labels remain restricted to non-live environments',()=>{
  const source=fs.readFileSync(__dirname+'/../blog/article-gifts.js','utf8');
@@ -48,7 +48,7 @@ test('release copy has a final receipt and QA labels remain restricted to non-li
 });
 test('each article explains the community value with its own invitation, without changing the three research questions',()=>{
  const invitations=Object.values(catalog.articles).map(gift=>gift.responseInvitation);
- assert.equal(new Set(invitations).size,7);
+ assert.equal(new Set(invitations).size,Object.keys(catalog.articles).length);
  for(const gift of Object.values(catalog.articles)){
   assert.ok(gift.responseInvitation.length>60 && gift.responseInvitation.length<300);
   assert.match(gift.responseInvitation,/artículos y recursos/);
@@ -104,7 +104,7 @@ test('retries restore gift without duplicate receipt; comments and honeypots do 
 test('same email gets the gift for each article; server owns URLs and keeps raw answers private',async()=>{
  const f=fixture({now:(()=>{let t=1800000000000;return()=>t+=900001;})()});
  for(const [article_id,gift] of Object.entries(catalog.articles)){const r=await f.call({...base(),article_id});assert.equal(r.statusCode,202);assert.equal(r.body.gift.id,gift.id);assert.equal(r.body.gift.url,gift.file);assert.doesNotMatch(JSON.stringify(r.body),/qa@|Quería/);}
- const s=await f.store.snapshot();assert.equal(s.messages.length,7);assert.equal(s.intents.length,0);
+ const s=await f.store.snapshot();assert.equal(s.messages.length,Object.keys(catalog.articles).length);assert.equal(s.intents.length,0);
 });
 test('historical approved pilot remains unchanged alongside the revised resource',()=>{
  const bytes=fs.readFileSync(__dirname+'/../assets/gifts/antes-de-publicar-v2.pdf');assert.equal(bytes.subarray(0,5).toString(),'%PDF-');assert.equal(crypto.createHash('sha256').update(bytes).digest('hex'),'b2be4eecb2b1649ad04cda3e8d647851cc7a96d86abfca977befd3dbd7ee2380');

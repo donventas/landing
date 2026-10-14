@@ -1,0 +1,8 @@
+.article-ending{--fg:#eef2f8;--fg-soft:#bcc8d8;--accent:#3979ff;--accent2:#91b3ff;font-family:Schibsted,Arial,sans-serif}.article-ending .btn{display:inline-block;padding:14px 20px;background:#285dcc;color:white;border:0;border-radius:5px;text-decoration:none;cursor:pointer;font:inherit;min-height:48px}.article-ending button,.article-ending input,.article-ending textarea{font:inherit}.article-ending summary span{float:none}.article-ending fieldset{min-width:0}.article-ending [hidden]{display:none!important}.article-ending a:focus-visible,.article-ending button:focus-visible,.article-ending input:focus-visible,.article-ending textarea:focus-visible{outline:3px solid #91b3ff;outline-offset:3px}
+.article-ending{--sans:Schibsted,Arial,sans-serif;--mono:Mono,monospace}
+.article-ending .article-gift.gift-discovery-pilot{padding:32px clamp(20px,4vw,36px);background:#181f29;border:1px solid #475366;border-top:3px solid #3b74f2}
+.article-ending .gift-offer{grid-template-columns:180px minmax(0,1fr);gap:28px}
+.article-ending .article-gift .gift-preview{width:100%;max-width:180px}
+.article-ending .article-gift .gift-preview img{border:1px solid #c5cdda}
+.article-ending .article-gift .gift-offer h2{font-weight:650;letter-spacing:-.035em}
+@media(max-width:600px){.article-ending .gift-offer{grid-template-columns:1fr}.article-ending .article-gift .gift-preview{max-width:160px}}
