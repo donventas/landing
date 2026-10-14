@@ -41,7 +41,7 @@ window.DVGiftPilot = function(host, section, gift) {
       back.hidden=step===0;next.hidden=step===fields.length;
       review.replaceChildren();
       fields.forEach(function(field,i){
-        var answer=field.querySelector('textarea').value.trim();if(i>=step || !answer)return;
+        var answer=field.querySelector('textarea, select').value.trim();if(i>=step || !answer)return;
         var edit=document.createElement('button');edit.type='button';edit.className='gift-answer-edit';
         edit.setAttribute('aria-label','Editar respuesta '+(i+1)+': '+gift.questions[i]);
         var number=document.createElement('span');number.textContent='0'+(i+1);
@@ -50,9 +50,9 @@ window.DVGiftPilot = function(host, section, gift) {
         edit.addEventListener('click',function(){showStep(i,true);});review.append(edit);
       });
       review.hidden=!review.childElementCount;
-      if(focus)(step<fields.length?fields[step].querySelector('textarea'):form.elements.email).focus();
+      if(focus)(step<fields.length?fields[step].querySelector('textarea, select'):form.elements.email).focus();
     }
-    var inputs=fields.map(function(field){return field.querySelector('textarea');}).concat([form.elements.email,form.elements.name,form.elements.comment]);
+    var inputs=fields.map(function(field){return field.querySelector('textarea, select');}).concat([form.elements.email,form.elements.name,form.elements.comment]);
     var errors=new Map();
     inputs.forEach(function(input){
       var error=document.createElement('p');error.id=input.id+'-error';error.className='gift-field-error';error.setAttribute('role','alert');error.hidden=true;
@@ -62,7 +62,7 @@ window.DVGiftPilot = function(host, section, gift) {
     });
     function validateField(input){
       var message='';
-      if(input.required && !input.value.trim())message=input.type==='email'?'Escribe tu correo, por ejemplo: nombre@empresa.com.':'Cuéntanos brevemente. Si no te ha pasado, puedes decirlo.';
+      if(input.required && !input.value.trim())message=input.type==='email'?'Escribe tu correo, por ejemplo: nombre@empresa.com.':input.tagName==='SELECT'?'Elige la opción que más se acerque a tu situación.':'Cuéntanos brevemente. Si no te ha pasado, puedes decirlo.';
       else if(input.type==='email' && input.validity.typeMismatch)message='Revisa tu correo. Debe verse así: nombre@empresa.com.';
       else if(input.maxLength>0 && input.value.length>input.maxLength)message='Usa hasta '+input.maxLength+' caracteres.';
       else if(!input.validity.valid)message='Revisa este dato para continuar.';
@@ -70,10 +70,10 @@ window.DVGiftPilot = function(host, section, gift) {
       error.hidden=!message;if(message)input.setAttribute('aria-invalid','true');else input.removeAttribute('aria-invalid');
       return !message;
     }
-    next.addEventListener('click',function(){var input=fields[step].querySelector('textarea');if(validateField(input))showStep(step+1,true);else input.focus();});
+    next.addEventListener('click',function(){var input=fields[step].querySelector('textarea, select');if(validateField(input))showStep(step+1,true);else input.focus();});
     back.addEventListener('click',function(){showStep(Math.max(0,step-1),true);});
     section.giftWizard={validate:function(){
-      for(var i=0;i<fields.length;i++){var input=fields[i].querySelector('textarea');if(!validateField(input)){showStep(i,true);return false;}}
+      for(var i=0;i<fields.length;i++){var input=fields[i].querySelector('textarea, select');if(!validateField(input)){showStep(i,true);return false;}}
       showStep(fields.length,false);
       var invalid=null;inputs.slice(fields.length).forEach(function(input){if(!validateField(input) && !invalid)invalid=input;});
       if(invalid){if(invalid===form.elements.comment)extra.open=true;invalid.focus();return false;}return true;

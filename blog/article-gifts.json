@@ -190,6 +190,46 @@
       ],
       "previewSourceSha256": "be2ed4190f27f24f42b5966d4e77c923026e0027576c3e6d488a522f7ea65c19",
       "previousFiles": []
+    },
+    "como-crear-una-marca": {
+      "id": "antes-del-logo-mapa-de-marca",
+      "title": "Antes del logo: el mapa de tu marca",
+      "file": "/assets/gifts/antes-del-logo-mapa-de-marca-v1.pdf",
+      "preview": "/assets/gifts/antes-del-logo-mapa-de-marca-v1-preview.webp",
+      "previewSourceSha256": "6eb1925ea1d91fee053f6283a9317d74b594f936828affc1be7767f2326373c1",
+      "offerTitle": "Tu guía «Antes del logo: el mapa de tu marca»",
+      "offerKicker": "Un regalo para ordenar las decisiones de tu marca",
+      "cta": "Quiero mi mapa",
+      "description": "Una hoja rellenable e imprimible para ordenar tus siete decisiones y distinguir lo que ya sabes de lo que necesitas comprobar.",
+      "intro": "una guía gratuita y rellenable para ordenar tus primeras siete decisiones.",
+      "accessTerms": "Responde 3 preguntas y deja tu correo. Descarga el PDF al terminar, sin suscribirte.",
+      "readingConditions": "Tres preguntas + tu correo · descarga inmediata · sin suscripción obligatoria.",
+      "responseInvitation": "Cuéntanos en qué momento está tu marca y qué necesitas resolver. Tus respuestas nos ayudan a crear artículos y recursos más útiles para ti y para otras personas que quieren empezar.",
+      "questions": [
+        "¿En qué momento está tu marca?",
+        "¿Qué te cuesta más resolver?",
+        "¿Dónde necesitas usarla primero?"
+      ],
+      "questionOptions": [
+        [
+          "Tengo una idea",
+          "Estoy por lanzar",
+          "Ya existe y quiero mejorarla"
+        ],
+        [
+          "Qué ofrecer y a quién",
+          "Nombre y mensaje",
+          "Identidad visual",
+          "Aplicarla con coherencia"
+        ],
+        [
+          "Redes y WhatsApp",
+          "Sitio web",
+          "Local o productos físicos",
+          "Presentaciones y propuestas"
+        ]
+      ],
+      "previousFiles": []
     }
   }
 }

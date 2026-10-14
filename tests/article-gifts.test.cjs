@@ -82,7 +82,7 @@ test('optional survey comment rejects invalid data; maximum content fits existin
   const f=fixture(),body=base();body.survey.comment=comment;assert.equal((await f.call(body)).statusCode,422);assert.equal((await f.store.snapshot()).messages.length,0);
  }
  for(const article_id of Object.keys(catalog.articles)){
-  const f=fixture(),body=base();body.article_id=article_id;body.survey.answers=['x'.repeat(900),'y'.repeat(900),'z'.repeat(900)];body.survey.comment='c'.repeat(900);
+  const f=fixture(),body=base();body.article_id=article_id;body.survey.answers=catalog.articles[article_id].questionOptions?.map(options=>options[0]) || ['x'.repeat(900),'y'.repeat(900),'z'.repeat(900)];body.survey.comment='c'.repeat(900);
   assert.equal((await f.call(body)).statusCode,202);assert.ok((await f.store.snapshot()).messages[0].message.length<=5000);
  }
 });
@@ -103,7 +103,7 @@ test('retries restore gift without duplicate receipt; comments and honeypots do 
 });
 test('same email gets the gift for each article; server owns URLs and keeps raw answers private',async()=>{
  const f=fixture({now:(()=>{let t=1800000000000;return()=>t+=900001;})()});
- for(const [article_id,gift] of Object.entries(catalog.articles)){const r=await f.call({...base(),article_id});assert.equal(r.statusCode,202);assert.equal(r.body.gift.id,gift.id);assert.equal(r.body.gift.url,gift.file);assert.doesNotMatch(JSON.stringify(r.body),/qa@|Quería/);}
+ for(const [article_id,gift] of Object.entries(catalog.articles)){const body={...base(),article_id};if(gift.questionOptions)body.survey.answers=gift.questionOptions.map(options=>options[0]);const r=await f.call(body);assert.equal(r.statusCode,202);assert.equal(r.body.gift.id,gift.id);assert.equal(r.body.gift.url,gift.file);assert.doesNotMatch(JSON.stringify(r.body),/qa@|Quería/);}
  const s=await f.store.snapshot();assert.equal(s.messages.length,Object.keys(catalog.articles).length);assert.equal(s.intents.length,0);
 });
 test('historical approved pilot remains unchanged alongside the revised resource',()=>{
