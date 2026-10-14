@@ -9,96 +9,187 @@
   },
   "articles": {
     "contenido-que-atrae-clientes": {
-      "id": "antes-de-publicar", "title": "Antes de publicar", "file": "/assets/gifts/antes-de-publicar-v4.pdf",
+      "id": "antes-de-publicar",
+      "title": "Antes de publicar",
+      "file": "/assets/gifts/antes-de-publicar-v4.pdf",
       "preview": "/assets/gifts/antes-de-publicar-v4-preview.webp",
       "previewSourceSha256": "1e57ae94ec783541952c788f0d03aa17283c76263b13dbe3f17b4b0529e98d97",
-      "offerTitle": "Tu checklist «Antes de publicar»", "cta": "Quiero mi checklist",
+      "offerTitle": "Tu checklist «Antes de publicar»",
+      "cta": "Quiero mi checklist",
       "offerKicker": "Un regalo para tu próxima publicación",
       "accessTerms": "Responde 3 preguntas y deja tu correo. Descarga el PDF al terminar, sin suscribirte.",
       "readingConditions": "Tres preguntas + tu correo · descarga inmediata · sin suscripción obligatoria.",
       "responseInvitation": "Cuéntanos qué pasó con una publicación de tu negocio, con un ejemplo si puedes. Tu experiencia nos ayuda a crear artículos y recursos más útiles sobre cómo comunicar lo que ofreces, para ti y para quienes leen este blog.",
       "intro": "una checklist gratuita para revisar tu próximo contenido.",
-      "previousFiles": ["/assets/gifts/antes-de-publicar-v2.pdf", "/assets/gifts/antes-de-publicar-v3.pdf"],
+      "previousFiles": [
+        "/assets/gifts/antes-de-publicar-v2.pdf",
+        "/assets/gifts/antes-de-publicar-v3.pdf"
+      ],
       "description": "Una hoja con cinco puntos para revisar tu contenido cuando lo necesites.",
-      "questions": ["Piensa en la última publicación de tu negocio: ¿qué querías que entendieran o hicieran? Si todavía no publicas, cuéntanos en qué punto estás.", "¿Qué ocurrió después? ¿Cómo te diste cuenta? También sirve que no haya pasado nada o que no lo hayas medido.", "¿Qué hiciste para preparar o ajustar esa publicación y qué esfuerzo te tomó? Si no necesitaste cambiarla, cuéntanos eso."]
+      "questions": [
+        "Piensa en la última publicación de tu negocio: ¿qué querías que entendieran o hicieran? Si todavía no publicas, cuéntanos en qué punto estás.",
+        "¿Qué ocurrió después? ¿Cómo te diste cuenta? También sirve que no haya pasado nada o que no lo hayas medido.",
+        "¿Qué hiciste para preparar o ajustar esa publicación y qué esfuerzo te tomó? Si no necesitaste cambiarla, cuéntanos eso."
+      ]
     },
     "diseno-editorial": {
-      "id": "antes-de-enviar-ese-pdf", "title": "Antes de enviar ese PDF", "file": "/assets/gifts/antes-de-enviar-ese-pdf-v3.pdf",
+      "id": "antes-de-enviar-ese-pdf",
+      "title": "Antes de enviar ese PDF",
+      "file": "/assets/gifts/antes-de-enviar-ese-pdf-v3.pdf",
       "preview": "/assets/gifts/antes-de-enviar-ese-pdf-v3-preview.webp",
       "previewSourceSha256": "ed3bd53081869ba430a71400da5b2332e1bdcd908ad8fc50b781dfe66250fd2f",
-      "cta": "Quiero mi checklist", "intro": "una checklist gratuita para revisar tu próximo reporte o propuesta.",
-      "offerTitle": "Tu checklist «Antes de enviar ese PDF»", "offerKicker": "Un regalo para tu próxima entrega",
+      "cta": "Quiero mi checklist",
+      "intro": "una checklist gratuita para revisar tu próximo reporte o propuesta.",
+      "offerTitle": "Tu checklist «Antes de enviar ese PDF»",
+      "offerKicker": "Un regalo para tu próxima entrega",
       "accessTerms": "Responde 3 preguntas y deja tu correo. Descarga el PDF al terminar, sin suscribirte.",
       "readingConditions": "Tres preguntas + tu correo · descarga inmediata · sin suscripción obligatoria.",
       "responseInvitation": "Cuéntanos qué pasó al entregar un reporte o propuesta, con un ejemplo si puedes. Tu experiencia nos ayuda a crear artículos y recursos más útiles para que tus entregas se entiendan mejor y ayudar a otros lectores con el mismo reto.",
-      "previousFiles": ["/assets/gifts/antes-de-enviar-ese-pdf-v2.pdf"],
+      "previousFiles": [
+        "/assets/gifts/antes-de-enviar-ese-pdf-v2.pdf"
+      ],
       "description": "Una hoja con cinco puntos para revisar la claridad de tus reportes y propuestas cuando lo necesites.",
-      "questions": ["Recuerda el último reporte o propuesta que entregaste: ¿quién lo recibió y para qué lo necesitaba? Si no has entregado uno, puedes decirlo.", "¿Qué preguntas o comentarios recibiste? Si se entendió a la primera o no hubo respuesta, también nos sirve saberlo.", "¿Cómo lo preparaste y qué tuviste que explicar o ajustar después? Cuéntanos el tiempo o esfuerzo, si lo recuerdas."]
+      "questions": [
+        "Recuerda el último reporte o propuesta que entregaste: ¿quién lo recibió y para qué lo necesitaba? Si no has entregado uno, puedes decirlo.",
+        "¿Qué preguntas o comentarios recibiste? Si se entendió a la primera o no hubo respuesta, también nos sirve saberlo.",
+        "¿Cómo lo preparaste y qué tuviste que explicar o ajustar después? Cuéntanos el tiempo o esfuerzo, si lo recuerdas."
+      ]
     },
     "por-que-nacio-don-ventas": {
-      "id": "tu-valor-en-tres-frases", "title": "Tu valor en tres frases", "file": "/assets/gifts/tu-valor-en-tres-frases-v2.pdf",
+      "id": "tu-valor-en-tres-frases",
+      "title": "Tu valor en tres frases",
+      "file": "/assets/gifts/tu-valor-en-tres-frases-v2.pdf",
       "preview": "/assets/gifts/tu-valor-en-tres-frases-v2-preview.webp",
       "previewSourceSha256": "bc696c68923ba68ff99687b221e7add82e5020180713af7c1c964e84b621a0b2",
-      "cta": "Quiero mi guía", "intro": "una guía gratuita para explicar tu servicio sin dar tantas vueltas.",
-      "offerTitle": "Tu guía «Tu valor en tres frases»", "offerKicker": "Un regalo para explicar lo que ofreces",
+      "cta": "Quiero mi guía",
+      "intro": "una guía gratuita para explicar tu servicio sin dar tantas vueltas.",
+      "offerTitle": "Tu guía «Tu valor en tres frases»",
+      "offerKicker": "Un regalo para explicar lo que ofreces",
       "accessTerms": "Responde 3 preguntas y deja tu correo. Descarga el PDF al terminar, sin suscribirte.",
       "readingConditions": "Tres preguntas + tu correo · descarga inmediata · sin suscripción obligatoria.",
       "responseInvitation": "Cuéntanos cómo te fue al explicar a qué se dedica tu negocio, con un ejemplo si puedes. Tu experiencia nos ayuda a crear artículos y recursos más útiles para comunicar tu valor y ayudar a otros lectores a hacer lo mismo.",
-      "previousFiles": ["/assets/gifts/tu-valor-en-tres-frases-v1.pdf"],
+      "previousFiles": [
+        "/assets/gifts/tu-valor-en-tres-frases-v1.pdf"
+      ],
       "description": "Una guía rápida de una hoja, con fórmulas y ejemplos para explicar tu servicio sin dar tantas vueltas.",
-      "questions": ["La última vez que alguien te preguntó a qué se dedica tu negocio, ¿qué le contestaste? Si aún no te ha pasado, cuéntanos tu situación.", "¿Qué entendió o preguntó esa persona después? También puede haber entendido exactamente lo que querías.", "¿Has cambiado esa explicación o buscado ayuda para hacerla? Cuéntanos qué hiciste; si no lo has necesitado, dilo."]
+      "questions": [
+        "La última vez que alguien te preguntó a qué se dedica tu negocio, ¿qué le contestaste? Si aún no te ha pasado, cuéntanos tu situación.",
+        "¿Qué entendió o preguntó esa persona después? También puede haber entendido exactamente lo que querías.",
+        "¿Has cambiado esa explicación o buscado ayuda para hacerla? Cuéntanos qué hiciste; si no lo has necesitado, dilo."
+      ]
     },
     "tu-marca-es-tu-ventaja": {
-      "id": "de-la-promesa-a-la-prueba", "title": "De la promesa a la prueba", "file": "/assets/gifts/de-la-promesa-a-la-prueba-v2.pdf",
+      "id": "de-la-promesa-a-la-prueba",
+      "title": "De la promesa a la prueba",
+      "file": "/assets/gifts/de-la-promesa-a-la-prueba-v2.pdf",
       "preview": "/assets/gifts/de-la-promesa-a-la-prueba-v2-preview.webp",
       "previewSourceSha256": "79abff660f1e4341cf345aa41a31f49e4ed0f2d446bf4d639e350f1d6743258e",
-      "cta": "Quiero mi guía", "intro": "una guía gratuita para convertir promesas de marca en acciones concretas.",
-      "offerTitle": "Tu guía «De la promesa a la prueba»", "offerKicker": "Un regalo para cuidar la experiencia de tus clientes",
+      "cta": "Quiero mi guía",
+      "intro": "una guía gratuita para convertir promesas de marca en acciones concretas.",
+      "offerTitle": "Tu guía «De la promesa a la prueba»",
+      "offerKicker": "Un regalo para cuidar la experiencia de tus clientes",
       "accessTerms": "Responde 3 preguntas y deja tu correo. Descarga el PDF al terminar, sin suscribirte.",
       "readingConditions": "Tres preguntas + tu correo · descarga inmediata · sin suscripción obligatoria.",
       "responseInvitation": "Cuéntanos una experiencia real con tus clientes, con un ejemplo si puedes. Nos ayudará a crear artículos y recursos más útiles sobre cómo cumplir lo que tu marca promete, para ti y para otros lectores.",
-      "previousFiles": ["/assets/gifts/de-la-promesa-a-la-prueba-v1.pdf"],
+      "previousFiles": [
+        "/assets/gifts/de-la-promesa-a-la-prueba-v1.pdf"
+      ],
       "description": "Una guía rápida de una hoja para traducir promesas de marca en conductas y evidencias concretas.",
-      "questions": ["Piensa en la última vez que un cliente te eligió o volvió: ¿qué razón te dio? Si no te la dijo, no hace falta adivinarla.", "¿Qué ocurrió durante el servicio o la compra que puedas describir con un ejemplo? Puede ser positivo, negativo o cotidiano.", "¿Qué haces hoy para repetir esa experiencia o corregirla? Si aún no tienes una forma de hacerlo, cuéntanos."]
+      "questions": [
+        "Piensa en la última vez que un cliente te eligió o volvió: ¿qué razón te dio? Si no te la dijo, no hace falta adivinarla.",
+        "¿Qué ocurrió durante el servicio o la compra que puedas describir con un ejemplo? Puede ser positivo, negativo o cotidiano.",
+        "¿Qué haces hoy para repetir esa experiencia o corregirla? Si aún no tienes una forma de hacerlo, cuéntanos."
+      ]
     },
     "manual-de-marca": {
-      "id": "tu-marca-lista-para-compartir", "title": "Tu marca lista para compartir", "file": "/assets/gifts/tu-marca-lista-para-compartir-v2.pdf",
+      "id": "tu-marca-lista-para-compartir",
+      "title": "Tu marca lista para compartir",
+      "file": "/assets/gifts/tu-marca-lista-para-compartir-v2.pdf",
       "preview": "/assets/gifts/tu-marca-lista-para-compartir-v2-preview.webp",
       "previewSourceSha256": "bae5f8c10b79094c4398b1d3a0029e56f562e5245cd7ab6899e685e7b047401a",
-      "cta": "Quiero mi checklist", "intro": "una checklist gratuita para compartir tu marca con menos dudas y correcciones.",
-      "offerTitle": "Tu checklist «Tu marca lista para compartir»", "offerKicker": "Un regalo para trabajar con tu equipo",
+      "cta": "Quiero mi checklist",
+      "intro": "una checklist gratuita para compartir tu marca con menos dudas y correcciones.",
+      "offerTitle": "Tu checklist «Tu marca lista para compartir»",
+      "offerKicker": "Un regalo para trabajar con tu equipo",
       "accessTerms": "Responde 3 preguntas y deja tu correo. Descarga el PDF al terminar, sin suscribirte.",
       "readingConditions": "Tres preguntas + tu correo · descarga inmediata · sin suscripción obligatoria.",
       "responseInvitation": "Cuéntanos qué pasó cuando alguien más necesitó usar tu marca, con un ejemplo si puedes. Tu experiencia nos ayuda a crear artículos y recursos más útiles para trabajar en equipo con menos dudas, para ti y para otros lectores.",
-      "previousFiles": ["/assets/gifts/tu-marca-lista-para-compartir-v1.pdf"],
+      "previousFiles": [
+        "/assets/gifts/tu-marca-lista-para-compartir-v1.pdf"
+      ],
       "description": "Un checklist de una hoja para entregar archivos, variantes e instrucciones que tu equipo sí pueda usar.",
-      "questions": ["La última vez que otra persona necesitó usar tu marca, ¿qué iba a hacer y qué le compartiste? Si no ha ocurrido, dilo.", "¿Qué pudo resolver por su cuenta y qué tuvo que preguntarte? Si no hubo dudas, también nos interesa.", "¿Cómo resolvieron esas preguntas y cuánto trabajo adicional hubo? Si no hizo falta corregir nada, cuéntanos."]
+      "questions": [
+        "La última vez que otra persona necesitó usar tu marca, ¿qué iba a hacer y qué le compartiste? Si no ha ocurrido, dilo.",
+        "¿Qué pudo resolver por su cuenta y qué tuvo que preguntarte? Si no hubo dudas, también nos interesa.",
+        "¿Cómo resolvieron esas preguntas y cuánto trabajo adicional hubo? Si no hizo falta corregir nada, cuéntanos."
+      ]
     },
     "logotipos-mitos": {
-      "id": "tu-logo-fuera-del-archivo", "title": "Tu logo fuera del archivo", "file": "/assets/gifts/tu-logo-fuera-del-archivo-v2.pdf",
+      "id": "tu-logo-fuera-del-archivo",
+      "title": "Tu logo fuera del archivo",
+      "file": "/assets/gifts/tu-logo-fuera-del-archivo-v2.pdf",
       "preview": "/assets/gifts/tu-logo-fuera-del-archivo-v2-preview.webp",
       "previewSourceSha256": "f17b94de055d4cf6583cb3ef304661e517ad0f9ee334da3de6d3777431d5bf50",
-      "cta": "Quiero mi checklist", "intro": "una checklist gratuita para probar tu logo en usos reales.",
-      "offerTitle": "Tu checklist «Tu logo fuera del archivo»", "offerKicker": "Un regalo para los usos reales de tu logo",
+      "cta": "Quiero mi checklist",
+      "intro": "una checklist gratuita para probar tu logo en usos reales.",
+      "offerTitle": "Tu checklist «Tu logo fuera del archivo»",
+      "offerKicker": "Un regalo para los usos reales de tu logo",
       "accessTerms": "Responde 3 preguntas y deja tu correo. Descarga el PDF al terminar, sin suscribirte.",
       "readingConditions": "Tres preguntas + tu correo · descarga inmediata · sin suscripción obligatoria.",
       "responseInvitation": "Cuéntanos cómo funcionó tu logo fuera del archivo, con un ejemplo si puedes. Tu experiencia nos ayuda a crear artículos y recursos más útiles sobre sus usos reales, para ti y para quienes enfrentan situaciones parecidas.",
-      "previousFiles": ["/assets/gifts/tu-logo-fuera-del-archivo-v1.pdf"],
+      "previousFiles": [
+        "/assets/gifts/tu-logo-fuera-del-archivo-v1.pdf"
+      ],
       "description": "Un checklist de una hoja para probar tamaño, fondo, proporciones y reproducción de tu logo en usos reales.",
-      "questions": ["¿Dónde usaste tu logo por última vez y en qué tamaño o material? Si aún no tienes uno, cuéntanos para qué lo necesitas.", "¿Cómo funcionó en ese lugar: se leyó bien, hubo que adaptarlo o no hizo falta cambiar nada? Describe lo que viste.", "¿Qué archivo o ayuda utilizaste para resolverlo y qué esfuerzo implicó? También sirve que ya tuvieras todo listo."]
+      "questions": [
+        "¿Dónde usaste tu logo por última vez y en qué tamaño o material? Si aún no tienes uno, cuéntanos para qué lo necesitas.",
+        "¿Cómo funcionó en ese lugar: se leyó bien, hubo que adaptarlo o no hizo falta cambiar nada? Describe lo que viste.",
+        "¿Qué archivo o ayuda utilizaste para resolverlo y qué esfuerzo implicó? También sirve que ya tuvieras todo listo."
+      ]
     },
     "como-aparecer-en-google": {
-      "id": "encuentrate-sin-tu-nombre", "title": "Encuéntrate sin tu nombre", "file": "/assets/gifts/encuentrate-sin-tu-nombre-v2.pdf",
+      "id": "encuentrate-sin-tu-nombre",
+      "title": "Encuéntrate sin tu nombre",
+      "file": "/assets/gifts/encuentrate-sin-tu-nombre-v2.pdf",
       "preview": "/assets/gifts/encuentrate-sin-tu-nombre-v2-preview.webp",
       "previewSourceSha256": "6669da8cd87a846dffa51a52f47d73d57989f40b138038e7483e338fa6380f48",
-      "cta": "Quiero mi guía", "intro": "una guía gratuita para explorar cómo podrían encontrar tu negocio sin conocer su nombre.",
-      "offerTitle": "Tu guía «Encuéntrate sin tu nombre»", "offerKicker": "Un regalo para explorar cómo encuentran tu negocio",
+      "cta": "Quiero mi guía",
+      "intro": "una guía gratuita para explorar cómo podrían encontrar tu negocio sin conocer su nombre.",
+      "offerTitle": "Tu guía «Encuéntrate sin tu nombre»",
+      "offerKicker": "Un regalo para explorar cómo encuentran tu negocio",
       "accessTerms": "Responde 3 preguntas y deja tu correo. Descarga el PDF al terminar, sin suscribirte.",
       "readingConditions": "Tres preguntas + tu correo · descarga inmediata · sin suscripción obligatoria.",
       "responseInvitation": "Cuéntanos cómo encuentran tu negocio y qué has observado al buscarlo, con un ejemplo si puedes. Tu experiencia nos ayuda a crear artículos y recursos más útiles sobre cómo hacerte visible, para ti y para otros lectores.",
-      "previousFiles": ["/assets/gifts/encuentrate-sin-tu-nombre-v1.pdf"],
+      "previousFiles": [
+        "/assets/gifts/encuentrate-sin-tu-nombre-v1.pdf"
+      ],
       "description": "Una guía rápida de una hoja con búsquedas de ejemplo, qué observar y qué información revisar en tu sitio.",
-      "questions": ["¿Cómo llegó el último cliente que te contó dónde te encontró? Si no lo sabes o todavía no tienes clientes, puedes decirlo.", "La última vez que buscaste en Google un servicio como el tuyo sin escribir tu marca, ¿qué escribiste y qué encontraste? Si no lo has probado, dilo.", "¿Qué has hecho para facilitar que te encuentren y cómo comprobaste si ayudó? No es necesario haber invertido ni medido resultados."]
+      "questions": [
+        "¿Cómo llegó el último cliente que te contó dónde te encontró? Si no lo sabes o todavía no tienes clientes, puedes decirlo.",
+        "La última vez que buscaste en Google un servicio como el tuyo sin escribir tu marca, ¿qué escribiste y qué encontraste? Si no lo has probado, dilo.",
+        "¿Qué has hecho para facilitar que te encuentren y cómo comprobaste si ayudó? No es necesario haber invertido ni medido resultados."
+      ]
+    },
+    "como-aplicar-identidad-visual": {
+      "id": "tu-marca-en-contexto",
+      "title": "Tu marca en contexto",
+      "file": "/assets/gifts/tu-marca-en-contexto-v2.pdf",
+      "preview": "/assets/gifts/tu-marca-en-contexto-v2-preview.webp",
+      "offerTitle": "Tu guía «Tu marca en contexto»",
+      "offerKicker": "Un regalo para tu próxima aplicación de marca",
+      "cta": "Quiero mi guía",
+      "description": "Una hoja para elegir versión, fondo y tamaño, con cinco comprobaciones antes de producir.",
+      "intro": "una guía de una hoja para aplicar tu identidad con criterio.",
+      "accessTerms": "Responde 3 preguntas y deja tu correo. Descarga el PDF al terminar, sin suscribirte.",
+      "readingConditions": "Tres preguntas + tu correo · descarga inmediata · sin suscripción obligatoria.",
+      "responseInvitation": "Cuéntanos una situación real al aplicar tu marca. Tu experiencia nos ayuda a crear artículos y recursos más útiles; si todavía no te ha pasado, también puedes decirlo.",
+      "questions": [
+        "¿Dónde te cuesta más aplicar tu marca: redes, fondos y colaboraciones, impresos, prendas u otro contexto?",
+        "Piensa en la última vez: ¿qué dejó de funcionar al cambiar el tamaño o el fondo? Si aún no has aplicado tu marca, cuéntanos qué necesitas preparar.",
+        "¿Cómo lo resolviste o qué te ayudaría a decidir? No hace falta conocer términos de diseño."
+      ],
+      "previewSourceSha256": "be2ed4190f27f24f42b5966d4e77c923026e0027576c3e6d488a522f7ea65c19",
+      "previousFiles": []
     }
   }
 }

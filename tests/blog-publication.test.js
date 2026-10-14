@@ -25,6 +25,7 @@ for (const file of files) {
     assert.ok(html.match(/<title>[^<]+<\/title>/));
     assert.equal(attr(html, 'link', 'rel', 'canonical', 'href'), url);
     assert.equal(attr(html, 'meta', 'property', 'og:url', 'content'), url);
+    assert.notEqual(attr(html, 'meta', 'name', 'dv:publication-status', 'content'), 'draft');
     assert.match(attr(html, 'meta', 'name', 'robots', 'content'), /^index,follow/);
     assert.ok(sitemap.includes(`<loc>${url}</loc>`));
     assert.ok(hub.includes(`href="/blog/${file}"`));
