@@ -20,3 +20,25 @@ test('tools keep their existing navigation; branding measurement hook retained',
  assert.ok(Buffer.byteLength(read('section-index.css'))<4500);
  assert.ok(Buffer.byteLength(read('section-index.js'))<4000);
 });
+
+test('both blog hub indexes include every published article in order and count their entries',()=>{
+ const html=read('blog/index.html');
+ const edition=html.match(/<div class="publication-index[^\"]*"[\s\S]*?<\/ol>/)[0];
+ const navigation=html.match(/<aside class="section-index[\s\S]*?<\/aside>/)[0];
+ const schema=JSON.parse(html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1]);
+ const articles=schema['@graph'].find(item=>item['@type']==='CollectionPage').mainEntity.itemListElement;
+ const sections=[...html.matchAll(/<section\b[^>]*\bid="([^"]+)"[^>]*>([\s\S]*?)<\/section>/g)];
+ for(const index of [edition,navigation]){
+  const links=[...index.matchAll(/href="#([^"]+)"[^>]*><span>(\d+)<\/span>/g)];
+  assert.deepEqual(links.map(link=>Number(link[2])),links.map((_,i)=>i+1),'Sequential index numbering');
+  articles.forEach((article,i)=>{
+   const pathname=new URL(article.url).pathname;
+   const section=sections.find(section=>section[2].includes('href="'+pathname+'"'));
+   assert.ok(section,'Missing article section '+pathname);
+   const heading=section[2].match(/<h2\b[^>]*\bid="([^"]+)"/)[1];
+   assert.ok([section[1],heading].includes(links[i]?.[1]),'Missing or misplaced index entry '+pathname);
+  });
+ }
+ const count=Number(navigation.match(/>(\d+) secciones<\/span>/)[1]);
+ assert.equal(count,[...navigation.matchAll(/href="#/g)].length,'Static section count matches navigation');
+});
