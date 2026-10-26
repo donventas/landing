@@ -25,6 +25,11 @@ test('translation: no third-party boot scripts, analytics, credentials or URL re
   assert.match(source,/\.search = ''/);assert.match(source,/\.hash = ''/);
   assert.match(read('.vercelignore'),/scripts\/translation-pages.cjs/);
 });
+test('translation: compact legacy article headers keep the diagnostic action inside the viewport',()=>{
+ const css=read('translation.css');
+ assert.match(css,/\.nav:has\(\.dv-language-trigger\)>\.in\{width:100%;max-width:none;box-sizing:border-box;margin-inline:0;padding-inline:12px;gap:8px\}/);
+ assert.match(css,/\.nav-cta>\.btn:not\(\[href="https:\/\/app\.donventas\.mx"\]\)\{padding-inline:8px;font-size:10px;letter-spacing:\.07em\}/);
+});
 function harness({host='127.0.0.1',ready='complete',hash='',url='https://www.donventas.mx/branding.html?token=private#private',sensitive=false,header=false}={}){
  const element=()=>({dataset:{},listeners:{},attrs:{},hidden:false,open:false,addEventListener(k,fn){this.listeners[k]=fn;},setAttribute(k,v){this.attrs[k]=v;},removeAttribute(k){delete this[k];},classList:{added:[],add(v){this.added.push(v);}},style:{values:{},setProperty(k,v){this.values[k]=v;}},focus(){this.focused=true;},scrollIntoView(options){this.scrolled=options;},closest(){return null;}});
  const details=element(),summary=element(),panel=element(),select=element(),link=element(),close=element(),entry=element(),menu=element(),appearance=element(),mark=element();
