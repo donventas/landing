@@ -6,7 +6,7 @@ const read=f=>fs.readFileSync(path.join(root,f),'utf8');
 const base='c487c25184ec05feed526e36572d274acb9d4eb0';
 for(const [file,family] of Object.entries(pages))test('appearance: preserved source and one control — '+file,()=>{
  const original=cp.execFileSync('git',['show',base+':'+file],{cwd:root,encoding:'utf8',maxBuffer:12e6});
- assert.equal(read(file).replace(/\r/g,''),integrate(original,family).replace(/\r/g,''));
+ assert.equal(read(file).replace(/\r/g,''),require('../scripts/translation-pages.cjs').integrate(integrate(original,family),file).replace(/\r/g,''));
  const html=decode(read(file));assert.equal((html.match(/id="site-appearance"/g)||[]).length,1);
  assert.match(html,new RegExp('data-dv-page="'+family+'"'));assert.match(html,/\/appearance-families.css/);
 });

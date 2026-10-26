@@ -26,8 +26,8 @@ test('native disclosures preserve content sequence and related deep links', () =
 });
 
 test('editorial glossary keeps one responsive static cover and bounded assets', () => {
-  // Added logo terminology and return registry: +2 KB ceiling, no new assets/JS.
-  assert.ok(Buffer.byteLength(glossary) < 34000);
+  // Translation utility adds bounded static markup; no third-party boot assets.
+  assert.ok(Buffer.byteLength(glossary) < 38000);
   assert.ok(Buffer.byteLength(read('blog/glosario.css')) < 11000);
   assert.ok(Buffer.byteLength(read('blog/glosario.js')) < 6000, 'Search, sort and deep-link enhancement budget');
   assert.equal((glossary.match(/<img\b/g) || []).length, 2, 'Existing wordmark and one cover');
@@ -67,6 +67,8 @@ test('every article glossary link reaches a specific existing entry, including f
     const html = read(`blog/${file}`);
     for (const [, href] of html.matchAll(/<a\b[^>]*href="([^"]*glosario\.html[^"]*)"/g)) {
       const url = new URL(href, 'https://www.donventas.mx/blog/');
+      if (url.origin !== 'https://www.donventas.mx') continue; // External translation URLs are not glossary term links.
+      if (!url.hash && file === 'glosario.html') continue;
       if (!url.hash && file === 'index.html') continue;
       assert.equal(url.pathname, '/blog/glosario.html');
       assert.ok(ids.has(decodeURIComponent(url.hash.slice(1))), `${file}: ${href}`);
@@ -89,7 +91,7 @@ test('glossary local paths, cross-page anchors and index all resolve without scr
   }
   assert.doesNotMatch(glossary, /on(?:click|mouseover)=|role="tooltip"|<iframe/);
   const scripts = [...glossary.matchAll(/<script[^>]*src="([^"]+)"/g)].map(x => x[1]);
-  assert.deepEqual(scripts, ['/appearance.js', '/analytics.js', '/blog/glosario.js?v=accordion-3', '/app.js', '/blog/blog.js', '/_vercel/insights/script.js']);
+  assert.deepEqual(scripts, ['/appearance.js', '/translation.js', '/analytics.js', '/blog/glosario.js?v=accordion-3', '/app.js', '/blog/blog.js', '/_vercel/insights/script.js']);
 });
 
 const { resolveReading } = require('../blog/glosario.js');
