@@ -12,6 +12,8 @@ jobs:
       - uses: actions/checkout@v4
       - name: Fetch approved appearance baseline for preservation checks
         run: git fetch --no-tags --depth=1 origin c487c25184ec05feed526e36572d274acb9d4eb0
+      - name: Fetch approved translation baseline for preservation checks
+        run: git fetch --no-tags --depth=1 origin 083d00e4e8473dd506d589a0e7814a0364f67663
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
