@@ -33,6 +33,7 @@
 [data-dv-page][data-dv-appearance=light] :is(.article-section,.article-copy) > p strong{color:#0E1117}
 [data-dv-page][data-dv-appearance=light] :is(.editorial-method dd,.promise-resources dd,.discovery-evidence p,.discovery-evidence li,.manual-annotations,.manual-plate>figcaption,.editorial-comparison>figcaption,.discovery-comparison>figcaption,.document-label){color:#48566B}
 [data-dv-page][data-dv-appearance=light] :is(.editorial-method dt,.promise-resources dt,.discovery-evidence a,.manual-annotations b,.related-reading a,.reading-next a,.reading-next .chapter-kicker){color:#1B49A0}
+[data-dv-page][data-dv-appearance=light] .editorial-method dd strong{color:#1B49A0}
 [data-dv-page][data-dv-appearance=light] :is(.discovery-evidence strong,.discovery-comparison>figcaption strong){color:#0E1117}
 [data-dv-page][data-dv-appearance=light] :is(.article-section.paper-chapter,.related-reading,.manual-readings,.truth-note,.value-gap,.content-page #diferencia){background:#FFF;color:#0E1117}
 [data-dv-page][data-dv-appearance=light] .reading-next .related-reading{background:transparent}
@@ -59,6 +60,7 @@
 [data-dv-page=context][data-dv-appearance=light] :is(.intro p:nth-child(2),.notes a,.cta a:not(.button),.related-reading a){color:#1B49A0}
 [data-dv-page=context] .button{background:var(--ui-button);color:var(--ui-on-button);border:1px solid var(--ui-button);min-height:48px}
 [data-dv-page=context] .tone-1 :is(small,.byline){color:#B8C4D8}
+[data-dv-page=context] .brand-context-page>footer a{color:var(--ui-ring)}
 /* Legal and utility documents: same text, stable reading measure and theme-aware rules. */
 [data-dv-page=legal][data-dv-appearance=light] :is(.doc,.head,.card,.note,.notice){background:var(--panel);color:var(--fg)}
 [data-dv-page=legal][data-dv-appearance=light] :is(p,li,.upd,.sub,.lead,.sec-intro){color:#48566B}

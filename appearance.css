@@ -15,7 +15,7 @@ html[data-dv-page]{--pilot-paper:#EEF1F6;--pilot-ink:#0E1117;--pilot-muted:#4856
  --fg:#EEF1F6;--fg-soft:#B8C4D8;--fg-faint:#B8C4D8;--line:#48566B;--accent:#6E97F6;--accent-2:#9DB8F9;
  background:#0E1117;color:#EEF1F6;
 }
-[data-dv-page][data-dv-appearance=light] :is(.editorial-nav,.nav) a:not(.editorial-button):not(.solid){color:#EEF1F6}
+[data-dv-page][data-dv-appearance=light] :is(.editorial-nav,.nav) a:where(:not(.editorial-button):not(.solid):not([data-blog-entry=nav-diagnostico])){color:#EEF1F6}
 [data-dv-page][data-dv-appearance=light] :is(.footer-meta,.footer-links,.footer-brand,.foot) :is(a,p){color:#B8C4D8}
 /* HERO: geometry, image placement and mobile order come only from production CSS. */
 [data-dv-page=home][data-dv-appearance=light] .hero-pattern{background-image:linear-gradient(90deg,rgba(238,241,246,.97),rgba(238,241,246,.88)),url('/assets/patterns/relieve-rastro-oscuro.svg')}

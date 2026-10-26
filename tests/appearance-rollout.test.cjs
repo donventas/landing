@@ -29,6 +29,26 @@ test('appearance: normal and late bundled legal initialization installs working 
  for(const ready of ['loading','complete']){const h=themeHarness(ready);if(ready==='loading')h.events.DOMContentLoaded();assert.equal(h.root.dataset.dvAppearance,'light');assert.equal(h.select.disabled,false);h.select.value='dark';h.listeners.change();assert.equal(h.root.dataset.dvAppearance,'dark');assert.deepEqual(h.saved(),['dv.appearance.v1','dark']);}
 });
 test('appearance: blocked storage never blocks controls',()=>{const h=themeHarness('complete',true);h.select.value='dark';assert.doesNotThrow(()=>h.listeners.change());assert.equal(h.root.dataset.dvAppearance,'dark');});
+
+test('appearance: broad masthead text excludes the diagnostic CTA',()=>{
+ const css=read('appearance.css');
+ assert.match(css,/a:where\(:not\(\.editorial-button\):not\(\.solid\):not\(\[data-blog-entry=nav-diagnostico\]\)\)/);
+ assert.doesNotMatch(css,/a:not\(\.editorial-button\):not\(\.solid\)\{color:#EEF1F6\}/);
+});
+test('appearance: editorial emphasis and context footer follow their actual surface',()=>{
+ const css=read('appearance-families.css');
+ assert.match(css,/\[data-dv-appearance=light\] \.editorial-method dd strong\{color:#1B49A0\}/);
+ assert.match(css,/\[data-dv-page=context\] \.brand-context-page>footer a\{color:var\(--ui-ring\)\}/);
+});
+test('appearance: System preference follows media changes without losing explicit choice',()=>{
+ const events={},media={matches:false,addEventListener(n,fn){this.changed=fn;}},root={dataset:{}},select={dataset:{},addEventListener(n,fn){this.change=fn;}};
+ const context={document:{documentElement:root,readyState:'complete',querySelectorAll:()=>[select],addEventListener(){}},URL,URLSearchParams,location:{search:'?appearance=system',href:'https://review.example/'},localStorage:{getItem(){return 'dark';},setItem(){}},matchMedia:()=>media,addEventListener(n,fn){events[n]=fn;},history:{replaceState(){}}};
+ vm.runInNewContext(read('appearance.js'),context);
+ assert.equal(root.dataset.dvPreference,'system');assert.equal(root.dataset.dvAppearance,'light');
+ media.matches=true;media.changed();assert.equal(root.dataset.dvAppearance,'dark');
+ select.value='light';select.change();media.changed();assert.equal(root.dataset.dvAppearance,'light');
+ events.storage({key:'dv.appearance.v1',newValue:'system'});assert.equal(root.dataset.dvAppearance,'dark');
+});
 test('preview: no body or transport in any review response; production is untouched',()=>{
  const {reviewResponse}=require('../lib/preview-safety.cjs');
  for(const endpoint of ['lead','article-message','article-subscription'])for(const method of ['GET','POST']){
