@@ -67,3 +67,7 @@ scripts/qa-article-gifts.cjs
 scripts/qa-comment-form.cjs
 scripts/qa-gift-discovery.cjs
 ARTICLE-GIFTS-REVIEW.txt
+scripts/appearance-pages.cjs
+scripts/appearance-review-server.cjs
+tests/appearance-rollout.test.cjs
+docs/appearance-rollout.md

@@ -1,0 +1,125 @@
+/* Family adapters: keep each published composition, photographs and native specimens. */
+[data-dv-page] body{--fg-soft:#B8C4D8;--fg-faint:#B8C4D8}
+[data-dv-page][data-dv-appearance=light] body{--soft:#48566B;--fg-soft:#48566B;--fg-faint:#545F70}
+/* Ink photography covers intentionally remain ink in both appearances. */
+[data-dv-page]:not([data-dv-page=manual]) :is(.publication-cover-grid,.article-cover-grid,.manifesto-hero-grid,.founder-cover,.glossary-header,.brand-context-page .hero),
+[data-dv-page] :is(.tone-1,.manifesto-quote,.hub-story:not(.hub-story--paper),.offer-confusion,.promise-care,#report-zoom){
+ --fg:#EEF1F6;--fg-soft:#B8C4D8;--fg-faint:#B8C4D8;--accent:#6E97F6;--accent-2:#9DB8F9;--panel:#161B23;
+ --ui-ink:#EEF1F6;--ui-muted:#B8C4D8;--ui-surface:#0E1117;--ui-ring:#9DB8F9;--ui-hover:#161B23;--ui-selected:#0C2350;--ui-line:#6C7585;--ui-button:#6E97F6;--ui-button-hover:#9DB8F9;--ui-on-button:#0E1117;
+ color:#EEF1F6;color-scheme:dark;
+}
+[data-dv-page] :is(.paper-chapter,.tone-0,.tone-2,.desk-section,.hub-story--paper,.origin-panel,.definition-section,.summary-box,.feature-aside,.from-desk,.term-example,.example-grid .after){
+ --fg:#0E1117;--fg-soft:#48566B;--fg-faint:#545F70;--accent:#1B49A0;--accent-2:#1B49A0;
+ --ui-ink:#0E1117;--ui-muted:#48566B;--ui-surface:#FFF;--ui-ring:#1B49A0;--ui-hover:#F1F5FF;--ui-selected:#F1F5FF;--ui-line:#6C7585;--ui-button:#1B49A0;--ui-button-hover:#11346F;--ui-on-button:#FFF;
+ color-scheme:light;
+}
+[data-dv-page] :is(.paper-chapter,.tone-0,.tone-2,.origin-panel,.definition-section) a.glossary-link{color:#1B49A0}
+/* Preference sits after the content: no floating overlay, no changes to hero height. */
+[data-dv-page] .appearance-preference{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:12px 20px;padding:24px max(24px,env(safe-area-inset-right)) calc(24px + env(safe-area-inset-bottom));background:var(--ui-surface);color:var(--ui-ink);border-top:1px solid var(--ui-line);font:14px/1.5 'Schibsted Grotesk',sans-serif;letter-spacing:0}
+[data-dv-page] .appearance-preference label{font:inherit;color:inherit}
+[data-dv-page] .appearance-preference select{font:inherit;font-size:16px;max-width:100%;min-height:48px;padding:10px 36px 10px 12px;border:1px solid var(--ui-line);border-radius:3px;background:var(--ui-surface);color:var(--ui-ink)}
+[data-dv-page] .appearance-preference:has(select:disabled){display:none}
+/* Editorial reading surfaces: only text surrounding specimens, not their intrinsic colors. */
+[data-dv-page=article] .article-section{padding-inline:var(--space-gutter)}
+[data-dv-page=article] .article-section.paper-chapter{padding-block:var(--space-section)}
+[data-dv-page=article] .article-ending{padding-inline:var(--space-gutter)}
+[data-dv-page] .article-ending .private-comment{padding:var(--space-inset);margin-top:32px}
+[data-dv-page] .article-ending .comment-content{padding-inline:0}
+[data-dv-page] .article-cta{background:#FFF;color:#0E1117;border:1px solid #B5BFCD;border-top:3px solid #1B49A0}
+[data-dv-page] .article-cta :is(h2,strong){color:#0E1117}
+[data-dv-page] .article-cta p{color:#48566B}
+[data-dv-page] .article-cta :is(.eyebrow,a:not(.btn)){color:#1B49A0}
+[data-dv-page][data-dv-appearance=light] :is(.article-copy>p,.article-section>p,.manual-opening>p,.manual-list,.manual-checklist,.checklist li,.manifesto-opening p,.revelation-copy>p,.founder-signature>p){color:#374356}
+[data-dv-page][data-dv-appearance=light] :is(.article-section,.article-copy) > p strong{color:#0E1117}
+[data-dv-page][data-dv-appearance=light] :is(.editorial-method dd,.promise-resources dd,.discovery-evidence p,.discovery-evidence li,.manual-annotations,.manual-plate>figcaption,.editorial-comparison>figcaption,.discovery-comparison>figcaption,.document-label){color:#48566B}
+[data-dv-page][data-dv-appearance=light] :is(.editorial-method dt,.promise-resources dt,.discovery-evidence a,.manual-annotations b,.related-reading a,.reading-next a,.reading-next .chapter-kicker){color:#1B49A0}
+[data-dv-page][data-dv-appearance=light] .editorial-method dd strong{color:#1B49A0}
+[data-dv-page][data-dv-appearance=light] :is(.discovery-evidence strong,.discovery-comparison>figcaption strong){color:#0E1117}
+[data-dv-page][data-dv-appearance=light] :is(.article-section.paper-chapter,.related-reading,.manual-readings,.truth-note,.value-gap,.content-page #diferencia){background:#FFF;color:#0E1117}
+[data-dv-page][data-dv-appearance=light] .reading-next .related-reading{background:transparent}
+[data-dv-page][data-dv-appearance=light] :is(.related-reading,.manual-readings) :is(p,summary){color:#48566B}
+/* Manual pilot's ink chapter owns its text in both themes. */
+[data-dv-page=manual][data-dv-appearance] #sistema>p{color:#B8C4D8}
+[data-dv-page=manual][data-dv-appearance] #sistema>p strong{color:#EEF1F6}
+[data-dv-page=manual][data-dv-appearance=light] .article-cover-figure picture::after{background:linear-gradient(180deg,transparent 86%,#FFF)}
+/* Index: keep paper story cards and their exact artwork rather than flattening the page. */
+[data-dv-page=blog][data-dv-appearance=light] :is(.hub-editor-note,.blog-invite,.hub-resource){color:#0E1117}
+[data-dv-page=blog][data-dv-appearance=light] .hub-resource .section-folio{color:#48566B}
+/* Glossary: actual controls, filtering and disclosures share the interaction system. */
+[data-dv-page=glossary] :is(.glossary-tools label,.term-body .term-definition,.term-body strong,.glossary-readings a){color:var(--ui-ink)}
+[data-dv-page=glossary] :is(.glossary-help,.glossary-order-note,#term-status,.term-body p,.term-body .term-related,.glossary-readings p,.glossary-sources p){color:var(--ui-muted)}
+[data-dv-page=glossary] :is(.glossary-tools input,.glossary-tools select,.term-disclosure summary,#term-empty){background:var(--ui-surface);color:var(--ui-ink);border-color:var(--ui-line);font-size:16px}
+[data-dv-page=glossary] :is(.term-toggle,.term-body .term-label,.term-related a,.term-body>a,.glossary-return a,.glossary-order-note summary,.glossary-sources a,#term-clear){color:var(--ui-ring)}
+[data-dv-page=glossary] .term-example{background:#EEF1F6;color:#0E1117}
+[data-dv-page=glossary] .term-example strong{color:#1B49A0}
+@media(hover:hover) and (pointer:fine){[data-dv-page=glossary] .term-disclosure summary:hover{background:var(--ui-hover)}}
+/* Context essays retain their sample palettes and their light/dark chapter cadence. */
+[data-dv-page=context] .brand-context-page>header{background:#0E1117;color:#EEF1F6;backdrop-filter:none}
+[data-dv-page=context] .tone-1{background:#161B23}
+[data-dv-page=context][data-dv-appearance=light] :is(.intro,.notes,.cta,.article-ending,.related-reading,.reading-poll){color:#0E1117}
+[data-dv-page=context][data-dv-appearance=light] :is(.intro p:nth-child(2),.notes a,.cta a:not(.button),.related-reading a){color:#1B49A0}
+[data-dv-page=context] .button{background:var(--ui-button);color:var(--ui-on-button);border:1px solid var(--ui-button);min-height:48px}
+[data-dv-page=context] .tone-1 :is(small,.byline){color:#B8C4D8}
+[data-dv-page=context] .brand-context-page>footer a{color:var(--ui-ring)}
+/* Legal and utility documents: same text, stable reading measure and theme-aware rules. */
+[data-dv-page=legal][data-dv-appearance=light] :is(.doc,.head,.card,.note,.notice){background:var(--panel);color:var(--fg)}
+[data-dv-page=legal][data-dv-appearance=light] :is(p,li,.upd,.sub,.lead,.sec-intro){color:#48566B}
+[data-dv-page=legal][data-dv-appearance=light] a{color:#1B49A0}
+[data-dv-page=legal] :is(.doc,main){overflow-wrap:anywhere}
+[data-dv-page=legal] :is(a,button,.dl){min-height:44px}
+[data-dv-page=utility] main{padding-block:56px;min-height:70vh}
+[data-dv-page=utility] .private-comment{padding:var(--space-inset)}
+[data-dv-page=utility] .private-comment p{color:var(--ui-muted)}
+[data-dv-page=utility] .private-comment a{color:var(--ui-ring)}
+[data-dv-page=utility] #subscription-action{min-height:48px;background:var(--ui-button);color:var(--ui-on-button);border:1px solid var(--ui-button);padding:12px 20px}
+[data-dv-page=diagnostic][data-dv-appearance=light] :is(.diag-intro,.diag-intro p){color:#48566B}
+[data-dv-page=diagnostic][data-dv-appearance=light] .diag-intro h1{color:#0E1117}
+[data-dv-page] :is(.comment-kicker,.private-comment summary span){color:var(--ui-ring)}
+[data-dv-page][data-dv-appearance=light] .blog-page a.glossary-link{color:var(--ui-ring)}
+[data-dv-page=home][data-dv-appearance=light] .founder-grid p.founder-note{color:#1B49A0!important}
+[data-dv-page=home] .paper-section .service-name p{color:#48566B}
+[data-dv-page=home] .founder-grid p a{color:var(--ui-ring)}
+[data-dv-page=home] .contact-copy .contact-caution{color:var(--ui-muted)}
+[data-dv-page=legal][data-dv-appearance=dark] a{color:#9DB8F9}
+[data-dv-page=founder][data-dv-appearance=light] .founder-section{background:#EEF1F6}
+[data-dv-page][data-dv-appearance=light] .memory-spread figcaption{color:#48566B}
+[data-dv-page] :is(.article-share,.article-share .article-share-status){color:var(--ui-muted)}
+[data-dv-page] .article-share-actions>:is(a,button){color:var(--ui-ring)}
+[data-dv-page] .article-share-manual input{background:var(--ui-surface);color:var(--ui-ink);border-color:var(--ui-line);font-size:16px}
+[data-dv-page=context][data-dv-appearance=light] :is(.cta,.article-ending,.draft-gift) .eyebrow{color:#1B49A0}
+[data-dv-page=legal] .dc .req{color:var(--ui-muted)}
+/* Reuse the existing resource flow: adaptation only, no subscription or question changes. */
+[data-dv-page] .article-gift :is(.gift-question-text,legend,.gift-delivery h3){color:var(--ui-ink)}
+[data-dv-page] .article-gift .gift-question label .gift-question-text{color:var(--ui-ink)}
+[data-dv-page] .article-gift :is(.gift-form-intro>span,.gift-question-number,.gift-step-progress p,.gift-extra-comment>summary,.gift-answer-edit>span:last-child){color:var(--ui-ring)}
+[data-dv-page] .article-gift :is(.gift-question textarea,.gift-question select){background:var(--ui-surface);color:var(--ui-ink);border-color:var(--ui-line);font-size:16px}
+[data-dv-page] :is(.gift-commercial,.gift-answer-edit){color:var(--ui-muted)}
+[data-dv-page] :is(.gift-step-navigation button,.gift-refresh,.gift-remember,.gift-share-toggle){background:var(--ui-surface);color:var(--ui-ring);border-color:var(--ui-line)}
+[data-dv-page] .article-gift .gift-step-navigation button{color:var(--ui-ring);border-color:var(--ui-line)}
+[data-dv-page] :is(.gift-submit button,.gift-step-navigation [data-gift-next]){background:var(--ui-button);color:var(--ui-on-button);border-color:var(--ui-button)}
+[data-dv-page] .article-gift .gift-step-navigation [data-gift-next]{color:var(--ui-on-button)}
+[data-dv-page] .gift-step-progress progress{background:var(--ui-line);accent-color:var(--ui-ring)}
+[data-dv-page] .gift-step-progress progress::-webkit-progress-bar{background:var(--ui-line)}
+[data-dv-page] .gift-step-progress progress::-webkit-progress-value{background:var(--ui-ring)}
+[data-dv-page] .gift-step-progress progress::-moz-progress-bar{background:var(--ui-ring)}
+[data-dv-page] .article-gift .gift-delivery{background:var(--ui-selected);border-color:var(--ui-ring)}
+[data-dv-page] .article-gift .gift-field-error{background:var(--ui-surface);color:var(--ui-error);border-color:var(--ui-error-border)}
+[data-dv-page] .private-comment .gift-subscribe{--ui-ring:#1B49A0;--ui-ink:#0E1117;--ui-muted:#48566B;color-scheme:light}
+[data-dv-page] .private-comment .gift-subscribe-label{color:#0E1117}
+[data-dv-page] .private-comment p{color:var(--ui-muted)}
+[data-dv-page] .article-gift .gift-offer .gift-offer-terms{color:var(--ui-muted)}
+[data-dv-page] .article-ending .gift-service-link h3{color:var(--ui-ink)}
+[data-dv-page] .article-ending .gift-service-link p{color:var(--ui-muted)}
+[data-dv-page] .article-ending .gift-service-link a{color:var(--ui-ring);border-color:var(--ui-line)}
+[data-dv-page] .article-ending .article-gift summary.gift-primary-action{background:var(--ui-button);color:var(--ui-on-button);border-color:var(--ui-button)}
+[data-dv-page] .private-comment summary.gift-primary-action span{color:var(--ui-on-button)}
+[data-dv-page] .private-comment .comment-environment{background:var(--ui-selected);color:var(--ui-muted);border-color:var(--ui-ring)}
+@media(hover:hover) and (pointer:fine){[data-dv-page] .article-ending .gift-service-link a:hover{background:var(--ui-hover)}}
+@media(max-width:600px){
+ [data-dv-page] .article-ending .private-comment{padding-inline:24px}
+ [data-dv-page=article] .article-ending{padding-inline:24px}
+ [data-dv-page] .appearance-preference{justify-content:flex-start}
+}
+@media print{[data-dv-page] .appearance-preference{display:none}}
+[data-dv-page][data-dv-appearance] .dv-analytics{--ui-ring:#9DB8F9;--ui-muted:#B8C4D8;--ui-hover:#243044}
+[data-dv-page][data-dv-appearance] .dv-analytics a{color:#9DB8F9}

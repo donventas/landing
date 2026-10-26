@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html data-dv-page="diagnostic" lang="es">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -34,6 +34,10 @@
 <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=canon-3-20261004">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png?v=canon-3-20261004">
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=canon-3-20261004">
+<script src="/appearance.js"></script>
+<link rel="stylesheet" href="/appearance.css">
+<link rel="stylesheet" href="/appearance-families.css">
+<script defer src="/diagnostic-focus.js"></script>
 </head>
 <body class="diagnostic-standalone" data-screen-label="Diagnóstico dinámico Don Ventas">
 <div class="nav">
@@ -62,5 +66,6 @@
 <script defer src="/analytics.js"></script>
 <script defer src="diagnostico-v2.js"></script>
 <script defer src="/_vercel/insights/script.js"></script>
+<div class="appearance-preference" id="apariencia"><label for="site-appearance">Apariencia del sitio</label><select id="site-appearance" data-dv-appearance-select disabled><option value="system">Según tu dispositivo</option><option value="light">Clara</option><option value="dark">Oscura</option></select></div>
 </body>
 </html>
