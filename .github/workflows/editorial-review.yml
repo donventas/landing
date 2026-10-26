@@ -10,6 +10,8 @@ jobs:
     timeout-minutes: 5
     steps:
       - uses: actions/checkout@v4
+      - name: Fetch approved appearance baseline for preservation checks
+        run: git fetch --no-tags --depth=1 origin c487c25184ec05feed526e36572d274acb9d4eb0
       - uses: actions/setup-node@v4
         with:
           node-version: '22'

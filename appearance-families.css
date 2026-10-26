@@ -104,6 +104,15 @@
 [data-dv-page] .article-gift .gift-field-error{background:var(--ui-surface);color:var(--ui-error);border-color:var(--ui-error-border)}
 [data-dv-page] .private-comment .gift-subscribe{--ui-ring:#1B49A0;--ui-ink:#0E1117;--ui-muted:#48566B;color-scheme:light}
 [data-dv-page] .private-comment .gift-subscribe-label{color:#0E1117}
+[data-dv-page] .private-comment p{color:var(--ui-muted)}
+[data-dv-page] .article-gift .gift-offer .gift-offer-terms{color:var(--ui-muted)}
+[data-dv-page] .article-ending .gift-service-link h3{color:var(--ui-ink)}
+[data-dv-page] .article-ending .gift-service-link p{color:var(--ui-muted)}
+[data-dv-page] .article-ending .gift-service-link a{color:var(--ui-ring);border-color:var(--ui-line)}
+[data-dv-page] .article-ending .article-gift summary.gift-primary-action{background:var(--ui-button);color:var(--ui-on-button);border-color:var(--ui-button)}
+[data-dv-page] .private-comment summary.gift-primary-action span{color:var(--ui-on-button)}
+[data-dv-page] .private-comment .comment-environment{background:var(--ui-selected);color:var(--ui-muted);border-color:var(--ui-ring)}
+@media(hover:hover) and (pointer:fine){[data-dv-page] .article-ending .gift-service-link a:hover{background:var(--ui-hover)}}
 @media(max-width:600px){
  [data-dv-page] .article-ending .private-comment{padding-inline:24px}
  [data-dv-page=article] .article-ending{padding-inline:24px}

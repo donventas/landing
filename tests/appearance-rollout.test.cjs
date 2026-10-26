@@ -35,6 +35,7 @@ test('preview: no body or transport in any review response; production is untouc
   const req={method,get body(){throw Error('must not read payload');}},res={setHeader(){},end(v){this.body=JSON.parse(v);}};
   assert.equal(reviewResponse(req,res,endpoint,{VERCEL_ENV:'preview'}),true);
   assert.equal(res.statusCode,endpoint==='article-message'&&method==='GET'?200:503);assert.equal(res.body.preview,true);
+  if(endpoint==='article-message'&&method==='GET')assert.deepEqual(res.body.gift_articles,Object.keys(require('../blog/article-gifts.json').articles));
  }
  assert.equal(reviewResponse({}, {setHeader(){throw Error();}},'lead',{VERCEL_ENV:'production'}),false);
  for(const name of ['lead','article-message','article-subscription'])assert.match(read('api/'+name+'.js'),/reviewResponse/);

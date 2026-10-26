@@ -10,7 +10,7 @@ function createServer(){const server=http.createServer((req,res)=>{
  if(req.headers.host!==new URL(origin).host){res.writeHead(403);return res.end();}
  const url=new URL(req.url,origin);
  if(url.pathname==='/api/appearance-review'){res.setHeader('Content-Type','text/html; charset=utf-8');return res.end(require('../api/appearance-review.js').render());}
- if(url.pathname.startsWith('/api/')){req.resume();res.setHeader('Content-Type','application/json');if(url.pathname==='/api/article-message'&&req.method==='GET')return res.end('{"enabled":true,"mode":"simulation","gifts_enabled":false}');res.writeHead(503);return res.end('{"ok":false,"code":"unavailable","preview":true}');}
+ if(url.pathname.startsWith('/api/')){req.resume();return require('../lib/preview-safety.cjs').reviewResponse(req,res,url.pathname.slice(5),{VERCEL_ENV:'preview'});}
  if(!['GET','HEAD'].includes(req.method)){req.resume();res.writeHead(405);return res.end();}
  if(url.pathname==='/analytics.js'||url.pathname.startsWith('/_vercel/')){res.setHeader('Content-Type','application/javascript');return res.end('/* no analytics in review */');}
  try{let rel=decodeURIComponent(url.pathname).replace(/^\//,'')||'index.html';
