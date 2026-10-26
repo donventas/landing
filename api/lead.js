@@ -93,6 +93,7 @@ function reply(res, status, body) {
 }
 
 async function handler(req, res) {
+  if (require('../lib/preview-safety.cjs').reviewResponse(req, res, 'lead')) return;
   if (req.method !== 'POST') {
     res.setHeader('Allow', 'POST');
     return reply(res, 405, { ok: false, code: 'method_not_allowed' });
