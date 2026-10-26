@@ -119,3 +119,5 @@
  [data-dv-page] .appearance-preference{justify-content:flex-start}
 }
 @media print{[data-dv-page] .appearance-preference{display:none}}
+[data-dv-page][data-dv-appearance] .dv-analytics{--ui-ring:#9DB8F9;--ui-muted:#B8C4D8;--ui-hover:#243044}
+[data-dv-page][data-dv-appearance] .dv-analytics a{color:#9DB8F9}
