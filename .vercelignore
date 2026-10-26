@@ -71,3 +71,5 @@ scripts/appearance-pages.cjs
 scripts/appearance-review-server.cjs
 tests/appearance-rollout.test.cjs
 docs/appearance-rollout.md
+docs/appearance-header-control.md
+tests/appearance-header.test.cjs

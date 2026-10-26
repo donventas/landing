@@ -12,7 +12,8 @@ for(const [file,family] of Object.entries(pages))test('appearance: preserved sou
 });
 test('appearance: source coverage, bounded additive assets and preview-only scripts excluded',()=>{
  assert.equal(Object.keys(pages).length,21);
- for(const file of ['appearance.js','diagnostic-focus.js'])assert.ok(Buffer.byteLength(read(file))<4000);
+ assert.ok(Buffer.byteLength(read('appearance.js'))<8500); // Includes the accessible header disclosure; no dependency.
+ assert.ok(Buffer.byteLength(read('diagnostic-focus.js'))<4000);
  assert.ok(Buffer.byteLength(read('appearance.css'))+Buffer.byteLength(read('appearance-families.css'))<45000);
  for(const file of ['appearance.css','appearance-families.css'])assert.doesNotMatch(read(file),/filter:\s*(?:invert|hue-rotate)|url\(https?:/);
  assert.match(read('.vercelignore'),/scripts\/appearance-review-server.cjs/);
@@ -21,7 +22,7 @@ test('appearance: source coverage, bounded additive assets and preview-only scri
 function themeHarness(readyState='loading',blocked=false){
  const events={},listeners={},root={dataset:{}},select={dataset:{},disabled:true,value:'',addEventListener:(n,fn)=>listeners[n]=fn};
  let saved=null;
- const context={document:{documentElement:root,readyState,querySelectorAll:()=>[select],addEventListener:(n,fn)=>events[n]=fn},URL,URLSearchParams,location:{search:'?appearance=light',href:'https://review.example/blog/#seccion'},localStorage:{getItem(){if(blocked)throw Error();return null;},setItem(k,v){if(blocked)throw Error();saved=[k,v];}},matchMedia:()=>({matches:true,addEventListener(){}}),addEventListener(){},history:{replaceState(){}}};
+ const context={document:{documentElement:root,readyState,querySelector:()=>null,querySelectorAll:()=>[select],addEventListener:(n,fn)=>events[n]=fn},URL,URLSearchParams,location:{search:'?appearance=light',href:'https://review.example/blog/#seccion'},localStorage:{getItem(){if(blocked)throw Error();return null;},setItem(k,v){if(blocked)throw Error();saved=[k,v];}},matchMedia:()=>({matches:true,addEventListener(){}}),addEventListener(){},history:{replaceState(){}}};
  vm.runInNewContext(read('appearance.js'),context);
  return {events,listeners,root,select,saved:()=>saved};
 }
@@ -42,7 +43,7 @@ test('appearance: editorial emphasis and context footer follow their actual surf
 });
 test('appearance: System preference follows media changes without losing explicit choice',()=>{
  const events={},media={matches:false,addEventListener(n,fn){this.changed=fn;}},root={dataset:{}},select={dataset:{},addEventListener(n,fn){this.change=fn;}};
- const context={document:{documentElement:root,readyState:'complete',querySelectorAll:()=>[select],addEventListener(){}},URL,URLSearchParams,location:{search:'?appearance=system',href:'https://review.example/'},localStorage:{getItem(){return 'dark';},setItem(){}},matchMedia:()=>media,addEventListener(n,fn){events[n]=fn;},history:{replaceState(){}}};
+ const context={document:{documentElement:root,readyState:'complete',querySelector:()=>null,querySelectorAll:()=>[select],addEventListener(){}},URL,URLSearchParams,location:{search:'?appearance=system',href:'https://review.example/'},localStorage:{getItem(){return 'dark';},setItem(){}},matchMedia:()=>media,addEventListener(n,fn){events[n]=fn;},history:{replaceState(){}}};
  vm.runInNewContext(read('appearance.js'),context);
  assert.equal(root.dataset.dvPreference,'system');assert.equal(root.dataset.dvAppearance,'light');
  media.matches=true;media.changed();assert.equal(root.dataset.dvAppearance,'dark');
