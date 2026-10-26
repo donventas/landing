@@ -61,7 +61,7 @@ test('images have alternative text and external new tabs are isolated', () => {
   assert.equal(images.length > 0, true);
   assert.deepEqual(images.filter(tag => !/\balt="[^"]*"/i.test(tag)), []);
   const newTabs = [...html.matchAll(/<a\b[^>]*target="_blank"[^>]*>/gi)].map(match => match[0]);
-  assert.equal(newTabs.length, 2);
+  assert.equal(newTabs.length, 4); // Two approved portfolio links + on-demand translation and browser help.
   assert.deepEqual(newTabs.filter(tag => !/\brel="[^"]*noopener[^"]*"/i.test(tag)), []);
 });
 

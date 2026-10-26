@@ -73,3 +73,6 @@ tests/appearance-rollout.test.cjs
 docs/appearance-rollout.md
 docs/appearance-header-control.md
 tests/appearance-header.test.cjs
+scripts/translation-pages.cjs
+tests/translation.test.cjs
+docs/public-translation.md
