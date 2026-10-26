@@ -1,4 +1,23 @@
 /* Appearance extension of approved pilots. Runtime f8a764b. Preserve literal assets. */
+/* Header utility: inherits approved ink masthead, never the page's paper field. */
+[data-dv-page] .dv-appearance-control{position:relative;flex:none;color:#EEF1F6;--ui-ring:#9DB8F9}
+[data-dv-page] :is(.nav-actions,.nav-cta):has(.dv-appearance-control){display:flex;align-items:center;gap:12px}
+[data-dv-page=context] .editorial-nav .nav-cta>a{white-space:nowrap;display:inline-flex;align-items:center;min-height:44px}
+[data-dv-page] .dv-appearance-trigger{display:grid;place-items:center;width:44px;height:44px;padding:0;border:1px solid #6C7585;border-radius:3px;color:#EEF1F6;background:transparent;cursor:pointer;touch-action:manipulation}
+[data-dv-page] .dv-appearance-trigger svg{width:22px;height:22px;pointer-events:none}
+[data-dv-page] .dv-appearance-control[data-effective=light] .dv-appearance-moon,[data-dv-page] .dv-appearance-control[data-effective=dark] .dv-appearance-sun{display:none}
+[data-dv-page] .dv-appearance-panel{position:absolute;z-index:10;top:calc(100% + 10px);right:0;width:252px;max-width:calc(100vw - 40px);padding:12px;background:#0E1117;color:#EEF1F6;border:1px solid #6C7585;border-radius:3px;box-shadow:0 12px 30px #0006}
+[data-dv-page] .dv-appearance-panel[hidden]{display:none}
+[data-dv-page] .dv-appearance-panel p{margin:0;padding:4px 10px 10px;color:#B8C4D8;font:11px/1.5 'Space Mono',monospace;letter-spacing:.08em;text-transform:uppercase}
+[data-dv-page] .dv-appearance-panel button{display:flex;align-items:center;justify-content:space-between;gap:10px;width:100%;min-height:44px;border:1px solid transparent;border-radius:2px;padding:10px;color:#EEF1F6;background:transparent;font:15px/1.4 'Schibsted Grotesk',sans-serif;text-align:left;cursor:pointer;touch-action:manipulation}
+[data-dv-page] .dv-appearance-check{visibility:hidden;color:#9DB8F9}
+[data-dv-page] .dv-appearance-panel button[aria-pressed=true]{background:#0C2350;border-color:#9DB8F9}
+[data-dv-page] .dv-appearance-panel button[aria-pressed=true] .dv-appearance-check{visibility:visible}
+[data-dv-page] .dv-appearance-trigger[aria-expanded=true]{border-color:#9DB8F9;background:#161B23}
+@media(hover:hover) and (pointer:fine){[data-dv-page] .dv-appearance-trigger:hover,[data-dv-page] .dv-appearance-panel button:hover{background:#161B23;border-color:#9DB8F9}}
+/* On mobile the panel aligns to the actions edge, not to the icon's left neighbour. */
+@media(max-width:720px){[data-dv-page] :is(.nav-actions,.nav-cta):has(.dv-appearance-control){position:relative;gap:10px}[data-dv-page] .dv-appearance-control{position:static}[data-dv-page] .dv-appearance-panel{top:calc(100% + 10px)}}
+@media print{[data-dv-page] .dv-appearance-control{display:none}}
 html[data-dv-page]{--pilot-paper:#EEF1F6;--pilot-ink:#0E1117;--pilot-muted:#48566B;--pilot-link:#1B49A0;--pilot-line:#B5BFCD}
 [data-dv-page] .skip-link:focus{z-index:1001}
 [data-dv-page] .has-section-index main [data-section-target],[data-dv-page] .has-section-index main section[id]{scroll-margin-top:calc(var(--section-nav,152px) + var(--section-bar,58px) + 24px)}
