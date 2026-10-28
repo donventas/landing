@@ -60,3 +60,7 @@
 .hero-actions .hero-portal-link:hover{background:#25354b;border-color:#b8ccf7}.hero-actions .hero-portal-link:focus-visible,.portal-waitlist-link:focus-visible{outline:2px solid #a9c3ff;outline-offset:3px}
 .portal-waitlist-link{display:inline-flex;gap:14px;align-items:center;min-height:48px;margin-top:22px;padding:12px 18px;border:1px solid #8293ad;color:inherit;text-decoration:none;font-weight:650}.portal-waitlist-link:hover{background:#25354b;color:#fff}
 .waitlist-more{margin-top:20px;border-top:1px solid #bac1ca;border-bottom:1px solid #bac1ca}.waitlist-more summary{cursor:pointer;font-size:14px;color:#1b49a0}.waitlist-more summary span{font-size:12px;font-weight:400;color:#545f70}.waitlist-more select{margin:0 0 16px}.waitlist-more summary:focus-visible{outline:2px solid #1b49a0;outline-offset:2px}
+
+.hero-actions .primary,.hero-actions .hero-portal-link{width:min(100%,238px);justify-content:space-between}
+
+.hero-actions .primary,.hero-actions .hero-portal-link{display:inline-flex;align-items:center;gap:8px;min-height:54px;white-space:nowrap}
