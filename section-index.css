@@ -25,3 +25,6 @@
 @media(max-width:520px){.section-index summary{font-size:14px}}
 @media(prefers-reduced-motion:reduce){html:has(.has-section-index){scroll-behavior:auto}}
 @media print{.section-index{display:none}}
+
+/* El índice de la portada usa enlaces sin numeración. */
+.launch-home .section-index a{grid-template-columns:minmax(0,1fr)}
