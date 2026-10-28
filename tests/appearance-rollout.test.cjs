@@ -6,9 +6,17 @@ const read=f=>fs.readFileSync(path.join(root,f),'utf8');
 const base='c487c25184ec05feed526e36572d274acb9d4eb0';
 for(const [file,family] of Object.entries(pages))test('appearance: preserved source and one control — '+file,()=>{
  const original=cp.execFileSync('git',['show',base+':'+file],{cwd:root,encoding:'utf8',maxBuffer:12e6});
- assert.equal(read(file).replace(/\r/g,''),require('../scripts/translation-pages.cjs').integrate(integrate(original,family),file).replace(/\r/g,''));
- const html=decode(read(file));assert.equal((html.match(/id="site-appearance"/g)||[]).length,1);
- assert.match(html,new RegExp('data-dv-page="'+family+'"'));assert.match(html,/\/appearance-families.css/);
+ const html=decode(read(file));
+ if(file==='index.html'){
+  // The approved new homepage has its own styling and the shared script
+  // creates the accessible header control; do not compare its HTML to 2026's hero.
+  assert.equal((html.match(/src="\/appearance\.js"/g)||[]).length,1);
+  assert.match(html,/class="editorial-nav"/);assert.match(html,/\/assets\/portal-launch\/integration.css/);
+ }else{
+  assert.equal(read(file).replace(/\r/g,''),require('../scripts/translation-pages.cjs').integrate(integrate(original,family),file).replace(/\r/g,''));
+  assert.equal((html.match(/id="site-appearance"/g)||[]).length,1);assert.match(html,/\/appearance-families.css/);
+ }
+ assert.match(html,new RegExp('data-dv-page="'+family+'"'));
 });
 test('appearance: source coverage, bounded additive assets and preview-only scripts excluded',()=>{
  assert.equal(Object.keys(pages).length,21);

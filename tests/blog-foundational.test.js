@@ -67,9 +67,9 @@ test('ships native social compositions for the three article image ratios', () =
 });
 
 test('integrates the article into the homepage and broadens the public audience', () => {
-  assert.match(home, /href="blog\/por-que-nacio-don-ventas\.html">Leer la carta fundacional/);
-  assert.match(home, /id="quien"/);
-  assert.match(home, /"audienceType": "Profesionales, emprendimientos y empresas de habla hispana"/);
+  assert.match(home, /href="\/blog\/"/);
+  assert.match(home, /href="\/arturo-villagomez\.html">Arturo Villagomez/);
+  assert.match(home, /"audienceType"\s*:\s*"Profesionales, emprendimientos y empresas de habla hispana"/);
   assert.doesNotMatch(home, /"audienceType": "PyMEs/);
 });
 
