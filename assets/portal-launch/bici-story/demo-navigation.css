@@ -12,3 +12,8 @@
 
 /* The prominent application menu replaces the duplicate desktop header links. */
 .launch-demo .editorial-nav .nav-shell>nav{display:none}
+
+/* Remain at the top of the demonstrations, below the site's header. */
+.vuelta-app-nav{position:sticky;top:var(--vuelta-nav-top,78px);z-index:35}
+.launch-demo #web,.launch-demo #propuesta,.launch-demo #tarjeta,.launch-demo #coleccion,.launch-demo #servicio,.launch-demo #consulta{scroll-margin-top:calc(var(--vuelta-nav-top,78px) + var(--vuelta-nav-height,130px) + 16px)}
+@media(max-height:500px) and (orientation:landscape){.vuelta-app-nav-inner{display:flex;padding:6px 0;gap:12px}.vuelta-app-nav p{display:none}.vuelta-app-links{grid-template-columns:repeat(4,minmax(0,1fr));gap:4px}.vuelta-app-links a{font-size:11px;min-height:40px;padding:5px}}
