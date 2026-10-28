@@ -20,9 +20,8 @@
    const notice=form.parentElement.querySelector('[data-form-environment]')||document.querySelector('[data-form-environment]');
    if(!notice)return;
    notice.hidden=false; notice.textContent='Para enviar tus datos de forma segura, abre el formulario en el sitio oficial. ';
-   const link=document.createElement('a'); link.href=urls[form.dataset.portalForm]; link.target='_blank'; link.rel='noopener noreferrer'; link.textContent='Abrir formulario oficial ↗';
-   link.addEventListener('click',e=>{e.preventDefault();window.open(urls[form.dataset.portalForm],'_blank','noopener,noreferrer');});
-   notice.appendChild(link);
+   const link=document.createElement('a'); link.href=urls[form.dataset.portalForm]; link.rel='noopener noreferrer'; link.translate=false; const language=new URLSearchParams(location.search).get('_x_tr_tl'); const texts={en:'Open official form',fr:'Ouvrir le formulaire officiel',pt:'Abrir formulário oficial',de:'Offizielles Formular öffnen',it:'Apri il modulo ufficiale',bg:'Отвори официалния формуляр',ja:'公式フォームを開く','zh-CN':'打开官方表格',ar:'فتح النموذج الرسمي'}; link.textContent=(texts[language]||'Abrir formulario oficial')+' ↗';
+   notice.appendChild(document.createElement('br')); notice.appendChild(link);
   });
   return;
  }
