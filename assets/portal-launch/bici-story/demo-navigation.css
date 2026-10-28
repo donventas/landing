@@ -24,3 +24,13 @@
 
 /* Switching samples must not re-anchor the viewport to replaced content. */
 .launch-demo #contenido{overflow-anchor:none}
+
+.vuelta-current{display:block;color:#d1ddef;letter-spacing:0;text-transform:none;font-family:"Schibsted Grotesk",sans-serif;font-size:12px;font-weight:600;margin-top:4px;white-space:normal}
+.vuelta-app-nav{scroll-margin-top:95px}
+.vuelta-flow-nav{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:32px 0 0;padding:20px 0 0;border-top:1px solid #536174}
+.vuelta-flow-nav a{display:flex;flex-direction:column;min-width:160px;min-height:48px;padding:10px 14px;border:1px solid #536174;color:inherit;text-decoration:none;font-size:13px;line-height:1.4}.vuelta-flow-nav a:last-child{margin-left:auto}.vuelta-flow-nav a:hover{border-color:#a9c1ff;background:#25354b}.vuelta-flow-nav a:focus-visible{outline:3px solid #a9c1ff;outline-offset:3px}.vuelta-flow-nav strong{font-size:14px}.vuelta-flow-nav span{color:#afc8ff}
+[data-embed] .vuelta-flow-nav{display:none}
+@media(max-width:400px){.vuelta-flow-nav a{min-width:0;flex:1}.vuelta-flow-nav a:last-child{margin-left:0}}
+@media(prefers-reduced-motion:no-preference){.launch-demo .application:not([data-vuelta-hidden]),.launch-demo .demo-collection:not([data-vuelta-hidden]){animation:vuelta-appear .18s ease-out}@keyframes vuelta-appear{from{opacity:.75}to{opacity:1}}}
+
+[data-dv-appearance="light"] .vuelta-flow-nav span{color:#1b49a0}[data-dv-appearance="light"] .vuelta-flow-nav a:hover{color:#fff}[data-dv-appearance="light"] .vuelta-flow-nav a:hover span{color:#d8e5ff}
