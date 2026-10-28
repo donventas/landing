@@ -101,4 +101,22 @@ test('purpose-specific PostgreSQL migration and lifecycle',{skip:!modulePath},as
   assert.equal(await rpc('dv_portal_claim',[false]),null);
   assert.deepEqual((await db.query('select id,state,attempts from dv_portal.outbox where is_test order by id')).rows,before);
  });
+ await t.test('candidate retention removes unconfirmed request data and keeps active consent',async()=>{
+  await db.exec(fs.readFileSync(path.join(__dirname,'../supabase/migrations/014_portal_retention_candidate.sql'),'utf8'));
+  const pending=record({email:'old-pending@example.test'}),active=record({email:'active@example.test'});
+  await receive(pending,'retention-one');await receive(active,'retention-two');
+  await db.query("update dv_portal.request set created_at=now()-interval '31 days' where submission_key in ($1::uuid,$2::uuid)",[pending.submission_key,active.submission_key]);
+  await db.query("update dv_portal.subscriber set requested_at=now()-interval '31 days',state='active',confirmed_at=now()-interval '30 days' where email=$1",[active.email]);
+  await db.query("update dv_portal.subscriber set requested_at=now()-interval '31 days' where email=$1",[pending.email]);
+  await db.exec('select public.dv_portal_purge()');
+  assert.equal((await db.query('select count(*)::integer n from dv_portal.request where submission_key=$1::uuid',[pending.submission_key])).rows[0].n,0);
+  assert.equal((await db.query('select count(*)::integer n from dv_portal.subscriber where email=$1',[pending.email])).rows[0].n,0);
+  assert.equal((await db.query('select count(*)::integer n from dv_portal.subscriber where email=$1 and state=$2',[active.email,'active'])).rows[0].n,1);
+  assert.equal((await db.query('select count(*)::integer n from dv_portal.request where submission_key=$1::uuid',[active.submission_key])).rows[0].n,1);
+  const oldContact=record({kind:'contact',email:'old-contact@example.test',message:'Solicitud de prueba antigua',purpose:'help_request',consent:false});
+  await receive(oldContact,'retention-three');
+  await db.query("update dv_portal.request set expires_at=now()-interval '1 day' where submission_key=$1::uuid",[oldContact.submission_key]);
+  await db.exec('select public.dv_portal_purge()');
+  assert.equal((await db.query('select count(*)::integer n from dv_portal.request where submission_key=$1::uuid',[oldContact.submission_key])).rows[0].n,0);
+ });
 });
