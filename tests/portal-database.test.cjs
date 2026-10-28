@@ -8,7 +8,9 @@ test('purpose-specific PostgreSQL migration and lifecycle',{skip:!modulePath},as
  try{await db.exec(fs.readFileSync(path.join(__dirname,'../supabase/migrations/009_portal_intake.sql'),'utf8'));}catch(e){console.error({position:e.position,internalPosition:e.internalPosition,where:e.where,internalQuery:e.internalQuery});throw e;}
  await db.exec(fs.readFileSync(path.join(__dirname,'../supabase/migrations/010_portal_delivery_webhook.sql'),'utf8'));
  await db.exec(fs.readFileSync(path.join(__dirname,'../supabase/migrations/013_portal_claim_mode_isolation.sql'),'utf8'));
- const record=(overrides={})=>({kind:'waitlist',email:'owner@example.test',name:'',message:'',interest:'',submission_key:crypto.randomUUID(),consent:true,purpose:'portal_launch_offers',source:'homepage',source_url:'https://www.donventas.mx/',notice_version:'portal-preview-2026-10-27-v1',is_test:true,...overrides});
+ await db.exec(fs.readFileSync(path.join(__dirname,'../supabase/migrations/015_portal_unsubscribe_candidate.sql'),'utf8'));
+ await db.exec(fs.readFileSync(path.join(__dirname,'../supabase/migrations/016_portal_notice_version_candidate.sql'),'utf8'));
+ const record=(overrides={})=>({kind:'waitlist',email:'owner@example.test',name:'',message:'',interest:'',submission_key:crypto.randomUUID(),consent:true,purpose:'portal_launch_offers',source:'homepage',source_url:'https://www.donventas.mx/',notice_version:overrides.is_test===false?'portal-2026-10-28-v2':'portal-preview-2026-10-27-v1',is_test:true,...overrides});
  const keys=(r,ip='ip')=>({ip:crypto.createHash('sha256').update(ip).digest('hex'),email:crypto.createHash('sha256').update(r.email).digest('hex'),payload:crypto.createHash('sha256').update(JSON.stringify(r)).digest('hex')});
  const rpc=async(name,params,cast)=>{const placeholders=params.map((_,i)=>'$'+(i+1)+(cast?.[i]?'::'+cast[i]:''));return(await db.query('select public.'+name+'('+placeholders.join(',')+') as result',params)).rows[0].result;};
  const receive=(r,ip)=>rpc('dv_portal_receive',[r,keys(r,ip)],['jsonb','jsonb']);
@@ -31,9 +33,13 @@ test('purpose-specific PostgreSQL migration and lifecycle',{skip:!modulePath},as
   assert.equal(await rpc('dv_portal_webhook_delivery',['unknown','delivered',true]),false);
   assert.equal(await rpc('dv_portal_webhook_delivery',['12345678-1234-4234-8234-123456789012','delivered',null]),false);
   assert.deepEqual(await rpc('dv_portal_action',['confirm','a'.repeat(64),true]),{ok:true});
+  assert.deepEqual(await rpc('dv_portal_action',['unsubscribe','b'.repeat(64),false]),{ok:false});
   assert.deepEqual(await rpc('dv_portal_action',['unsubscribe','b'.repeat(64),true]),{ok:true});
   assert.deepEqual(await rpc('dv_portal_action',['unsubscribe','b'.repeat(64),true]),{ok:true});
   assert.deepEqual(await rpc('dv_portal_action',['confirm','a'.repeat(64),true]),{ok:false});
+  assert.deepEqual(await rpc('dv_portal_action',['unsubscribe','b'.repeat(64),true]),{ok:true});
+  const cleared=(await db.query("select confirm_hash,confirm_expires_at from dv_portal.subscriber where is_test and email='owner@example.test'")).rows[0];
+  assert.equal(cleared.confirm_hash,null);assert.equal(cleared.confirm_expires_at,null);
  });
  await t.test('private contact does not create or change subscriber',async()=>{
   const c=record({kind:'contact',email:'help@example.test',name:'QA',message:'Prueba local de solicitud privada.',purpose:'help_request',consent:false});await receive(c,'contact');
@@ -63,6 +69,7 @@ test('purpose-specific PostgreSQL migration and lifecycle',{skip:!modulePath},as
  await t.test('missing purpose or consent rejected in the database',async()=>{
   const missing=record();delete missing.purpose;await assert.rejects(receive(missing,'bad'),/invalid/);
   await assert.rejects(receive(record({consent:false}),'bad'),/invalid/);
+  await assert.rejects(receive(record({is_test:false,notice_version:'portal-preview-2026-10-27-v1'}),'bad-version'),/invalid/);
  });
  await t.test('test claim cannot expire live jobs or an active fifth-attempt lease',async()=>{
   await db.exec("update dv_portal.outbox set attempts=5, state='sending',lease=gen_random_uuid(),lease_until=now()+interval '2 minutes',first_attempt_at=now() where not is_test");
@@ -113,6 +120,12 @@ test('purpose-specific PostgreSQL migration and lifecycle',{skip:!modulePath},as
   assert.equal((await db.query('select count(*)::integer n from dv_portal.subscriber where email=$1',[pending.email])).rows[0].n,0);
   assert.equal((await db.query('select count(*)::integer n from dv_portal.subscriber where email=$1 and state=$2',[active.email,'active'])).rows[0].n,1);
   assert.equal((await db.query('select count(*)::integer n from dv_portal.request where submission_key=$1::uuid',[active.submission_key])).rows[0].n,1);
+  const oldGeneration=record({email:'renewed@example.test'});await receive(oldGeneration,'retention-renewed');
+  await db.query("update dv_portal.request set created_at=now()-interval '31 days' where submission_key=$1::uuid",[oldGeneration.submission_key]);
+  await db.query("update dv_portal.subscriber set state='active',generation=gen_random_uuid(),confirmed_at=now() where email=$1",[oldGeneration.email]);
+  await db.exec('select public.dv_portal_purge()');
+  assert.equal((await db.query('select count(*)::integer n from dv_portal.request where submission_key=$1::uuid',[oldGeneration.submission_key])).rows[0].n,0);
+  assert.equal((await db.query('select count(*)::integer n from dv_portal.subscriber where email=$1 and state=$2',[oldGeneration.email,'active'])).rows[0].n,1);
   const oldContact=record({kind:'contact',email:'old-contact@example.test',message:'Solicitud de prueba antigua',purpose:'help_request',consent:false});
   await receive(oldContact,'retention-three');
   await db.query("update dv_portal.request set expires_at=now()-interval '1 day' where submission_key=$1::uuid",[oldContact.submission_key]);
