@@ -34,3 +34,6 @@
 @media(prefers-reduced-motion:no-preference){.launch-demo .application:not([data-vuelta-hidden]),.launch-demo .demo-collection:not([data-vuelta-hidden]){animation:vuelta-appear .18s ease-out}@keyframes vuelta-appear{from{opacity:.75}to{opacity:1}}}
 
 [data-dv-appearance="light"] .vuelta-flow-nav span{color:#1b49a0}[data-dv-appearance="light"] .vuelta-flow-nav a:hover{color:#fff}[data-dv-appearance="light"] .vuelta-flow-nav a:hover span{color:#d8e5ff}
+
+/* Return to the selector only while a sample is being explored. */
+.vuelta-return{position:fixed;left:max(18px,env(safe-area-inset-left));bottom:max(20px,env(safe-area-inset-bottom));z-index:40;min-height:44px;padding:10px 16px;border:1px solid #a9c1ff;background:#101720;color:#fff;font:600 13px/1.25 "Schibsted Grotesk",sans-serif;box-shadow:0 4px 16px #0004;cursor:pointer}.vuelta-return:hover{background:#25354b}.vuelta-return:focus-visible{outline:3px solid #a9c1ff;outline-offset:3px}.vuelta-return[hidden],[data-embed] .vuelta-return{display:none!important}
