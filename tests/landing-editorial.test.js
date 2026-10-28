@@ -20,7 +20,7 @@ test('keeps the indexable SEO contract and one visible page topic', () => {
   assert.match(html, /<meta name="description" content="[^"]+">/);
   assert.match(html, /<meta name="robots" content="index,follow,/);
   assert.match(html, /<link rel="canonical" href="https:\/\/www\.donventas\.mx\/">/);
-  assert.match(html, /<meta property="og:image" content="https:\/\/www\.donventas\.mx\/og-content\.png\?/);
+  assert.match(html, /<meta property="og:image" content="https:\/\/www\.donventas\.mx\/assets\/portal-launch\/og-home-vuelta27\.jpg"/);
 });
 
 test('publishes valid structured data without early public pricing', () => {
