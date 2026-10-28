@@ -46,3 +46,9 @@
 }
 
 @media (orientation:landscape) and (min-width:681px) and (max-height:600px){.editorial-hero .hero-folio{padding:10px 0}.editorial-hero .hero-frame{padding:12px 4% 24px;align-items:start}.hero-media{align-self:start}.editorial-hero .hero-editorial-copy{align-self:start}}
+
+/* Landscape: headline on the left and film on the right. */
+@media (orientation:landscape) and (min-width:681px){
+ .hero-media{grid-column:2}
+ .editorial-hero .hero-editorial-copy,.hero-copy-support{grid-column:1}
+}
