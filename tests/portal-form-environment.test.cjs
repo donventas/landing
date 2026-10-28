@@ -14,3 +14,12 @@ test('form notices distinguish live, simulation and unavailable endpoints',async
  for(const node of await render({enabled:false,mode:'unavailable'})){assert.equal(node.hidden,false);assert.match(node.textContent,/no está disponible/);}
  for(const node of await render(new Error('network'))){assert.equal(node.hidden,false);assert.match(node.textContent,/no está disponible/);}
 });
+test('direct service inquiry opens from the hero and loads versioned assets',()=>{
+ const html=fs.readFileSync(path.join(__dirname,'../index.html'),'utf8');
+ assert.match(html,/href="#consulta-encargo">Cuéntanos qué necesitas/);
+ assert.match(html,/<details class="launch-help-form" id="consulta-encargo">/);
+ assert.match(source,/hash==='#consulta-encargo'/);
+ assert.match(html,/forms\.js\?v=20261028-encargo1/);
+ assert.match(html,/integration\.css\?v=20261028-encargo1/);
+ assert.match(html,/href="\/diagnostico\.html">Completa el diagnóstico/);
+});

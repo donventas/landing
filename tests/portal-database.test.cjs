@@ -7,6 +7,7 @@ test('purpose-specific PostgreSQL migration and lifecycle',{skip:!modulePath},as
  await db.exec('create role anon; create role authenticated; create role service_role;');
  try{await db.exec(fs.readFileSync(path.join(__dirname,'../supabase/migrations/009_portal_intake.sql'),'utf8'));}catch(e){console.error({position:e.position,internalPosition:e.internalPosition,where:e.where,internalQuery:e.internalQuery});throw e;}
  await db.exec(fs.readFileSync(path.join(__dirname,'../supabase/migrations/010_portal_delivery_webhook.sql'),'utf8'));
+ await db.exec(fs.readFileSync(path.join(__dirname,'../supabase/migrations/013_portal_claim_mode_isolation.sql'),'utf8'));
  const record=(overrides={})=>({kind:'waitlist',email:'owner@example.test',name:'',message:'',interest:'',submission_key:crypto.randomUUID(),consent:true,purpose:'portal_launch_offers',source:'homepage',source_url:'https://www.donventas.mx/',notice_version:'portal-preview-2026-10-27-v1',is_test:true,...overrides});
  const keys=(r,ip='ip')=>({ip:crypto.createHash('sha256').update(ip).digest('hex'),email:crypto.createHash('sha256').update(r.email).digest('hex'),payload:crypto.createHash('sha256').update(JSON.stringify(r)).digest('hex')});
  const rpc=async(name,params,cast)=>{const placeholders=params.map((_,i)=>'$'+(i+1)+(cast?.[i]?'::'+cast[i]:''));return(await db.query('select public.'+name+'('+placeholders.join(',')+') as result',params)).rows[0].result;};
@@ -86,5 +87,18 @@ test('purpose-specific PostgreSQL migration and lifecycle',{skip:!modulePath},as
   await db.query('insert into vault.decrypted_secrets values ($1,$2),($3,$4)',['portal_worker_anon_jwt','test-gateway','portal_worker_test_key','k'.repeat(32)]);
   assert.equal(String((await db.query('select dv_portal.dispatch_test_due() as id')).rows[0].id),'42');
   for(const role of ['anon','authenticated','service_role'])assert.equal((await db.query("select has_function_privilege($1,'dv_portal.dispatch_test_due()','execute') as ok",[role])).rows[0].ok,false);
+  await db.exec(fs.readFileSync(path.join(__dirname,'../supabase/migrations/012_portal_live_dispatch_candidate.sql'),'utf8'));
+  assert.equal((await db.query('select dv_portal.dispatch_live_due() as id')).rows[0].id,null);
+  await db.query('insert into vault.decrypted_secrets values ($1,$2),($3,$4)',['portal_live_anon_jwt','live-gateway','portal_live_worker_key','l'.repeat(32)]);
+  assert.equal(String((await db.query('select dv_portal.dispatch_live_due() as id')).rows[0].id),'42');
+  await db.exec("update dv_portal.outbox set state='cancelled' where not is_test");
+  assert.equal((await db.query('select dv_portal.dispatch_live_due() as id')).rows[0].id,null);
+  for(const role of ['anon','authenticated','service_role'])assert.equal((await db.query("select has_function_privilege($1,'dv_portal.dispatch_live_due()','execute') as ok",[role])).rows[0].ok,false);
+ });
+ await t.test('live claim cannot consume or expire test jobs',async()=>{
+  await db.exec("update dv_portal.outbox set state='pending',next_at=now(),attempts=0 where is_test and id=(select id from dv_portal.outbox where is_test limit 1)");
+  const before=(await db.query('select id,state,attempts from dv_portal.outbox where is_test order by id')).rows;
+  assert.equal(await rpc('dv_portal_claim',[false]),null);
+  assert.deepEqual((await db.query('select id,state,attempts from dv_portal.outbox where is_test order by id')).rows,before);
  });
 });
