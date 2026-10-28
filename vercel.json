@@ -142,7 +142,7 @@
         },
         {
           "key": "Content-Security-Policy",
-          "value": "frame-ancestors 'self'"
+          "value": "frame-ancestors 'self'; form-action 'none'; connect-src 'none'; base-uri 'self'"
         }
       ]
     },
@@ -168,7 +168,7 @@
         },
         {
           "key": "Content-Security-Policy",
-          "value": "frame-ancestors 'self'"
+          "value": "frame-ancestors 'self'; form-action 'none'; connect-src 'none'; base-uri 'self'"
         }
       ]
     },
