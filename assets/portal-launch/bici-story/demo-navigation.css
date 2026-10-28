@@ -1,0 +1,11 @@
+/* A visible entrance to the four demonstrations, without changing the embedded samples. */
+.vuelta-app-nav{background:#101720;border-bottom:1px solid #364051;color:#eef1f6}
+.vuelta-app-nav-inner{width:min(1280px,calc(100% - 80px));margin:auto;padding:14px 0 16px;display:flex;align-items:center;gap:24px}
+.vuelta-app-nav p{margin:0;font-family:"Space Mono",monospace;font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:#afc8ff;white-space:nowrap}
+.vuelta-app-links{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;flex:1}
+.vuelta-app-links a{display:flex;align-items:center;gap:8px;min-height:44px;padding:10px 12px;border:1px solid #536174;color:#eef1f6;text-decoration:none;font-size:13px;font-weight:650;line-height:1.25}
+.vuelta-app-links a span{font-family:"Space Mono",monospace;color:#a9c1ff;font-size:10px}
+.vuelta-app-links a:hover{background:#25354b;border-color:#a9c1ff}.vuelta-app-links a:focus-visible{outline:3px solid #a9c1ff;outline-offset:3px}
+[data-embed] .vuelta-app-nav{display:none}
+@media(max-width:760px){.vuelta-app-nav-inner{width:calc(100% - 36px);display:block;padding:12px 0}.vuelta-app-nav p{margin-bottom:9px}.vuelta-app-links{grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}.vuelta-app-links a{min-height:44px;padding:8px 10px;font-size:13px}}
+@media(max-width:340px){.vuelta-app-links a{font-size:12px}}
