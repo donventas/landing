@@ -13,7 +13,10 @@
 /* The prominent application menu replaces the duplicate desktop header links. */
 .launch-demo .editorial-nav .nav-shell>nav{display:none}
 
-/* Remain at the top of the demonstrations, below the site's header. */
-.vuelta-app-nav{position:sticky;top:var(--vuelta-nav-top,78px);z-index:35}
-.launch-demo #web,.launch-demo #propuesta,.launch-demo #tarjeta,.launch-demo #coleccion,.launch-demo #servicio,.launch-demo #consulta{scroll-margin-top:calc(var(--vuelta-nav-top,78px) + var(--vuelta-nav-height,130px) + 16px)}
-@media(max-height:500px) and (orientation:landscape){.vuelta-app-nav-inner{display:flex;padding:6px 0;gap:12px}.vuelta-app-nav p{display:none}.vuelta-app-links{grid-template-columns:repeat(4,minmax(0,1fr));gap:4px}.vuelta-app-links a{font-size:11px;min-height:40px;padding:5px}}
+/* The menu belongs to each visualizer and scrolls with its content. */
+.vuelta-app-nav{position:static;margin:0 0 16px;border:1px solid #364051}
+.vuelta-app-nav-inner{width:auto;padding:14px 16px}
+.vuelta-app-links a[aria-current]{background:#1b49a0;color:#fff;border-color:#7ca5ff}
+.vuelta-app-links a[aria-current] span{color:#fff}
+.launch-demo #web,.launch-demo #propuesta,.launch-demo #tarjeta,.launch-demo #coleccion,.launch-demo #servicio,.launch-demo #consulta{scroll-margin-top:105px}
+@media(max-width:760px){.vuelta-app-nav-inner{width:auto;padding:12px}.vuelta-app-nav{margin-bottom:12px}}
