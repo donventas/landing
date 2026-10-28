@@ -20,7 +20,7 @@ test('keeps the indexable SEO contract and one visible page topic', () => {
   assert.match(html, /<meta name="description" content="[^"]+">/);
   assert.match(html, /<meta name="robots" content="index,follow,/);
   assert.match(html, /<link rel="canonical" href="https:\/\/www\.donventas\.mx\/">/);
-  assert.match(html, /<meta property="og:image" content="https:\/\/www\.donventas\.mx\/assets\/portal-launch\/og-home-vuelta27\.jpg"/);
+  assert.match(html, /<meta property="og:image" content="https:\/\/www\.donventas\.mx\/variantes\/b\/media\/social-landing-b06\.jpg"/);
 });
 
 test('publishes valid structured data without early public pricing', () => {
@@ -82,7 +82,7 @@ test('new hero states the offer and labels the fictional case', () => {
 test('uses the launch stylesheet and includes the example image with dimensions', () => {
   assert.match(html, /href="\/assets\/portal-launch\/landing\.css"/);
   assert.doesNotMatch(html, /href="styles\.css"/);
-  assert.match(html, /taller-p04\.png" width="1942" height="809"/);
+  assert.match(html, /taller\.webp" width="1942" height="809"/);
 });
 
 test('exposes accessible diagnostic progress semantics', () => {
