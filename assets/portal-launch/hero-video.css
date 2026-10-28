@@ -54,3 +54,9 @@
 }
 
 .film-reading .film-transcript-help{margin:6px 0 8px;color:#c2cad5;line-height:1.5}.film-reading details summary{padding:6px 0}.film-reading .film-transcript{max-height:16rem;overflow:auto;border-left:1px solid #536071;padding:8px 12px;color:#eef1f6;line-height:1.6;font-size:14px}.film-reading .film-transcript p{margin:0 0 6px}
+
+/* Secondary action and invitation share the site's visual language. */
+.hero-actions .hero-portal-link{display:inline-flex;align-items:center;justify-content:center;gap:16px;min-height:52px;padding:14px 20px;border:1px solid #8293ad;color:#edf3ff;text-decoration:none;font-size:14px;font-weight:650;transition:background-color .2s,border-color .2s}
+.hero-actions .hero-portal-link:hover{background:#25354b;border-color:#b8ccf7}.hero-actions .hero-portal-link:focus-visible,.portal-waitlist-link:focus-visible{outline:2px solid #a9c3ff;outline-offset:3px}
+.portal-waitlist-link{display:inline-flex;gap:14px;align-items:center;min-height:48px;margin-top:22px;padding:12px 18px;border:1px solid #8293ad;color:inherit;text-decoration:none;font-weight:650}.portal-waitlist-link:hover{background:#25354b;color:#fff}
+.waitlist-more{margin-top:20px;border-top:1px solid #bac1ca;border-bottom:1px solid #bac1ca}.waitlist-more summary{cursor:pointer;font-size:14px;color:#1b49a0}.waitlist-more summary span{font-size:12px;font-weight:400;color:#545f70}.waitlist-more select{margin:0 0 16px}.waitlist-more summary:focus-visible{outline:2px solid #1b49a0;outline-offset:2px}
