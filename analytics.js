@@ -23,11 +23,10 @@
   var steps = 'moment serviceNeeded workingMode currentNeed existingAssets budgetNote outcome salesProblem consistencyProblem searchProblem otherProblem nextAction attempted proof businessAudience timing budgetBand desired clarityProblem systemProblem launchProblem repositionProblem brandOtherProblem applications users autonomy difference contact'.split(' ');
   // Reading order (includes the hero); independent of the decorative folio numbering.
   var landingSections = [
-    { key: 'hero', heading: 'hero-title' }, { key: 'problema', heading: 'friction-title' },
-    { key: 'metodo', heading: 'method-title' }, { key: 'servicios', heading: 'services-title' },
-    { key: 'casos', heading: 'proof-title' }, { key: 'ideas', heading: 'ideas-title' },
-    { key: 'quien', heading: 'founder-title' }, { key: 'preguntas', heading: 'faq-title' },
-    { key: 'contacto', heading: 'contact-title' }
+    { key: 'hero', heading: 'hero-title' }, { key: 'problema', heading: 'moments-title' },
+    { key: 'casos', heading: 'showcase-title' }, { key: 'metodo', heading: 'work-title' },
+    { key: 'portal', heading: 'portal-title' }, { key: 'servicios', heading: 'help-title' },
+    { key: 'lista', heading: 'waitlist-title' }, { key: 'preguntas', heading: 'questions-title' }
   ];
   function landingOrder(key) { return landingSections.findIndex(function (item) { return item.key === key; }) + 1; }
   function member(value, list) { return list.indexOf(value) >= 0 ? value : null; }
@@ -79,8 +78,11 @@
     } else if (['article_gift_received','article_gift_download_clicked'].indexOf(name) >= 0) {
       // No receipt ID, email, answers, file URL or free text.
     } else if (name === 'section_viewed') {
-      if (!member(data.section, ['hero', 'problema', 'metodo', 'servicios', 'casos', 'ideas', 'quien', 'inversion', 'preguntas', 'contacto'])) return null;
+      if (!member(data.section, ['hero', 'problema', 'metodo', 'servicios', 'casos', 'ideas', 'quien', 'inversion', 'preguntas', 'contacto', 'portal', 'lista'])) return null;
       output.section = data.section;
+    } else if (name === 'portal_request_received') {
+      if (!member(data.form, ['waitlist', 'contact'])) return null;
+      output.form = data.form;
     } else if (name === 'reading_progress') {
       if (!member(data.percent, [25, 50, 75, 90])) return null;
       output.percent = data.percent;

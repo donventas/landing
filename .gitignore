@@ -13,3 +13,5 @@ tmp/pdfs/
 output/pdf/
 __pycache__/
 *.pyc
+.vercel
+.env*

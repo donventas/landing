@@ -1,0 +1,42 @@
+/* Candidato local: interacción editorial, sin animar fotografías. */
+.review-language{position:relative;font-size:12px;z-index:8}.review-language summary{min-height:44px;padding:10px 12px;border:1px solid var(--line);list-style:none;cursor:pointer}.review-language summary::-webkit-details-marker{display:none}.review-language>div{position:absolute;right:0;top:calc(100% + 8px);width:min(340px,calc(100vw - 36px));padding:20px;background:var(--panel);color:var(--ink);border:1px solid var(--line);box-shadow:0 16px 32px #0004}.review-language>div p{font-size:13px;line-height:1.5;margin-bottom:12px}.review-language select{display:block;width:100%;margin:8px 0 12px;min-height:44px}
+.moment-grid article,.moment-grid article+article{padding:30px 22px 26px;transition:background-color .28s ease,box-shadow .28s ease,transform .28s ease}
+.moment-grid article .folio,.moment-grid article h3{transition:color .28s ease,transform .28s ease}
+@media(hover:hover) and (pointer:fine){.moment-grid article:hover{background:rgba(59,116,242,.09);box-shadow:inset 0 3px #1b49a0;transform:translateY(-3px)}.moment-grid article:hover h3,.moment-grid article:hover .folio{color:#1b49a0}}
+.moment-grid article.is-current{background:rgba(59,116,242,.09);box-shadow:inset 3px 0 #1b49a0}
+.work-sequence li{position:relative;isolation:isolate;padding:24px 18px;transition:background-color .28s ease,box-shadow .28s ease,transform .28s ease,border-color .28s ease}
+.work-sequence li .folio,.work-sequence li h3{transition:color .28s ease,transform .28s ease}
+@media(hover:hover) and (pointer:fine){.work-sequence li:hover,.editorial-help .two-paths article:hover,.portal-foundations>div:hover{background:rgba(59,116,242,.09);box-shadow:inset 3px 0 #1b49a0;transform:translateX(4px)}.work-sequence li:hover .folio{transform:translateX(3px)}}
+.work-sequence li.is-current{background:rgba(59,116,242,.09);box-shadow:inset 3px 0 #1b49a0}
+.portal-foundations>div,.editorial-help .two-paths article{transition:background-color .28s ease,box-shadow .28s ease,transform .28s ease}
+.portal-foundations>div,.portal-foundations>div+div{padding:28px 24px 32px}
+.editorial-help .two-paths article,.editorial-help .two-paths article+article{padding:40px 32px}
+@media(max-width:680px){.portal-foundations>div,.portal-foundations>div+div{padding:22px 20px}.editorial-help .two-paths article,.editorial-help .two-paths article+article{padding:28px 20px}}
+.demo-toolbar button,.hero-actions a,.film-tools button,.film-tools select{transition:background-color .2s ease,border-color .2s ease,transform .2s ease,box-shadow .2s ease}
+:is(a,button,select,summary):focus-visible{outline:3px solid #6e97f6;outline-offset:4px}
+.film-stage{position:relative;overflow:hidden}
+.film-screen{position:relative;width:100%;aspect-ratio:16/9;background:#0e1117;overflow:hidden}
+.film-screen video{width:100%;height:100%;aspect-ratio:auto}
+.film-captions:not([hidden]){position:absolute;z-index:2;left:50%;bottom:11%;transform:translateX(-50%);width:max-content;max-width:88%;min-height:0;padding:.35em .7em;border-radius:4px;background:rgba(0,0,0,.78);pointer-events:none;text-shadow:0 1px 2px #000}
+.film-captions[hidden],.film-tools[hidden]{display:none!important}
+.film-captions:lang(ar){direction:rtl;unicode-bidi:plaintext}
+.film-tools{border-top:1px solid #495465;background:#151c28;gap:14px;padding:14px 18px}
+.film-tools label{font-weight:600}.film-tools select,.film-tools button{border-radius:2px}.film-tools select:hover,.film-tools button:hover{border-color:#8aacff;background:#253856}
+.film-stage:fullscreen{display:flex;flex-direction:column;justify-content:center;align-items:center;width:100%;height:100%;background:#080b10}
+.film-stage:fullscreen .film-screen{width:min(100vw,calc((100dvh - 76px)*16/9));flex:none}
+.film-stage:fullscreen video{max-height:none;flex:none}
+.film-stage:fullscreen .film-tools{width:min(100vw,calc((100dvh - 76px)*16/9));box-sizing:border-box}
+.film-stage:fullscreen .film-captions{min-height:0}
+@media(max-width:680px){.moment-grid article,.moment-grid article+article{padding:26px 16px}.work-sequence li{padding:22px 14px}.film-captions:not([hidden]){font-size:clamp(12px,3.5vw,17px);bottom:30%;padding:.3em .55em}.film-tools{padding:12px}}
+@media(prefers-reduced-motion:reduce){.moment-grid article,.moment-grid article .folio,.moment-grid article h3,.work-sequence li,.work-sequence li .folio,.work-sequence li h3,.portal-foundations>div,.editorial-help .two-paths article,.demo-toolbar button,.hero-actions a,.film-tools button,.film-tools select{transition:none!important;transform:none!important}}
+[data-motion=reduce] .moment-grid article,[data-motion=reduce] .moment-grid article .folio,[data-motion=reduce] .moment-grid article h3,[data-motion=reduce] .work-sequence li,[data-motion=reduce] .work-sequence li .folio,[data-motion=reduce] .portal-foundations>div,[data-motion=reduce] .editorial-help .two-paths article{transition:none!important;transform:none!important}
+/* On portrait screens, lead with the photograph, then the editable message. */
+@media(max-width:680px){
+ .hero-panorama{position:relative;inset:auto;height:clamp(220px,68vw,320px);z-index:auto;overflow:hidden}
+ .hero-panorama img{object-position:72% center}
+ .hero-panorama::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,#0e1117 0%,transparent 45%);pointer-events:none}
+ .hero-frame::before{display:none}
+ .hero-editorial-copy{padding:24px 7% 30px;width:100%}
+ .hero-case-label{top:calc(clamp(220px,68vw,320px) - 52px);bottom:auto;left:7%;right:7%;grid-template-columns:1fr 1fr;align-items:end}
+ .hero-case-label img{width:115px}.hero-case-label>span{font-size:8px}
+}

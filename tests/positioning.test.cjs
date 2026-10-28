@@ -69,7 +69,10 @@ test('all affected pages preserve indexability and production canonicals, withou
     assert.match(html, /name="robots" content="index,follow/);
     assert.match(html, /rel="canonical" href="https:\/\/www\.donventas\.mx\//);
     assert.equal((html.match(/<h1\b/g) || []).length, 1);
-    assert.doesNotMatch(html, /hreflang=/);
+    // Language annotations on transcript links are valid; only alternate page
+    // declarations would imply separate indexed locale versions.
+    assert.doesNotMatch(html, /<link\b[^>]*\brel="alternate"[^>]*\bhreflang=/i);
+    assert.doesNotMatch(html, /<link\b[^>]*\bhreflang=[^>]*\brel="alternate"/i);
   }
   assert.match(read('robots.txt'), /User-agent: OAI-SearchBot\s+Allow: \//);
 });

@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600" preserveAspectRatio="none" fill="none">
+  <title>Carriles ambientales · recorrido entre columnas</title>
+  <defs><path id="trayecto" d="M-30 568H510Q592 568 592 490V90Q592 16 666 16H1090Q1184 16 1184 100V250 M-30 576H510Q600 576 600 490V90Q600 24 666 24H1090Q1176 24 1176 100V250 M-30 584H510Q608 584 608 490V90Q608 32 666 32H1090Q1168 32 1168 100V250"/></defs>
+  <use href="#trayecto" stroke="#C5BEAA" stroke-opacity=".55" stroke-width="4" transform="translate(1 2)"/>
+  <use href="#trayecto" stroke="#FFFCF1" stroke-width="2.5" transform="translate(-1 -1)"/>
+  <use href="#trayecto" stroke="#E1DCCB" stroke-width="1.5"/>
+</svg>

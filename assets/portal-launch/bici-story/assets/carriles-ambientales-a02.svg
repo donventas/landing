@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600" fill="none">
+  <title>Carriles ambientales Vuelta 27 · estudio A02</title>
+  <defs>
+    <linearGradient id="presencia" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="white" stop-opacity="0"/><stop offset=".58" stop-color="white" stop-opacity="0"/><stop offset="1" stop-color="white"/></linearGradient>
+    <mask id="borde"><path fill="url(#presencia)" d="M0 0h1200v600H0z"/></mask>
+    <path id="carriles" d="M680 -100V10q0 130 130 130h130q130 0 130 130v430 M710 -100V10q0 100 100 100h130q160 0 160 160v430 M740 -100V10q0 70 70 70h130q190 0 190 190v430 M770 -100V10q0 40 40 40h130q220 0 220 220v430 M800 -100V10q0 10 10 10h130q250 0 250 250v430"/>
+  </defs>
+  <g mask="url(#borde)" stroke-linecap="round">
+    <use href="#carriles" stroke="#061D17" stroke-opacity=".55" stroke-width="5" transform="translate(0 2)"/>
+    <use href="#carriles" stroke="#426658" stroke-opacity=".8" stroke-width="1.7" transform="translate(0 -1)"/>
+    <use href="#carriles" stroke="#1B4237" stroke-width="2"/>
+  </g>
+</svg>

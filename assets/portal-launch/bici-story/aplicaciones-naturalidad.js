@@ -1,0 +1,1 @@
+(() => { function openTarget(){if(location.hash==='#consulta')document.getElementById('consulta').open=true;} addEventListener('hashchange',openTarget);openTarget();})();

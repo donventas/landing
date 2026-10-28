@@ -1,0 +1,37 @@
+/* A02: brand-derived open lanes; decorative, never a replacement mark. */
+.ambient-field{position:relative;isolation:isolate;overflow:hidden}
+.ambient-field::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:url('assets/carriles-ambientales-a02.svg') right center/auto 100% no-repeat;opacity:.72}
+.ambient-field>*{position:relative}
+.proposal{grid-template-columns:1fr}
+.proposal-cover{padding:0;display:block;overflow:hidden}
+.proposal-cover-copy{padding:38px 48px 34px;display:grid;grid-template-columns:1.25fr 1fr;column-gap:50px;align-items:end;background:var(--forest);color:var(--bone)}
+.proposal-cover-copy>img{width:320px;margin:0 0 32px;grid-column:1/-1}
+.proposal-cover-copy .micro{color:var(--lime);margin:0 0 18px}
+.proposal-cover-copy h3{font-size:clamp(40px,4.9vw,64px);margin:0;font-weight:550}
+.proposal-cover-copy .cover-support{max-width:330px;margin:0;font-size:18px;padding-bottom:5px}
+.ride-panorama{margin:0;background:var(--forest)}
+.ride-panorama>img{display:block;width:100%;height:auto;aspect-ratio:1942/809;object-fit:contain;margin:0}
+.ride-panorama figcaption{font-size:10px;color:var(--bone);padding:10px 20px;letter-spacing:.03em;line-height:1.5}
+.proposal-body{display:grid;grid-template-columns:1fr 1fr;gap:60px;padding:42px 48px}
+.proposal-steps{margin:0;border:0;padding:0}
+.proposal-close{position:relative;isolation:isolate;overflow:hidden}
+.proposal-close::before{content:"";position:absolute;inset:0;z-index:-1;background:url('assets/carriles-ambientales-a02.svg') right center/auto 100% no-repeat;opacity:.12}
+.card-family{align-items:stretch}
+.service-card.front{padding:0;min-height:0;display:flex;justify-content:flex-start}
+.card-front-copy{padding:34px 34px 30px;background:var(--forest);color:var(--bone);flex:1}
+.card-front-copy>img{width:280px;margin-bottom:34px}
+.card-front-copy .micro{margin:0;color:var(--lime)}
+.card-front-copy h3{margin:16px 0 24px;font-size:clamp(38px,4.1vw,54px)}
+.card-front-copy>p:last-child{font-size:15px;max-width:30ch;line-height:1.6;margin:0}
+.card-family .ride-panorama figcaption{font-size:9px;padding:8px 14px}
+.video-comparison{border-block:1px solid var(--line);padding:32px 0;margin:20px 0 36px}
+.video-comparison h3{font-size:28px;margin-bottom:18px}
+.video-comparison>p{max-width:80ch;color:var(--secondary)}
+.comparison-pair{display:grid;grid-template-columns:1fr 1fr;gap:32px;margin:26px 0}
+.comparison-pair article{border-left:2px solid var(--link);padding-left:22px}
+.comparison-pair h4{font-size:22px;margin-bottom:12px}
+.comparison-pair p{font-size:16px;color:var(--secondary)}
+.comparison-pair .micro{font-size:11px;color:var(--link);margin-bottom:14px}
+@media(max-width:1000px){.proposal-cover-copy{padding:32px;gap:28px}.proposal-body{padding:32px;gap:32px}.card-front-copy{padding:28px}.card-front-copy>img{width:260px}}
+@media(max-width:680px){.proposal-cover-copy{display:block;padding:28px 20px}.proposal-cover-copy>img{width:260px;max-width:100%;margin-bottom:30px}.proposal-cover-copy h3{font-size:42px}.proposal-cover-copy .cover-support{font-size:16px;margin-top:22px;max-width:32ch}.proposal-body{display:block;padding:28px 20px}.proposal-steps{border-top:1px solid #9ba68f;margin-top:28px;padding-top:28px}.card-front-copy{padding:28px 20px}.card-front-copy h3{font-size:44px}.card-front-copy>img{width:240px;max-width:100%}.ambient-field::before{opacity:.42;background-size:auto 85%}.comparison-pair{grid-template-columns:1fr;gap:26px}.ride-panorama figcaption{font-size:9px;padding:8px 14px}}
+@media print{.ambient-field,.ride-panorama{-webkit-print-color-adjust:exact;print-color-adjust:exact}.video-comparison{break-inside:avoid}}
