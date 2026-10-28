@@ -9,21 +9,24 @@
   const result = document.getElementById('bike-result');
   const error = document.getElementById('need-error');
   const status = document.getElementById('bike-status');
+  const bikeSteps=[...form.querySelectorAll('[data-bike-step]')],progress=form.querySelector('[data-bike-progress]'),next=form.querySelector('[data-bike-next]'),back=form.querySelector('[data-bike-back]'),example=document.getElementById('bike-example');
+  const examples={'Mantenimiento general':'Por ejemplo: hace tiempo que no revisan la bicicleta.','Frenos o cambios':'Por ejemplo: el freno delantero hace ruido al bajar.','Preparar una salida':'Por ejemplo: quieres revisar la bici antes de una rodada.','Necesito orientación':'Por ejemplo: no sabes qué conviene revisar primero.'};
+  function show(index,focus=true){bikeSteps.forEach((step,i)=>step.hidden=i!==index);progress.textContent=index?'02 / 02 · TU BICICLETA':'01 / 02 · LO QUE NECESITAS';if(focus)bikeSteps[index].querySelector('legend,h4').focus();}
+  function update(){const selected=[...form.querySelectorAll('[name=need]:checked')];if(selected.length){error.hidden=true;form.querySelectorAll('[name=need]').forEach(e=>{e.removeAttribute('aria-invalid');e.removeAttribute('aria-describedby');});}example.textContent=selected.length===1?examples[selected[0].value]:'Por ejemplo: cuéntanos qué te gustaría revisar.';}
+  function valid(){if(form.querySelector('[name=need]:checked'))return true;error.hidden=false;form.querySelectorAll('[name=need]').forEach(e=>{e.setAttribute('aria-invalid','true');e.setAttribute('aria-describedby','need-error');});form.querySelector('[name=need]').focus();return false;}
+  progress.hidden=false;next.hidden=false;back.hidden=false;show(0,false);form.addEventListener('change',update);
+  next.addEventListener('click',()=>{if(valid())show(1);});back.addEventListener('click',()=>show(0));
   form.addEventListener('submit', event => {
-    event.preventDefault();
-    const data = new FormData(form);
-    if (!data.get('need')) { error.hidden=false; form.querySelectorAll('[name=need]').forEach(e=>{e.setAttribute('aria-invalid','true');e.setAttribute('aria-describedby','need-error');}); form.querySelector('[name=need]').focus(); return; }
-    error.hidden=true;
-    const summary=document.getElementById('bike-summary'); summary.replaceChildren();
-    for(const [label,value] of [['Necesidad',data.get('need')],['Bicicleta',data.get('bike')],['Fecha deseada · sin confirmar',data.get('when')],['Contexto',String(data.get('notes')||'Sin observaciones adicionales').trim()||'Sin observaciones adicionales']]){
+    event.preventDefault();if(!valid()){show(0,false);form.querySelector('[name=need]').focus();return;}
+    const data=new FormData(form),summary=document.getElementById('bike-summary');summary.replaceChildren();
+    for(const [label,value] of [['Necesidad',data.getAll('need').join(', ')],['Bicicleta',data.get('bike')],['Fecha deseada · sin confirmar',data.get('when')],['Contexto',String(data.get('notes')||'Sin observaciones adicionales').trim()||'Sin observaciones adicionales']]){
       const row=document.createElement('div'),dt=document.createElement('dt'),dd=document.createElement('dd');dt.textContent=label;dd.textContent=value;row.append(dt,dd);summary.append(row);
     }
     form.hidden=true;result.hidden=false;enter(result);document.getElementById('bike-result-title').focus();status.textContent='Resumen preparado solo en esta página. No se ha enviado ni guardado.';
   });
-  form.addEventListener('change',()=>{if(form.querySelector('[name=need]:checked')){error.hidden=true;form.querySelectorAll('[name=need]').forEach(e=>{e.removeAttribute('aria-invalid');e.removeAttribute('aria-describedby');});}});
-  document.getElementById('edit-bike').addEventListener('click',()=>{result.hidden=true;form.hidden=false;enter(form);(form.querySelector('[name=need]:checked')||form.querySelector('[name=need]')).focus();status.textContent='Puedes editar tus respuestas. Se conservan mientras esta página permanece abierta.';});
-  document.getElementById('reset-bike').addEventListener('click',()=>{form.reset();result.hidden=true;form.hidden=false;document.getElementById('bike-summary').replaceChildren();form.querySelector('[name=need]').focus();status.textContent='Ejemplo borrado.';});
-  document.querySelector('.shop-hero .v27-button').addEventListener('click',()=>{document.getElementById('consulta').open=true;requestAnimationFrame(()=>form.hidden?document.getElementById('bike-result-title').focus():form.querySelector('[name=need]').focus());});
+  document.getElementById('edit-bike').addEventListener('click',()=>{result.hidden=true;form.hidden=false;show(0);enter(form);status.textContent='Puedes editar tus respuestas. Se conservan mientras esta página permanece abierta.';});
+  document.getElementById('reset-bike').addEventListener('click',()=>{form.reset();result.hidden=true;form.hidden=false;document.getElementById('bike-summary').replaceChildren();error.hidden=true;update();show(0);status.textContent='Ejemplo borrado.';});
+  document.querySelector('.shop-hero .v27-button').addEventListener('click',()=>{document.getElementById('consulta').open=true;requestAnimationFrame(()=>form.hidden?document.getElementById('bike-result-title').focus():(bikeSteps.find(s=>!s.hidden).querySelector('legend,h4')).focus());});
   // Decorative track follows measured reading regions, never the other way round.
   const body=document.querySelector('.proposal-body'),steps=document.querySelector('.proposal-steps');
   const ns='http://www.w3.org/2000/svg',svg=document.createElementNS(ns,'svg');svg.classList.add('proposal-route');svg.setAttribute('aria-hidden','true');body.prepend(svg);
