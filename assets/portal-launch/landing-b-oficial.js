@@ -2,6 +2,18 @@
  'use strict';
  const root=document.documentElement;
  const frame=document.getElementById('case-frame'),frames={web:frame},preference=matchMedia('(prefers-reduced-motion:reduce)');
+ // Google's translated page and its translated sample must share the proxy origin.
+ const translatedHost='www-donventas-mx.translate.goog';
+ const allowedLanguages=new Set(['en','fr','pt','de','it','bg','ja','zh-CN','ar']);
+ const params=new URLSearchParams(location.search);
+ const translated=location.hostname===translatedHost && params.get('_x_tr_sl')==='es' && allowedLanguages.has(params.get('_x_tr_tl'));
+ function demoURL(key,embed=true){
+   const url=new URL('/portafolio/vuelta-27/',location.origin);
+   if(embed)url.searchParams.set('embed',key);else url.hash=key;
+   if(translated){url.searchParams.set('_x_tr_sl','es');url.searchParams.set('_x_tr_tl',params.get('_x_tr_tl'));url.searchParams.set('_x_tr_hl','es');}
+   return url.href;
+ }
+ if(translated)frame.src=demoURL('web');
  // Measure the card content, not the iframe viewport: it must shrink as well as grow.
  let cardObserver;
  function fitCard(){const f=frames.tarjeta;if(!f||f.hidden)return;const cards=f.contentDocument?.querySelector('.card-family');if(!cards)return;const height=Math.ceil(cards.getBoundingClientRect().height);if(height>0&&height<10000)f.style.height=`${height}px`;}
@@ -23,11 +35,11 @@
    const key=button.dataset.view;
    if(!Object.hasOwn(descriptions,key))return;
    document.querySelectorAll('[data-view]').forEach(b=>b.setAttribute('aria-pressed',String(b===button)));
-   if(!frames[key]){const f=document.createElement('iframe');f.src=`/portafolio/vuelta-27/?embed=${key}`;f.title=`Demo de ${key} de Vuelta 27, marca ficticia`;f.id=`case-frame-${key}`;f.addEventListener('load',motion);if(key==='tarjeta')f.addEventListener('load',watchCard);frames[key]=f;frame.parentElement.append(f);}
+   if(!frames[key]){const f=document.createElement('iframe');f.src=demoURL(key);f.title=`Demo de ${key} de Vuelta 27, marca ficticia`;f.id=`case-frame-${key}`;f.addEventListener('load',motion);if(key==='tarjeta')f.addEventListener('load',watchCard);frames[key]=f;frame.parentElement.append(f);}
    Object.entries(frames).forEach(([id,f])=>{f.hidden=id!==key;});
    document.querySelector('.window-label span:last-child').textContent=key==='tarjeta'?'FRENTE Y REVERSO · VISTA COMPLETA':'DESPLÁZATE DENTRO PARA EXPLORAR ↓';
    if(key==='tarjeta')requestAnimationFrame(fitCard);
-   document.getElementById('view-description').textContent=descriptions[key];document.getElementById('open-demo').href=`/portafolio/vuelta-27/#${key}`;
+   document.getElementById('view-description').textContent=descriptions[key];document.getElementById('open-demo').href=demoURL(key,false);
  }));
 
 })();
