@@ -23,16 +23,14 @@ la capacidad de ejecución del negocio.
 
 ## Primer paso
 
-La llamada a la acción principal es **Solicita tu diagnóstico**. El formulario pregunta
-primero por el momento, el servicio y la forma de trabajo que la persona busca. Recoge lo que
-quiere cambiar y lo que ya funciona. Muestra una orientación preliminar basada en esas elecciones,
-no una cotización ni una evaluación automática. El presupuesto y la moneda son opcionales. Arturo Villagomez revisa
-personalmente cada solicitud antes de contactar por correo o WhatsApp y proponer el siguiente
-paso. El sitio no promete un PDF automático ni un plazo fijo de entrega.
+La página principal ofrece dos caminos: **Cuéntanos qué necesitas** para conversar sobre un encargo, y **Unirme a la waitlist** para recibir novedades del Portal en desarrollo. La lista requiere confirmar el correo y no implica una compra ni garantiza acceso. Los servicios expertos se acuerdan por separado.
+
+El [diagnóstico](https://www.donventas.mx/diagnostico.html) sigue disponible para orientar una solicitud más detallada. Su orientación preliminar no es una cotización; Arturo revisa cada solicitud antes de proponer el siguiente paso.
 
 ## Enlaces canónicos
 
 - [Sitio principal](https://www.donventas.mx/): propósito, oferta, casos, método y formulario.
+- [Vuelta 27](https://www.donventas.mx/portafolio/vuelta-27/): estudio conceptual de una marca ficticia, con ejemplos de web, propuesta, tarjeta y aplicaciones. No es un cliente ni un negocio en operación.
 - [Sistema de marca](https://www.donventas.mx/branding.html): ruta para crear o actualizar una marca
   clara y utilizable con equipo propio, otros colaboradores o Don Ventas; por proyecto o con acompañamiento acordado.
 - [Diagnóstico](https://www.donventas.mx/diagnostico.html): formulario compartido para recomendar
