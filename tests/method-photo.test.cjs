@@ -14,15 +14,11 @@ const assets = [
 ];
 const assetPath = width => `assets/editorial/criterio-metodo-01-06-v2-${width}.webp`;
 
-test('method photograph consumes the exact supplied WebPs and keeps responsive attributes', () => {
+test('approved method assets remain intact after the homepage changes', () => {
   const html = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
-  const img = html.match(/<img[^>]+criterio-metodo-01-06-v2[^>]+>/)[0];
-  assert.match(img, /src="assets\/editorial\/criterio-metodo-01-06-v2-960.webp"/);
-  assert.match(img, /width="960" height="720" loading="lazy" decoding="async"/);
-  assert.ok(img.includes('sizes="(max-width: 620px) calc(100vw - 32px), (max-width: 820px) calc(100vw - 40px), 56vw"'));
+  assert.match(html, /tarjeta-foto-p05\.png/);
   for (const [width, height, size, hash] of assets) {
     assert.equal(width / height, 4 / 3);
-    assert.ok(img.includes(`${assetPath(width)} ${width}w`));
     const bytes = fs.readFileSync(path.join(root, assetPath(width)));
     assert.equal(bytes.length, size);
     assert.equal(bytes.toString('ascii', 0, 4), 'RIFF');

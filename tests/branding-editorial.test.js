@@ -74,7 +74,7 @@ test('branding references, anchors, metadata images and srcsets resolve', () => 
 
 test('branding is discoverable and click measurement is bounded to non-personal enums', () => {
   const home = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
-  assert.match(home, /href="branding.html">Marca<\/a>/);
+  assert.match(home, /href="\/branding.html">Marca<\/a>/);
   assert.match(fs.readFileSync(path.join(root,'blog','por-que-nacio-don-ventas.html'),'utf8'), /href="\/branding.html" data-blog-entry="sistema-de-marca"/);
   const experience = fs.readFileSync(path.join(root,'blog','contenido-que-atrae-clientes.html'),'utf8');
   // Services remain available in navigation; the ending now has one contextual CTA.

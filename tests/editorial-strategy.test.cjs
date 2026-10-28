@@ -31,12 +31,11 @@ test('an in-flight legacy submission retains its choice and key even with a new 
  assert.match(read('diagnostico-v2.js'),/id:'autonomia',label:'Preparar recursos para mi equipo u otros proveedores'/);
 });
 test('native mobile menus retain service, proof, reading and diagnostic paths',()=>{
- assert.match(read('index.html'),/class="hero-lede">[^\n]*entender, encontrar y elegir/);
- for(const file of ['index.html','branding.html']){
-  const menu=read(file).match(/<details class="mobile-explore">([\s\S]*?)<\/details>/)[1];
-  for(const label of ['Servicios','Cómo trabajamos','Ideas','Solicita tu diagnóstico'])assert.ok(menu.includes(label));
- }
- assert.match(read('index.html'),/href="#trabajo-web"/);assert.match(read('index.html'),/id="trabajo-web"/);
+ const menu=read('index.html').match(/<details class="mobile-explore">([\s\S]*?)<\/details>/)[1];
+ for(const label of ['Verlo en acción','Cómo te ayudamos','El Portal','Marca','Ideas'])assert.ok(menu.includes(label));
+ assert.match(read('index.html'),/href="\/diagnostico.html"/);
+ const brandMenu=read('branding.html').match(/<details class="mobile-explore">([\s\S]*?)<\/details>/)[1];
+ for(const label of ['Servicios','Cómo trabajamos','Ideas','Solicita tu diagnóstico'])assert.ok(brandMenu.includes(label));
  assert.match(read('branding.html'),/href="\/blog\/glosario.html#sistema-de-marca"/);
  assert.match(read('blog/glosario.html'),/id="sistema-de-marca"/);
 });

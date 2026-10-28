@@ -18,13 +18,13 @@ test('founder and new diagnostic steps are measurable without answers or arbitra
  assert.deepEqual(analytics.cleanEvent('diagnostic_step_completed',{route:'evolucion',step:'moment',answer:'secret',email:'secret'}),{route:'evolucion',step:'moment'});
  assert.equal(analytics.cleanEvent('diagnostic_step_completed',{route:'evolucion',step:'secret'}),null);
 });
-test('four services, six situations and continuity use existing canonical routes',()=>{
+test('service offering, demonstration and continuity have clear routes and limits',()=>{
  const home=read('index.html');
- for(const id of ['estrategia','identidad','contenido-servicio','web','acompanamiento'])assert.match(home,new RegExp('id="'+id+'"'));
- assert.match(home,/No son etapas obligatorias/);assert.match(home,/No es atención ilimitada/);
+ for(const id of ['web','acompanamiento','ejemplo','ayuda'])assert.match(home,new RegExp('id="'+id+'"'));
+ assert.match(home,/No son caminos excluyentes/);assert.match(home,/no implica equipo propio ni servicios ilimitados/);
  const data=JSON.parse(home.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1])['@graph'];
- assert.equal(data.find(x=>x['@type']==='Service').hasOfferCatalog.itemListElement.length,4);
- assert.equal((read('sitemap.xml').match(/<loc>/g)||[]).length,19);
+ assert.match(data.find(x=>x['@type']==='Service').name,/Estrategia, identidad, contenido y sitios web/);
+ assert.ok(read('sitemap.xml').includes('https://www.donventas.mx/portafolio/vuelta-27/'));
  assert.ok(read('sitemap.xml').includes('https://www.donventas.mx/blog/como-aparecer-en-google.html'));
  assert.ok(read('sitemap.xml').includes('https://www.donventas.mx/blog/diseno-editorial.html'));
  assert.ok(read('sitemap.xml').includes('https://www.donventas.mx/blog/logotipos-mitos.html'));

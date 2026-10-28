@@ -1,0 +1,33 @@
+/* A06 — one editorial opening; DV owns the message, Vuelta 27 is the example. */
+.editorial-hero{padding-top:24px}
+.hero-folio{display:flex;justify-content:space-between;gap:24px;border-top:1px solid var(--line);padding:22px 0}
+.hero-folio .eyebrow{margin:0;font-size:10px}
+.hero-folio>span{font:10px "Space Mono",monospace;color:var(--muted);white-space:nowrap}
+.hero-frame{position:relative;isolation:isolate;overflow:hidden;background:#0e1117;color:#eef1f6;min-height:660px}
+.hero-panorama{position:absolute;inset:0;z-index:-3}
+.hero-panorama img{height:100%;width:100%;object-fit:cover;object-position:72% center}
+.hero-frame::before{content:"";position:absolute;inset:0;z-index:-2;background:linear-gradient(90deg,#0e1117fa 0%,#0e1117f5 28%,#0e1117db 43%,#0e111750 65%,#0e111708 100%),linear-gradient(0deg,#0e1117d9,transparent 29%)}
+.hero-editorial-copy{position:relative;padding:54px 5%;width:61%;max-width:770px}
+.hero-kicker{font-size:16px;margin-bottom:24px}
+.editorial-hero h1{font-size:clamp(66px,7.3vw,106px);line-height:.98;letter-spacing:-.055em;font-weight:650;max-width:100%}
+.editorial-hero h1 span{color:#6e97f6}
+.hero-deck{font-size:clamp(25px,2.65vw,37px);line-height:1.15;letter-spacing:-.035em;margin-top:20px}
+.hero-intro{font-size:17px;line-height:1.55;max-width:37ch;margin-top:30px}
+.hero-actions{display:flex;align-items:center;gap:24px;flex-wrap:wrap;margin-top:30px}
+.hero-actions .primary{background:#6e97f6;color:#0e1117;border-color:#6e97f6;font-size:14px;padding:15px 19px}
+.hero-actions .text-link{color:#eef1f6;font-size:13px}
+.hero-frame a:focus-visible{outline-color:#9db8f9}
+.hero-scope{font-size:11px;line-height:1.5;color:#c2cad5;margin-top:22px}
+.hero-case-label{position:absolute;right:4%;bottom:35px;display:grid;gap:14px;text-decoration:none;text-align:right;color:#f1edde}
+.hero-case-label img{width:190px;justify-self:end}
+.hero-case-label>span{font-size:10px;line-height:1.6}
+.hero-case-label b{display:inline-block;margin-left:8px}
+.hero-afterword{display:flex;align-items:start;justify-content:space-between;gap:32px;border-bottom:1px solid var(--line);padding:25px 0}
+.hero-afterword>p{font-size:14px;max-width:35ch}
+.hero-afterword>a{font-size:12px;text-decoration:none;color:var(--muted);text-align:right}
+.hero-afterword>a span{display:block;color:var(--action);text-decoration:underline;margin-top:4px}
+@media(hover:hover) and (pointer:fine){.hero-actions .primary:hover{background:#9db8f9}.hero-case-label:hover b{transform:translate(2px,-2px)}.hero-afterword>a:hover span{text-decoration-thickness:2px}}
+@media(max-width:1000px){.hero-editorial-copy{width:68%;padding:42px 5%}.hero-frame{min-height:650px}.hero-case-label img{width:150px}.hero-intro{font-size:16px}.hero-actions{gap:18px}.editorial-hero h1{font-size:clamp(58px,7.7vw,78px)}.hero-deck{font-size:29px}}
+@media(max-width:680px){.editorial-hero{padding-top:8px}.hero-folio{padding:18px 0;gap:12px}.hero-folio .eyebrow{max-width:24ch;line-height:1.6;font-size:9px}.hero-folio>span{font-size:8px;padding-top:3px}.hero-frame{min-height:0}.hero-editorial-copy{padding:30px 7% 270px;width:100%;max-width:none}.hero-kicker{font-size:13px;margin-bottom:20px}.editorial-hero h1{font-size:clamp(48px,12.8vw,80px)}.hero-deck{font-size:clamp(22px,5.9vw,34px);margin-top:18px}.hero-intro{font-size:15px;margin-top:24px;max-width:36ch}.hero-actions{margin-top:24px;gap:20px}.hero-actions .primary{font-size:13px;min-height:50px}.hero-scope{font-size:10px;margin-top:20px}.hero-panorama{top:auto;height:440px}.hero-panorama img{object-position:78% center}.hero-frame::before{background:linear-gradient(180deg,#0e1117 0%,#0e1117 48%,#0e1117d9 59%,#0e111700 77%),linear-gradient(0deg,#0e1117e6,transparent 20%)}.hero-case-label{bottom:24px;left:7%;right:7%;grid-template-columns:1fr 1fr;align-items:end;gap:14px}.hero-case-label img{width:145px;max-width:100%;justify-self:start}.hero-case-label>span{font-size:8px}.hero-afterword{display:block;padding:22px 0}.hero-afterword>a{display:block;text-align:left;margin-top:18px}.hero-afterword>p{max-width:33ch}}
+@media(prefers-reduced-motion:reduce){.hero-panorama,.hero-editorial-copy{transform:none!important;clip-path:none!important}}
+[data-motion=reduce] .hero-panorama,[data-motion=reduce] .hero-editorial-copy{transform:none!important;clip-path:none!important}

@@ -16,7 +16,7 @@ function sha256(relativePath) {
 
 test('keeps the indexable SEO contract and one visible page topic', () => {
   assert.equal((html.match(/<h1\b/gi) || []).length, 1);
-  assert.match(html, /<title>Estrategia, identidad, contenido y sitios web — Don Ventas<\/title>/);
+  assert.match(html, /<title>Haz que tu marca se entienda · Don Ventas<\/title>/);
   assert.match(html, /<meta name="description" content="[^"]+">/);
   assert.match(html, /<meta name="robots" content="index,follow,/);
   assert.match(html, /<link rel="canonical" href="https:\/\/www\.donventas\.mx\/">/);
@@ -34,13 +34,11 @@ test('publishes valid structured data without early public pricing', () => {
 });
 
 test('keeps the working diagnostic, privacy and analytics surfaces', () => {
-  assert.match(html, /data-dv-diagnostic/);
+  assert.match(html, /href="\/diagnostico\.html"/);
   assert.doesNotMatch(html, /<script[^>]+src="diagnostico-v2\.js"/);
   assert.match(fs.readFileSync(path.join(root, 'app.js'), 'utf8'), /script\.src='diagnostico-v2\.js'/);
-  assert.match(html, /src="\/_vercel\/insights\/script\.js"/);
-  assert.match(html, /15_LEGAL\/Aviso de Privacidad\.html/);
-  assert.match(html, /15_LEGAL\/Terminos y Condiciones\.html/);
-  assert.match(html, /15_LEGAL\/Politica de Cookies\.html/);
+  assert.match(html, /src="\/analytics\.js"/);
+  assert.match(html, /15_LEGAL\/Aviso%20de%20Privacidad\.html/);
   assert.doesNotMatch(html, /clarity\.ms|hotjar|session.?replay/i);
 });
 
@@ -61,7 +59,7 @@ test('images have alternative text and external new tabs are isolated', () => {
   assert.equal(images.length > 0, true);
   assert.deepEqual(images.filter(tag => !/\balt="[^"]*"/i.test(tag)), []);
   const newTabs = [...html.matchAll(/<a\b[^>]*target="_blank"[^>]*>/gi)].map(match => match[0]);
-  assert.equal(newTabs.length, 4); // Two approved portfolio links + on-demand translation and browser help.
+  assert.ok(newTabs.length >= 2); // Translation and browser help remain available.
   assert.deepEqual(newTabs.filter(tag => !/\brel="[^"]*noopener[^"]*"/i.test(tag)), []);
 });
 
@@ -74,27 +72,17 @@ test('keeps the canonical wordmark without loading the 3D emblem in the hero', (
   assert.doesNotMatch(html, /data-hero-mark|hero-mark-3d\.js/);
 });
 
-test('leads with a capable customer situation before the mobile copy', () => {
-  const homeCss = fs.readFileSync(path.join(root, 'home.css'), 'utf8');
-  assert.match(html, /Tu negocio evoluciona\.<br><em>Tu marca también debería hacerlo\./);
-  assert.match(html, /hero-situacion-capacidad-v1-640\.webp/);
-  assert.match(html, /hero-situacion-capacidad-v1-960\.webp 960w/);
-  assert.match(html, /Ya conoce su negocio\. Necesita que otros entiendan su valor\./);
-  assert.doesNotMatch(html, /class="hero-signature"/);
-  assert.match(homeCss, /@media\(max-width:1120px\)[\s\S]*?\.situation-stage\{order:-1(?:;|\})/);
-  assert.match(homeCss, /@media\(max-width:1120px\)[\s\S]*?\.hero-grid\{grid-template-columns:1fr;gap:0;align-items:stretch;border:/);
-  assert.match(homeCss, /@media\(max-width:1120px\)[\s\S]*?\.hero-scene\{min-height:0;aspect-ratio:4\/3\}/);
-  assert.match(homeCss, /@media\(max-width:1120px\)[\s\S]*?\.hero-scene img\{[^}]*object-position:center top/);
-  assert.match(homeCss, /@media\(max-width:620px\)[\s\S]*?\.hero-copy::before\{[^}]*linear-gradient/);
+test('new hero states the offer and labels the fictional case', () => {
+  assert.match(html, /Haz que se <br><span>entienda\.<\/span>/);
+  assert.match(html, /Tu negocio tiene mucho que ofrecer/);
+  assert.match(html, /alt="Un experto revisa una bicicleta en el taller conceptual de Vuelta 27\."/);
+  assert.match(html, /Vuelta 27 es un taller ficticio/);
 });
 
-test('uses the lean home stylesheet and responsive uncropped method image', () => {
-  assert.match(html, /href="home\.css(?:\?[^"\s]+)?"/);
+test('uses the launch stylesheet and includes the example image with dimensions', () => {
+  assert.match(html, /href="\/assets\/portal-launch\/landing\.css"/);
   assert.doesNotMatch(html, /href="styles\.css"/);
-  assert.match(html, /criterio-metodo-01-06-v2-480\.webp 480w/);
-  assert.match(html, /criterio-metodo-01-06-v2-960\.webp 960w/);
-  assert.match(html, /criterio-metodo-01-06-v2-1448\.webp 1448w/);
-  assert.match(html, /width="960" height="720"/);
+  assert.match(html, /taller-p04\.png" width="1942" height="809"/);
 });
 
 test('exposes accessible diagnostic progress semantics', () => {

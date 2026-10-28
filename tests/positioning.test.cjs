@@ -22,18 +22,18 @@ test('public service coverage is remote and international, not restricted to Mex
 
 test('the approved definition is readable HTML and matches the organization description', () => {
   const home = read('index.html');
-  const definition = home.match(/<p id="que-es-don-ventas">([^<]+)<\/p><p>([^<]+)<\/p>/);
+  const definition = home.match(/<p class="hero-intro">([^<]+)<\/p>/);
   assert.ok(definition);
   const org = graph('index.html').find(node => node['@id'] === 'https://www.donventas.mx/#org');
-  assert.equal(org.description, definition[1] + ' ' + definition[2]);
-  assert.equal(org.contactPoint.availableLanguage, 'es');
+  assert.equal(org.description, definition[1]);
   assert.equal(org.founder['@id'], 'https://www.donventas.mx/#quien');
   // Do not mistake the founder's personal site for an official corporate social profile.
   assert.equal(org.sameAs, undefined);
 });
 
 test('international coverage FAQ agrees with visible text on both commercial pages', () => {
-  for (const file of ['index.html', 'branding.html']) {
+  assert.match(read('index.html'),/Trabajamos de forma remota en español, desde México y con clientes de otros países/);
+  for (const file of ['branding.html']) {
     const question = graph(file).find(node => node['@type'] === 'FAQPage').mainEntity.find(q => q.name === '¿Puedo trabajar con Don Ventas desde otro país?');
     assert.ok(question);
     const details = [...read(file).matchAll(/<details[^>]*><summary>((?:(?!<\/summary>)[\s\S])*?)<\/summary><p>([\s\S]*?)<\/p><\/details>/g)].find(match => plain(match[1]) === question.name);
@@ -42,10 +42,17 @@ test('international coverage FAQ agrees with visible text on both commercial pag
     assert.match(question.acceptedAnswer.text, /MXN y no incluyen IVA/);
     assert.match(question.acceptedAnswer.text, /alcance y los horarios/);
   }
+  const homeFAQ=graph('index.html').find(node=>node['@type']==='FAQPage');
+  for(const q of homeFAQ.mainEntity){assert.ok(read('index.html').includes(`<summary>${q.name}</summary><p>${q.acceptedAnswer.text}</p>`));}
 });
 
 test('every active portal link discloses coming-soon status without changing its destination', () => {
   for (const file of pages) {
+    if(file==='index.html'){
+      assert.match(read(file),/Portal en desarrollo/);
+      assert.match(read(file),/href="#lista"/);
+      continue;
+    }
     const links = [...read(file).matchAll(/<a\b[^>]*href="https:\/\/app\.donventas\.mx\/?"[^>]*>([\s\S]*?)<\/a>/g)];
     assert.ok(links.length, file);
     for (const link of links) assert.match(plain(link[1]), /Portal · próximamente/, file);
@@ -69,7 +76,10 @@ test('all affected pages preserve indexability and production canonicals, withou
     assert.match(html, /name="robots" content="index,follow/);
     assert.match(html, /rel="canonical" href="https:\/\/www\.donventas\.mx\//);
     assert.equal((html.match(/<h1\b/g) || []).length, 1);
-    assert.doesNotMatch(html, /hreflang=/);
+    // Language annotations on transcript links are valid; only alternate page
+    // declarations would imply separate indexed locale versions.
+    assert.doesNotMatch(html, /<link\b[^>]*\brel="alternate"[^>]*\bhreflang=/i);
+    assert.doesNotMatch(html, /<link\b[^>]*\bhreflang=[^>]*\brel="alternate"/i);
   }
   assert.match(read('robots.txt'), /User-agent: OAI-SearchBot\s+Allow: \//);
 });

@@ -1,4 +1,6 @@
 # Local-only QA server; never make the simulated endpoint part of a deployment.
+.env*
+.vercel/
 scripts/analytics-qa-server.cjs
 scripts/analytics-qa-health.js
 scripts/qa-brand-evolution.cjs
@@ -76,3 +78,13 @@ tests/appearance-header.test.cjs
 scripts/translation-pages.cjs
 tests/translation.test.cjs
 docs/public-translation.md
+# Portal integration notes, fixtures and local-only tooling are not public assets.
+docs/PORTAL-INTEGRATION-REVIEW.md
+scripts/portal-*.cjs
+scripts/assemble-portal-pilot.cjs
+scripts/inventory-portal-pilot.cjs
+scripts/update-portal-hero.cjs
+scripts/portal-partials/
+tests/portal-*.test.cjs
+assets/portal-launch/bici-story/video-base/subtitles/*.candidata.vtt
+assets/portal-launch/bici-story/video-base/delivery/vuelta-27-p05-naturalidad.mp4

@@ -1,0 +1,66 @@
+/* One photographic canvas per section; native branding/copy on its safe area. */
+.photo-surface{position:relative;isolation:isolate;overflow:hidden;container-type:inline-size;background:#163b32;color:#f1edde}
+.photo-surface .surface-media{position:absolute;inset:0;display:block;width:100%;height:100%;z-index:-3}
+.photo-surface .surface-media img{width:100%;height:100%;object-fit:cover;object-position:center;margin:0;max-width:none}
+.photo-surface::after{content:"";position:absolute;inset:0;z-index:-2;pointer-events:none;background:linear-gradient(90deg,rgba(5,24,17,.72),rgba(5,24,17,.5) 39%,rgba(5,24,17,0) 58%),linear-gradient(0deg,rgba(5,24,17,.68),transparent 15%)}
+.proposal-cover.photo-surface{aspect-ratio:1942/809;padding:0;min-height:0}
+.proposal-cover .surface-copy{padding:3.5cqw;max-width:49%;position:relative}
+.proposal-cover .surface-copy>img{width:27cqw;max-width:320px;margin:0 0 2.4cqw}
+.proposal-cover .micro{font-size:clamp(9px,1cqw,12px);color:#d7eb58;margin:0 0 1cqw}
+.proposal-cover .surface-copy h3{font-size:clamp(28px,4.7cqw,64px);font-weight:550;line-height:1.05;margin:0 0 1.5cqw}
+.proposal-cover .surface-copy .cover-support{font-size:clamp(12px,1.5cqw,19px);line-height:1.5;margin:0;max-width:29ch}
+.surface-caption{position:absolute;bottom:2%;left:3.5%;right:3.5%;font-size:clamp(9px,.8cqw,11px);line-height:1.35;margin:0;color:#f1edde}
+.proposal-body{position:relative;isolation:isolate;padding:64px 52px 80px;gap:94px}
+.proposal-body::before{content:"";position:absolute;inset:0;z-index:-1;background:url('assets/carriles-recorrido-a03.svg') center/100% 100% no-repeat;pointer-events:none}
+.card-family{align-items:start}
+.service-card.front.photo-surface{display:block;aspect-ratio:1122/1402;min-height:0;padding:0}
+.service-card.front.photo-surface::after{background:linear-gradient(180deg,rgba(5,24,17,.7),rgba(5,24,17,.6) 29%,rgba(5,24,17,0) 45%),linear-gradient(0deg,rgba(5,24,17,.8),transparent 10%)}
+.care-copy{padding:4.6cqw;position:relative}
+.care-copy>img{width:56cqw;max-width:300px;margin:0 0 2.5cqw}
+.front .care-copy h3{font-size:clamp(24px,6.5cqw,43px);line-height:1.05;margin:0 0 2.5cqw;font-weight:550}
+.care-copy>p{font-size:clamp(11px,2.5cqw,16px);line-height:1.45;margin:0;max-width:35ch}
+.service-card.front .surface-caption{font-size:clamp(8px,1.7cqw,10px)}
+.service-card.back{min-height:0;align-self:stretch}
+@media(max-width:1000px) and (min-width:681px){.proposal-cover .surface-copy{max-width:50%;padding:3cqw}.proposal-cover .surface-copy>img{margin-bottom:1.7cqw}.proposal-cover .surface-copy h3{font-size:4.5cqw}.proposal-body{padding:54px 32px 70px;gap:72px}}
+@media(max-width:680px){
+ .proposal-cover.photo-surface{aspect-ratio:1122/1402}
+ .proposal-cover.photo-surface::after{background:linear-gradient(180deg,rgba(5,24,17,.75),rgba(5,24,17,.6) 35%,rgba(5,24,17,0) 54%),linear-gradient(0deg,rgba(5,24,17,.7),transparent 12%)}
+ .proposal-cover .surface-copy{padding:5cqw;max-width:100%}
+ .proposal-cover .surface-copy>img{width:60cqw;max-width:300px;margin-bottom:3cqw}
+ .proposal-cover .micro{font-size:clamp(8px,2.2cqw,11px);margin-bottom:2cqw}
+ .proposal-cover .surface-copy h3{font-size:8cqw;line-height:1.06;margin-bottom:2.3cqw}
+ .proposal-cover .surface-copy .cover-support{font-size:clamp(11px,3.1cqw,16px);max-width:29ch;line-height:1.4}
+ .surface-caption{left:5%;right:5%;font-size:8px}
+ .proposal-body{padding:32px 28px 36px}
+ .proposal-body::before{inset:18px 8px 18px auto;width:7px;background:none;border-right:1px solid #c8c1ad;border-radius:0 24px 24px 0;box-shadow:2px 0 #fffaf0,4px 0 #ded8c4}
+ .proposal-steps{margin-top:30px;padding-top:28px}
+}
+@media print{.photo-surface{-webkit-print-color-adjust:exact;print-color-adjust:exact;break-inside:avoid}.proposal-body::before{print-color-adjust:exact}}
+
+/* A03 spacing pass: shared editorial inset, equal card frames. */
+.proposal{container-type:inline-size;--proposal-inset:5cqw}
+.proposal-cover .surface-copy{padding:var(--proposal-inset)}
+.proposal-cover.photo-surface>.surface-caption{left:var(--proposal-inset);right:var(--proposal-inset);bottom:var(--proposal-inset);font-size:clamp(8px,.95cqw,11px);line-height:1.4;max-width:none;margin:0}
+.proposal-body{padding:var(--proposal-inset);gap:calc(2 * var(--proposal-inset))}
+.proposal-body::before{inset:12px}
+.proposal-close{padding:var(--proposal-inset)}
+.card-family{align-items:stretch;--card-inset:clamp(24px,3vw,42px)}
+.card-family .service-card{width:100%;min-width:0;min-height:0;aspect-ratio:1122/1500;align-self:stretch}
+.card-family .service-card.front.photo-surface{aspect-ratio:auto;height:auto}
+.care-copy{padding:var(--card-inset)}
+.service-card.back{container-type:inline-size;padding:var(--card-inset)}
+.service-card.back h3{font-size:clamp(25px,8.5cqw,40px)}
+.service-card.back header{gap:16px}
+.service-card.back header img{width:22%;height:auto;align-self:start}
+.service-card.back dl{margin:20px 0}
+.service-card.back dl div{padding:clamp(10px,3.8cqw,20px) 0}
+.service-card.back dt{font-size:clamp(9px,2.7cqw,12px)}
+.service-card.back dd{font-size:clamp(12px,3.7cqw,16px);line-height:1.5}
+.service-card.back>p{font-size:clamp(9px,2.6cqw,11px);line-height:1.5}
+.service-card.front>.surface-caption{left:var(--card-inset);right:var(--card-inset);bottom:var(--card-inset);margin:0;font-size:clamp(8px,1.7cqw,10px);line-height:1.4}
+@media(max-width:680px){
+ .proposal{--proposal-inset:7cqw}
+ .proposal-body::before{inset:18px 8px 18px auto}
+ .card-family .service-card{min-height:420px}
+ .card-family .service-card.front.photo-surface{aspect-ratio:1122/1500;min-height:420px}
+}
