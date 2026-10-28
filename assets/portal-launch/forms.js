@@ -4,8 +4,10 @@
  const labels={waitlist:'Avísame del Portal',contact:'Conversemos'};
  const privacyDetails=document.getElementById('privacidad-formularios');
  function revealPrivacy(){if(location.hash==='#privacidad-formularios'&&privacyDetails)privacyDetails.open=true;}
+ function revealContact(){const details=document.getElementById('consulta-encargo');if(location.hash==='#consulta-encargo'&&details)details.open=true;}
  document.querySelectorAll('a[href="#privacidad-formularios"]').forEach(link=>link.addEventListener('click',()=>{if(privacyDetails)privacyDetails.open=true;}));
- window.addEventListener('hashchange',revealPrivacy);revealPrivacy();
+ document.querySelectorAll('a[href="#consulta-encargo"]').forEach(link=>link.addEventListener('click',()=>{const details=document.getElementById('consulta-encargo');if(details)details.open=true;}));
+ window.addEventListener('hashchange',revealPrivacy);window.addEventListener('hashchange',revealContact);revealPrivacy();revealContact();
  const notices=[...document.querySelectorAll('[data-form-environment]')];
  const unavailable=()=>notices.forEach(el=>{el.hidden=false;el.textContent='Este formulario no está disponible por ahora. Inténtalo más tarde.';});
  unavailable();
@@ -24,7 +26,7 @@
   const values=Object.fromEntries(new FormData(form));
   const kind=form.dataset.portalForm;
   const signature=JSON.stringify(values);if(state.signature!==null&&signature!==state.signature)state.key=crypto.randomUUID();state.signature=signature;
-  const payload={kind,email:values.email,name:values.name||'',message:values.message||'',interest:values.interest||'',consent:values.consent==='on',website:values.website||'',started_at:state.started,submission_key:state.key};
+  const payload={kind,email:values.email,name:values.name||'',message:values.message||'',interest:values.interest||'',help_type:values.help_type||'',timing:values.timing||'',whatsapp:values.whatsapp||'',consent:values.consent==='on',website:values.website||'',started_at:state.started,submission_key:state.key};
   state.busy=true;button.disabled=true;button.textContent='Enviando…';result.hidden=false;result.textContent='Estamos procesando tu solicitud…';
   try{
    const response=await fetch('/api/portal-intake',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload),signal:AbortSignal.timeout(15000)});
