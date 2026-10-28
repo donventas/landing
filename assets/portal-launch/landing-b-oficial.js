@@ -4,16 +4,28 @@
  const frame=document.getElementById('case-frame'),frames={web:frame},preference=matchMedia('(prefers-reduced-motion:reduce)');
  // Google's translated page and its translated sample must share the proxy origin.
  const translatedHost='www-donventas-mx.translate.goog';
- const allowedLanguages=new Set(['en','fr','pt','de','it','bg','ja','zh-CN','ar']);
+ const validLanguage=value=>/^[a-z]{2,3}(?:-[a-z0-9]{2,8}){0,2}$/i.test(value||'');
  const params=new URLSearchParams(location.search);
- const translated=location.hostname===translatedHost && params.get('_x_tr_sl')==='es' && allowedLanguages.has(params.get('_x_tr_tl'));
+ const translated=location.hostname===translatedHost && params.get('_x_tr_sl')==='es' && validLanguage(params.get('_x_tr_tl'));
+ let activeLanguage=translated?params.get('_x_tr_tl'):null;
  function demoURL(key,embed=true){
-   const url=new URL('/portafolio/vuelta-27/',location.origin);
+   const url=new URL('/portafolio/vuelta-27/',translated&&activeLanguage==='es'?'https://www.donventas.mx':location.origin);
    if(embed)url.searchParams.set('embed',key);else url.hash=key;
-   if(translated){url.searchParams.set('_x_tr_sl','es');url.searchParams.set('_x_tr_tl',params.get('_x_tr_tl'));url.searchParams.set('_x_tr_hl','es');}
+   if(translated&&activeLanguage!=='es'){if(params.get('_x_tr_enc')==='1')url.searchParams.set('_x_tr_enc','1');url.searchParams.set('_x_tr_sl','es');url.searchParams.set('_x_tr_tl',activeLanguage);url.searchParams.set('_x_tr_hl','es');}
    return url.href;
  }
- if(translated)frame.src=demoURL('web');
+ if(translated){
+   frame.src=demoURL('web');
+   // Google may switch its toolbar language in place without changing the URL.
+   new MutationObserver(()=>{
+     const language=root.lang;
+     if(!validLanguage(language)||language===activeLanguage)return;
+     activeLanguage=language;
+     Object.entries(frames).forEach(([key,view])=>{view.src=demoURL(key)});
+     const selected=document.querySelector('[data-view][aria-pressed="true"]');
+     if(selected)document.getElementById('open-demo').href=demoURL(selected.dataset.view,false);
+   }).observe(root,{attributes:true,attributeFilter:['lang']});
+ }
  // Measure the card content, not the iframe viewport: it must shrink as well as grow.
  let cardObserver;
  function fitCard(){const f=frames.tarjeta;if(!f||f.hidden)return;const cards=f.contentDocument?.querySelector('.card-family');if(!cards)return;const height=Math.ceil(cards.getBoundingClientRect().height);if(height>0&&height<10000)f.style.height=`${height}px`;}
