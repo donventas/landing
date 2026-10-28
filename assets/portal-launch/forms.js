@@ -11,6 +11,13 @@
  const notices=[...document.querySelectorAll('[data-form-environment]')];
  const unavailable=()=>notices.forEach(el=>{el.hidden=false;el.textContent='Este formulario no está disponible por ahora. Inténtalo más tarde.';});
  unavailable();
+ const contact=document.getElementById('help-form');
+ if(contact){
+  const choices=[...contact.querySelectorAll('input[name="needs"]')],example=contact.querySelector('#help-example');
+  const examples={claridad:'Por ejemplo: quiero que mis clientes entiendan mejor mis servicios.',web:'Por ejemplo: necesito una página para explicar mis servicios y recibir consultas.',propuesta:'Por ejemplo: quiero presentar una propuesta y no sé cómo organizarla.',marca:'Por ejemplo: mi negocio cambió y quiero actualizar su identidad.',materiales:'Por ejemplo: necesito llevar mi marca a empaques, letreros o documentos.',otro:'Cuéntanos qué está pasando o qué te gustaría conseguir.'};
+  const update=()=>{const selected=choices.filter(c=>c.checked);choices[0].setCustomValidity(selected.length?'':'Elige al menos una opción.');example.textContent=selected.length===1?examples[selected[0].value]:'Por ejemplo: cuéntanos qué quieres lograr y qué has intentado hasta ahora.';};
+  choices.forEach(c=>c.addEventListener('change',update));update();
+ }
  fetch('/api/portal-intake',{cache:'no-store'}).then(r=>r.json()).then(config=>{
   if(config.enabled&&config.mode==='live')notices.forEach(el=>{el.hidden=true;});
   else if(config.enabled&&config.mode==='simulation')notices.forEach(el=>{el.hidden=false;el.textContent='Vista previa: los envíos se simulan. No se guardan datos ni se envían correos.';});
@@ -23,10 +30,11 @@
   event.preventDefault();const state=states.get(form);if(state.busy)return;
   const result=form.querySelector('[data-form-result]'),button=form.querySelector('[type=submit]');
   if(!form.reportValidity())return;
-  const values=Object.fromEntries(new FormData(form));
+  const formData=new FormData(form),values=Object.fromEntries(formData);
   const kind=form.dataset.portalForm;
-  const signature=JSON.stringify(values);if(state.signature!==null&&signature!==state.signature)state.key=crypto.randomUUID();state.signature=signature;
-  const payload={kind,email:values.email,name:values.name||'',message:values.message||'',interest:values.interest||'',help_type:values.help_type||'',timing:values.timing||'',whatsapp:values.whatsapp||'',consent:values.consent==='on',website:values.website||'',started_at:state.started,submission_key:state.key};
+  const needs=formData.getAll('needs');
+  const signature=JSON.stringify({...values,needs});if(state.signature!==null&&signature!==state.signature)state.key=crypto.randomUUID();state.signature=signature;
+  const payload={kind,email:values.email,name:values.name||'',message:values.message||'',interest:values.interest||'',needs,timing:values.timing||'',whatsapp:values.whatsapp||'',consent:values.consent==='on',website:values.website||'',started_at:state.started,submission_key:state.key};
   state.busy=true;button.disabled=true;button.textContent='Enviando…';result.hidden=false;result.textContent='Estamos procesando tu solicitud…';
   try{
    const response=await fetch('/api/portal-intake',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload),signal:AbortSignal.timeout(15000)});

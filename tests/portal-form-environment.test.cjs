@@ -22,7 +22,9 @@ test('direct service inquiry opens from the hero and loads versioned assets',()=
  assert.match(service,/<details class="launch-help-form" id="consulta-encargo">/);
  assert.doesNotMatch(service,/Qué preparar para conversar/);
  assert.match(source,/hash==='#consulta-encargo'/);
- assert.match(html,/forms\.js\?v=20261028-encargo1/);
- assert.match(html,/integration\.css\?v=20261028-encargo2/);
+ assert.match(html,/forms\.js\?v=20261028-encargo3/);
+ assert.match(html,/integration\.css\?v=20261028-encargo3/);
+ assert.equal((service.match(/name="needs"/g)||[]).length,6);
+ assert.doesNotMatch(service,/id="help-type"/);
  assert.match(html,/href="\/diagnostico\.html">Completa el diagnóstico/);
 });
