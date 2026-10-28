@@ -11,15 +11,17 @@ test('purpose-specific PostgreSQL migration and lifecycle',{skip:!modulePath},as
  await db.exec(fs.readFileSync(path.join(__dirname,'../supabase/migrations/015_portal_unsubscribe_candidate.sql'),'utf8'));
  await db.exec(fs.readFileSync(path.join(__dirname,'../supabase/migrations/016_portal_notice_version_candidate.sql'),'utf8'));
  await db.exec(fs.readFileSync(path.join(__dirname,'../supabase/migrations/017_portal_retention_delivery_isolation.sql'),'utf8'));
+ await db.exec(fs.readFileSync(path.join(__dirname,'../supabase/migrations/018_portal_waitlist_interest.sql'),'utf8'));
  const record=(overrides={})=>({kind:'waitlist',email:'owner@example.test',name:'',message:'',interest:'',submission_key:crypto.randomUUID(),consent:true,purpose:'portal_launch_offers',source:'homepage',source_url:'https://www.donventas.mx/',notice_version:overrides.is_test===false?'portal-2026-10-28-v2':'portal-preview-2026-10-27-v1',is_test:true,...overrides});
  const keys=(r,ip='ip')=>({ip:crypto.createHash('sha256').update(ip).digest('hex'),email:crypto.createHash('sha256').update(r.email).digest('hex'),payload:crypto.createHash('sha256').update(JSON.stringify(r)).digest('hex')});
  const rpc=async(name,params,cast)=>{const placeholders=params.map((_,i)=>'$'+(i+1)+(cast?.[i]?'::'+cast[i]:''));return(await db.query('select public.'+name+'('+placeholders.join(',')+') as result',params)).rows[0].result;};
  const receive=(r,ip)=>rpc('dv_portal_receive',[r,keys(r,ip)],['jsonb','jsonb']);
- const r=record();
+ const r=record({interest:'brand'});
  await t.test('receipt is durable; identical retry does not enqueue twice',async()=>{
   assert.deepEqual(await receive(r),{accepted:true,duplicate:false});assert.deepEqual(await receive(r),{accepted:true,duplicate:true});
   assert.equal((await db.query('select count(*)::integer n from dv_portal.outbox')).rows[0].n,1);
-  await assert.rejects(receive({...r,interest:'brand'}),/key_reused/);
+  assert.equal((await db.query('select interest from dv_portal.subscriber where email=$1',[r.email])).rows[0].interest,'brand');
+  await assert.rejects(receive({...r,interest:'formats'}),/key_reused/);
  });
  await t.test('confirmation requires explicit action and withdrawal cannot be reversed by old token',async()=>{
   const job=await rpc('dv_portal_claim',[true]);assert.equal(job.kind,'confirmation');
@@ -43,6 +45,7 @@ test('purpose-specific PostgreSQL migration and lifecycle',{skip:!modulePath},as
   assert.deepEqual(await rpc('dv_portal_action',['unsubscribe','b'.repeat(64),true]),{ok:true});
   const cleared=(await db.query("select confirm_hash,confirm_expires_at from dv_portal.subscriber where is_test and email='owner@example.test'")).rows[0];
   assert.equal(cleared.confirm_hash,null);assert.equal(cleared.confirm_expires_at,null);
+  assert.equal((await db.query('select interest from dv_portal.subscriber where email=$1 and is_test',[r.email])).rows[0].interest,'');
  });
  await t.test('private contact does not create or change subscriber',async()=>{
   const c=record({kind:'contact',email:'help@example.test',name:'QA',message:'Prueba local de solicitud privada.',purpose:'help_request',consent:false});await receive(c,'contact');
@@ -112,9 +115,7 @@ test('purpose-specific PostgreSQL migration and lifecycle',{skip:!modulePath},as
   assert.deepEqual((await db.query('select id,state,attempts from dv_portal.outbox where is_test order by id')).rows,before);
  });
  await t.test('candidate retention removes unconfirmed request data and keeps active consent',async()=>{
-  await db.exec(fs.readFileSync(path.join(__dirname,'../supabase/migrations/014_portal_retention_candidate.sql'),'utf8'));
-  await db.exec(fs.readFileSync(path.join(__dirname,'../supabase/migrations/017_portal_retention_delivery_isolation.sql'),'utf8'));
-  const pending=record({email:'old-pending@example.test'}),active=record({email:'active@example.test'});
+  const pending=record({email:'old-pending@example.test'}),active=record({email:'active@example.test',interest:'proposal'});
   await receive(pending,'retention-one');await receive(active,'retention-two');
   await db.query("update dv_portal.request set created_at=now()-interval '31 days' where submission_key in ($1::uuid,$2::uuid)",[pending.submission_key,active.submission_key]);
   await db.query("update dv_portal.subscriber set requested_at=now()-interval '31 days',state='active',confirmed_at=now()-interval '30 days' where email=$1",[active.email]);
@@ -128,6 +129,10 @@ test('purpose-specific PostgreSQL migration and lifecycle',{skip:!modulePath},as
   await db.exec('select public.dv_portal_purge(); select public.dv_portal_purge()');
   assert.equal((await db.query('select count(*)::integer n from dv_portal.request where submission_key=$1::uuid',[active.submission_key])).rows[0].n,1);
   assert.equal((await db.query('select count(*)::integer n from dv_portal.outbox where request_id=(select id from dv_portal.request where submission_key=$1::uuid)',[active.submission_key])).rows[0].n,1);
+  await db.query("update dv_portal.request set expires_at=now()-interval '1 day' where submission_key=$1::uuid",[active.submission_key]);
+  await db.exec('select public.dv_portal_purge()');
+  assert.equal((await db.query('select count(*)::integer n from dv_portal.request where submission_key=$1::uuid',[active.submission_key])).rows[0].n,0);
+  assert.equal((await db.query('select interest from dv_portal.subscriber where email=$1 and state=$2',[active.email,'active'])).rows[0].interest,'proposal');
   const oldGeneration=record({email:'renewed@example.test'});await receive(oldGeneration,'retention-renewed');
   await db.query("update dv_portal.request set created_at=now()-interval '31 days' where submission_key=$1::uuid",[oldGeneration.submission_key]);
   await db.query("update dv_portal.subscriber set state='active',generation=gen_random_uuid(),confirmed_at=now() where email=$1",[oldGeneration.email]);
@@ -140,4 +145,34 @@ test('purpose-specific PostgreSQL migration and lifecycle',{skip:!modulePath},as
   await db.exec('select public.dv_portal_purge()');
   assert.equal((await db.query('select count(*)::integer n from dv_portal.request where submission_key=$1::uuid',[oldContact.submission_key])).rows[0].n,0);
  });
+});
+test('migration backfills linked interests and clears them on withdrawal or suppression',{skip:!modulePath},async t=>{
+ const {PGlite}=require(modulePath),db=new PGlite();t.after(()=>db.close());
+ await db.exec('create role anon; create role authenticated; create role service_role;');
+ for(const file of ['009_portal_intake.sql','010_portal_delivery_webhook.sql','013_portal_claim_mode_isolation.sql','015_portal_unsubscribe_candidate.sql','016_portal_notice_version_candidate.sql','017_portal_retention_delivery_isolation.sql'])await db.exec(fs.readFileSync(path.join(__dirname,'../supabase/migrations',file),'utf8'));
+ const sub=crypto.randomUUID(),req=crypto.randomUUID(),gen=crypto.randomUUID(),job=crypto.randomUUID();
+ await db.query("insert into dv_portal.subscriber(id,email,is_test,state,generation,notice_version,unsubscribe_hash) values($1,'backfill@example.test',true,'active',$2,'test',repeat('b',64))",[sub,gen]);
+ await db.query("insert into dv_portal.request(id,submission_key,kind,email,interest,purpose,source_url,notice_version,payload_hash,is_test) values($1,gen_random_uuid(),'waitlist','backfill@example.test','brand','portal_launch_offers','https://www.donventas.mx/','test',repeat('a',64),true)",[req]);
+ await db.query("insert into dv_portal.outbox(id,request_id,subscriber_id,generation,kind,is_test,state,provider_id) values($1,$2,$3,$4,'confirmation',true,'accepted','12345678-1234-4234-8234-123456789012')",[job,req,sub,gen]);
+ await db.exec("insert into dv_portal.subscriber(email,is_test,state,notice_version) values('no-link@example.test',true,'active','test')");
+ await db.exec(fs.readFileSync(path.join(__dirname,'../supabase/migrations/018_portal_waitlist_interest.sql'),'utf8'));
+ assert.equal((await db.query('select interest from dv_portal.subscriber where id=$1',[sub])).rows[0].interest,'brand');
+ assert.equal((await db.query("select interest from dv_portal.subscriber where email='no-link@example.test'")).rows[0].interest,'');
+ await db.exec("select public.dv_portal_action('unsubscribe',repeat('b',64),true)");
+ assert.equal((await db.query('select interest from dv_portal.request where id=$1',[req])).rows[0].interest,'');
+ assert.equal((await db.query('select interest from dv_portal.subscriber where id=$1',[sub])).rows[0].interest,'');
+ const r={kind:'waitlist',email:'backfill@example.test',name:'',message:'',interest:'formats',submission_key:crypto.randomUUID(),consent:true,purpose:'portal_launch_offers',source:'homepage',source_url:'https://www.donventas.mx/',notice_version:'portal-preview-2026-10-27-v1',is_test:true};
+ const keys={ip:'a'.repeat(64),email:'b'.repeat(64),payload:'c'.repeat(64)};
+ await db.query('select public.dv_portal_receive($1::jsonb,$2::jsonb)',[r,keys]);
+ assert.equal((await db.query('select state,interest from dv_portal.subscriber where id=$1',[sub])).rows[0].interest,'formats');
+ await db.exec("select public.dv_portal_delivery('12345678-1234-4234-8234-123456789012','bounced')");
+ assert.deepEqual((await db.query('select state,interest from dv_portal.subscriber where id=$1',[sub])).rows[0],{state:'pending',interest:'formats'});
+ await db.query("update dv_portal.subscriber set state='active' where id=$1",[sub]);
+ await db.query("update dv_portal.outbox set state='accepted',provider_id='aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa' where subscriber_id=$1 and generation=(select generation from dv_portal.subscriber where id=$1)",[sub]);
+ await db.exec("select public.dv_portal_delivery('aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa','bounced')");
+ assert.deepEqual((await db.query('select state,interest from dv_portal.subscriber where id=$1',[sub])).rows[0],{state:'suppressed',interest:''});
+ assert.equal((await db.query("select count(*)::int n from dv_portal.request where email='backfill@example.test' and interest<>''")).rows[0].n,0);
+ const again={...r,submission_key:crypto.randomUUID(),interest:'brand'};
+ await db.query('select public.dv_portal_receive($1::jsonb,$2::jsonb)',[again,keys]);
+ assert.equal((await db.query('select interest from dv_portal.request where submission_key=$1',[again.submission_key])).rows[0].interest,'');
 });
