@@ -17,7 +17,7 @@
  sceneReveal.observe(panorama);
  const editorialReveal=new IntersectionObserver(entries=>{for(const entry of entries){if(!entry.isIntersecting)continue;if(allowMotion())entry.target.animate([{transform:'translateY(10px)'},{transform:'translateY(0)'}],{duration:400,easing:'cubic-bezier(.2,.7,.3,1)'});editorialReveal.unobserve(entry.target);}},{threshold:.15});
  document.querySelectorAll('[data-editorial-reveal]').forEach(section=>editorialReveal.observe(section));
- const descriptions={web:'Web: prueba «Preparar mi consulta», elige una necesidad y revisa el resumen ficticio. No envía ni guarda datos.',propuesta:'Propuesta: contexto de un grupo, trabajo pertinente y siguiente paso. No es una cotización ni promete disponibilidad.',tarjeta:'Tarjeta: una cara comunica cuidado; la otra organiza el historial. Maqueta conceptual, no arte listo para imprenta.'};
+ const descriptions={web:'Web: prueba «Preparar mi consulta», elige una o varias necesidades y revisa el resumen ficticio. No envía ni guarda datos.',propuesta:'Propuesta: contexto de un grupo, trabajo pertinente y siguiente paso. No es una cotización ni promete disponibilidad.',tarjeta:'Tarjeta: una cara comunica cuidado; la otra organiza el historial. Maqueta conceptual, no arte listo para imprenta.'};
  document.querySelectorAll('[data-view]').forEach(button=>button.addEventListener('click',()=>{
    if(button.getAttribute('aria-pressed')==='true')return;
    const key=button.dataset.view;
