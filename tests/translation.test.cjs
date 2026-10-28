@@ -33,7 +33,7 @@ test('translation: compact legacy article headers keep the diagnostic action ins
  assert.match(css,/\.nav-cta>\.btn:not\(\[href="https:\/\/app\.donventas\.mx"\]\)\{padding-inline:8px;font-size:10px;letter-spacing:\.07em\}/);
 });
 function harness({host='127.0.0.1',ready='complete',hash='',url='https://www.donventas.mx/branding.html?token=private#private',sensitive=false,header=false}={}){
- const element=()=>({dataset:{},listeners:{},attrs:{},hidden:false,open:false,addEventListener(k,fn){this.listeners[k]=fn;},setAttribute(k,v){this.attrs[k]=v;},removeAttribute(k){delete this[k];},classList:{added:[],add(v){this.added.push(v);}},style:{values:{},setProperty(k,v){this.values[k]=v;}},focus(){this.focused=true;},scrollIntoView(options){this.scrolled=options;},closest(){return null;}});
+ const element=()=>({getBoundingClientRect:()=>({bottom:64,left:900}),dataset:{},listeners:{},attrs:{},hidden:false,open:false,addEventListener(k,fn){this.listeners[k]=fn;},setAttribute(k,v){this.attrs[k]=v;},removeAttribute(k){delete this[k];},classList:{added:[],add(v){this.added.push(v);}},style:{values:{},setProperty(k,v){this.values[k]=v;}},focus(){this.focused=true;},scrollIntoView(options){this.scrolled=options;},closest(){return null;}});
  const details=element(),summary=element(),panel=element(),select=element(),link=element(),close=element(),entry=element(),menu=element(),appearance=element(),mark=element();
  select.value='en';select.disabled=true;link.dataset.dvLanguageUrl=url;
  details.querySelector=s=>({summary,'.dv-language-panel':panel,'[data-dv-language-target]':sensitive?null:select,'[data-dv-language-url]':sensitive?null:link,'.dv-language-close':close}[s]);
@@ -51,6 +51,7 @@ test('translation: header modal reuses panel, restores focus and supports deferr
   assert.equal(trigger.before,h.appearance);assert.equal(trigger.attrs['aria-haspopup'],'dialog');
   trigger.listeners.click();assert.equal(dialog.open,true);assert.equal(h.select.focused,true);assert.equal(trigger.attrs['aria-expanded'],'true');
   dialog.listeners.cancel({preventDefault(){}});assert.equal(dialog.open,false);assert.equal(trigger.focused,true);
+  h.entry.listeners.click({preventDefault(){}});assert.equal(dialog.open,true);assert.equal(h.entry.attrs['aria-expanded'],'true');h.close.listeners.click();assert.equal(h.entry.focused,true);assert.equal(h.entry.attrs['aria-expanded'],'false');
   h.summary.listeners.click({preventDefault(){}});assert.equal(dialog.open,true);
   h.close.listeners.click();assert.equal(dialog.open,false);assert.equal(h.summary.focused,true);
   trigger.listeners.click();dialog.listeners.click({target:dialog});assert.equal(dialog.open,false);

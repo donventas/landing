@@ -45,7 +45,7 @@
       addEventListener('resize',function(){ if (dialog.open) positionDialog(); });
     }
     function positionDialog() {
-      var rect = trigger.getBoundingClientRect();
+      var rect = (returnTarget || trigger).getBoundingClientRect();
       dialog.style.setProperty('--language-top',Math.max(12,rect.bottom + 12)+'px');
       dialog.style.setProperty('--language-left',Math.max(12,Math.min(rect.left,innerWidth - 372))+'px');
     }
@@ -54,6 +54,7 @@
       details.open = false;
       if (dialog && dialog.open) dialog.close();
       if (trigger) trigger.setAttribute('aria-expanded','false');
+      if (returnTarget && returnTarget !== trigger) returnTarget.setAttribute('aria-expanded','false');
       if (focus) returnTarget.focus({preventScroll:true});
     }
     function open(source) {
@@ -63,6 +64,7 @@
         positionDialog();
         if (!dialog.open) dialog.showModal();
         trigger.setAttribute('aria-expanded','true');
+        if (returnTarget !== trigger) returnTarget.setAttribute('aria-expanded','true');
         (select || closeButton).focus({preventScroll:true});
         return;
       }
@@ -92,7 +94,7 @@
     document.querySelectorAll('[data-dv-language-open]').forEach(function (entry) {
       entry.addEventListener('click', function (event) {
         event.preventDefault();
-        open();
+        open(entry);
       });
     });
     details.addEventListener('keydown', function (event) {
