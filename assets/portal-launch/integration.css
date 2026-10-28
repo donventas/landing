@@ -15,6 +15,7 @@
 .launch-trap{position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden}
 .launch-help-form,.launch-privacy{max-width:760px;margin:32px 0;border-top:1px solid var(--line);padding:20px 0}
 .launch-help-form summary span{display:none}.launch-help-form summary::after{content:'+';margin-left:.5em}.launch-help-form[open] summary::after{content:'−'}
+.editorial-help .two-paths article:has(.launch-help-form[open]):hover{transform:none}
 .launch-help-form>p{margin:16px 0}.launch-help-form label{display:block;margin:20px 0 8px;font-weight:600}.launch-help-form label span{font-weight:400;font-size:13px}
 .launch-help-form input,.launch-help-form textarea,.launch-help-form select{display:block;width:100%;background:var(--panel);color:var(--ink);border:1px solid var(--line);border-radius:0;min-height:48px;padding:12px;font:inherit}.launch-help-form textarea{resize:vertical}
 .launch-help-form .button{margin-top:24px}.launch-help-form .form-note{color:var(--muted)}

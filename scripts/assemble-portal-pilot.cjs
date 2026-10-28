@@ -58,7 +58,7 @@ function page(entry, demo) {
  text=text.replace(/<div class="pilot-bar">[\s\S]*?<\/div>/,'');
  text=text.replace(/<header class="(?:navigation shell|review-nav)"[\s\S]*?<\/header>/,header(demo));
  text=text.replace(/<aside class="dv-mobile-index"[\s\S]*?<\/aside>/,sectionIndex(demo));
- text=text.replace('</head>',`<link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="/assets/fonts/fonts.css"><script src="/appearance.js"></script><link rel="stylesheet" href="/appearance.css"><link rel="stylesheet" href="/section-index.css"><link rel="stylesheet" href="/translation.css"><link rel="stylesheet" href="/assets/portal-launch/integration.css?v=20261028-encargo1"><script src="/translation.js" defer></script><script src="/section-index.js" defer></script>${demo?'':'<script src="/assets/portal-launch/forms.js?v=20261028-encargo1" defer></script>'}</head>`);
+ text=text.replace('</head>',`<link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="/assets/fonts/fonts.css"><script src="/appearance.js"></script><link rel="stylesheet" href="/appearance.css"><link rel="stylesheet" href="/section-index.css"><link rel="stylesheet" href="/translation.css"><link rel="stylesheet" href="/assets/portal-launch/integration.css?v=20261028-encargo2"><script src="/translation.js" defer></script><script src="/section-index.js" defer></script>${demo?'':'<script src="/assets/portal-launch/forms.js?v=20261028-encargo1" defer></script>'}</head>`);
  const url='https://www.donventas.mx/'+(demo?'portafolio/vuelta-27/':'');
  text=text.replace('</body>',language.replaceAll('https://www.donventas.mx/branding.html',url).replaceAll('https%3A%2F%2Fwww.donventas.mx%2Fbranding.html',encodeURIComponent(url))+'<p class="launch-preview-note">Preview de integración · no publicado. La traducción externa muestra la URL de producción, no este preview.</p></body>');
  text=text.replace(/<a[^>]*href="[^"]*(?:pruebas-m03|escena-taller)\.html"[^>]*>[\s\S]*?<\/a>/g,'');
@@ -66,8 +66,14 @@ function page(entry, demo) {
  if (!demo) {
   text=text.replace(/<div class="waitlist-entry">[\s\S]*?<\/form><\/div>/,fs.readFileSync(path.join(root,'scripts/portal-partials/waitlist.html'),'utf8'));
   text=text.replace('<div class="help-heading">','<span id="servicios"></span><div class="help-heading">');
-  text=text.replace('Este piloto no envía solicitudes; el canal de contacto se validará antes de publicar.','Puedes contarnos tu situación en el formulario siguiente. No necesitas suscribirte al Portal.');
-  text=text.replace('</div></section>\n<section id="lista"', '</div>'+fs.readFileSync(path.join(root,'scripts/portal-partials/contact.html'),'utf8')+'</section>\n<section id="lista"');
+  const contact=fs.readFileSync(path.join(root,'scripts/portal-partials/contact.html'),'utf8');
+  const split=contact.indexOf('<details class="launch-privacy"');
+  if(split<0)throw Error('privacy_partial_missing');
+  const inquiry=contact.slice(0,split),privacy=contact.slice(split);
+  const before=text;
+  text=text.replace(/<details><summary>Qué preparar para conversar<\/summary>[\s\S]*?<\/details>/,inquiry);
+  if(text===before)throw Error('service_inquiry_target_missing');
+  text=text.replace('</div></section>\n<section id="lista"', '</div>'+privacy+'</section>\n<section id="lista"');
  }
  text=text.replace('<title>Tu marca, en la vida real · Don Ventas · Piloto</title>','<title>Haz que tu marca se entienda · Don Ventas</title>');
  const target=path.join(root,demo?'portafolio/vuelta-27/index.html':'index.html');fs.mkdirSync(path.dirname(target),{recursive:true});fs.writeFileSync(target,text);

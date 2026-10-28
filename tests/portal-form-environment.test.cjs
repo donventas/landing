@@ -18,8 +18,11 @@ test('direct service inquiry opens from the hero and loads versioned assets',()=
  const html=fs.readFileSync(path.join(__dirname,'../index.html'),'utf8');
  assert.match(html,/href="#consulta-encargo">Cuéntanos qué necesitas/);
  assert.match(html,/<details class="launch-help-form" id="consulta-encargo">/);
+ const service=html.match(/<article><span class="path-label">02 \/ CON INTERVENCIÓN EXPERTA[\s\S]*?<\/article>/)[0];
+ assert.match(service,/<details class="launch-help-form" id="consulta-encargo">/);
+ assert.doesNotMatch(service,/Qué preparar para conversar/);
  assert.match(source,/hash==='#consulta-encargo'/);
  assert.match(html,/forms\.js\?v=20261028-encargo1/);
- assert.match(html,/integration\.css\?v=20261028-encargo1/);
+ assert.match(html,/integration\.css\?v=20261028-encargo2/);
  assert.match(html,/href="\/diagnostico\.html">Completa el diagnóstico/);
 });
