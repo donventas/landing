@@ -13,10 +13,14 @@
 /* The prominent application menu replaces the duplicate desktop header links. */
 .launch-demo .editorial-nav .nav-shell>nav{display:none}
 
-/* The menu belongs to each visualizer and scrolls with its content. */
-.vuelta-app-nav{position:static;margin:0 0 16px;border:1px solid #364051}
-.vuelta-app-nav-inner{width:auto;padding:14px 16px}
+/* The selector sits immediately above the active sample and scrolls with it. */
+.vuelta-app-nav{position:static;margin:0 0 16px;border:0;border-bottom:1px solid #364051}
+.vuelta-app-nav-inner{width:min(1280px,calc(100% - 80px));padding:14px 0 16px}
 .vuelta-app-links a[aria-current]{background:#1b49a0;color:#fff;border-color:#7ca5ff}
 .vuelta-app-links a[aria-current] span{color:#fff}
+.launch-demo [data-vuelta-hidden]{display:none!important}
 .launch-demo #web,.launch-demo #propuesta,.launch-demo #tarjeta,.launch-demo #coleccion,.launch-demo #servicio,.launch-demo #consulta{scroll-margin-top:105px}
-@media(max-width:760px){.vuelta-app-nav-inner{width:auto;padding:12px}.vuelta-app-nav{margin-bottom:12px}}
+@media(max-width:760px){.vuelta-app-nav-inner{width:calc(100% - 36px);padding:12px 0}.vuelta-app-nav{margin-bottom:12px}}
+
+/* Switching samples must not re-anchor the viewport to replaced content. */
+.launch-demo #contenido{overflow-anchor:none}
