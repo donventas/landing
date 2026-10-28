@@ -22,7 +22,9 @@
   var active=-1,limit=offset+summary.getBoundingClientRect().height+100;
   targets.forEach(function(s,i){if(s&&s.getBoundingClientRect().top<=limit)active=i;});
   links.forEach(function(a,i){if(i===active)a.setAttribute('aria-current','location');else a.removeAttribute('aria-current');});
-  current.textContent=active<0?links.length+' secciones':links[active].textContent.trim().replace(/^(\d{2})/,'$1 · ');
+  var lang=new URLSearchParams(location.search).get('_x_tr_tl');
+  var words={en:'sections',fr:'sections',pt:'seções',de:'Abschnitte',it:'sezioni',bg:'раздела',ja:'セクション', 'zh-CN':'个部分',ar:'أقسام'};
+  current.textContent=active<0?links.length+' '+(location.hostname.endsWith('.translate.goog')&&words[lang]||'secciones'):links[active].textContent.trim().replace(/^(\d{2})/,'$1 · ');
  }
  function schedule(){if(scheduled)return;scheduled=true;requestAnimationFrame(function(){scheduled=false;measure();update();});}
  measure();update();

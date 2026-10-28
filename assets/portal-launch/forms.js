@@ -11,6 +11,21 @@
  const notices=[...document.querySelectorAll('[data-form-environment]')];
  const unavailable=()=>notices.forEach(el=>{el.hidden=false;el.textContent='Este formulario no está disponible por ahora. Inténtalo más tarde.';});
  unavailable();
+ // Google Translate is a separate origin: send readers to the official form,
+ // rather than submit personal data through the translator or weaken API checks.
+ if(location.hostname&&location.hostname.endsWith('.translate.goog')){
+  const urls={waitlist:'https://www.donventas.mx/#lista',contact:'https://www.donventas.mx/#consulta-encargo'};
+  forms.forEach(form=>{
+   form.hidden=true;
+   const notice=form.parentElement.querySelector('[data-form-environment]')||document.querySelector('[data-form-environment]');
+   if(!notice)return;
+   notice.hidden=false; notice.textContent='Para enviar tus datos de forma segura, abre el formulario en el sitio oficial. ';
+   const link=document.createElement('a'); link.href=urls[form.dataset.portalForm]; link.target='_blank'; link.rel='noopener noreferrer'; link.textContent='Abrir formulario oficial ↗';
+   link.addEventListener('click',e=>{e.preventDefault();window.open(urls[form.dataset.portalForm],'_blank','noopener,noreferrer');});
+   notice.appendChild(link);
+  });
+  return;
+ }
  const contact=document.getElementById('help-form');
  if(contact){
   const choices=[...contact.querySelectorAll('input[name="needs"]')],example=contact.querySelector('#help-example');

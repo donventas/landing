@@ -9,7 +9,7 @@ for(const file of pages)test('section index: unique native targets and resources
  const ids=[...h.matchAll(/\bid="([^"]+)"/g)].map(m=>m[1]);assert.equal(ids.length,new Set(ids).size);
  const links=[...index.matchAll(/href="#([^"]+)"/g)].map(m=>m[1]);assert.ok(links.length>=2);
  for(const id of links)assert.ok(ids.includes(id),'Missing '+id);
- assert.equal((h.match(/src="\/section-index.js\?v=202610(?:07|29)-1"/g)||[]).length,1);
+ assert.equal((h.match(/src="\/section-index.js\?v=202610(?:07-1|29-[12])"/g)||[]).length,1);
  assert.equal((h.match(/href="\/section-index.css\?v=202610(?:07|29)-1"/g)||[]).length,1);
  assert.match(index,/<details data-section-index[^>]*>/);
  assert.doesNotMatch(index,/<details[^>]*\sopen[\s>]/);
@@ -50,7 +50,7 @@ test('translated index counts and navigates same-page absolute URLs without relo
  const external={href:'https://other.invalid/#ejemplo',hash:'#ejemplo'};
  const handlers={},index={open:true,querySelector:s=>s==='summary'?summary:current,querySelectorAll:()=>[link,external],addEventListener:(n,f)=>{handlers[n]=f}};
  const document={querySelector:s=>s==='[data-section-index]'?index:null,getElementById:id=>id==='ejemplo'?target:null,body:{classList:{add(){}},style:{setProperty(){}}},addEventListener(){}};
- const location={href:'https://site.translate.goog/?_x_tr_tl=en',origin:'https://site.translate.goog',pathname:'/',search:'?_x_tr_tl=en'};
- vm.runInNewContext(read('section-index.js'),{document,location,URL,window:{},history:{pushState:(...v)=>historyCalls.push(v)},matchMedia:()=>({matches:true}),getComputedStyle:()=>({position:'static'}),addEventListener(){},requestAnimationFrame:f=>f(),decodeURIComponent});
- assert.equal(current.textContent,'1 secciones');let prevented=false;handlers.click({target:{closest:()=>link},button:0,preventDefault(){prevented=true}});assert.equal(prevented,true);assert.equal(index.open,false);assert.equal(historyCalls[0][2],'/?_x_tr_tl=en#ejemplo');assert.equal(target.scrolled.behavior,'instant');
+ const location={href:'https://site.translate.goog/?_x_tr_tl=en',origin:'https://site.translate.goog',pathname:'/',search:'?_x_tr_tl=en',hostname:'site.translate.goog'};
+ vm.runInNewContext(read('section-index.js'),{document,location,URL,URLSearchParams,window:{},history:{pushState:(...v)=>historyCalls.push(v)},matchMedia:()=>({matches:true}),getComputedStyle:()=>({position:'static'}),addEventListener(){},requestAnimationFrame:f=>f(),decodeURIComponent});
+ assert.equal(current.textContent,'1 sections');let prevented=false;handlers.click({target:{closest:()=>link},button:0,preventDefault(){prevented=true}});assert.equal(prevented,true);assert.equal(index.open,false);assert.equal(historyCalls[0][2],'/?_x_tr_tl=en#ejemplo');assert.equal(target.scrolled.behavior,'instant');
 });
