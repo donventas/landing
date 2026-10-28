@@ -16,7 +16,7 @@ const assetPath = width => `assets/editorial/criterio-metodo-01-06-v2-${width}.w
 
 test('approved method assets remain intact after the homepage changes', () => {
   const html = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
-  assert.match(html, /tarjeta-foto-p05\.png/);
+  assert.match(fs.readFileSync(path.join(root, 'portafolio/vuelta-27/index.html'), 'utf8'), /variantes\/b\/media\/tarjeta\.webp/);
   for (const [width, height, size, hash] of assets) {
     assert.equal(width / height, 4 / 3);
     const bytes = fs.readFileSync(path.join(root, assetPath(width)));
