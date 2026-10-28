@@ -26,5 +26,9 @@ test('direct service inquiry opens from the hero and loads versioned assets',()=
  assert.match(html,/integration\.css\?v=20261028-encargo4/);
  assert.equal((service.match(/name="needs"/g)||[]).length,6);
  assert.doesNotMatch(service,/id="help-type"/);
+ const pattern=service.match(/name="whatsapp"[^>]*pattern="([^"]+)"/)[1];
+ const phone=new RegExp(`^(?:${pattern})$`,'v');
+ assert.equal(phone.test('+52 55 1234 5678'),true);
+ assert.equal(phone.test('telefono incorrecto'),false);
  assert.match(html,/href="\/diagnostico\.html">Completa el diagnóstico/);
 });
