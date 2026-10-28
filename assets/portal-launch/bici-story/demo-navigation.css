@@ -9,3 +9,6 @@
 [data-embed] .vuelta-app-nav{display:none}
 @media(max-width:760px){.vuelta-app-nav-inner{width:calc(100% - 36px);display:block;padding:12px 0}.vuelta-app-nav p{margin-bottom:9px}.vuelta-app-links{grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}.vuelta-app-links a{min-height:44px;padding:8px 10px;font-size:13px}}
 @media(max-width:340px){.vuelta-app-links a{font-size:12px}}
+
+/* The prominent application menu replaces the duplicate desktop header links. */
+.launch-demo .editorial-nav .nav-shell>nav{display:none}
