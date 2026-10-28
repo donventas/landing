@@ -17,6 +17,17 @@
   const examples={claridad:'Por ejemplo: quiero que mis clientes entiendan mejor mis servicios.',web:'Por ejemplo: necesito una página para explicar mis servicios y recibir consultas.',propuesta:'Por ejemplo: quiero presentar una propuesta y no sé cómo organizarla.',marca:'Por ejemplo: mi negocio cambió y quiero actualizar su identidad.',materiales:'Por ejemplo: necesito llevar mi marca a empaques, letreros o documentos.',otro:'Cuéntanos qué está pasando o qué te gustaría conseguir.'};
   const update=()=>{const selected=choices.filter(c=>c.checked);choices[0].setCustomValidity(selected.length?'':'Elige al menos una opción.');example.textContent=selected.length===1?examples[selected[0].value]:'Por ejemplo: cuéntanos qué quieres lograr y qué has intentado hasta ahora.';};
   choices.forEach(c=>c.addEventListener('change',update));update();
+  const more=contact.querySelector('[data-details-toggle]'),extra=contact.querySelector('[data-details-extra]');
+  if(more&&extra){const expand=open=>{extra.hidden=!open;more.setAttribute('aria-expanded',String(open));};more.hidden=false;expand(false);more.addEventListener('click',()=>expand(extra.hidden));contact.addEventListener('invalid',e=>{if(extra.contains(e.target))expand(true);},true);}
+  const steps=[...contact.querySelectorAll('[data-wizard-step]')],progress=contact.querySelector('[data-wizard-progress]');
+  if(steps.length===2&&progress){
+   let current=0;const titles=['Tu necesidad','Tus datos'];
+   const show=(index,focus=false)=>{current=index;steps.forEach((step,i)=>{step.hidden=i!==index;});progress.textContent=`${String(index+1).padStart(2,'0')} / 02 · ${titles[index]}`;if(focus){const target=steps[index].querySelector('legend,h4');target?.focus();}};
+   progress.hidden=false;contact.querySelectorAll('[data-wizard-actions],[data-wizard-back]').forEach(el=>{el.hidden=false;});
+   contact.querySelectorAll('[data-wizard-next]').forEach((button,i)=>button.addEventListener('click',()=>{const invalid=[...steps[i].querySelectorAll('input,textarea,select')].find(field=>!field.checkValidity());if(invalid){invalid.reportValidity();return;}show(i+1,true);}));
+   contact.querySelectorAll('[data-wizard-back]').forEach(button=>button.addEventListener('click',()=>show(Math.max(0,current-1),true)));
+   show(0);
+  }
  }
  fetch('/api/portal-intake',{cache:'no-store'}).then(r=>r.json()).then(config=>{
   if(config.enabled&&config.mode==='live')notices.forEach(el=>{el.hidden=true;});
