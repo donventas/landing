@@ -5,7 +5,7 @@ test('A and B offer the same subtitle languages with P06 timing',()=>{
  const tracks=html=>[...html.matchAll(/<track\b[^>]*src="([^"]+)"[^>]*srclang="([^"]+)"/g)].map(m=>[m[2],m[1]]);
  const a=tracks(page('a')),b=tracks(page('b'));assert.deepEqual(a.map(x=>x[0]),b.map(x=>x[0]));assert.equal(a.length,10);
  const times=s=>[...s.matchAll(/\d\d:\d\d:\d\d\.\d{3} --> \d\d:\d\d:\d\d\.\d{3}/g)].map(m=>m[0]);
- const expected=times(read(a[0][1].slice(1)));assert.ok(expected.length>0);for(const [,src] of a)assert.deepEqual(times(read(src.slice(1))),expected,src);
+ const expected=times(read(a[0][1].slice(1)));assert.ok(expected.length>0);for(const [,src] of a)assert.deepEqual(times(read(src.slice(1).split('?')[0])),expected,src);
 });
 test('A includes the same collection message and embedded language control',()=>{
  for(const x of ['a','b']){const s=demo(x);assert.match(s,/Una marca también se reconoce desde afuera/);assert.match(s,/La identidad toma forma en el espacio, los objetos y cada encuentro/);assert.match(s,/shop-language-trigger/);}
