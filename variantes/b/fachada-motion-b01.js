@@ -5,11 +5,11 @@
   const reduced=matchMedia('(prefers-reduced-motion: reduce)'),mobile=matchMedia('(max-width:680px)'),root=document.documentElement;
   let visible=false,userPaused=false,userRequested=false;
   const update=()=>{
-    const reducedMotion=reduced.matches||root.dataset.motion==='reduce';
-    const wantsPlayback=!userPaused&&(!mobile.matches||userRequested);
-    const allowed=visible&&!document.hidden&&!reducedMotion&&wantsPlayback;
-    button.hidden=reducedMotion;
-    button.textContent=wantsPlayback?'❚❚  Pausar':'▶  Reproducir';
+    const reducedMotion=(reduced.matches||root.dataset.motion==='reduce')&&!userRequested;
+    const wantsPlayback=!userPaused&&!reducedMotion;
+    const allowed=visible&&!document.hidden&&wantsPlayback;
+    button.hidden=false;
+    button.textContent=wantsPlayback?'Ⅱ Pausar fondo':'▶ Reanudar fondo';
     button.setAttribute('aria-label',wantsPlayback?'Pausar video de la fachada':'Reproducir video de la fachada');
     if(!allowed){v.pause();if(reducedMotion)v.classList.remove('is-playing');return}
     if(!v.src){v.src=v.dataset.src;v.load()}
@@ -17,7 +17,7 @@
   };
   v.addEventListener('playing',()=>v.classList.add('is-playing'));
   v.addEventListener('error',()=>{v.classList.remove('is-playing');button.hidden=true});
-  button.addEventListener('click',()=>{if(v.paused){userRequested=true;userPaused=false}else userPaused=true;update()});
+  button.addEventListener('click',()=>{if(v.paused||userPaused){userRequested=true;userPaused=false}else userPaused=true;update()});
   if('IntersectionObserver' in window){new IntersectionObserver(entries=>{visible=entries[0].isIntersecting;update()},{threshold:.15}).observe(v)}
   else {visible=true;update()}
   reduced.addEventListener('change',update);mobile.addEventListener('change',update);document.addEventListener('visibilitychange',update);
