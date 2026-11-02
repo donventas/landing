@@ -73,7 +73,7 @@ test('keeps the canonical wordmark without loading the 3D emblem in the hero', (
 });
 
 test('new hero states the offer and labels the fictional case', () => {
-  assert.match(html, /Haz que se <br><span>entienda\.<\/span>/);
+  assert.match(html, /Haz que se <br><span>entienda<\/span>/);
   assert.match(html, /Tu negocio tiene mucho que ofrecer/);
   assert.match(html, /alt="Un experto revisa una bicicleta en el taller conceptual de Vuelta 27\."/);
   assert.match(html, /Vuelta 27 es un taller ficticio/);

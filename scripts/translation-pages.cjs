@@ -9,7 +9,7 @@ function block(file) {
   const link = 'https://translate.google.com/website?sl=es&tl=en&u=' + encodeURIComponent(url);
   return '<section class="dv-language-footer" aria-label="Idioma / Language">\n' +
     '<details class="dv-language" id="idioma"><summary aria-label="Idioma / Language" title="Idioma / Language"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5h12M9 3v2M5 5c1 5 4 8 9 10M13 5c-1 5-4 8-9 10M14 21l4-10 4 10M15.5 17h5"/></svg><span class="dv-language-label">Idioma / Language</span></summary>\n' +
-    '<div class="dv-language-panel"><h2>Lee en tu idioma.<br><span lang="en">Read in your language.</span></h2>' +
+    '<div class="dv-language-panel"><h2>Lee en tu idioma<br><span lang="en">Read in your language</span></h2>' +
     (sensitive ? '<p>En esta página, usa <strong>Traducir</strong> desde el menú de tu navegador. No compartimos tu enlace de suscripción con un traductor externo.</p><p lang="en">Use your browser’s Translate option here. Your subscription link is not shared with an external translator.</p>' :
     '<label for="dv-language-target">Idioma de lectura / Reading language</label><select id="dv-language-target" data-dv-language-target disabled>' + languages.map(([value,name]) => '<option value="'+value+'">'+name+'</option>').join('') + '</select>' +
     '<a class="dv-language-go" data-dv-language-url="'+url+'" href="'+link.replace(/&/g,'&amp;')+'" target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer">Traducir con Google <span lang="en">/ Translate</span> ↗</a>' +

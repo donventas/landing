@@ -2,6 +2,7 @@
 const test=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path'),cp=require('node:child_process'),vm=require('node:vm');
 const root=path.resolve(__dirname,'..');
 const {pages,decode,integrate}=require('../scripts/appearance-pages.cjs');
+const editorialPunctuation=require('./support/approved-editorial-punctuation.cjs');
 const read=f=>fs.readFileSync(path.join(root,f),'utf8');
 const base='c487c25184ec05feed526e36572d274acb9d4eb0';
 for(const [file,family] of Object.entries(pages))test('appearance: preserved source and one control — '+file,()=>{
@@ -13,7 +14,7 @@ for(const [file,family] of Object.entries(pages))test('appearance: preserved sou
   assert.equal((html.match(/src="\/appearance\.js"/g)||[]).length,1);
   assert.match(html,/class="editorial-nav"/);assert.match(html,/\/assets\/portal-launch\/integration.css/);
  }else{
-  assert.equal(read(file).replace(/\r/g,''),require('../scripts/translation-pages.cjs').integrate(integrate(original,family),file).replace(/\r/g,''));
+  assert.equal(read(file).replace(/\r/g,''),editorialPunctuation(require('../scripts/translation-pages.cjs').integrate(integrate(original,family),file).replace(/\r/g,''),file));
   assert.equal((html.match(/id="site-appearance"/g)||[]).length,1);assert.match(html,/\/appearance-families.css/);
  }
  assert.match(html,new RegExp('data-dv-page="'+family+'"'));

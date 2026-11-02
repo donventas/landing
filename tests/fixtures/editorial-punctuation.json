@@ -1,0 +1,426 @@
+{
+  "branding.html": [
+    [
+      "<h1 id=\"brand-title\">Tu negocio tiene algo propio.<br><em>Hagamos que tu marca lo transmita.</em></h1>",
+      "<h1 id=\"brand-title\">Tu negocio tiene algo propio.<br><em>Hagamos que tu marca lo transmita</em></h1>"
+    ],
+    [
+      "<h2 id=\"situation-title\">Lo que quieres construir.<br><em>Lo que vale la pena conservar.</em></h2>",
+      "<h2 id=\"situation-title\">Lo que quieres construir.<br><em>Lo que vale la pena conservar</em></h2>"
+    ],
+    [
+      "<h3>Te conocen, pero no por lo que realmente haces.</h3>",
+      "<h3>Te conocen, pero no por lo que realmente haces</h3>"
+    ],
+    [
+      "<h3>Cada canal cuenta una historia distinta.</h3>",
+      "<h3>Cada canal cuenta una historia distinta</h3>"
+    ],
+    [
+      "<h3>Crear una pieza obliga a decidirlo todo otra vez.</h3>",
+      "<h3>Crear una pieza obliga a decidirlo todo otra vez</h3>"
+    ],
+    [
+      "<h2 id=\"system-title\">Que se entienda.<br>Que se reconozca.<br><em>Que puedas usarla.</em></h2>",
+      "<h2 id=\"system-title\">Que se entienda.<br>Que se reconozca.<br><em>Que puedas usarla</em></h2>"
+    ],
+    [
+      "<h3>Palabras que explican tu valor.</h3>",
+      "<h3>Palabras que explican tu valor</h3>"
+    ],
+    [
+      "<h3>Una presencia que se sienta tuya.</h3>",
+      "<h3>Una presencia que se sienta tuya</h3>"
+    ],
+    [
+      "<h3>Herramientas para seguir adelante.</h3>",
+      "<h3>Herramientas para seguir adelante</h3>"
+    ],
+    [
+      "<h3>Construimos o actualizamos una base<br>que puedas <em>usar y desarrollar.</em></h3>",
+      "<h3>Construimos o actualizamos una base<br>que puedas <em>usar y desarrollar</em></h3>"
+    ],
+    [
+      "<h2 id=\"proof-title\">No se queda en una guía.<br><em>Acompaña lo que ofreces.</em></h2>",
+      "<h2 id=\"proof-title\">No se queda en una guía.<br><em>Acompaña lo que ofreces</em></h2>"
+    ],
+    [
+      "<h2 id=\"method-title\">Entender antes de diseñar.<br><em>Probar antes de extender.</em></h2>",
+      "<h2 id=\"method-title\">Entender antes de diseñar.<br><em>Probar antes de extender</em></h2>"
+    ],
+    [
+      "<h3>Escuchamos el negocio.</h3>",
+      "<h3>Escuchamos el negocio</h3>"
+    ],
+    [
+      "<h3>Elegimos una prioridad.</h3>",
+      "<h3>Elegimos una prioridad</h3>"
+    ],
+    [
+      "<h3>Lo llevamos a una aplicación.</h3>",
+      "<h3>Lo llevamos a una aplicación</h3>"
+    ],
+    [
+      "<h3>Lo dejamos listo para usar.</h3>",
+      "<h3>Lo dejamos listo para usar</h3>"
+    ],
+    [
+      "<h2 id=\"investment-title\">El alcance correcto.<br><em>No el paquete más grande.</em></h2>",
+      "<h2 id=\"investment-title\">El alcance correcto.<br><em>No el paquete más grande</em></h2>"
+    ],
+    [
+      "<h3>Una base común.</h3>",
+      "<h3>Una base común</h3>"
+    ],
+    [
+      "<h3>Conectar los usos.</h3>",
+      "<h3>Conectar los usos</h3>"
+    ],
+    [
+      "<h3>Compartir el criterio.</h3>",
+      "<h3>Compartir el criterio</h3>"
+    ],
+    [
+      "<h3>Tu negocio no se queda quieto.<br><em>Tu sistema tampoco tiene que hacerlo.</em></h3>",
+      "<h3>Tu negocio no se queda quieto.<br><em>Tu sistema tampoco tiene que hacerlo</em></h3>"
+    ],
+    [
+      "<h2 id=\"faq-title\">Preguntas<br><em>con respuestas claras.</em></h2>",
+      "<h2 id=\"faq-title\">Preguntas<br><em>con respuestas claras</em></h2>"
+    ]
+  ],
+  "diagnostico.html": [
+    [
+      "<h1>Una recomendación clara antes de una propuesta.</h1>",
+      "<h1>Una recomendación clara antes de una propuesta</h1>"
+    ]
+  ],
+  "arturo-villagomez.html": [
+    [
+      "<h2 id=\"enfoque-title\">No separar lo que dices de <em>lo que puedes entregar.</em></h2>",
+      "<h2 id=\"enfoque-title\">No separar lo que dices de <em>lo que puedes entregar</em></h2>"
+    ],
+    [
+      "<h2 id=\"trabajo-title\" data-section-target>Una idea clara. <em>Piezas que se conectan.</em></h2>",
+      "<h2 id=\"trabajo-title\" data-section-target>Una idea clara. <em>Piezas que se conectan</em></h2>"
+    ],
+    [
+      "<h3>El valor no siempre habla por sí solo.</h3>",
+      "<h3>El valor no siempre habla por sí solo</h3>"
+    ],
+    [
+      "<h3>Antes de crear contenido, entiende qué resuelve el negocio.</h3>",
+      "<h3>Antes de crear contenido, entiende qué resuelve el negocio</h3>"
+    ],
+    [
+      "<h3>Tu marca es tu ventaja.</h3>",
+      "<h3>Tu marca es tu ventaja</h3>"
+    ],
+    [
+      "<h3>Manual de marca: el manual que más vale no perder.</h3>",
+      "<h3>Manual de marca: el manual que más vale no perder</h3>"
+    ],
+    [
+      "<h3>Logotipos: mitos que no dejan brillar a tu marca.</h3>",
+      "<h3>Logotipos: mitos que no dejan brillar a tu marca</h3>"
+    ],
+    [
+      "<h3>Diseño editorial: dale identidad a lo que entregas.</h3>",
+      "<h3>Diseño editorial: dale identidad a lo que entregas</h3>"
+    ],
+    [
+      "<h3>Tu marca no necesita verse igual para sentirse la misma.</h3>",
+      "<h3>Tu marca no necesita verse igual para sentirse la misma</h3>"
+    ],
+    [
+      "<h2 id=\"siguiente-title\" data-section-target>Cuéntame en qué momento <em>está tu negocio.</em></h2>",
+      "<h2 id=\"siguiente-title\" data-section-target>Cuéntame en qué momento <em>está tu negocio</em></h2>"
+    ]
+  ],
+  "blog/index.html": [
+    [
+      "<h1>Ideas para hacer visible el <em>valor de un negocio.</em></h1>",
+      "<h1>Ideas para hacer visible el <em>valor de un negocio</em></h1>"
+    ],
+    [
+      "<h2 id=\"situation-title\">Empieza por lo que quieres hacer posible.</h2>",
+      "<h2 id=\"situation-title\">Empieza por lo que quieres hacer posible</h2>"
+    ],
+    [
+      "<h2 id=\"glosario-title\" data-section-target>Marketing, en palabras claras.</h2>",
+      "<h2 id=\"glosario-title\" data-section-target>Marketing, en palabras claras</h2>"
+    ]
+  ],
+  "blog/glosario.html": [
+    [
+      "<h1>Marketing, en <em>palabras claras.</em></h1>",
+      "<h1>Marketing, en <em>palabras claras</em></h1>"
+    ]
+  ],
+  "blog/manual-de-marca.html": [
+    [
+      "<h2 id=\"related-title\">Lo que el manual no puede hacer por ti.</h2>",
+      "<h2 id=\"related-title\">Lo que el manual no puede hacer por ti</h2>"
+    ],
+    [
+      "<h2 id=\"related-logos-title\">Tu logo, fuera del archivo.</h2>",
+      "<h2 id=\"related-logos-title\">Tu logo, fuera del archivo</h2>"
+    ]
+  ],
+  "blog/por-que-nacio-don-ventas.html": [
+    [
+      "<h1>El valor no siempre habla <em>por sí solo.</em></h1>",
+      "<h1>El valor no siempre habla <em>por sí solo</em></h1>"
+    ],
+    [
+      "<h2>Antes de ser una marca, fue una manera de salir adelante.</h2>",
+      "<h2>Antes de ser una marca, fue una manera de salir adelante</h2>"
+    ],
+    [
+      "<h2>No cambié de camino. <em>Fui ampliando la forma de ayudar.</em></h2>",
+      "<h2>No cambié de camino. <em>Fui ampliando la forma de ayudar</em></h2>"
+    ],
+    [
+      "<h2>El problema no siempre era la idea. Era la distancia entre la idea y las personas.</h2>",
+      "<h2>El problema no siempre era la idea. Era la distancia entre la idea y las personas</h2>"
+    ],
+    [
+      "<h2>Hacer visible el valor que ya existe.</h2>",
+      "<h2>Hacer visible el valor que ya existe</h2>"
+    ],
+    [
+      "<h3>Para que el buen trabajo no permanezca oculto.</h3>",
+      "<h3>Para que el buen trabajo no permanezca oculto</h3>"
+    ],
+    [
+      "<h3>Entendiendo primero el negocio.</h3>",
+      "<h3>Entendiendo primero el negocio</h3>"
+    ],
+    [
+      "<h3>Un sistema para explicar, demostrar y aparecer.</h3>",
+      "<h3>Un sistema para explicar, demostrar y aparecer</h3>"
+    ],
+    [
+      "<h2>Quiero compartirte lo que me hubiera gustado entender antes.</h2>",
+      "<h2>Quiero compartirte lo que me hubiera gustado entender antes</h2>"
+    ],
+    [
+      "<h2 id=\"related-foundational-title\">Nos buscaban para pedir créditos. No ofrecíamos créditos.</h2>",
+      "<h2 id=\"related-foundational-title\">Nos buscaban para pedir créditos. No ofrecíamos créditos</h2>"
+    ]
+  ],
+  "blog/contenido-que-atrae-clientes.html": [
+    [
+      "<h1>Antes de crear contenido, entiende <em>qué resuelve el negocio.</em></h1>",
+      "<h1>Antes de crear contenido, entiende <em>qué resuelve el negocio</em></h1>"
+    ],
+    [
+      "<h2>Nos preguntaban por un servicio que no vendíamos.</h2>",
+      "<h2>Nos preguntaban por un servicio que no vendíamos</h2>"
+    ],
+    [
+      "<h2>Más seguidores no significan que la oferta se entienda mejor.</h2>",
+      "<h2>Más seguidores no significan que la oferta se entienda mejor</h2>"
+    ],
+    [
+      "<h2>Qué necesito conocer antes de comunicar un negocio.</h2>",
+      "<h2>Qué necesito conocer antes de comunicar un negocio</h2>"
+    ],
+    [
+      "<h2>Cómo explicar lo que haces sin perder su significado.</h2>",
+      "<h2>Cómo explicar lo que haces sin perder su significado</h2>"
+    ],
+    [
+      "<h2>No elegiría solo por lo bonito que se ve.</h2>",
+      "<h2>No elegiría solo por lo bonito que se ve</h2>"
+    ]
+  ],
+  "blog/tu-marca-es-tu-ventaja.html": [
+    [
+      "<h1>Tu marca es <em>tu ventaja.</em></h1>",
+      "<h1>Tu marca es <em>tu ventaja</em></h1>"
+    ],
+    [
+      "<h2>Hay lugares a los que volvemos por algo más que lo que venden.</h2>",
+      "<h2>Hay lugares a los que volvemos por algo más que lo que venden</h2>"
+    ],
+    [
+      "<h2>La marca también se construye después de la venta.</h2>",
+      "<h2>La marca también se construye después de la venta</h2>"
+    ],
+    [
+      "<h2>Lo entendí viendo el negocio de mi mamá.</h2>",
+      "<h2>Lo entendí viendo el negocio de mi mamá</h2>"
+    ],
+    [
+      "<h2>Una promesa necesita un negocio capaz de cumplirla.</h2>",
+      "<h2>Una promesa necesita un negocio capaz de cumplirla</h2>"
+    ],
+    [
+      "<h2>Contar tu historia puede ayudar. Vivirla también.</h2>",
+      "<h2>Contar tu historia puede ayudar. Vivirla también</h2>"
+    ],
+    [
+      "<h2 id=\"related-title\">Antes de comunicarlo, hay que entenderlo.</h2>",
+      "<h2 id=\"related-title\">Antes de comunicarlo, hay que entenderlo</h2>"
+    ]
+  ],
+  "blog/logotipos-mitos.html": [
+    [
+      "<h3>Haz una lista de lugares, no de formatos por cumplir.</h3>",
+      "<h3>Haz una lista de lugares, no de formatos por cumplir</h3>"
+    ],
+    [
+      "<h3>Cuenta cómo funciona tu operación.</h3>",
+      "<h3>Cuenta cómo funciona tu operación</h3>"
+    ],
+    [
+      "<h3>Convierte esas necesidades en reglas.</h3>",
+      "<h3>Convierte esas necesidades en reglas</h3>"
+    ],
+    [
+      "<h3>Prueba lo bonito y también lo difícil.</h3>",
+      "<h3>Prueba lo bonito y también lo difícil</h3>"
+    ],
+    [
+      "<h3>Entrega recursos que alguien pueda utilizar.</h3>",
+      "<h3>Entrega recursos que alguien pueda utilizar</h3>"
+    ],
+    [
+      "<h2>El archivo es una pieza. Las decisiones hacen que funcione.</h2>",
+      "<h2>El archivo es una pieza. Las decisiones hacen que funcione</h2>"
+    ],
+    [
+      "<h2 id=\"related-title\">Las reglas que conviene tener a la mano.</h2>",
+      "<h2 id=\"related-title\">Las reglas que conviene tener a la mano</h2>"
+    ]
+  ],
+  "blog/diseno-editorial.html": [
+    [
+      "<h2 class=\"opening-line\">Cambiaste el logo, pusiste tus colores y exportaste el PDF. Listo: ya parece tuyo.</h2>",
+      "<h2 class=\"opening-line\">Cambiaste el logo, pusiste tus colores y exportaste el PDF. Listo: ya parece tuyo</h2>"
+    ],
+    [
+      "<h2>Entenderte no debería requerir un curso.</h2>",
+      "<h2>Entenderte no debería requerir un curso</h2>"
+    ],
+    [
+      "<h2>Tu documento no es una bodega de información.</h2>",
+      "<h2>Tu documento no es una bodega de información</h2>"
+    ],
+    [
+      "<h3>Tu catálogo necesita una actualización.</h3>",
+      "<h3>Tu catálogo necesita una actualización</h3>"
+    ],
+    [
+      "<h2>Reconocer tu marca. Reconocerse en lo que cuentas.</h2>",
+      "<h2>Reconocer tu marca. Reconocerse en lo que cuentas</h2>"
+    ],
+    [
+      "<h2>La IA acelera. El criterio da dirección.</h2>",
+      "<h2>La IA acelera. El criterio da dirección</h2>"
+    ],
+    [
+      "<h2 id=\"related-title\">Que el criterio no se quede contigo.</h2>",
+      "<h2 id=\"related-title\">Que el criterio no se quede contigo</h2>"
+    ]
+  ],
+  "blog/como-aparecer-en-google.html": [
+    [
+      "<h2 class=\"opening-line\">Sales en el periódico. No por un escándalo: nadie logra encontrarte.</h2>",
+      "<h2 class=\"opening-line\">Sales en el periódico. No por un escándalo: nadie logra encontrarte</h2>"
+    ],
+    [
+      "<h2>Tu próximo cliente no siempre busca de la misma manera.</h2>",
+      "<h2>Tu próximo cliente no siempre busca de la misma manera</h2>"
+    ],
+    [
+      "<h2>Cómo aparecer en Google: empieza por lo que sí puedes preparar.</h2>",
+      "<h2>Cómo aparecer en Google: empieza por lo que sí puedes preparar</h2>"
+    ],
+    [
+      "<h2>Dale razones a alguien para considerarte.</h2>",
+      "<h2>Dale razones a alguien para considerarte</h2>"
+    ],
+    [
+      "<h4>Calidad en cada detalle.</h4>",
+      "<h4>Calidad en cada detalle</h4>"
+    ],
+    [
+      "<h4>Un escritorio que sí cabe.</h4>",
+      "<h4>Un escritorio que sí cabe</h4>"
+    ],
+    [
+      "<h2>Haz esta prueba antes de publicar otra cosa.</h2>",
+      "<h2>Haz esta prueba antes de publicar otra cosa</h2>"
+    ]
+  ],
+  "blog/como-aplicar-identidad-visual.html": [
+    [
+      "<h3>La misma marca.<br>Tres trabajos distintos.</h3>",
+      "<h3>La misma marca.<br>Tres trabajos distintos</h3>"
+    ],
+    [
+      "<h3>Del local a tu bolsillo.</h3>",
+      "<h3>Del local a tu bolsillo</h3>"
+    ],
+    [
+      "<h2>Hablemos de las próximas aplicaciones de tu marca.</h2>",
+      "<h2>Hablemos de las próximas aplicaciones de tu marca</h2>"
+    ]
+  ],
+  "blog/como-crear-una-marca.html": [
+    [
+      "<h1 id=\"titulo\">Cómo crear una marca desde cero: <em>por dónde empezar y qué decidir.</em></h1>",
+      "<h1 id=\"titulo\">Cómo crear una marca desde cero: <em>por dónde empezar y qué decidir</em></h1>"
+    ],
+    [
+      "<h2>Antes de pensar cómo te verás, piensa a quién vas a ayudar.</h2>",
+      "<h2>Antes de pensar cómo te verás, piensa a quién vas a ayudar</h2>"
+    ],
+    [
+      "<h2>Encuentra una razón para que te elijan.</h2>",
+      "<h2>Encuentra una razón para que te elijan</h2>"
+    ],
+    [
+      "<h2>Decide qué quieres que recuerden de ti.</h2>",
+      "<h2>Decide qué quieres que recuerden de ti</h2>"
+    ],
+    [
+      "<h2>Dale nombre y una forma de hablar.</h2>",
+      "<h2>Dale nombre y una forma de hablar</h2>"
+    ],
+    [
+      "<h2>Ahora sí: una identidad visual con algo que decir.</h2>",
+      "<h2>Ahora sí: una identidad visual con algo que decir</h2>"
+    ],
+    [
+      "<h2>Pruébala donde realmente va a vivir.</h2>",
+      "<h2>Pruébala donde realmente va a vivir</h2>"
+    ],
+    [
+      "<h3 id=\"ejemplo-titulo\">De «café para todos»<br>a una mañana con menos vueltas.</h3>",
+      "<h3 id=\"ejemplo-titulo\">De «café para todos»<br>a una mañana con menos vueltas</h3>"
+    ],
+    [
+      "<h2>Organiza lo necesario para no empezar de cero.</h2>",
+      "<h2>Organiza lo necesario para no empezar de cero</h2>"
+    ],
+    [
+      "<h2>Ordenemos estas decisiones contigo.</h2>",
+      "<h2>Ordenemos estas decisiones contigo</h2>"
+    ]
+  ],
+  "15_LEGAL/Comentarios Privados.html": [
+    [
+      "<h1>Tu comentario es privado.</h1>",
+      "<h1>Tu comentario es privado</h1>"
+    ]
+  ],
+  "suscripcion.html": [
+    [
+      "<h1 id=\"subscription-title\">Tú eliges qué recibir.</h1>",
+      "<h1 id=\"subscription-title\">Tú eliges qué recibir</h1>"
+    ]
+  ]
+}

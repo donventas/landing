@@ -5,9 +5,8 @@
 .collection-facade-copy{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start;margin:22px 0 12px}
 .collection-facade-copy h3{font-size:clamp(1.5rem,3vw,2.5rem);line-height:1.1;letter-spacing:-.035em;margin:0;max-width:16ch}
 .collection-facade-copy p{margin:0;max-width:46ch;line-height:1.55}
-.facade-motion-toggle{position:absolute;right:16px;bottom:16px;z-index:2;display:inline-flex;align-items:center;gap:.5rem;padding:.65rem .9rem;border:1px solid rgba(255,255,255,.7);background:rgba(14,17,23,.82);color:#fff;font:inherit;font-size:.85rem;cursor:pointer}
+.facade-motion-toggle{position:absolute;right:16px;bottom:16px;z-index:2;display:inline-flex;align-items:center;gap:.5rem;min-height:44px;padding:.65rem .9rem;border:0;background:transparent;color:#fff;font:inherit;font-size:.85rem;text-shadow:0 1px 5px #000;cursor:pointer}
 .facade-motion-toggle[hidden]{display:none}
 .facade-motion-toggle:focus-visible{outline:3px solid #6e97f6;outline-offset:3px}
 @media(max-width:680px){.collection-facade-copy{grid-template-columns:1fr;gap:12px}.collection-facade .facade-stage{aspect-ratio:4/3}.facade-motion-toggle{right:10px;bottom:10px}}
-@media(prefers-reduced-motion:reduce){.collection-facade .facade-stage video{display:none!important;transition:none}}
-[data-motion=reduce] .collection-facade .facade-stage video{display:none!important}
+@media(prefers-reduced-motion:reduce){.collection-facade .facade-stage video{transition:none}}

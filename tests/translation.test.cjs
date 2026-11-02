@@ -3,10 +3,11 @@ const test=require('node:test'), assert=require('node:assert/strict'),fs=require
 const root=path.join(__dirname,'..'),read=f=>fs.readFileSync(path.join(root,f),'utf8');
 const {pages,decode}=require('../scripts/appearance-pages.cjs');
 const {publicURL,integrate,languages}=require('../scripts/translation-pages.cjs');
+const editorialPunctuation=require('./support/approved-editorial-punctuation.cjs');
 for(const file of Object.keys(pages)) test('translation: safe additive integration — '+file,()=>{
   const base=cp.execFileSync('git',['show','083d00e4e8473dd506d589a0e7814a0364f67663:'+file],{cwd:root,encoding:'utf8',maxBuffer:12e6});
   const actual=read(file), html=decode(actual);
-  if(file!=='index.html')assert.equal(actual.replace(/\r/g,''),integrate(base,file).replace(/\r/g,''));
+  if(file!=='index.html')assert.equal(actual.replace(/\r/g,''),editorialPunctuation(integrate(base,file).replace(/\r/g,''),file));
   // The new homepage installs the same translation component directly; the
   // legacy additive transformer targets the former homepage's utility markup.
   if(file!=='index.html')assert.equal(integrate(actual,file),actual);
