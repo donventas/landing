@@ -5,6 +5,66 @@
       "source": "/blog",
       "destination": "/blog/",
       "permanent": true
+    },
+    {
+      "source": "/variantes/a",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/variantes/a/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/variantes/a/index.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/variantes/a/vuelta-27",
+      "destination": "/portafolio/vuelta-27/",
+      "permanent": true
+    },
+    {
+      "source": "/variantes/a/vuelta-27/",
+      "destination": "/portafolio/vuelta-27/",
+      "permanent": true
+    },
+    {
+      "source": "/variantes/a/vuelta-27/index.html",
+      "destination": "/portafolio/vuelta-27/",
+      "permanent": true
+    },
+    {
+      "source": "/variantes/b",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/variantes/b/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/variantes/b/index.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/variantes/b/vuelta-27",
+      "destination": "/portafolio/vuelta-27/",
+      "permanent": true
+    },
+    {
+      "source": "/variantes/b/vuelta-27/",
+      "destination": "/portafolio/vuelta-27/",
+      "permanent": true
+    },
+    {
+      "source": "/variantes/b/vuelta-27/index.html",
+      "destination": "/portafolio/vuelta-27/",
+      "permanent": true
     }
   ],
   "rewrites": [
